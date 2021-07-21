@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+
+    tools {
+        jdk 'jdk-8'
+    }
+
+    environment {
+        SIGNING_PASSWORD = credentials("signing_password")
+        BF_PROJECT_ID = credentials("BF_PROJECT_ID")
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                 sh  './gradlew build -Psigning.password=${SIGNING_PASSWORD} --stacktrace'
+            }
+        }
+
+        stage('integrationTest') {
+             steps {
+                sh  './gradlew integrationTest -PBF_PROJECT_ID=${BF_PROJECT_ID}'
+             }
+        }
+
+        stage('Results') {
+            steps {
+                archiveArtifacts 'build/libs/*.jar'
+            }
+        }
+    }
+}
