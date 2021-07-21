@@ -1,7 +1,7 @@
 package io.blockfrost.sdk.impl;
 
 import io.blockfrost.sdk.api.Ledger;
-import io.blockfrost.sdk.api.exception.BlockfrostAPIException;
+import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.impl.model.Genesis;
 import io.blockfrost.sdk.impl.retrofit.LedgerApi;
 import retrofit2.Call;
@@ -19,14 +19,14 @@ public class LedgerImpl extends BaseImpl implements Ledger {
     }
 
     @Override
-    public Genesis getGenesis() throws BlockfrostAPIException {
+    public Genesis getGenesis() throws APIException {
         Call<Genesis> genesisCall = ledgerApi.genesisGet(getProjectId());
 
         try{
             Response<Genesis> genesisResponse = genesisCall.execute();
             return processResponse(genesisResponse);
         } catch (IOException exp){
-            throw new BlockfrostAPIException("Exception while fetching blockchain genesis", exp);
+            throw new APIException("Exception while fetching blockchain genesis", exp);
         }
     }
 }

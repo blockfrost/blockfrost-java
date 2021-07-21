@@ -1,6 +1,6 @@
 package io.blockfrost.sdk.api;
 
-import io.blockfrost.sdk.api.exception.BlockfrostAPIException;
+import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.impl.HealthImpl;
 import io.blockfrost.sdk.impl.common.Constants;
 import io.blockfrost.sdk.impl.model.Clock;
@@ -25,14 +25,14 @@ public class HealthTests extends TestBase {
     }
 
     @Test
-    public void health_willReturn_healthStatus() throws BlockfrostAPIException {
+    public void health_willReturn_healthStatus() throws APIException {
         HealthStatus healthResponse = health.getHealth();
         assertThat(healthResponse.getIsHealthy(), is(true));
     }
 
     //TODO: Need to check how much error range need to be defined.
     @Test
-    public void clock_willReturn_currentBackEndTime() throws BlockfrostAPIException {
+    public void clock_willReturn_currentBackEndTime() throws APIException {
         Clock clock = health.getCurrentBackendTime();
         Date date = new Date(clock.getServerTime());
         assertThat(date, DateMatchers.within(1, ChronoUnit.SECONDS, new Date()));

@@ -1,6 +1,6 @@
 package io.blockfrost.sdk.api;
 
-import io.blockfrost.sdk.api.exception.BlockfrostAPIException;
+import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.impl.LedgerImpl;
 import io.blockfrost.sdk.impl.common.Constants;
 import io.blockfrost.sdk.impl.model.Genesis;
@@ -23,7 +23,7 @@ public class LedgerTests extends TestBase {
 
     //TODO: Network magic and system start are different from the Api Documentation
     @Test
-    public void genesis_willReturn_blockchainGenesis() throws BlockfrostAPIException {
+    public void genesis_willReturn_blockchainGenesis() throws APIException {
 
         Genesis expectedGenesis = Genesis.builder()
                 .activeSlotsCoefficient(new BigDecimal("0.05"))

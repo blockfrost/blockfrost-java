@@ -1,6 +1,6 @@
 package io.blockfrost.sdk.impl;
 
-import io.blockfrost.sdk.api.exception.BlockfrostAPIException;
+import io.blockfrost.sdk.api.exception.APIException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import retrofit2.Response;
@@ -38,11 +38,11 @@ public class BaseImpl {
         return projectId;
     }
 
-    protected  <T> T processResponse(Response<T> response) throws BlockfrostAPIException {
+    protected  <T> T processResponse(Response<T> response) throws APIException {
         if (response.isSuccessful()){
             return response.body();
         } else {
-            throw new BlockfrostAPIException(response.message());
+            throw new APIException(response.message());
         }
     }
 

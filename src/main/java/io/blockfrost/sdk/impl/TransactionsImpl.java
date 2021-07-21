@@ -1,7 +1,7 @@
 package io.blockfrost.sdk.impl;
 
 import io.blockfrost.sdk.api.Transactions;
-import io.blockfrost.sdk.api.exception.BlockfrostAPIException;
+import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.impl.model.Transaction;
 import io.blockfrost.sdk.impl.retrofit.TransactionsApi;
 import retrofit2.Call;
@@ -19,14 +19,14 @@ public class TransactionsImpl extends BaseImpl implements Transactions {
     }
 
     @Override
-    public Transaction getTransaction(String transactionHash) throws BlockfrostAPIException {
+    public Transaction getTransaction(String transactionHash) throws APIException {
         Call<Transaction> transactionCall = transactionsApi.txsHashGet(getProjectId(), transactionHash);
 
         try{
             Response<Transaction> transactionResponse = transactionCall.execute();
             return processResponse(transactionResponse);
         } catch (IOException exp){
-            throw new BlockfrostAPIException("Exception while fetching transaction for hash " + transactionHash , exp);
+            throw new APIException("Exception while fetching transaction for hash " + transactionHash , exp);
         }
     }
 }

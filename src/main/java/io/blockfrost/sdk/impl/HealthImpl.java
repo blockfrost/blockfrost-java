@@ -1,7 +1,7 @@
 package io.blockfrost.sdk.impl;
 
 import io.blockfrost.sdk.api.Health;
-import io.blockfrost.sdk.api.exception.BlockfrostAPIException;
+import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.impl.model.Clock;
 import io.blockfrost.sdk.impl.model.HealthStatus;
 import io.blockfrost.sdk.impl.retrofit.HealthApi;
@@ -21,7 +21,7 @@ public class HealthImpl extends BaseImpl implements Health {
     }
 
     @Override
-    public HealthStatus getHealth() throws BlockfrostAPIException {
+    public HealthStatus getHealth() throws APIException {
 
         Call<HealthStatus> healthCall = healthApi.healthGet(getProjectId());
 
@@ -29,24 +29,24 @@ public class HealthImpl extends BaseImpl implements Health {
             Response<HealthStatus> healthResponse = healthCall.execute();
             return processResponse(healthResponse);
         } catch (IOException exp){
-            throw new BlockfrostAPIException("Exception while fetching health status", exp);
+            throw new APIException("Exception while fetching health status", exp);
         }
     }
 
     @Override
-    public Clock getCurrentBackendTime() throws BlockfrostAPIException {
+    public Clock getCurrentBackendTime() throws APIException {
         Call<Clock> clockCall = healthApi.healthClockGet(getProjectId());
 
         try{
             Response<Clock> clockResponse = clockCall.execute();
             return processResponse(clockResponse);
         } catch (IOException exp){
-            throw new BlockfrostAPIException("Exception while fetching current backend time", exp);
+            throw new APIException("Exception while fetching current backend time", exp);
         }
     }
 
     @Override
-    public String getApiRoot() throws BlockfrostAPIException {
+    public String getApiRoot() throws APIException {
 
         Call<ResponseBody> apiRootCall = healthApi.rootGet(getProjectId());
 
@@ -56,7 +56,7 @@ public class HealthImpl extends BaseImpl implements Health {
             //return processResponse(apiRootResponse);
             return "done";
         } catch (Exception exp){
-            throw new BlockfrostAPIException("Exception while fetching Api Root", exp);
+            throw new APIException("Exception while fetching Api Root", exp);
         }
 
     }

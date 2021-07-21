@@ -1,6 +1,6 @@
 package io.blockfrost.sdk.api;
 
-import io.blockfrost.sdk.api.exception.BlockfrostAPIException;
+import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.impl.TransactionsImpl;
 import io.blockfrost.sdk.impl.common.Constants;
 import io.blockfrost.sdk.impl.model.Transaction;
@@ -23,7 +23,7 @@ public class TransactionsTests extends TestBase {
     }
 
     @Test
-    public void transaction_willReturn_transactionForAHash() throws BlockfrostAPIException {
+    public void transaction_willReturn_transactionForAHash() throws APIException {
 
         Transaction expectedTransaction = Transaction.builder()
                 .hash("0089e962584516378463141d853f7102852e7f2a8546c2a2af6cc05c6e628a5b")

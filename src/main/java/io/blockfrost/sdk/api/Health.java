@@ -1,15 +1,15 @@
 package io.blockfrost.sdk.api;
 
-import io.blockfrost.sdk.api.exception.BlockfrostAPIException;
+import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.impl.model.Clock;
 import io.blockfrost.sdk.impl.model.HealthStatus;
 
 public interface Health {
 
-    HealthStatus getHealth() throws BlockfrostAPIException;
+    HealthStatus getHealth() throws APIException;
 
-    Clock getCurrentBackendTime() throws BlockfrostAPIException;
+    Clock getCurrentBackendTime() throws APIException;
 
-    String getApiRoot() throws BlockfrostAPIException;
+    String getApiRoot() throws APIException;
 
 }

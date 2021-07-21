@@ -1,6 +1,6 @@
 package io.blockfrost.sdk.api;
 
-import io.blockfrost.sdk.api.exception.BlockfrostAPIException;
+import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.impl.MetricsImpl;
 import io.blockfrost.sdk.impl.common.Constants;
 import io.blockfrost.sdk.impl.model.EndpointUsageMetric;
@@ -24,7 +24,7 @@ public class MetricsTests extends TestBase {
 
     //TODO: How to assert this test results. Should we keep a separate projectId?
     @Test
-    public void usageMetrics_willReturn_listOfUsageMetrics() throws BlockfrostAPIException {
+    public void usageMetrics_willReturn_listOfUsageMetrics() throws APIException {
         List<UsageMetric> usageMetricsResponse = metrics.getUsageMetrics();
         assertThat(usageMetricsResponse, hasSize(greaterThan(0)));
     }
@@ -32,7 +32,7 @@ public class MetricsTests extends TestBase {
     //TODO: How to assert this test results. Should we keep a separate projectId?
     //TODO: "date" in Api Documentation has changed to "time"
     @Test
-    public void endpointUsageMetrics_willReturn_listOfEndpointUsageMetrics() throws BlockfrostAPIException {
+    public void endpointUsageMetrics_willReturn_listOfEndpointUsageMetrics() throws APIException {
         List<EndpointUsageMetric> endpointUsageMetricsResponse = metrics.getEndpointUsageMetrics();
         assertThat(endpointUsageMetricsResponse, hasSize(greaterThan(0)));
     }
