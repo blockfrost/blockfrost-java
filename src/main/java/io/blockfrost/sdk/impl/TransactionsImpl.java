@@ -2,9 +2,7 @@ package io.blockfrost.sdk.impl;
 
 import io.blockfrost.sdk.api.Transactions;
 import io.blockfrost.sdk.api.exception.APIException;
-import io.blockfrost.sdk.impl.model.Transaction;
-import io.blockfrost.sdk.impl.model.TransactionStake;
-import io.blockfrost.sdk.impl.model.TransactionUtxo;
+import io.blockfrost.sdk.impl.model.*;
 import io.blockfrost.sdk.impl.retrofit.TransactionsApi;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -54,6 +52,30 @@ public class TransactionsImpl extends BaseImpl implements Transactions {
             return processResponse(transactionStakesResponse);
         } catch (IOException exp){
             throw new APIException("Exception while fetching transaction stakes for hash " + transactionHash , exp);
+        }
+    }
+
+    @Override
+    public List<TransactionDelegation> getTransactionDelegations(String transactionHash) throws APIException {
+        Call<List<TransactionDelegation>> transactionDelegationCall = transactionsApi.txsHashDelegationsGet(getProjectId(), transactionHash);
+
+        try{
+            Response<List<TransactionDelegation>> transactionDelegationsResponse = transactionDelegationCall.execute();
+            return processResponse(transactionDelegationsResponse);
+        } catch (IOException exp){
+            throw new APIException("Exception while fetching transaction delegations for hash " + transactionHash , exp);
+        }
+    }
+
+    @Override
+    public List<TransactionWithdrawal> getTransactionWithdrawals(String transactionHash) throws APIException {
+        Call<List<TransactionWithdrawal>> transactionWithdrawalCall = transactionsApi.txsHashWithdrawalsGet(getProjectId(), transactionHash);
+
+        try{
+            Response<List<TransactionWithdrawal>> transactionWithdrawalsResponse = transactionWithdrawalCall.execute();
+            return processResponse(transactionWithdrawalsResponse);
+        } catch (IOException exp){
+            throw new APIException("Exception while fetching transaction withdrawals for hash " + transactionHash , exp);
         }
     }
 }

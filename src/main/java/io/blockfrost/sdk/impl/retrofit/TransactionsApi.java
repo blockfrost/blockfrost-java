@@ -1,8 +1,6 @@
 package io.blockfrost.sdk.impl.retrofit;
 
-import io.blockfrost.sdk.impl.model.Transaction;
-import io.blockfrost.sdk.impl.model.TransactionStake;
-import io.blockfrost.sdk.impl.model.TransactionUtxo;
+import io.blockfrost.sdk.impl.model.*;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
@@ -30,7 +28,8 @@ public interface TransactionsApi {
    * @return Call&lt;List&lt;Object&gt;&gt;
    */
   @GET("txs/{hash}/delegations")
-  Call<List<Object>> txsHashDelegationsGet(
+  Call<List<TransactionDelegation>> txsHashDelegationsGet(
+    @Header("project_id") String projectId,
     @Path("hash") String hash
   );
 
@@ -132,7 +131,8 @@ public interface TransactionsApi {
    * @return Call&lt;List&lt;Object&gt;&gt;
    */
   @GET("txs/{hash}/withdrawals")
-  Call<List<Object>> txsHashWithdrawalsGet(
+  Call<List<TransactionWithdrawal>> txsHashWithdrawalsGet(
+    @Header("project_id") String projectId,
     @Path("hash") String hash
   );
 

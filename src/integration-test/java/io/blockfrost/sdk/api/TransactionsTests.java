@@ -115,4 +115,22 @@ public class TransactionsTests extends TestBase {
         assertThat(transactionStakeResponse, hasSize(0));
     }
 
+    //TODO: Need to use a Transaction has with actual Delegation certificate for validation.
+    @Test
+    public void transactionDelegations_willReturn_transactionDelegationsForAHash() throws APIException {
+
+        String transactionHash = "0089e962584516378463141d853f7102852e7f2a8546c2a2af6cc05c6e628a5b";
+        List<TransactionDelegation> transactionDelegationResponse = transactions.getTransactionDelegations(transactionHash);
+        assertThat(transactionDelegationResponse, hasSize(0));
+    }
+
+    //TODO: Need to use a Transaction has with actual Withdrawal certificate for validation.
+    @Test
+    public void transactionWithdrawals_willReturn_transactionWithdrawalsForAHash() throws APIException {
+
+        String transactionHash = "0089e962584516378463141d853f7102852e7f2a8546c2a2af6cc05c6e628a5b";
+        List<TransactionWithdrawal> transactionWithdrawalResponse = transactions.getTransactionWithdrawals(transactionHash);
+        assertThat(transactionWithdrawalResponse, hasSize(0));
+    }
+
 }

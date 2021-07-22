@@ -1,9 +1,7 @@
 package io.blockfrost.sdk.api;
 
 import io.blockfrost.sdk.api.exception.APIException;
-import io.blockfrost.sdk.impl.model.Transaction;
-import io.blockfrost.sdk.impl.model.TransactionStake;
-import io.blockfrost.sdk.impl.model.TransactionUtxo;
+import io.blockfrost.sdk.impl.model.*;
 
 import java.util.List;
 
@@ -14,5 +12,9 @@ public interface Transactions {
     TransactionUtxo getTransactionUtxo(String transactionHash) throws APIException;
 
     List<TransactionStake> getTransactionStakes(String transactionHash) throws APIException;
+
+    List<TransactionDelegation> getTransactionDelegations(String transactionHash) throws APIException;
+
+    List<TransactionWithdrawal> getTransactionWithdrawals(String transactionHash) throws APIException;
 }
 
