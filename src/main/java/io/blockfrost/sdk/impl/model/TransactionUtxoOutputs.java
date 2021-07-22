@@ -33,7 +33,7 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 
-public class TxContentUtxoOutputs {
+public class TransactionUtxoOutputs {
   private String address;
   private List<TransactionOutputAmount> amount = new ArrayList<TransactionOutputAmount>();
 

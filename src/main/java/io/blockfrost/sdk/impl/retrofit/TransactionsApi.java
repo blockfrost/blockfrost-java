@@ -119,6 +119,7 @@ public interface TransactionsApi {
    */
   @GET("txs/{hash}/utxos")
   Call<TransactionUtxo> txsHashUtxosGet(
+    @Header("project_id") String projectId,
     @Path("hash") String hash
   );
 

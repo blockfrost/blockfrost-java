@@ -36,7 +36,7 @@ import java.util.List;
 public class TransactionUtxo {
   private String hash;
   private List<TransactionUtxoInputs> inputs = new ArrayList<TransactionUtxoInputs>();
-  private List<TxContentUtxoOutputs> outputs = new ArrayList<TxContentUtxoOutputs>();
+  private List<TransactionUtxoOutputs> outputs = new ArrayList<TransactionUtxoOutputs>();
 
 }
 

@@ -3,11 +3,11 @@ package io.blockfrost.sdk.api;
 import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.impl.TransactionsImpl;
 import io.blockfrost.sdk.impl.common.Constants;
-import io.blockfrost.sdk.impl.model.Transaction;
-import io.blockfrost.sdk.impl.model.TransactionOutputAmount;
+import io.blockfrost.sdk.impl.model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -56,6 +56,51 @@ public class TransactionsTests extends TestBase {
         String transactionHash = "0089e962584516378463141d853f7102852e7f2a8546c2a2af6cc05c6e628a5b";
         Transaction transactionResponse = transactions.getTransaction(transactionHash);
         assertThat(transactionResponse, is(expectedTransaction));
+    }
+
+    @Test
+    public void transactionUtxo_willReturn_transactionUtxoForAHash() throws APIException {
+
+        TransactionUtxo expectedTransactionUtxo = TransactionUtxo.builder()
+                .hash("0089e962584516378463141d853f7102852e7f2a8546c2a2af6cc05c6e628a5b")
+                .inputs(Arrays.asList(
+                        TransactionUtxoInputs.builder()
+                                .address("addr_test1qqk2fygtqcusmx9djys2r7m4emslwy8hfjllrakd5777hzcxu2hyfhlkwuxupa9d5085eunq2qywy7hvmvej456flknstkhmyt")
+                                .txHash("59b051e130d32fa2d316b0ee50934d10f1a8e9af332166812bd696a755727fec")
+                                .outputIndex(new BigDecimal(1))
+                                .amount(Arrays.asList(
+                                        TransactionOutputAmount.builder()
+                                                .unit("lovelace")
+                                                .quantity("9605414258640")
+                                                .build()
+                                ))
+                                .build()
+                ))
+                .outputs(Arrays.asList(
+                        TransactionUtxoOutputs.builder()
+                                .address("addr_test1qqy07jaue8tru20877ak7wxpuagrqqpm2pdacfjjtv4z3elcn8dnk52656jspgq03ts2sl6jvefwakdacwfy605m9ydselehdg")
+                                .amount(Arrays.asList(
+                                        TransactionOutputAmount.builder()
+                                                .unit("lovelace")
+                                                .quantity("1000000000")
+                                                .build()
+                                ))
+                                .build(),
+                        TransactionUtxoOutputs.builder()
+                                .address("addr_test1qq4sa7kg02ms66nsx6d06q4h697p57ajla2eedfl0aysqrgxu2hyfhlkwuxupa9d5085eunq2qywy7hvmvej456flknsyznauy")
+                                .amount(Arrays.asList(
+                                        TransactionOutputAmount.builder()
+                                                .unit("lovelace")
+                                                .quantity("9604414089839")
+                                                .build()
+                                ))
+                                .build()
+                ))
+                .build();
+
+        String transactionHash = "0089e962584516378463141d853f7102852e7f2a8546c2a2af6cc05c6e628a5b";
+        TransactionUtxo transactionUtxoResponse = transactions.getTransactionUtxo(transactionHash);
+        assertThat(transactionUtxoResponse, is(expectedTransactionUtxo));
     }
 
 }
