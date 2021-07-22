@@ -133,4 +133,13 @@ public class TransactionsTests extends TestBase {
         assertThat(transactionWithdrawalResponse, hasSize(0));
     }
 
+    //TODO: Need to use a Transaction has with actual Mir certificate for validation.
+    @Test
+    public void transactionMirs_willReturn_transactionMirsForAHash() throws APIException {
+
+        String transactionHash = "0089e962584516378463141d853f7102852e7f2a8546c2a2af6cc05c6e628a5b";
+        List<TransactionMir> transactionMirResponse = transactions.getTransactionMirs(transactionHash);
+        assertThat(transactionMirResponse, hasSize(0));
+    }
+
 }

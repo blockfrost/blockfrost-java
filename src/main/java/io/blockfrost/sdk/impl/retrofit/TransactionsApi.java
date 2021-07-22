@@ -74,7 +74,8 @@ public interface TransactionsApi {
    * @return Call&lt;List&lt;Object&gt;&gt;
    */
   @GET("txs/{hash}/mirs")
-  Call<List<Object>> txsHashMirsGet(
+  Call<List<TransactionMir>> txsHashMirsGet(
+    @Header("project_id") String projectId,
     @Path("hash") String hash
   );
 

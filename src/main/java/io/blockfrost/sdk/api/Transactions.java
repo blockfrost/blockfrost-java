@@ -16,5 +16,7 @@ public interface Transactions {
     List<TransactionDelegation> getTransactionDelegations(String transactionHash) throws APIException;
 
     List<TransactionWithdrawal> getTransactionWithdrawals(String transactionHash) throws APIException;
+    
+    List<TransactionMir> getTransactionMirs(String transactionHash) throws APIException;
 }
 
