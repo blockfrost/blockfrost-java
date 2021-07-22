@@ -9,8 +9,10 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 
 public class TransactionsTests extends TestBase {
@@ -101,6 +103,16 @@ public class TransactionsTests extends TestBase {
         String transactionHash = "0089e962584516378463141d853f7102852e7f2a8546c2a2af6cc05c6e628a5b";
         TransactionUtxo transactionUtxoResponse = transactions.getTransactionUtxo(transactionHash);
         assertThat(transactionUtxoResponse, is(expectedTransactionUtxo));
+    }
+
+
+    //TODO: Need to use a Transaction has with actual stake certificate for validation.
+    @Test
+    public void transactionStakes_willReturn_transactionStakesForAHash() throws APIException {
+
+        String transactionHash = "0089e962584516378463141d853f7102852e7f2a8546c2a2af6cc05c6e628a5b";
+        List<TransactionStake> transactionStakeResponse = transactions.getTransactionStakes(transactionHash);
+        assertThat(transactionStakeResponse, hasSize(0));
     }
 
 }
