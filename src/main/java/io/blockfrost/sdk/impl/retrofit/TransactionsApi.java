@@ -52,7 +52,8 @@ public interface TransactionsApi {
    * @return Call&lt;List&lt;Object&gt;&gt;
    */
   @GET("txs/{hash}/metadata/cbor")
-  Call<List<Object>> txsHashMetadataCborGet(
+  Call<List<TransactionMetadataCbor>> txsHashMetadataCborGet(
+    @Header("project_id") String projectId,
     @Path("hash") String hash
   );
 
@@ -63,7 +64,8 @@ public interface TransactionsApi {
    * @return Call&lt;List&lt;Object&gt;&gt;
    */
   @GET("txs/{hash}/metadata")
-  Call<List<Object>> txsHashMetadataGet(
+  Call<List<TransactionMetadata>> txsHashMetadataGet(
+    @Header("project_id") String projectId,
     @Path("hash") String hash
   );
 

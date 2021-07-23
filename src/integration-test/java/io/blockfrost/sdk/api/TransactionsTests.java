@@ -159,5 +159,22 @@ public class TransactionsTests extends TestBase {
         List<TransactionPoolRetire> transactionPoolRetireResponse = transactions.getTransactionPoolRetires(transactionHash);
         assertThat(transactionPoolRetireResponse, hasSize(0));
     }
-    
+
+    //TODO: Need to use a Transaction has with actual metadata.
+    @Test
+    public void transactionMetadata_willReturn_transactionMetadataForAHash() throws APIException {
+
+        String transactionHash = "0089e962584516378463141d853f7102852e7f2a8546c2a2af6cc05c6e628a5b";
+        List<TransactionMetadata> transactionMetadataResponse = transactions.getTransactionMetadata(transactionHash);
+        assertThat(transactionMetadataResponse, hasSize(0));
+    }
+
+    //TODO: Need to use a Transaction has with actual metadata in cbor.
+    @Test
+    public void transactionMetadataCbor_willReturn_transactionMetadataCborForAHash() throws APIException {
+
+        String transactionHash = "0089e962584516378463141d853f7102852e7f2a8546c2a2af6cc05c6e628a5b";
+        List<TransactionMetadataCbor> transactionMetadataCborResponse = transactions.getTransactionMetadataCbor(transactionHash);
+        assertThat(transactionMetadataCborResponse, hasSize(0));
+    }
 }

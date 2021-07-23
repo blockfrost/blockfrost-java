@@ -115,4 +115,28 @@ public class TransactionsImpl extends BaseImpl implements Transactions {
         }
     }
 
+    @Override
+    public List<TransactionMetadata> getTransactionMetadata(String transactionHash) throws APIException {
+        Call<List<TransactionMetadata>> transactionMetadataCall = transactionsApi.txsHashMetadataGet(getProjectId(), transactionHash);
+
+        try{
+            Response<List<TransactionMetadata>> transactionMetadataResponse = transactionMetadataCall.execute();
+            return processResponse(transactionMetadataResponse);
+        } catch (IOException exp){
+            throw new APIException("Exception while fetching transaction metadata for hash " + transactionHash , exp);
+        }
+    }
+
+    @Override
+    public List<TransactionMetadataCbor> getTransactionMetadataCbor(String transactionHash) throws APIException {
+        Call<List<TransactionMetadataCbor>> transactionCborMetadataCall = transactionsApi.txsHashMetadataCborGet(getProjectId(), transactionHash);
+
+        try{
+            Response<List<TransactionMetadataCbor>> transactionCborMetadataResponse = transactionCborMetadataCall.execute();
+            return processResponse(transactionCborMetadataResponse);
+        } catch (IOException exp){
+            throw new APIException("Exception while fetching transaction cbor metadata for hash " + transactionHash , exp);
+        }
+    }
+
 }
