@@ -142,4 +142,13 @@ public class TransactionsTests extends TestBase {
         assertThat(transactionMirResponse, hasSize(0));
     }
 
+    //TODO: Need to use a Transaction has with actual PoolUpdate certificate for validation.
+    @Test
+    public void transactionPoolUpdates_willReturn_transactionPoolUpdatesForAHash() throws APIException {
+
+        String transactionHash = "0089e962584516378463141d853f7102852e7f2a8546c2a2af6cc05c6e628a5b";
+        List<TransactionPoolUpdate> transactionPoolUpdateResponse = transactions.getTransactionPoolUpdates(transactionHash);
+        assertThat(transactionPoolUpdateResponse, hasSize(0));
+    }
+
 }

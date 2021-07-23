@@ -97,7 +97,8 @@ public interface TransactionsApi {
    * @return Call&lt;List&lt;Object&gt;&gt;
    */
   @GET("txs/{hash}/pool_updates")
-  Call<List<Object>> txsHashPoolUpdatesGet(
+  Call<List<TransactionPoolUpdate>> txsHashPoolUpdatesGet(
+    @Header("project_id") String projectId,
     @Path("hash") String hash
   );
 
