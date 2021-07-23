@@ -151,4 +151,13 @@ public class TransactionsTests extends TestBase {
         assertThat(transactionPoolUpdateResponse, hasSize(0));
     }
 
+    //TODO: Need to use a Transaction has with actual PoolRetire certificate for validation.
+    @Test
+    public void transactionPoolRetires_willReturn_transactionPoolRetiresForAHash() throws APIException {
+
+        String transactionHash = "0089e962584516378463141d853f7102852e7f2a8546c2a2af6cc05c6e628a5b";
+        List<TransactionPoolRetire> transactionPoolRetireResponse = transactions.getTransactionPoolRetires(transactionHash);
+        assertThat(transactionPoolRetireResponse, hasSize(0));
+    }
+    
 }

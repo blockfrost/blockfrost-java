@@ -99,9 +99,20 @@ public class TransactionsImpl extends BaseImpl implements Transactions {
             Response<List<TransactionPoolUpdate>> transactionPoolUpdatesResponse = transactionPoolUpdateCall.execute();
             return processResponse(transactionPoolUpdatesResponse);
         } catch (IOException exp){
-            throw new APIException("Exception while fetching transaction PoolUpdates for hash " + transactionHash , exp);
+            throw new APIException("Exception while fetching transaction pool updates for hash " + transactionHash , exp);
         }
     }
 
+    @Override
+    public List<TransactionPoolRetire> getTransactionPoolRetires(String transactionHash) throws APIException {
+        Call<List<TransactionPoolRetire>> transactionPoolRetireCall = transactionsApi.txsHashPoolRetiresGet(getProjectId(), transactionHash);
+
+        try{
+            Response<List<TransactionPoolRetire>> transactionPoolRetiresResponse = transactionPoolRetireCall.execute();
+            return processResponse(transactionPoolRetiresResponse);
+        } catch (IOException exp){
+            throw new APIException("Exception while fetching transaction pool retires for hash " + transactionHash , exp);
+        }
+    }
 
 }

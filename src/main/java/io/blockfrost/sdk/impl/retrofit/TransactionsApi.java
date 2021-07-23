@@ -86,7 +86,8 @@ public interface TransactionsApi {
    * @return Call&lt;List&lt;Object&gt;&gt;
    */
   @GET("txs/{hash}/pool_retires")
-  Call<List<Object>> txsHashPoolRetiresGet(
+  Call<List<TransactionPoolRetire>> txsHashPoolRetiresGet(
+    @Header("project_id") String projectId,
     @Path("hash") String hash
   );
 

@@ -20,5 +20,7 @@ public interface Transactions {
     List<TransactionMir> getTransactionMirs(String transactionHash) throws APIException;
 
     List<TransactionPoolUpdate> getTransactionPoolUpdates(String transactionHash) throws APIException;
+
+    List<TransactionPoolRetire> getTransactionPoolRetires(String transactionHash) throws APIException;
 }
 
