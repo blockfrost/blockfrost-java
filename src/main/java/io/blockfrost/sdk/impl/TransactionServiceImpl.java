@@ -20,122 +20,122 @@ public class TransactionServiceImpl extends BaseImpl implements TransactionServi
     }
 
     @Override
-    public Transaction getTransaction(String transactionHash) throws APIException {
-        Call<Transaction> transactionCall = transactionsApi.txsHashGet(getProjectId(), transactionHash);
+    public Transaction getTransaction(String hash) throws APIException {
+        Call<Transaction> transactionCall = transactionsApi.txsHashGet(getProjectId(), hash);
 
         try{
             Response<Transaction> transactionResponse = transactionCall.execute();
             return processResponse(transactionResponse);
         } catch (IOException exp){
-            throw new APIException("Exception while fetching transaction for hash " + transactionHash , exp);
+            throw new APIException("Exception while fetching transaction for hash " + hash, exp);
         }
     }
 
     @Override
-    public TransactionUtxo getTransactionUtxo(String transactionHash) throws APIException {
-        Call<TransactionUtxo> transactionUtxoCall = transactionsApi.txsHashUtxosGet(getProjectId(), transactionHash);
+    public TransactionUtxo getTransactionUtxo(String hash) throws APIException {
+        Call<TransactionUtxo> transactionUtxoCall = transactionsApi.txsHashUtxosGet(getProjectId(), hash);
 
         try{
             Response<TransactionUtxo> transactionUtxoResponse = transactionUtxoCall.execute();
             return processResponse(transactionUtxoResponse);
         } catch (IOException exp){
-            throw new APIException("Exception while fetching transaction utxos for hash " + transactionHash , exp);
+            throw new APIException("Exception while fetching transaction utxos for hash " + hash, exp);
         }
     }
 
     @Override
-    public List<TransactionStake> getTransactionStakes(String transactionHash) throws APIException {
-        Call<List<TransactionStake>> transactionStakesCall = transactionsApi.txsHashStakesGet(getProjectId(), transactionHash);
+    public List<TransactionStake> getTransactionStakes(String hash) throws APIException {
+        Call<List<TransactionStake>> transactionStakesCall = transactionsApi.txsHashStakesGet(getProjectId(), hash);
 
         try{
             Response<List<TransactionStake>> transactionStakesResponse = transactionStakesCall.execute();
             return processResponse(transactionStakesResponse);
         } catch (IOException exp){
-            throw new APIException("Exception while fetching transaction stakes for hash " + transactionHash , exp);
+            throw new APIException("Exception while fetching transaction stakes for hash " + hash, exp);
         }
     }
 
     @Override
-    public List<TransactionDelegation> getTransactionDelegations(String transactionHash) throws APIException {
-        Call<List<TransactionDelegation>> transactionDelegationCall = transactionsApi.txsHashDelegationsGet(getProjectId(), transactionHash);
+    public List<TransactionDelegation> getTransactionDelegations(String hash) throws APIException {
+        Call<List<TransactionDelegation>> transactionDelegationCall = transactionsApi.txsHashDelegationsGet(getProjectId(), hash);
 
         try{
             Response<List<TransactionDelegation>> transactionDelegationsResponse = transactionDelegationCall.execute();
             return processResponse(transactionDelegationsResponse);
         } catch (IOException exp){
-            throw new APIException("Exception while fetching transaction delegations for hash " + transactionHash , exp);
+            throw new APIException("Exception while fetching transaction delegations for hash " + hash, exp);
         }
     }
 
     @Override
-    public List<TransactionWithdrawal> getTransactionWithdrawals(String transactionHash) throws APIException {
-        Call<List<TransactionWithdrawal>> transactionWithdrawalCall = transactionsApi.txsHashWithdrawalsGet(getProjectId(), transactionHash);
+    public List<TransactionWithdrawal> getTransactionWithdrawals(String hash) throws APIException {
+        Call<List<TransactionWithdrawal>> transactionWithdrawalCall = transactionsApi.txsHashWithdrawalsGet(getProjectId(), hash);
 
         try{
             Response<List<TransactionWithdrawal>> transactionWithdrawalsResponse = transactionWithdrawalCall.execute();
             return processResponse(transactionWithdrawalsResponse);
         } catch (IOException exp){
-            throw new APIException("Exception while fetching transaction withdrawals for hash " + transactionHash , exp);
+            throw new APIException("Exception while fetching transaction withdrawals for hash " + hash, exp);
         }
     }
 
     @Override
-    public List<TransactionMir> getTransactionMirs(String transactionHash) throws APIException {
-        Call<List<TransactionMir>> transactionMirCall = transactionsApi.txsHashMirsGet(getProjectId(), transactionHash);
+    public List<TransactionMir> getTransactionMirs(String hash) throws APIException {
+        Call<List<TransactionMir>> transactionMirCall = transactionsApi.txsHashMirsGet(getProjectId(), hash);
 
         try{
             Response<List<TransactionMir>> transactionMirsResponse = transactionMirCall.execute();
             return processResponse(transactionMirsResponse);
         } catch (IOException exp){
-            throw new APIException("Exception while fetching transaction mirs for hash " + transactionHash , exp);
+            throw new APIException("Exception while fetching transaction mirs for hash " + hash, exp);
         }
     }
 
     @Override
-    public List<TransactionPoolUpdate> getTransactionPoolUpdates(String transactionHash) throws APIException {
-        Call<List<TransactionPoolUpdate>> transactionPoolUpdateCall = transactionsApi.txsHashPoolUpdatesGet(getProjectId(), transactionHash);
+    public List<TransactionPoolUpdate> getTransactionPoolUpdates(String hash) throws APIException {
+        Call<List<TransactionPoolUpdate>> transactionPoolUpdateCall = transactionsApi.txsHashPoolUpdatesGet(getProjectId(), hash);
 
         try{
             Response<List<TransactionPoolUpdate>> transactionPoolUpdatesResponse = transactionPoolUpdateCall.execute();
             return processResponse(transactionPoolUpdatesResponse);
         } catch (IOException exp){
-            throw new APIException("Exception while fetching transaction pool updates for hash " + transactionHash , exp);
+            throw new APIException("Exception while fetching transaction pool updates for hash " + hash, exp);
         }
     }
 
     @Override
-    public List<TransactionPoolRetire> getTransactionPoolRetires(String transactionHash) throws APIException {
-        Call<List<TransactionPoolRetire>> transactionPoolRetireCall = transactionsApi.txsHashPoolRetiresGet(getProjectId(), transactionHash);
+    public List<TransactionPoolRetire> getTransactionPoolRetires(String hash) throws APIException {
+        Call<List<TransactionPoolRetire>> transactionPoolRetireCall = transactionsApi.txsHashPoolRetiresGet(getProjectId(), hash);
 
         try{
             Response<List<TransactionPoolRetire>> transactionPoolRetiresResponse = transactionPoolRetireCall.execute();
             return processResponse(transactionPoolRetiresResponse);
         } catch (IOException exp){
-            throw new APIException("Exception while fetching transaction pool retires for hash " + transactionHash , exp);
+            throw new APIException("Exception while fetching transaction pool retires for hash " + hash, exp);
         }
     }
 
     @Override
-    public List<TransactionMetadata> getTransactionMetadata(String transactionHash) throws APIException {
-        Call<List<TransactionMetadata>> transactionMetadataCall = transactionsApi.txsHashMetadataGet(getProjectId(), transactionHash);
+    public List<TransactionMetadata> getTransactionMetadata(String hash) throws APIException {
+        Call<List<TransactionMetadata>> transactionMetadataCall = transactionsApi.txsHashMetadataGet(getProjectId(), hash);
 
         try{
             Response<List<TransactionMetadata>> transactionMetadataResponse = transactionMetadataCall.execute();
             return processResponse(transactionMetadataResponse);
         } catch (IOException exp){
-            throw new APIException("Exception while fetching transaction metadata for hash " + transactionHash , exp);
+            throw new APIException("Exception while fetching transaction metadata for hash " + hash, exp);
         }
     }
 
     @Override
-    public List<TransactionMetadataCbor> getTransactionMetadataCbor(String transactionHash) throws APIException {
-        Call<List<TransactionMetadataCbor>> transactionCborMetadataCall = transactionsApi.txsHashMetadataCborGet(getProjectId(), transactionHash);
+    public List<TransactionMetadataCbor> getTransactionMetadataCbor(String hash) throws APIException {
+        Call<List<TransactionMetadataCbor>> transactionCborMetadataCall = transactionsApi.txsHashMetadataCborGet(getProjectId(), hash);
 
         try{
             Response<List<TransactionMetadataCbor>> transactionCborMetadataResponse = transactionCborMetadataCall.execute();
             return processResponse(transactionCborMetadataResponse);
         } catch (IOException exp){
-            throw new APIException("Exception while fetching transaction cbor metadata for hash " + transactionHash , exp);
+            throw new APIException("Exception while fetching transaction cbor metadata for hash " + hash, exp);
         }
     }
 
