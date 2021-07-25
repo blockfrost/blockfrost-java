@@ -139,4 +139,16 @@ public class TransactionServiceImpl extends BaseImpl implements TransactionServi
         }
     }
 
+    @Override
+    public String submitTransaction(byte[] serializedTransaction) throws APIException {
+        Call<String> transactionSubmitCall = transactionsApi.txSubmitPost(getProjectId(), "application/cbor");
+
+        try{
+            Response<String> transactionSubmitResponse = transactionSubmitCall.execute();
+            return processResponse(transactionSubmitResponse);
+        } catch (IOException exp){
+            throw new APIException("Exception while submitting transaction  " + new String(serializedTransaction), exp);
+        }
+    }
+
 }

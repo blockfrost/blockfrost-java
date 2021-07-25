@@ -86,5 +86,13 @@ public interface TransactionService {
      * @return List&lt;TransactionMetadataCbor&gt;
      */
     List<TransactionMetadataCbor> getTransactionMetadataCbor(String hash) throws APIException;
+
+    /**
+     * Submit a transaction
+     * Submit an already serialized transaction to the network.
+     * @param serializedTransaction Serialized transaction in Cbor (required)
+     * @return String
+     */
+    String submitTransaction(byte[] serializedTransaction) throws APIException;
 }
 

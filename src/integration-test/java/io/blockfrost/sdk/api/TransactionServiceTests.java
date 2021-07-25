@@ -12,8 +12,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TransactionServiceTests extends TestBase {
 
@@ -176,5 +176,12 @@ public class TransactionServiceTests extends TestBase {
         String transactionHash = "0089e962584516378463141d853f7102852e7f2a8546c2a2af6cc05c6e628a5b";
         List<TransactionMetadataCbor> transactionMetadataCborResponse = transactionService.getTransactionMetadataCbor(transactionHash);
         assertThat(transactionMetadataCborResponse, hasSize(0));
+    }
+
+    //TODO: Use a real serialized transaction if possible
+    @Test
+    public void transactionPost_willReturn_transactionId(){
+        Exception exception = assertThrows( APIException.class, () -> transactionService.submitTransaction(new byte[0]));
+        assertThat(exception.getMessage(), containsString("Bad Request"));
     }
 }
