@@ -46,4 +46,8 @@ public class BaseImpl {
         }
     }
 
+    protected <T> T getApiClient(Class<T> clazz) {
+        return getRetrofit().create(clazz);
+    }
+
 }
