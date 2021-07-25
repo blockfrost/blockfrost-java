@@ -1,6 +1,6 @@
 package io.blockfrost.sdk.impl.retrofit;
 
-import io.blockfrost.sdk.impl.model.Genesis;
+import io.blockfrost.sdk.api.model.Genesis;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;

@@ -1,6 +1,6 @@
 package io.blockfrost.sdk.impl.retrofit;
 
-import io.blockfrost.sdk.impl.model.*;
+import io.blockfrost.sdk.api.model.*;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
@@ -18,6 +18,7 @@ public interface TransactionsApi {
    */
   @POST("tx/submit")
   Call<String> txSubmitPost(
+    @Header("project_id") String projectId,
     @Header("Content-Type") String contentType
   );
 

@@ -1,7 +1,7 @@
 package io.blockfrost.sdk.impl.retrofit;
 
-import io.blockfrost.sdk.impl.model.Clock;
-import io.blockfrost.sdk.impl.model.HealthStatus;
+import io.blockfrost.sdk.api.model.Clock;
+import io.blockfrost.sdk.api.model.Health;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -23,7 +23,7 @@ public interface HealthApi {
    * @return Call&lt;Health&gt;
    */
   @GET("health")
-  Call<HealthStatus> healthGet(@Header("project_id") String projectId);
+  Call<Health> healthGet(@Header("project_id") String projectId);
     
 
   /**

@@ -1,7 +1,7 @@
 package io.blockfrost.sdk.impl.retrofit;
 
-import io.blockfrost.sdk.impl.model.EndpointUsageMetric;
-import io.blockfrost.sdk.impl.model.UsageMetric;
+import io.blockfrost.sdk.api.model.EndpointUsageMetric;
+import io.blockfrost.sdk.api.model.UsageMetric;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
