@@ -2,7 +2,7 @@ package io.blockfrost.sdk.api;
 
 import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.impl.MetricsServiceImpl;
-import io.blockfrost.sdk.impl.common.Constants;
+import io.blockfrost.sdk.api.util.Constants;
 import io.blockfrost.sdk.api.model.EndpointUsageMetric;
 import io.blockfrost.sdk.api.model.UsageMetric;
 import org.junit.jupiter.api.BeforeEach;

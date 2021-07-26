@@ -2,7 +2,7 @@ package io.blockfrost.sdk.api;
 
 import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.impl.HealthServiceImpl;
-import io.blockfrost.sdk.impl.common.Constants;
+import io.blockfrost.sdk.api.util.Constants;
 import io.blockfrost.sdk.api.model.Clock;
 import io.blockfrost.sdk.api.model.Health;
 import org.exparity.hamcrest.date.DateMatchers;

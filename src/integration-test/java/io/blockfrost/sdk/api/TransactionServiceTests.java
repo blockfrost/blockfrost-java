@@ -3,7 +3,7 @@ package io.blockfrost.sdk.api;
 import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.api.model.*;
 import io.blockfrost.sdk.impl.TransactionServiceImpl;
-import io.blockfrost.sdk.impl.common.Constants;
+import io.blockfrost.sdk.api.util.Constants;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

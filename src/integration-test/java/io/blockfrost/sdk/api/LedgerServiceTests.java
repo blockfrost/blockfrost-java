@@ -2,7 +2,7 @@ package io.blockfrost.sdk.api;
 
 import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.impl.LedgerServiceImpl;
-import io.blockfrost.sdk.impl.common.Constants;
+import io.blockfrost.sdk.api.util.Constants;
 import io.blockfrost.sdk.api.model.Genesis;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
