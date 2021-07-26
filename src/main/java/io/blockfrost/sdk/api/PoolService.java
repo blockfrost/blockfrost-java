@@ -20,7 +20,7 @@ public interface PoolService {
     /**
      * List of stake pools
      * List of registered stake pools ordered from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
-     * @param count The numbers of pools per page (&lt;&eq;100).
+     * @param count The numbers of pools per page (&lt;=100).
      * @param page The page number for listing the results.
      * @return List&lt;String&gt;
      */
