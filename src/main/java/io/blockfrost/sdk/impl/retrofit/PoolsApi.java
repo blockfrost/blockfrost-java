@@ -2,6 +2,7 @@ package io.blockfrost.sdk.impl.retrofit;
 
 import io.blockfrost.sdk.api.model.Pool;
 import io.blockfrost.sdk.api.model.PoolMetadata;
+import io.blockfrost.sdk.api.model.PoolRetirementInfo;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
@@ -125,8 +126,11 @@ public interface PoolsApi {
    * @return Call&lt;List&lt;Object&gt;&gt;
    */
   @GET("pools/retired")
-  Call<List<Object>> poolsRetiredGet(
-          @Query("count") Integer count, @Query("page") Integer page, @Query("order") String order
+  Call<List<PoolRetirementInfo>> poolsRetiredGet(
+          @Header("project_id") String projectId,
+          @Query("count") Integer count,
+          @Query("page") Integer page,
+          @Query("order") String order
   );
 
   /**
