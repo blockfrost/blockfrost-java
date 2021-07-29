@@ -64,7 +64,8 @@ public interface PoolsApi {
    */
   @GET("pools/{pool_id}")
   Call<Pool> poolsPoolIdGet(
-    @Path("pool_id") String poolId
+          @Header("project_id") String projectId,
+          @Path("pool_id") String poolId
   );
 
   /**

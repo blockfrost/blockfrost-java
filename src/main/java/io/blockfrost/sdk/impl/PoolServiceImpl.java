@@ -2,6 +2,7 @@ package io.blockfrost.sdk.impl;
 
 import io.blockfrost.sdk.api.PoolService;
 import io.blockfrost.sdk.api.exception.APIException;
+import io.blockfrost.sdk.api.model.Pool;
 import io.blockfrost.sdk.api.model.PoolRetirementInfo;
 import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.helper.ValidationHelper;
@@ -113,6 +114,19 @@ public class PoolServiceImpl extends BaseImpl implements PoolService {
     @Override
     public List<PoolRetirementInfo> getRetiringPools() throws APIException {
         return getRetiringPools(OrderEnum.asc);
+    }
+
+    @Override
+    public Pool getPool(String poolId) throws APIException {
+
+        Call<Pool> poolCall = poolsApi.poolsPoolIdGet(getProjectId(), poolId);
+
+        try{
+            Response<Pool> poolResponse = poolCall.execute();
+            return processResponse(poolResponse);
+        } catch (IOException exp){
+            throw new APIException("Exception while fetching pool for poolId: " + poolId, exp);
+        }
     }
 
 

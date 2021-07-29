@@ -1,6 +1,7 @@
 package io.blockfrost.sdk.api;
 
 import io.blockfrost.sdk.api.exception.APIException;
+import io.blockfrost.sdk.api.model.Pool;
 import io.blockfrost.sdk.api.model.PoolRetirementInfo;
 import io.blockfrost.sdk.api.util.OrderEnum;
 
@@ -116,5 +117,13 @@ public interface PoolService {
      * @return List&lt;PoolRetirementInfo&gt;
      */
     List<PoolRetirementInfo> getRetiringPools() throws APIException;
+
+    /**
+     * Specific stake pool
+     * Pool information.
+     * @param poolId Bech32 or hexadecimal pool ID. (required)
+     * @return Pool
+     */
+    Pool getPool(String poolId) throws APIException;
 
 }
