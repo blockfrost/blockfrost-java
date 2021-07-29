@@ -2,6 +2,7 @@ package io.blockfrost.sdk.api;
 
 import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.api.model.Pool;
+import io.blockfrost.sdk.api.model.PoolHistory;
 import io.blockfrost.sdk.api.model.PoolRetirementInfo;
 import io.blockfrost.sdk.api.util.OrderEnum;
 
@@ -125,5 +126,45 @@ public interface PoolService {
      * @return Pool
      */
     Pool getPool(String poolId) throws APIException;
+
+    /**
+     * Stake pool history
+     * History of stake pool parameters over epochs.
+     * @param poolId Bech32 or hexadecimal pool ID. (required)
+     * @param count The number of results displayed on one page.
+     * @param page The page number for listing the results.
+     * @param order The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.  (optional, default to asc)
+     * @return List&lt;PoolHistory&gt;
+     */
+    List<PoolHistory> getPoolHistory(String poolId, int count, int page, OrderEnum order) throws APIException;
+
+    /**
+     * List of retiring pools
+     * List of retiring stake pools ordered from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
+     * @param poolId Bech32 or hexadecimal pool ID. (required)
+     * @param count The numbers of pools per page (&lt;=100).
+     * @param page The page number for listing the results.
+     * @return List&lt;PoolHistory&gt;
+     */
+    List<PoolHistory> getPoolHistory(String poolId, int count, int page) throws APIException;
+
+
+    /**
+     * List of retiring pools
+     * List of all retiring stake pools.
+     * @param poolId Bech32 or hexadecimal pool ID. (required)
+     * @param order The ordering of items from the point of view of the blockchain.
+     * @return List&lt;PoolHistory&gt;
+     */
+    //TODO: Implement
+    List<PoolHistory> getPoolHistory(String poolId, OrderEnum order) throws APIException;
+
+    /**
+     * List of retiring pools
+     * List of all retiring stake pools in ascending order from the point of view of the blockchain. We return oldest first, newest last
+     * @param poolId Bech32 or hexadecimal pool ID. (required)
+     * @return List&lt;PoolRetirementInfo&gt;
+     */
+    List<PoolHistory> getPoolHistory(String poolId) throws APIException;
 
 }

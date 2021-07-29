@@ -2,6 +2,7 @@ package io.blockfrost.sdk.api;
 
 import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.api.model.Pool;
+import io.blockfrost.sdk.api.model.PoolHistory;
 import io.blockfrost.sdk.api.model.PoolRetirementInfo;
 import io.blockfrost.sdk.api.util.Constants;
 import io.blockfrost.sdk.api.util.OrderEnum;
@@ -31,7 +32,7 @@ public class PoolServiceTests extends TestBase {
     }
 
     @Test
-    public void getPool_willReturn_poolForPoolId() throws APIException {
+    public void pool_willReturn_poolForPoolId() throws APIException {
 
         Pool expectedPool = Pool.builder()
                 .poolId("pool126zlx7728y7xs08s8epg9qp393kyafy9rzr89g4qkvv4cv93zem")
@@ -56,8 +57,15 @@ public class PoolServiceTests extends TestBase {
 
         Pool pool = poolService.getPool("pool126zlx7728y7xs08s8epg9qp393kyafy9rzr89g4qkvv4cv93zem");
         assertThat(pool, is(notNullValue()));
-        assertThat(pool, is(expectedPool));
+        assertThat(pool, samePropertyValuesAs(expectedPool, "liveSaturation", "liveSize"));
 
+    }
+
+    @Test
+    public void pool_willThrowAPIException_onNullPoolId() {
+
+        Exception exception = assertThrows(APIException.class, () -> poolService.getPool(null));
+        assertThat(exception.getMessage(), is("PoolId cannot be null or empty"));
     }
 
     @Nested
@@ -189,6 +197,108 @@ public class PoolServiceTests extends TestBase {
 
             Exception exception = assertThrows(APIException.class, () -> poolService.getRetiringPools(101, 1));
             assertThat(exception.getMessage(), containsString(ValidationHelper.COUNT_VALIDATION_MESSAGE));
+
+        }
+
+    }
+
+
+    @Nested
+    @DisplayName("GetPoolHistory Tests")
+    class GetPoolHistoryTests {
+
+        @Test
+        public void poolHistory_willReturn_poolHistoryForCountPageAndAscendingOrder() throws APIException {
+
+            List<PoolHistory> expectedPoolHistory = Arrays.asList(
+                    PoolHistory.builder()
+                            .epoch(77)
+                            .blocks(0)
+                            .activeStake("1497626626")
+                            .activeSize(new BigDecimal("0.00016613871489641306"))
+                            .delegatorsCount(1)
+                            .rewards("0")
+                            .fees("0")
+                            .build(),
+                    PoolHistory.builder()
+                            .epoch(78)
+                            .blocks(0)
+                            .activeStake("1497626626")
+                            .activeSize(new BigDecimal("0.000014972989086644468"))
+                            .delegatorsCount(1)
+                            .rewards("0")
+                            .fees("0")
+                            .build(),
+                    PoolHistory.builder()
+                            .epoch(79)
+                            .blocks(0)
+                            .activeStake("1497626626")
+                            .activeSize(new BigDecimal("0.000002942120178511434"))
+                            .delegatorsCount(1)
+                            .rewards("0")
+                            .fees("0")
+                            .build()
+            );
+
+            List<PoolHistory> poolHistory = poolService.getPoolHistory("pool1adur9jcn0dkjpm3v8ayf94yn3fe5xfk2rqfz7rfpuh6cw6evd7w", 3, 1, OrderEnum.asc);
+
+            assertThat(poolHistory, hasSize(3));
+            assertThat(poolHistory, contains(expectedPoolHistory.toArray()));
+        }
+
+        @Test
+        public void poolHistory_willReturn_poolHistoryForCountPage() throws APIException {
+
+            List<PoolHistory> expectedPoolHistory = Arrays.asList(
+                    PoolHistory.builder()
+                            .epoch(77)
+                            .blocks(0)
+                            .activeStake("1497626626")
+                            .activeSize(new BigDecimal("0.00016613871489641306"))
+                            .delegatorsCount(1)
+                            .rewards("0")
+                            .fees("0")
+                            .build(),
+                    PoolHistory.builder()
+                            .epoch(78)
+                            .blocks(0)
+                            .activeStake("1497626626")
+                            .activeSize(new BigDecimal("0.000014972989086644468"))
+                            .delegatorsCount(1)
+                            .rewards("0")
+                            .fees("0")
+                            .build(),
+                    PoolHistory.builder()
+                            .epoch(79)
+                            .blocks(0)
+                            .activeStake("1497626626")
+                            .activeSize(new BigDecimal("0.000002942120178511434"))
+                            .delegatorsCount(1)
+                            .rewards("0")
+                            .fees("0")
+                            .build()
+            );
+
+
+            List<PoolHistory> poolHistory = poolService.getPoolHistory("pool1adur9jcn0dkjpm3v8ayf94yn3fe5xfk2rqfz7rfpuh6cw6evd7w", 3, 1);
+
+            assertThat(poolHistory, hasSize(3));
+            assertThat(poolHistory, contains(expectedPoolHistory.toArray()));
+        }
+
+        @Test
+        public void poolHistory_willThrowAPIException_onCountGreaterThan100() {
+
+            Exception exception = assertThrows(APIException.class, () -> poolService.getPoolHistory("pool1adur9jcn0dkjpm3v8ayf94yn3fe5xfk2rqfz7rfpuh6cw6evd7w", 101, 1));
+            assertThat(exception.getMessage(), containsString(ValidationHelper.COUNT_VALIDATION_MESSAGE));
+
+        }
+
+        @Test
+        public void poolHistory_willThrowAPIException_onNullPoolId() {
+
+            Exception exception = assertThrows(APIException.class, () -> poolService.getPoolHistory(null, 101, 1));
+            assertThat(exception.getMessage(), is("PoolId cannot be null or empty"));
 
         }
 

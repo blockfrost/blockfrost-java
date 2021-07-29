@@ -33,7 +33,6 @@ import java.util.List;
 @ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-
 public class Pool {
   private String poolId;
   private String hex;

@@ -3,6 +3,7 @@ package io.blockfrost.sdk.impl;
 import io.blockfrost.sdk.api.PoolService;
 import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.api.model.Pool;
+import io.blockfrost.sdk.api.model.PoolHistory;
 import io.blockfrost.sdk.api.model.PoolRetirementInfo;
 import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.helper.ValidationHelper;
@@ -20,6 +21,12 @@ public class PoolServiceImpl extends BaseImpl implements PoolService {
     public PoolServiceImpl(String baseUrl, String projectId){
         super(baseUrl, projectId);
         poolsApi = getRetrofit().create(PoolsApi.class);
+    }
+
+    private void validatePoolId(String poolId) throws APIException {
+        if ( poolId == null || poolId.equals("") ){
+            throw new APIException("PoolId cannot be null or empty");
+        }
     }
 
     @Override
@@ -119,6 +126,8 @@ public class PoolServiceImpl extends BaseImpl implements PoolService {
     @Override
     public Pool getPool(String poolId) throws APIException {
 
+        validatePoolId(poolId);
+
         Call<Pool> poolCall = poolsApi.poolsPoolIdGet(getProjectId(), poolId);
 
         try{
@@ -127,6 +136,39 @@ public class PoolServiceImpl extends BaseImpl implements PoolService {
         } catch (IOException exp){
             throw new APIException("Exception while fetching pool for poolId: " + poolId, exp);
         }
+    }
+
+    @Override
+    public List<PoolHistory> getPoolHistory(String poolId, int count, int page, OrderEnum order) throws APIException {
+
+        validatePoolId(poolId);
+
+        ValidationHelper.validateCount(count);
+
+        Call<List<PoolHistory>> poolHistoryCall = poolsApi.poolsPoolIdHistoryGet(getProjectId(), poolId, count, page, order.name());
+
+        try{
+            Response<List<PoolHistory>> poolHistoryResponse = poolHistoryCall.execute();
+            return processResponse(poolHistoryResponse);
+        } catch (IOException exp){
+            throw new APIException("Exception while fetching history for poolId: " + poolId, exp);
+        }
+    }
+
+    @Override
+    public List<PoolHistory> getPoolHistory(String poolId, int count, int page) throws APIException {
+        return getPoolHistory(poolId, count, page, OrderEnum.asc);
+    }
+
+    //TODO: Implement using parallel fetch
+    @Override
+    public List<PoolHistory> getPoolHistory(String poolId, OrderEnum order) throws APIException {
+        return null;
+    }
+
+    @Override
+    public List<PoolHistory> getPoolHistory(String poolId) throws APIException {
+        return getPoolHistory(poolId, OrderEnum.asc);
     }
 
 

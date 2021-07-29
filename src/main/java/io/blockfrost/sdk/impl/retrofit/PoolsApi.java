@@ -1,6 +1,7 @@
 package io.blockfrost.sdk.impl.retrofit;
 
 import io.blockfrost.sdk.api.model.Pool;
+import io.blockfrost.sdk.api.model.PoolHistory;
 import io.blockfrost.sdk.api.model.PoolMetadata;
 import io.blockfrost.sdk.api.model.PoolRetirementInfo;
 import retrofit2.Call;
@@ -75,11 +76,15 @@ public interface PoolsApi {
    * @param count The number of results displayed on one page. (optional, default to 100)
    * @param page The page number for listing the results (optional, default to 1)
    * @param order The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.  (optional, default to asc)
-   * @return Call&lt;List&lt;Object&gt;&gt;
+   * @return Call&lt;List&lt;PoolHistory&gt;&gt;
    */
   @GET("pools/{pool_id}/history")
-  Call<List<Object>> poolsPoolIdHistoryGet(
-          @Path("pool_id") String poolId, @Query("count") Integer count, @Query("page") Integer page, @Query("order") String order
+  Call<List<PoolHistory>> poolsPoolIdHistoryGet(
+          @Header("project_id") String projectId,
+          @Path("pool_id") String poolId,
+          @Query("count") Integer count,
+          @Query("page") Integer page,
+          @Query("order") String order
   );
 
   /**
