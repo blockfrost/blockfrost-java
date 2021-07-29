@@ -2,10 +2,7 @@ package io.blockfrost.sdk.impl;
 
 import io.blockfrost.sdk.api.PoolService;
 import io.blockfrost.sdk.api.exception.APIException;
-import io.blockfrost.sdk.api.model.Pool;
-import io.blockfrost.sdk.api.model.PoolHistory;
-import io.blockfrost.sdk.api.model.PoolMetadata;
-import io.blockfrost.sdk.api.model.PoolRetirementInfo;
+import io.blockfrost.sdk.api.model.*;
 import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.helper.ValidationHelper;
 import io.blockfrost.sdk.impl.retrofit.PoolsApi;
@@ -183,9 +180,23 @@ public class PoolServiceImpl extends BaseImpl implements PoolService {
             Response<PoolMetadata> poolMetadataResponse = poolMetadataCall.execute();
             return processResponse(poolMetadataResponse);
         } catch (IOException exp){
-            throw new APIException("Exception while fetching poolMetadata for poolId: " + poolId, exp);
+            throw new APIException("Exception while fetching pool metadata for poolId: " + poolId, exp);
         }
     }
 
+    @Override
+    public List<PoolRelay> getPoolRelays(String poolId) throws APIException {
+
+        validatePoolId(poolId);
+
+        Call<List<PoolRelay>> poolRelayCall = poolsApi.poolsPoolIdRelaysGet(getProjectId(), poolId);
+
+        try{
+            Response<List<PoolRelay>> poolRelaysResponse = poolRelayCall.execute();
+            return processResponse(poolRelaysResponse);
+        } catch (IOException exp){
+            throw new APIException("Exception while fetching pool relays for poolId: " + poolId, exp);
+        }
+    }
 
 }

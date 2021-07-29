@@ -30,7 +30,7 @@ import lombok.*;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 
-public class PoolRelays {
+public class PoolRelay {
     private String ipv4;
     private String ipv6;
     private String dns;

@@ -1,10 +1,7 @@
 package io.blockfrost.sdk.api;
 
 import io.blockfrost.sdk.api.exception.APIException;
-import io.blockfrost.sdk.api.model.Pool;
-import io.blockfrost.sdk.api.model.PoolHistory;
-import io.blockfrost.sdk.api.model.PoolMetadata;
-import io.blockfrost.sdk.api.model.PoolRetirementInfo;
+import io.blockfrost.sdk.api.model.*;
 import io.blockfrost.sdk.api.util.OrderEnum;
 
 import java.util.List;
@@ -175,5 +172,13 @@ public interface PoolService {
      * @return PoolMetadata
      */
     PoolMetadata getPoolMetadata(String poolId) throws APIException;
+
+    /**
+     * Stake pool relays
+     * Relays of a stake pool.
+     * @param poolId Bech32 or hexadecimal pool ID. (required)
+     * @return List&lt;Object&gt;
+     */
+    List<PoolRelay> getPoolRelays(String poolId) throws APIException;
 
 }

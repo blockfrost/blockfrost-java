@@ -30,7 +30,7 @@ public class TransactionPoolUpdate {
     private String rewardAccount;
     private List<String> owners;
     private PoolMetadata metadata;
-    private List<PoolRelays> relays;
+    private List<PoolRelay> relays;
     private Integer activeEpoch;
 
 }

@@ -1,10 +1,7 @@
 package io.blockfrost.sdk.api;
 
 import io.blockfrost.sdk.api.exception.APIException;
-import io.blockfrost.sdk.api.model.Pool;
-import io.blockfrost.sdk.api.model.PoolHistory;
-import io.blockfrost.sdk.api.model.PoolMetadata;
-import io.blockfrost.sdk.api.model.PoolRetirementInfo;
+import io.blockfrost.sdk.api.model.*;
 import io.blockfrost.sdk.api.util.Constants;
 import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.PoolServiceImpl;
@@ -335,9 +332,38 @@ public class PoolServiceTests extends TestBase {
         @Test
         public void pool_willThrowAPIException_onNullPoolId() {
 
-            Exception exception = assertThrows(APIException.class, () -> poolService.getPool(null));
+            Exception exception = assertThrows(APIException.class, () -> poolService.getPoolMetadata(null));
             assertThat(exception.getMessage(), is("PoolId cannot be null or empty"));
         }
     }
 
+    @Nested
+    @DisplayName("GetPoolRelays Tests")
+    class GetPoolRelaysTests {
+        @Test
+        public void poolRelays_willReturn_poolRelaysForPoolId() throws APIException {
+
+            List<PoolRelay> expectedPoolRelays = Arrays.asList(
+                    PoolRelay.builder()
+                            .ipv4("120.12.13.43")
+                            .ipv6(null)
+                            .dns(null)
+                            .dnsSrv(null)
+                            .port(6000)
+                            .build()
+            );
+
+            List<PoolRelay> poolRelays = poolService.getPoolRelays("pool126zlx7728y7xs08s8epg9qp393kyafy9rzr89g4qkvv4cv93zem");
+            assertThat(poolRelays, is(notNullValue()));
+            assertThat(poolRelays, is(expectedPoolRelays));
+
+        }
+
+        @Test
+        public void pool_willThrowAPIException_onNullPoolId() {
+
+            Exception exception = assertThrows(APIException.class, () -> poolService.getPoolRelays(null));
+            assertThat(exception.getMessage(), is("PoolId cannot be null or empty"));
+        }
+    }    
 }
