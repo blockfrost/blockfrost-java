@@ -268,7 +268,7 @@ public interface PoolService {
      * @param count The number of results displayed on one page. (optional, default to 100)
      * @param page The page number for listing the results. (optional, default to 1)
      * @param order The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.  (optional, default to asc)
-     * @return List&lt;PoolUpdate&gt
+     * @return List&lt;PoolUpdate&gt;
      */
     List<PoolUpdate> getPoolUpdates(String poolId, int count, int page, OrderEnum order) throws APIException;
 
