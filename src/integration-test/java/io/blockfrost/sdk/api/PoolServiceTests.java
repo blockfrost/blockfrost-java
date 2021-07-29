@@ -6,10 +6,7 @@ import io.blockfrost.sdk.api.util.Constants;
 import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.PoolServiceImpl;
 import io.blockfrost.sdk.impl.helper.ValidationHelper;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -121,6 +118,45 @@ public class PoolServiceTests extends TestBase {
 
     }
 
+    @Nested
+    @DisplayName("GetRetiringPools Tests")
+    class GetRetiringPoolsTests {
+
+        @Test
+        public void retiringPools_willReturn_retiringPoolsForCountPageAndAscendingOrder() throws APIException {
+
+            List<PoolRetirementInfo> poolRetirementInfoList = Arrays.asList(
+                    PoolRetirementInfo.builder().poolId("pool1w660hycvxgc2k5ac6ff6jrn9dp3ycr9zrf26wvjchfctvp5f39v").epoch(148).build()
+            );
+
+            List<PoolRetirementInfo> poolList = poolService.getRetiringPools(1, 1, OrderEnum.asc);
+
+            assertThat(poolList, hasSize(1));
+            assertThat(poolList, contains(poolRetirementInfoList.toArray()));
+        }
+
+        @Test
+        public void retiringPools_willReturn_retiringPoolsForCountPage() throws APIException {
+
+            List<PoolRetirementInfo> poolRetirementInfoList = Arrays.asList(
+                    PoolRetirementInfo.builder().poolId("pool1w660hycvxgc2k5ac6ff6jrn9dp3ycr9zrf26wvjchfctvp5f39v").epoch(148).build()
+            );
+
+            List<PoolRetirementInfo> poolList = poolService.getRetiringPools(1, 1);
+
+            assertThat(poolList, hasSize(1));
+            assertThat(poolList, contains(poolRetirementInfoList.toArray()));
+        }
+
+        @Test
+        public void retiringPools_willThrowAPIException_onCountGreaterThan100() {
+
+            Exception exception = assertThrows(APIException.class, () -> poolService.getRetiringPools(101, 1));
+            assertThat(exception.getMessage(), containsString(ValidationHelper.COUNT_VALIDATION_MESSAGE));
+
+        }
+
+    }
 
 
 }

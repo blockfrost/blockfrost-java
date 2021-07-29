@@ -142,8 +142,11 @@ public interface PoolsApi {
    * @return Call&lt;List&lt;Object&gt;&gt;
    */
   @GET("pools/retiring")
-  Call<List<Object>> poolsRetiringGet(
-          @Query("count") Integer count, @Query("page") Integer page, @Query("order") String order
+  Call<List<PoolRetirementInfo>> poolsRetiringGet(
+          @Header("project_id") String projectId,
+          @Query("count") Integer count,
+          @Query("page") Integer page,
+          @Query("order") String order
   );
 
 }

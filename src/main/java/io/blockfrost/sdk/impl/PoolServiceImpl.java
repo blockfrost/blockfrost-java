@@ -72,6 +72,7 @@ public class PoolServiceImpl extends BaseImpl implements PoolService {
         return getRetiredPools(count, page, OrderEnum.asc);
     }
 
+    //TODO: Implement using parallel fetch
     @Override
     public List<PoolRetirementInfo> getRetiredPools(OrderEnum order) throws APIException {
         return null;
@@ -80,6 +81,38 @@ public class PoolServiceImpl extends BaseImpl implements PoolService {
     @Override
     public List<PoolRetirementInfo> getRetiredPools() throws APIException {
         return getRetiredPools(OrderEnum.asc);
+    }
+
+    @Override
+    public List<PoolRetirementInfo> getRetiringPools(int count, int page, OrderEnum order) throws APIException {
+
+        ValidationHelper.validateCount(count);
+
+        Call<List<PoolRetirementInfo>> poolsCall = poolsApi.poolsRetiringGet(getProjectId(), count, page, order.name());
+
+        try{
+            Response<List<PoolRetirementInfo>> poolsResponse = poolsCall.execute();
+            return processResponse(poolsResponse);
+        } catch (IOException exp){
+            throw new APIException("Exception while fetching retiring pools ", exp);
+        }
+
+    }
+
+    @Override
+    public List<PoolRetirementInfo> getRetiringPools(int count, int page) throws APIException {
+        return getRetiringPools(count, page, OrderEnum.asc);
+    }
+
+    //TODO: Implement using parallel fetch
+    @Override
+    public List<PoolRetirementInfo> getRetiringPools(OrderEnum order) throws APIException {
+        return null;
+    }
+
+    @Override
+    public List<PoolRetirementInfo> getRetiringPools() throws APIException {
+        return getRetiringPools(OrderEnum.asc);
     }
 
 
