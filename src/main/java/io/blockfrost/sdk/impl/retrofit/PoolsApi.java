@@ -50,8 +50,12 @@ public interface PoolsApi {
    * @return Call&lt;List&lt;Object&gt;&gt;
    */
   @GET("pools/{pool_id}/delegators")
-  Call<List<Object>> poolsPoolIdDelegatorsGet(
-          @Path("pool_id") String poolId, @Query("count") Integer count, @Query("page") Integer page, @Query("order") String order
+  Call<List<PoolDelegator>> poolsPoolIdDelegatorsGet(
+          @Header("project_id") String projectId,
+          @Path("pool_id") String poolId,
+          @Query("count") Integer count,
+          @Query("page") Integer page,
+          @Query("order") String order
   );
 
   /**

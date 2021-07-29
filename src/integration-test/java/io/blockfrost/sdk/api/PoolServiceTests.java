@@ -354,7 +354,7 @@ public class PoolServiceTests extends TestBase {
             );
 
             List<PoolRelay> poolRelays = poolService.getPoolRelays("pool126zlx7728y7xs08s8epg9qp393kyafy9rzr89g4qkvv4cv93zem");
-            assertThat(poolRelays, is(notNullValue()));
+            assertThat(poolRelays, hasSize(1));
             assertThat(poolRelays, is(expectedPoolRelays));
 
         }
@@ -365,5 +365,62 @@ public class PoolServiceTests extends TestBase {
             Exception exception = assertThrows(APIException.class, () -> poolService.getPoolRelays(null));
             assertThat(exception.getMessage(), is("PoolId cannot be null or empty"));
         }
-    }    
+    }
+
+    @Nested
+    @DisplayName("GetPoolDelegators Tests")
+    class GetPoolDelegatorsTests {
+
+        @Test
+        public void poolDelegators_willReturn_poolDelegatorsForCountPageAndAscendingOrder() throws APIException {
+
+            List<PoolDelegator> expectedPoolDelegatorList = Arrays.asList(
+                    PoolDelegator.builder()
+                            .address("stake_test1up32f2hrv5ytqk8ad6e4apss5zrrjjlrkjhrksypn5g08fqrqf9gr")
+                            .liveStake("997443657")
+                            .build()
+            );
+
+            List<PoolDelegator> poolDelegatorList = poolService.getPoolDelegators("pool126zlx7728y7xs08s8epg9qp393kyafy9rzr89g4qkvv4cv93zem", 3, 1, OrderEnum.asc);
+
+            assertThat(poolDelegatorList, hasSize(1));
+            assertThat(poolDelegatorList, contains(expectedPoolDelegatorList.toArray()));
+        }
+
+        @Test
+        public void poolDelegators_willReturn_poolDelegatorsForCountPage() throws APIException {
+
+            List<PoolDelegator> expectedPoolDelegatorList = Arrays.asList(
+                    PoolDelegator.builder()
+                            .address("stake_test1up32f2hrv5ytqk8ad6e4apss5zrrjjlrkjhrksypn5g08fqrqf9gr")
+                            .liveStake("997443657")
+                            .build()
+            );
+
+            List<PoolDelegator> poolDelegatorList = poolService.getPoolDelegators("pool126zlx7728y7xs08s8epg9qp393kyafy9rzr89g4qkvv4cv93zem", 3, 1, OrderEnum.asc);
+
+            assertThat(poolDelegatorList, hasSize(1));
+            assertThat(poolDelegatorList, contains(expectedPoolDelegatorList.toArray()));
+
+        }
+
+        @Test
+        public void poolDelegators_willThrowAPIException_onCountGreaterThan100() {
+
+            Exception exception = assertThrows(APIException.class, () -> poolService.getPoolDelegators("pool126zlx7728y7xs08s8epg9qp393kyafy9rzr89g4qkvv4cv93zem", 101, 1));
+            assertThat(exception.getMessage(), containsString(ValidationHelper.COUNT_VALIDATION_MESSAGE));
+
+        }
+
+        @Test
+        public void poolDelegators_willThrowAPIException_onNullPoolId() {
+
+            Exception exception = assertThrows(APIException.class, () -> poolService.getPoolRelays(null));
+            assertThat(exception.getMessage(), is("PoolId cannot be null or empty"));
+        }
+
+
+
+    }
+
 }

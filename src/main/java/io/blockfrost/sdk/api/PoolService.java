@@ -161,7 +161,7 @@ public interface PoolService {
      * List of retiring pools
      * List of all retiring stake pools in ascending order from the point of view of the blockchain. We return oldest first, newest last
      * @param poolId Bech32 or hexadecimal pool ID. (required)
-     * @return List&lt;PoolRetirementInfo&gt;
+     * @return List&lt;PoolHistory&gt;
      */
     List<PoolHistory> getPoolHistory(String poolId) throws APIException;
 
@@ -180,5 +180,45 @@ public interface PoolService {
      * @return List&lt;Object&gt;
      */
     List<PoolRelay> getPoolRelays(String poolId) throws APIException;
+
+    /**
+     * Stake pool delegators
+     * List of current stake pools delegators.
+     * @param poolId Bech32 or hexadecimal pool ID. (required)
+     * @param count The number of results displayed on one page.
+     * @param page The page number for listing the results.
+     * @param order The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.  (optional, default to asc)
+     * @return List&lt;PoolDelegator&gt;
+     */
+    List<PoolDelegator> getPoolDelegators(String poolId, int count, int page, OrderEnum order) throws APIException;
+
+    /**
+     * List of stake pool delegators
+     * List of stake pool delegators ordered from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
+     * @param poolId Bech32 or hexadecimal pool ID. (required)
+     * @param count The numbers of pools per page (&lt;=100).
+     * @param page The page number for listing the results.
+     * @return List&lt;PoolDelegator&gt;
+     */
+    List<PoolDelegator> getPoolDelegators(String poolId, int count, int page) throws APIException;
+
+
+    /**
+     * List of stake pool delegators
+     * List of stake pool delegators
+     * @param poolId Bech32 or hexadecimal pool ID. (required)
+     * @param order The ordering of items from the point of view of the blockchain.
+     * @return List&lt;PoolDelegator&gt;
+     */
+    //TODO: Implement
+    List<PoolDelegator> getPoolDelegators(String poolId, OrderEnum order) throws APIException;
+
+    /**
+     * List of stake pool delegators
+     * List of stake pool delegators in ascending order from the point of view of the blockchain. We return oldest first, newest last
+     * @param poolId Bech32 or hexadecimal pool ID. (required)
+     * @return List&lt;PoolDelegator&gt;
+     */
+    List<PoolDelegator> getPoolDelegators(String poolId) throws APIException;
 
 }

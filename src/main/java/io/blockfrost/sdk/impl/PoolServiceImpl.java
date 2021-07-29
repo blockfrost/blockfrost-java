@@ -199,4 +199,37 @@ public class PoolServiceImpl extends BaseImpl implements PoolService {
         }
     }
 
+    @Override
+    public List<PoolDelegator> getPoolDelegators(String poolId, int count, int page, OrderEnum order) throws APIException {
+
+        validatePoolId(poolId);
+
+        ValidationHelper.validateCount(count);
+
+        Call<List<PoolDelegator>> poolDelegatorCall = poolsApi.poolsPoolIdDelegatorsGet(getProjectId(), poolId, count, page, order.name());
+
+        try{
+            Response<List<PoolDelegator>> poolDelegatorsResponse = poolDelegatorCall.execute();
+            return processResponse(poolDelegatorsResponse);
+        } catch (IOException exp){
+            throw new APIException("Exception while fetching pool delegators for poolId: " + poolId, exp);
+        }
+    }
+
+    @Override
+    public List<PoolDelegator> getPoolDelegators(String poolId, int count, int page) throws APIException {
+        return getPoolDelegators(poolId, count, page, OrderEnum.asc);
+    }
+
+    //TODO: Implement using parallel fetch
+    @Override
+    public List<PoolDelegator> getPoolDelegators(String poolId, OrderEnum order) throws APIException {
+        return null;
+    }
+
+    @Override
+    public List<PoolDelegator> getPoolDelegators(String poolId) throws APIException {
+        return getPoolDelegators(poolId, OrderEnum.asc);
+    }
+
 }
