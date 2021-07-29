@@ -458,6 +458,74 @@ public class PoolServiceTests extends TestBase {
             assertThat(exception.getMessage(), is("PoolId cannot be null or empty"));
         }
 
-    }    
+    }
+
+
+    @Nested
+    @DisplayName("GetPoolUpdates Tests")
+    class GetPoolUpdatesTests {
+
+        @Test
+        public void poolUpdates_willReturn_poolUpdatesForCountPageAndAscendingOrder() throws APIException {
+
+            List<PoolUpdate> expectedPoolUpdateList = Arrays.asList(
+                    PoolUpdate.builder()
+                            .txHash("78925fad4cce75a22a675ed5e175ecfd40baf7ac51c487c5cdb0fde9a02afa64")
+                            .certIndex(0)
+                            .action("registered")
+                            .build(),
+                    PoolUpdate.builder()
+                            .txHash("fd8a94eaa104d73b177ff092f959c9ae376bd9fb464a57cfc85664c4823011ed")
+                            .certIndex(0)
+                            .action("deregistered")
+                            .build()
+            );
+
+            List<PoolUpdate> poolUpdateList = poolService.getPoolUpdates("pool126zlx7728y7xs08s8epg9qp393kyafy9rzr89g4qkvv4cv93zem", 3, 1, OrderEnum.asc);
+
+            assertThat(poolUpdateList, hasSize(2));
+            assertThat(poolUpdateList, contains(expectedPoolUpdateList.toArray()));
+        }
+
+        @Test
+        public void poolUpdates_willReturn_poolUpdatesForCountPage() throws APIException {
+
+            List<PoolUpdate> expectedPoolUpdateList = Arrays.asList(
+                    PoolUpdate.builder()
+                            .txHash("78925fad4cce75a22a675ed5e175ecfd40baf7ac51c487c5cdb0fde9a02afa64")
+                            .certIndex(0)
+                            .action("registered")
+                            .build(),
+                    PoolUpdate.builder()
+                            .txHash("fd8a94eaa104d73b177ff092f959c9ae376bd9fb464a57cfc85664c4823011ed")
+                            .certIndex(0)
+                            .action("deregistered")
+                            .build()
+            );
+
+            List<PoolUpdate> poolUpdateList = poolService.getPoolUpdates("pool126zlx7728y7xs08s8epg9qp393kyafy9rzr89g4qkvv4cv93zem", 3, 1, OrderEnum.asc);
+
+            assertThat(poolUpdateList, hasSize(2));
+            assertThat(poolUpdateList, contains(expectedPoolUpdateList.toArray()));
+
+        }
+
+        @Test
+        public void poolUpdates_willThrowAPIException_onCountGreaterThan100() {
+
+            Exception exception = assertThrows(APIException.class, () -> poolService.getPoolUpdates("pool126zlx7728y7xs08s8epg9qp393kyafy9rzr89g4qkvv4cv93zem", 101, 1));
+            assertThat(exception.getMessage(), containsString(ValidationHelper.COUNT_VALIDATION_MESSAGE));
+
+        }
+
+        @Test
+        public void poolUpdates_willThrowAPIException_onNullPoolId() {
+
+            Exception exception = assertThrows(APIException.class, () -> poolService.getPoolRelays(null));
+            assertThat(exception.getMessage(), is("PoolId cannot be null or empty"));
+        }
+
+    }
+
 
 }

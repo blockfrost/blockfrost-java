@@ -248,7 +248,7 @@ public interface PoolService {
      * List of stake pools blocks.
      * @param poolId Bech32 or hexadecimal pool ID. (required)
      * @param order The ordering of items from the point of view of the blockchain.
-     * @return List&lt;PoolDelegator&gt;
+     * @return List&lt;String&gt;
      */
     //TODO: Implement
     List<String> getPoolBlocks(String poolId, OrderEnum order) throws APIException;
@@ -257,9 +257,48 @@ public interface PoolService {
      * Stake pool blocks
      * List of stake pools blocks. in ascending order from the point of view of the blockchain. We return oldest first, newest last
      * @param poolId Bech32 or hexadecimal pool ID. (required)
-     * @return List&lt;PoolDelegator&gt;
+     * @return List&lt;String&gt;
      */
     List<String> getPoolBlocks(String poolId) throws APIException;
 
+    /**
+     * Stake pool updates
+     * List of certificate updates to the stake pool.
+     * @param poolId Bech32 or hexadecimal pool ID. (required)
+     * @param count The number of results displayed on one page. (optional, default to 100)
+     * @param page The page number for listing the results. (optional, default to 1)
+     * @param order The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.  (optional, default to asc)
+     * @return List&lt;PoolUpdate&gt
+     */
+    List<PoolUpdate> getPoolUpdates(String poolId, int count, int page, OrderEnum order) throws APIException;
+
+    /**
+     * Stake pool updates
+     * List of certificate updates to the stake pool. ordered from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
+     * @param poolId Bech32 or hexadecimal pool ID. (required)
+     * @param count The numbers of pools per page (&lt;=100).
+     * @param page The page number for listing the results.
+     * @return List&lt;PoolUpdate&gt;
+     */
+    List<PoolUpdate> getPoolUpdates(String poolId, int count, int page) throws APIException;
+
+
+    /**
+     * Stake pool updates
+     * List of certificate updates to the stake pool.
+     * @param poolId Bech32 or hexadecimal pool ID. (required)
+     * @param order The ordering of items from the point of view of the blockchain.
+     * @return List&lt;PoolUpdate&gt;
+     */
+    //TODO: Implement
+    List<PoolUpdate> getPoolUpdates(String poolId, OrderEnum order) throws APIException;
+
+    /**
+     * Stake pool updates
+     * List of certificate updates to the stake pool. in ascending order from the point of view of the blockchain. We return oldest first, newest last
+     * @param poolId Bech32 or hexadecimal pool ID. (required)
+     * @return List&lt;PoolUpdate&gt;
+     */
+    List<PoolUpdate> getPoolUpdates(String poolId) throws APIException;
 
 }

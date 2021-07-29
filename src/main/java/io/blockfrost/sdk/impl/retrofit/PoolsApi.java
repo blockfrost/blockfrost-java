@@ -126,8 +126,12 @@ public interface PoolsApi {
    * @return Call&lt;List&lt;Object&gt;&gt;
    */
   @GET("pools/{pool_id}/updates")
-  Call<List<Object>> poolsPoolIdUpdatesGet(
-          @Path("pool_id") String poolId, @Query("count") Integer count, @Query("page") Integer page, @Query("order") String order
+  Call<List<PoolUpdate>> poolsPoolIdUpdatesGet(
+          @Header("project_id") String projectId,
+          @Path("pool_id") String poolId,
+          @Query("count") Integer count,
+          @Query("page") Integer page,
+          @Query("order") String order
   );
 
   /**
