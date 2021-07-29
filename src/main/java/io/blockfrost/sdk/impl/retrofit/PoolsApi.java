@@ -37,7 +37,11 @@ public interface PoolsApi {
    */
   @GET("pools/{pool_id}/blocks")
   Call<List<String>> poolsPoolIdBlocksGet(
-          @Path("pool_id") String poolId, @Query("count") Integer count, @Query("page") Integer page, @Query("order") String order
+          @Header("project_id") String projectId,
+          @Path("pool_id") String poolId,
+          @Query("count") Integer count,
+          @Query("page") Integer page,
+          @Query("order") String order
   );
 
   /**

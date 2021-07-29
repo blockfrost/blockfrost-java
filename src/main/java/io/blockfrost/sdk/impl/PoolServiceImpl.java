@@ -232,4 +232,38 @@ public class PoolServiceImpl extends BaseImpl implements PoolService {
         return getPoolDelegators(poolId, OrderEnum.asc);
     }
 
+    @Override
+    public List<String> getPoolBlocks(String poolId, int count, int page, OrderEnum order) throws APIException {
+
+        validatePoolId(poolId);
+
+        ValidationHelper.validateCount(count);
+
+        Call<List<String>> poolBlockCall = poolsApi.poolsPoolIdBlocksGet(getProjectId(), poolId, count, page, order.name());
+
+        try{
+            Response<List<String>> poolBlocksResponse = poolBlockCall.execute();
+            return processResponse(poolBlocksResponse);
+        } catch (IOException exp){
+            throw new APIException("Exception while fetching pool blocks for poolId: " + poolId, exp);
+        }
+    }
+
+    @Override
+    public List<String> getPoolBlocks(String poolId, int count, int page) throws APIException {
+        return getPoolBlocks(poolId, count, page, OrderEnum.asc);
+    }
+
+    //TODO: Implement using parallel fetch
+    @Override
+    public List<String> getPoolBlocks(String poolId, OrderEnum order) throws APIException {
+        return null;
+    }
+
+    @Override
+    public List<String> getPoolBlocks(String poolId) throws APIException {
+        return getPoolBlocks(poolId, OrderEnum.asc);
+    }
+
+
 }

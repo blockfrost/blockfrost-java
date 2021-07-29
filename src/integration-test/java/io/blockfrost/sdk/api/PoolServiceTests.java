@@ -419,8 +419,45 @@ public class PoolServiceTests extends TestBase {
             assertThat(exception.getMessage(), is("PoolId cannot be null or empty"));
         }
 
-
-
     }
+
+
+    @Nested
+    @DisplayName("GetPoolBlocks Tests")
+    class GetPoolBlocksTests {
+
+        @Test
+        public void poolBlocks_willReturn_poolBlocksForCountPageAndAscendingOrder() throws APIException {
+
+            List<String> poolBlockList = poolService.getPoolBlocks("pool126zlx7728y7xs08s8epg9qp393kyafy9rzr89g4qkvv4cv93zem", 3, 1, OrderEnum.asc);
+
+            assertThat(poolBlockList, hasSize(0));
+        }
+
+        @Test
+        public void poolBlocks_willReturn_poolBlocksForCountPage() throws APIException {
+
+            List<String> poolBlockList = poolService.getPoolBlocks("pool126zlx7728y7xs08s8epg9qp393kyafy9rzr89g4qkvv4cv93zem", 3, 1, OrderEnum.asc);
+
+            assertThat(poolBlockList, hasSize(0));
+
+        }
+
+        @Test
+        public void poolBlocks_willThrowAPIException_onCountGreaterThan100() {
+
+            Exception exception = assertThrows(APIException.class, () -> poolService.getPoolBlocks("pool126zlx7728y7xs08s8epg9qp393kyafy9rzr89g4qkvv4cv93zem", 101, 1));
+            assertThat(exception.getMessage(), containsString(ValidationHelper.COUNT_VALIDATION_MESSAGE));
+
+        }
+
+        @Test
+        public void poolBlocks_willThrowAPIException_onNullPoolId() {
+
+            Exception exception = assertThrows(APIException.class, () -> poolService.getPoolRelays(null));
+            assertThat(exception.getMessage(), is("PoolId cannot be null or empty"));
+        }
+
+    }    
 
 }
