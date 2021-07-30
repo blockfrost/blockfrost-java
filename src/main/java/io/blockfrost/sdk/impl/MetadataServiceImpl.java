@@ -2,6 +2,7 @@ package io.blockfrost.sdk.impl;
 
 import io.blockfrost.sdk.api.MetadataService;
 import io.blockfrost.sdk.api.exception.APIException;
+import io.blockfrost.sdk.api.model.TransactionMetadataLabelCbor;
 import io.blockfrost.sdk.api.model.TransactionMetadataLabel;
 import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.helper.ValidationHelper;
@@ -21,6 +22,11 @@ public class MetadataServiceImpl extends BaseImpl implements MetadataService {
         metadataApi = getRetrofit().create(MetadataApi.class);
     }
 
+    private void validateLabel(String label) throws APIException {
+        if ( label == null || label.equals("") ){
+            throw new APIException("Label cannot be null or empty");
+        }
+    }
 
     @Override
     public List<TransactionMetadataLabel> getTransactionMetadataLabels(int count, int page, OrderEnum order) throws APIException {
@@ -50,7 +56,41 @@ public class MetadataServiceImpl extends BaseImpl implements MetadataService {
     }
 
     @Override
-    public List<TransactionMetadataLabel> getTransactionMetadataLabels(String poolId) throws APIException {
+    public List<TransactionMetadataLabel> getTransactionMetadataLabels() throws APIException {
         return getTransactionMetadataLabels(OrderEnum.asc);
+    }
+
+    @Override
+    public List<TransactionMetadataLabelCbor> getTransactionMetadataCborForLabel(String label, int count, int page, OrderEnum order) throws APIException {
+
+        validateLabel(label);
+
+        ValidationHelper.validateCount(count);
+
+        Call<List<TransactionMetadataLabelCbor>> metadataCborCall = metadataApi.metadataTxsLabelsLabelCborGet(getProjectId(), label, count, page, order.name());
+
+        try{
+            Response<List<TransactionMetadataLabelCbor>> metadataCborResponse = metadataCborCall.execute();
+            return processResponse(metadataCborResponse);
+        } catch (IOException exp){
+            throw new APIException("Exception while fetching transaction metadata for label: " + label, exp);
+        }
+    }
+
+    @Override
+    public List<TransactionMetadataLabelCbor> getTransactionMetadataCborForLabel(String label, int count, int page) throws APIException {
+        return getTransactionMetadataCborForLabel(label, count, page, OrderEnum.asc);
+    }
+
+    //TODO: Implement
+    @Override
+    public List<TransactionMetadataLabelCbor> getTransactionMetadataCborForLabel(String label, OrderEnum order) throws APIException {
+        validateLabel(label);
+        return null;
+    }
+
+    @Override
+    public List<TransactionMetadataLabelCbor> getTransactionMetadataCborForLabel(String label) throws APIException {
+        return getTransactionMetadataCborForLabel(label, OrderEnum.asc);
     }
 }

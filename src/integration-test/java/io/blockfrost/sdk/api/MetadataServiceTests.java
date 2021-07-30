@@ -2,6 +2,7 @@ package io.blockfrost.sdk.api;
 
 import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.api.model.TransactionMetadataLabel;
+import io.blockfrost.sdk.api.model.TransactionMetadataLabelCbor;
 import io.blockfrost.sdk.api.util.Constants;
 import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.MetadataServiceImpl;
@@ -44,7 +45,7 @@ public class MetadataServiceTests extends TestBase {
             List<TransactionMetadataLabel> metadataList = metadataService.getTransactionMetadataLabels(3, 1, OrderEnum.asc);
 
             assertThat(metadataList, hasSize(3));
-            assertThat(metadataList, contains(expectedTransactionMetadataLabelsList.toArray()));
+            assertThat(metadataList.get(0), samePropertyValuesAs(expectedTransactionMetadataLabelsList.get(0), "count"));
 
         }
 
@@ -60,7 +61,8 @@ public class MetadataServiceTests extends TestBase {
             List<TransactionMetadataLabel> metadataList = metadataService.getTransactionMetadataLabels(3, 1, OrderEnum.asc);
 
             assertThat(metadataList, hasSize(3));
-            assertThat(metadataList, contains(expectedTransactionMetadataLabelsList.toArray()));
+            assertThat(metadataList.get(0), samePropertyValuesAs(expectedTransactionMetadataLabelsList.get(0), "count"));
+
         }
 
         @Test
@@ -69,6 +71,77 @@ public class MetadataServiceTests extends TestBase {
             Exception exception = assertThrows(APIException.class, () -> metadataService.getTransactionMetadataLabels(101, 1));
             assertThat(exception.getMessage(), containsString(ValidationHelper.COUNT_VALIDATION_MESSAGE));
 
+        }
+
+    }
+
+    @Nested
+    @DisplayName("GetTransactionMetadataCborForLabel Tests")
+    class GetTransactionMetadataCborForLabel {
+
+        @Test
+        public void transactionMetadataCborForLabel_willReturn_transactionMetadataLabelCborForCountPageAndAscendingOrder() throws APIException {
+
+            List<TransactionMetadataLabelCbor> expectedTransactionMetadataLabelCborList = Arrays.asList(
+                    TransactionMetadataLabelCbor.builder()
+                            .txHash("1c8997f9f0debde5b15fe29f0f18839a64e51c19ccdbe89e2811930d777c9b68")
+                            .cborMetadata("\\xa1006763617264616e6f")
+                            .build(),
+                    TransactionMetadataLabelCbor.builder()
+                            .txHash("d28b574902c286dc1d589c239095c97c5f352dfac08274583898b6380274930a")
+                            .cborMetadata("\\xa1006763617264616e6f")
+                            .build(),
+                    TransactionMetadataLabelCbor.builder()
+                            .txHash("5037dca9a80649bc44dc619233b31f4b7dcc1dd23ab808b1cc225b3b2b6bf736")
+                            .cborMetadata("\\xa1006763617264616e6f")
+                            .build()
+            );
+
+            List<TransactionMetadataLabelCbor> transactionMetadataLabelCborList = metadataService.getTransactionMetadataCborForLabel("0",  3, 1, OrderEnum.asc);
+
+            assertThat(transactionMetadataLabelCborList, hasSize(3));
+            assertThat(transactionMetadataLabelCborList, contains(expectedTransactionMetadataLabelCborList.toArray()));
+
+        }
+
+        @Test
+        public void transactionMetadataCborForLabel_willReturn_transactionMetadataLabelCborForCountPage() throws APIException {
+
+            List<TransactionMetadataLabelCbor> expectedTransactionMetadataLabelCborList = Arrays.asList(
+                    TransactionMetadataLabelCbor.builder()
+                            .txHash("1c8997f9f0debde5b15fe29f0f18839a64e51c19ccdbe89e2811930d777c9b68")
+                            .cborMetadata("\\xa1006763617264616e6f")
+                            .build(),
+                    TransactionMetadataLabelCbor.builder()
+                            .txHash("d28b574902c286dc1d589c239095c97c5f352dfac08274583898b6380274930a")
+                            .cborMetadata("\\xa1006763617264616e6f")
+                            .build(),
+                    TransactionMetadataLabelCbor.builder()
+                            .txHash("5037dca9a80649bc44dc619233b31f4b7dcc1dd23ab808b1cc225b3b2b6bf736")
+                            .cborMetadata("\\xa1006763617264616e6f")
+                            .build()
+            );
+
+            List<TransactionMetadataLabelCbor> transactionMetadataLabelCborList = metadataService.getTransactionMetadataCborForLabel("0", 3, 1, OrderEnum.asc);
+
+            assertThat(transactionMetadataLabelCborList, hasSize(3));
+            assertThat(transactionMetadataLabelCborList, contains(expectedTransactionMetadataLabelCborList.toArray()));
+
+        }
+
+        @Test
+        public void transactionMetadataCborForLabel_willThrowAPIException_onCountGreaterThan100() {
+
+            Exception exception = assertThrows(APIException.class, () -> metadataService.getTransactionMetadataCborForLabel("0", 101, 1));
+            assertThat(exception.getMessage(), containsString(ValidationHelper.COUNT_VALIDATION_MESSAGE));
+
+        }
+
+        @Test
+        public void transactionMetadataCborForLabel_willThrowAPIException_onNullLabel() {
+
+            Exception exception = assertThrows(APIException.class, () -> metadataService.getTransactionMetadataCborForLabel(null));
+            assertThat(exception.getMessage(), is("Label cannot be null or empty"));
         }
 
     }

@@ -1,6 +1,7 @@
 package io.blockfrost.sdk.impl.retrofit;
 
 import io.blockfrost.sdk.api.model.TransactionMetadataLabel;
+import io.blockfrost.sdk.api.model.TransactionMetadataLabelCbor;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
@@ -36,8 +37,12 @@ public interface MetadataApi {
    * @return Call&lt;List&lt;Object&gt;&gt;
    */
   @GET("metadata/txs/labels/{label}/cbor")
-  Call<List<Object>> metadataTxsLabelsLabelCborGet(
-          @Path("label") String label, @Query("count") Integer count, @Query("page") Integer page, @Query("order") String order
+  Call<List<TransactionMetadataLabelCbor>> metadataTxsLabelsLabelCborGet(
+          @Header("project_id") String projectId,
+          @Path("label") String label,
+          @Query("count") Integer count,
+          @Query("page") Integer page,
+          @Query("order") String order
   );
 
   /**
@@ -51,7 +56,11 @@ public interface MetadataApi {
    */
   @GET("metadata/txs/labels/{label}")
   Call<List<Object>> metadataTxsLabelsLabelGet(
-          @Path("label") String label, @Query("count") Integer count, @Query("page") Integer page, @Query("order") String order
+          @Header("project_id") String projectId,
+          @Path("label") String label,
+          @Query("count") Integer count,
+          @Query("page") Integer page,
+          @Query("order") String order
   );
 
 }
