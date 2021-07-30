@@ -4,6 +4,7 @@ import io.blockfrost.sdk.api.MetadataService;
 import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.api.model.TransactionMetadataLabelCbor;
 import io.blockfrost.sdk.api.model.TransactionMetadataLabel;
+import io.blockfrost.sdk.api.model.TransactionMetadataLabelJson;
 import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.helper.ValidationHelper;
 import io.blockfrost.sdk.impl.retrofit.MetadataApi;
@@ -73,7 +74,7 @@ public class MetadataServiceImpl extends BaseImpl implements MetadataService {
             Response<List<TransactionMetadataLabelCbor>> metadataCborResponse = metadataCborCall.execute();
             return processResponse(metadataCborResponse);
         } catch (IOException exp){
-            throw new APIException("Exception while fetching transaction metadata for label: " + label, exp);
+            throw new APIException("Exception while fetching transaction metadata in CBOR for label: " + label, exp);
         }
     }
 
@@ -92,5 +93,38 @@ public class MetadataServiceImpl extends BaseImpl implements MetadataService {
     @Override
     public List<TransactionMetadataLabelCbor> getTransactionMetadataCborForLabel(String label) throws APIException {
         return getTransactionMetadataCborForLabel(label, OrderEnum.asc);
+    }
+
+    @Override
+    public List<TransactionMetadataLabelJson> getTransactionMetadataJsonForLabel(String label, int count, int page, OrderEnum order) throws APIException {
+        validateLabel(label);
+
+        ValidationHelper.validateCount(count);
+
+        Call<List<TransactionMetadataLabelJson>> metadataJsonCall = metadataApi.metadataTxsLabelsLabelGet(getProjectId(), label, count, page, order.name());
+
+        try{
+            Response<List<TransactionMetadataLabelJson>> metadataJsonResponse = metadataJsonCall.execute();
+            return processResponse(metadataJsonResponse);
+        } catch (IOException exp){
+            throw new APIException("Exception while fetching transaction metadata in JSON for label: " + label, exp);
+        }
+    }
+
+    @Override
+    public List<TransactionMetadataLabelJson> getTransactionMetadataJsonForLabel(String label, int count, int page) throws APIException {
+        return getTransactionMetadataJsonForLabel(label, count, page, OrderEnum.asc);
+    }
+
+    //TODO: Implement
+    @Override
+    public List<TransactionMetadataLabelJson> getTransactionMetadataJsonForLabel(String label, OrderEnum order) throws APIException {
+        validateLabel(label);
+        return null;
+    }
+
+    @Override
+    public List<TransactionMetadataLabelJson> getTransactionMetadataJsonForLabel(String label) throws APIException {
+        return getTransactionMetadataJsonForLabel(label, OrderEnum.asc);
     }
 }

@@ -3,6 +3,7 @@ package io.blockfrost.sdk.api;
 import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.api.model.TransactionMetadataLabel;
 import io.blockfrost.sdk.api.model.TransactionMetadataLabelCbor;
+import io.blockfrost.sdk.api.model.TransactionMetadataLabelJson;
 import io.blockfrost.sdk.api.util.Constants;
 import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.MetadataServiceImpl;
@@ -31,7 +32,7 @@ public class MetadataServiceTests extends TestBase {
 
     @Nested
     @DisplayName("GetTransactionMetadataLabels Tests")
-    class GetTransactionMetadataLabelsTests {
+    class GetTransactionMetadataJsonLabelsTests {
 
         @Test
         public void transactionMetadataLabels_willReturn_transactionMetadataLabelsForCountPageAndAscendingOrder() throws APIException {
@@ -76,8 +77,8 @@ public class MetadataServiceTests extends TestBase {
     }
 
     @Nested
-    @DisplayName("GetTransactionMetadataCborForLabel Tests")
-    class GetTransactionMetadataCborForLabel {
+    @DisplayName("GetTransactionMetadataJsonCborForLabel Tests")
+    class GetTransactionMetadataJsonCborForLabel {
 
         @Test
         public void transactionMetadataCborForLabel_willReturn_transactionMetadataLabelCborForCountPageAndAscendingOrder() throws APIException {
@@ -145,5 +146,80 @@ public class MetadataServiceTests extends TestBase {
         }
 
     }
+
+    @Nested
+    @DisplayName("GetTransactionMetadataJsonJsonForLabel Tests")
+    class GetTransactionMetadataJsonJsonForLabel {
+
+        @Test
+        public void transactionMetadataJsonForLabel_willReturn_transactionMetadataLabelJsonForCountPageAndAscendingOrder() throws APIException {
+
+            List<TransactionMetadataLabelJson> expectedTransactionMetadataLabelJsonList = Arrays.asList(
+                    TransactionMetadataLabelJson.builder()
+                            .txHash("1c8997f9f0debde5b15fe29f0f18839a64e51c19ccdbe89e2811930d777c9b68")
+                            .jsonMetadata("cardano")
+                            .build(),
+                    TransactionMetadataLabelJson.builder()
+                            .txHash("d28b574902c286dc1d589c239095c97c5f352dfac08274583898b6380274930a")
+                            .jsonMetadata("cardano")
+                            .build(),
+                    TransactionMetadataLabelJson.builder()
+                            .txHash("5037dca9a80649bc44dc619233b31f4b7dcc1dd23ab808b1cc225b3b2b6bf736")
+                            .jsonMetadata("cardano")
+                            .build()
+            );
+
+            List<TransactionMetadataLabelJson> transactionMetadataLabelJsonList = metadataService.getTransactionMetadataJsonForLabel("0",  3, 1, OrderEnum.asc);
+
+            assertThat(transactionMetadataLabelJsonList, hasSize(3));
+            assertThat(transactionMetadataLabelJsonList, contains(expectedTransactionMetadataLabelJsonList.toArray()));
+
+        }
+
+        @Test
+        public void transactionMetadataJsonForLabel_willReturn_transactionMetadataLabelJsonForCountPage() throws APIException {
+
+            List<TransactionMetadataLabelJson> expectedTransactionMetadataLabelJsonList = Arrays.asList(
+                    TransactionMetadataLabelJson.builder()
+                            .txHash("1c8997f9f0debde5b15fe29f0f18839a64e51c19ccdbe89e2811930d777c9b68")
+                            .jsonMetadata("cardano")
+                            .build(),
+                    TransactionMetadataLabelJson.builder()
+                            .txHash("d28b574902c286dc1d589c239095c97c5f352dfac08274583898b6380274930a")
+                            .jsonMetadata("cardano")
+                            .build(),
+                    TransactionMetadataLabelJson.builder()
+                            .txHash("5037dca9a80649bc44dc619233b31f4b7dcc1dd23ab808b1cc225b3b2b6bf736")
+                            .jsonMetadata("cardano")
+                            .build()
+            );
+
+            List<TransactionMetadataLabelJson> transactionMetadataLabelJsonList = metadataService.getTransactionMetadataJsonForLabel("0", 3, 1, OrderEnum.asc);
+
+            assertThat(transactionMetadataLabelJsonList, hasSize(3));
+            assertThat(transactionMetadataLabelJsonList, contains(expectedTransactionMetadataLabelJsonList.toArray()));
+
+        }
+
+        @Test
+        public void transactionMetadataJsonForLabel_willThrowAPIException_onCountGreaterThan100() {
+
+            Exception exception = assertThrows(APIException.class, () -> metadataService.getTransactionMetadataJsonForLabel("0", 101, 1));
+            assertThat(exception.getMessage(), containsString(ValidationHelper.COUNT_VALIDATION_MESSAGE));
+
+        }
+
+        @Test
+        public void transactionMetadataJsonForLabel_willThrowAPIException_onNullLabel() {
+
+            Exception exception = assertThrows(APIException.class, () -> metadataService.getTransactionMetadataJsonForLabel(null, 1, 1));
+            assertThat(exception.getMessage(), is("Label cannot be null or empty"));
+
+            exception = assertThrows(APIException.class, () -> metadataService.getTransactionMetadataJsonForLabel(null));
+            assertThat(exception.getMessage(), is("Label cannot be null or empty"));
+
+        }
+
+    }    
 
 }

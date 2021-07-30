@@ -65,7 +65,7 @@ public interface TransactionsApi {
    * @return Call&lt;List&lt;Object&gt;&gt;
    */
   @GET("txs/{hash}/metadata")
-  Call<List<TransactionMetadata>> txsHashMetadataGet(
+  Call<List<TransactionMetadataJson>> txsHashMetadataGet(
     @Header("project_id") String projectId,
     @Path("hash") String hash
   );

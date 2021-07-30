@@ -116,11 +116,11 @@ public class TransactionServiceImpl extends BaseImpl implements TransactionServi
     }
 
     @Override
-    public List<TransactionMetadata> getTransactionMetadata(String hash) throws APIException {
-        Call<List<TransactionMetadata>> transactionMetadataCall = transactionsApi.txsHashMetadataGet(getProjectId(), hash);
+    public List<TransactionMetadataJson> getTransactionMetadata(String hash) throws APIException {
+        Call<List<TransactionMetadataJson>> transactionMetadataCall = transactionsApi.txsHashMetadataGet(getProjectId(), hash);
 
         try{
-            Response<List<TransactionMetadata>> transactionMetadataResponse = transactionMetadataCall.execute();
+            Response<List<TransactionMetadataJson>> transactionMetadataResponse = transactionMetadataCall.execute();
             return processResponse(transactionMetadataResponse);
         } catch (IOException exp){
             throw new APIException("Exception while fetching transaction metadata for hash " + hash, exp);

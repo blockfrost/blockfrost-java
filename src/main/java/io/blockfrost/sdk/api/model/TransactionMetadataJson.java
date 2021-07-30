@@ -17,8 +17,8 @@ import lombok.*;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 
-public class TransactionJsonMetadata {
-    private String metadata;
-    private String hash;
-
+public class TransactionMetadataJson {
+    private String label;
+    //TODO: Check this implementation as String
+    private String jsonMetadata;
 }

@@ -165,8 +165,8 @@ public class TransactionServiceTests extends TestBase {
     public void transactionMetadata_willReturn_transactionMetadataForAHash() throws APIException {
 
         String transactionHash = "0089e962584516378463141d853f7102852e7f2a8546c2a2af6cc05c6e628a5b";
-        List<TransactionMetadata> transactionMetadataResponse = transactionService.getTransactionMetadata(transactionHash);
-        assertThat(transactionMetadataResponse, hasSize(0));
+        List<TransactionMetadataJson> transactionMetadataJsonResponse = transactionService.getTransactionMetadata(transactionHash);
+        assertThat(transactionMetadataJsonResponse, hasSize(0));
     }
 
     //TODO: Need to use a Transaction has with actual metadata in cbor.

@@ -71,13 +71,14 @@ public interface TransactionService {
      */
     List<TransactionPoolRetire> getTransactionPoolRetires(String hash) throws APIException;
 
+    //TODO: Check the implementation of JsonMetadata
     /**
      * Transaction metadata
      * Obtain the transaction metadata.
      * @param hash Hash of the requested transaction (required)
-     * @return List&lt;TransactionMetadata&gt;
+     * @return List&lt;TransactionMetadataJson&gt;
      */
-    List<TransactionMetadata> getTransactionMetadata(String hash) throws APIException;
+    List<TransactionMetadataJson> getTransactionMetadata(String hash) throws APIException;
 
     /**
      * Transaction metadata in CBOR

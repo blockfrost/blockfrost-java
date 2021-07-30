@@ -2,6 +2,7 @@ package io.blockfrost.sdk.impl.retrofit;
 
 import io.blockfrost.sdk.api.model.TransactionMetadataLabel;
 import io.blockfrost.sdk.api.model.TransactionMetadataLabelCbor;
+import io.blockfrost.sdk.api.model.TransactionMetadataLabelJson;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
@@ -55,7 +56,7 @@ public interface MetadataApi {
    * @return Call&lt;List&lt;Object&gt;&gt;
    */
   @GET("metadata/txs/labels/{label}")
-  Call<List<Object>> metadataTxsLabelsLabelGet(
+  Call<List<TransactionMetadataLabelJson>> metadataTxsLabelsLabelGet(
           @Header("project_id") String projectId,
           @Path("label") String label,
           @Query("count") Integer count,

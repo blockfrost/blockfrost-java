@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
 /**
- * TransactionStakeCertificate
+ * TransactionMetadataLabelCbor
  */
 @Data
 @Builder
@@ -16,8 +16,8 @@ import lombok.*;
 @ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-
-public class TransactionMetadata {
-    private String label;
-    private TransactionJsonMetadata jsonMetadata;
+public class TransactionMetadataLabelJson {
+    private String txHash;
+    //TODO: Check this implementation of jsonMetadata as String
+    private String jsonMetadata;
 }

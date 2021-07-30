@@ -3,6 +3,7 @@ package io.blockfrost.sdk.api;
 import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.api.model.TransactionMetadataLabelCbor;
 import io.blockfrost.sdk.api.model.TransactionMetadataLabel;
+import io.blockfrost.sdk.api.model.TransactionMetadataLabelJson;
 import io.blockfrost.sdk.api.util.OrderEnum;
 
 import java.util.List;
@@ -85,5 +86,43 @@ public interface MetadataService {
      */
     List<TransactionMetadataLabelCbor> getTransactionMetadataCborForLabel(String label) throws APIException;
 
+    /**
+     * Transaction metadata content in JSON
+     * Transaction metadata per label.
+     * @param label Metadata label (required)
+     * @param count The number of results displayed on one page.
+     * @param page The page number for listing the results.
+     * @param order The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.  (optional, default to asc)
+     * @return List&lt;TransactionMetadataLabelJson&gt;
+     */
+    List<TransactionMetadataLabelJson> getTransactionMetadataJsonForLabel(String label, int count, int page, OrderEnum order) throws APIException;
 
+    /**
+     * Transaction metadata content in JSON
+     * Transaction metadata per label ordered from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
+     * @param label Metadata label (required)
+     * @param count The numbers of pools per page (&lt;=100).
+     * @param page The page number for listing the results.
+     * @return List&lt;TransactionMetadataLabelJson&gt;
+     */
+    List<TransactionMetadataLabelJson> getTransactionMetadataJsonForLabel(String label, int count, int page) throws APIException;
+
+
+    /**
+     * Transaction metadata content in JSON
+     * Transaction metadata per label.
+     * @param label Metadata label (required)
+     * @param order The ordering of items from the point of view of the blockchain.
+     * @return List&lt;TransactionMetadataLabelJson&gt;
+     */
+    //TODO: Implement
+    List<TransactionMetadataLabelJson> getTransactionMetadataJsonForLabel(String label, OrderEnum order) throws APIException;
+
+    /**
+     * Transaction metadata content in JSON
+     * Transaction metadata per label in ascending order from the point of view of the blockchain. We return oldest first, newest last
+     * @param label Metadata label (required)
+     * @return List&lt;TransactionMetadataLabelJson&gt;
+     */
+    List<TransactionMetadataLabelJson> getTransactionMetadataJsonForLabel(String label) throws APIException;
 }
