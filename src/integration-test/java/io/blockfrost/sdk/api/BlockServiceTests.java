@@ -152,7 +152,7 @@ public class BlockServiceTests extends TestBase {
             List<BlockContent> nextBlocks = blockService.getNextBlocks("1", 1, 1);
 
             assertThat(nextBlocks, hasSize(1));
-            assertThat(nextBlocks.get(0), samePropertyValuesAs(expectedBlockContent, "confirmations"));
+            assertThat(nextBlocks, hasItem(samePropertyValuesAs(expectedBlockContent, "confirmations")));
         }
 
         @Test
@@ -189,7 +189,7 @@ public class BlockServiceTests extends TestBase {
             List<BlockContent> previousBlocks = blockService.getPreviousBlocks("2", 1, 1);
 
             assertThat(previousBlocks, hasSize(1));
-            assertThat(previousBlocks.get(0), samePropertyValuesAs(expectedBlockContent, "confirmations"));
+            assertThat(previousBlocks, hasItem(samePropertyValuesAs(expectedBlockContent, "confirmations")));
         }
 
         @Test
