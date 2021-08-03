@@ -19,7 +19,9 @@ public interface BlocksApi {
    */
   @GET("blocks/epoch/{epoch_number}/slot/{slot_number}")
   Call<BlockContent> blocksEpochEpochNumberSlotSlotNumberGet(
-          @Path("epoch_number") Integer epochNumber, @Path("slot_number") Integer slotNumber
+          @Header("project_id") String projectId,
+          @Path("epoch_number") Integer epochNumber,
+          @Path("slot_number") Integer slotNumber
   );
 
   /**

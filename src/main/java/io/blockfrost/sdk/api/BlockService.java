@@ -28,4 +28,13 @@ public interface BlockService {
      */
     BlockContent getBlockInSlot(int slotNumber) throws APIException;
 
+    /**
+     * Specific block in a slot in an epoch
+     * Return the content of a requested block for a specific slot in an epoch
+     * @param epochNumber Epoch for specific epoch slot. (required)
+     * @param slotNumber Slot position for requested block. (required)
+     * @return BlockContent
+     */
+    BlockContent getBlockInEpochInSlot(int epochNumber, int slotNumber) throws APIException;
+
 }

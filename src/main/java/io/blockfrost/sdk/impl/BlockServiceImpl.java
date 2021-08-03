@@ -60,4 +60,17 @@ public class BlockServiceImpl extends BaseImpl implements BlockService {
             throw new APIException("Exception while fetching block in slot: " + slotNumber, exp);
         }
     }
+
+    @Override
+    public BlockContent getBlockInEpochInSlot(int epochNumber, int slotNumber) throws APIException {
+
+        Call<BlockContent> blockInEpochInSlotCall = blocksApi.blocksEpochEpochNumberSlotSlotNumberGet(getProjectId(), epochNumber, slotNumber);
+
+        try{
+            Response<BlockContent> blockInEpochInSlotResponse = blockInEpochInSlotCall.execute();
+            return processResponse(blockInEpochInSlotResponse);
+        } catch (IOException exp){
+            throw new APIException("Exception while fetching block in epoch: " + epochNumber + " in slot: " + slotNumber, exp);
+        }
+    }
 }
