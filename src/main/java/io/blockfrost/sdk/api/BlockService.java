@@ -93,5 +93,21 @@ public interface BlockService {
      */
     List<BlockContent> getNextBlocks(String hashOrNumber) throws APIException;
 
+    /**
+     * Listing of previous blocks
+     * Return the list of blocks following a specific block.
+     * @param hashOrNumber Hash of the requested block.
+     * @param count The number of results displayed on one page. (&lt;=100).
+     * @param page The page number for listing the results.
+     * @return List&lt;BlockContent&gt
+     */
+    List<BlockContent> getPreviousBlocks(String hashOrNumber, int count, int page) throws APIException;
 
+    /**
+     * Listing of previous blocks
+     * Return the list of all blocks following a specific block.
+     * @param hashOrNumber Hash of the requested block.
+     * @return List&lt;BlockContent&gt
+     */
+    List<BlockContent> getPreviousBlocks(String hashOrNumber) throws APIException;
 }

@@ -127,4 +127,24 @@ public class BlockServiceImpl extends BaseImpl implements BlockService {
     public List<BlockContent> getNextBlocks(String hashOrNumber) throws APIException {
         return null;
     }
+
+    @Override
+    public List<BlockContent> getPreviousBlocks(String hashOrNumber, int count, int page) throws APIException {
+        validateHashOrNumber(hashOrNumber);
+
+        Call<List<BlockContent>> previousBlocksCall = blocksApi.blocksHashOrNumberPreviousGet(getProjectId(), hashOrNumber, count, page);
+
+        try{
+            Response<List<BlockContent>> previousBlocksResponse = previousBlocksCall.execute();
+            return processResponse(previousBlocksResponse);
+        } catch (IOException exp){
+            throw new APIException("Exception while fetching previous blocks for block: " + hashOrNumber, exp);
+        }
+    }
+
+    //TODO: Implement
+    @Override
+    public List<BlockContent> getPreviousBlocks(String hashOrNumber) throws APIException {
+        return null;
+    }
 }

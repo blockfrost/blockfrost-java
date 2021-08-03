@@ -62,7 +62,10 @@ public interface BlocksApi {
    */
   @GET("blocks/{hash_or_number}/previous")
   Call<List<BlockContent>> blocksHashOrNumberPreviousGet(
-          @Path("hash_or_number") String hashOrNumber, @Query("count") Integer count, @Query("page") Integer page
+          @Header("project_id") String projectId,
+          @Path("hash_or_number") String hashOrNumber,
+          @Query("count") Integer count,
+          @Query("page") Integer page
   );
 
   /**
