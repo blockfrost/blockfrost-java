@@ -95,7 +95,10 @@ public interface BlocksApi {
    */
   @GET("blocks/latest/txs")
   Call<List<String>> blocksLatestTxsGet(
-          @Query("count") Integer count, @Query("page") Integer page, @Query("order") String order
+          @Header("project_id") String projectId,
+          @Query("count") Integer count,
+          @Query("page") Integer page,
+          @Query("order") String order
   );
 
   /**

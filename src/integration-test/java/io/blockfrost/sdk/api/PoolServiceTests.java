@@ -171,10 +171,6 @@ public class PoolServiceTests extends TestBase {
         @Test
         public void retiringPools_willReturn_retiringPoolsForCountPageAndAscendingOrder() throws APIException {
 
-            List<PoolRetirementInfo> poolRetirementInfoList = Arrays.asList(
-                    PoolRetirementInfo.builder().poolId("pool1w660hycvxgc2k5ac6ff6jrn9dp3ycr9zrf26wvjchfctvp5f39v").epoch(148).build()
-            );
-
             List<PoolRetirementInfo> poolList = poolService.getRetiringPools(2, 1, OrderEnum.asc);
 
             assertThat(poolList, hasSize(lessThanOrEqualTo(2)));
@@ -182,10 +178,6 @@ public class PoolServiceTests extends TestBase {
 
         @Test
         public void retiringPools_willReturn_retiringPoolsForCountPage() throws APIException {
-
-            List<PoolRetirementInfo> poolRetirementInfoList = Arrays.asList(
-                    PoolRetirementInfo.builder().poolId("pool1w660hycvxgc2k5ac6ff6jrn9dp3ycr9zrf26wvjchfctvp5f39v").epoch(148).build()
-            );
 
             List<PoolRetirementInfo> poolList = poolService.getRetiringPools(2, 1);
 

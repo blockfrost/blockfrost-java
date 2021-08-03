@@ -3,11 +3,13 @@ package io.blockfrost.sdk.impl;
 import io.blockfrost.sdk.api.BlockService;
 import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.api.model.BlockContent;
+import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.retrofit.BlocksApi;
 import retrofit2.Call;
 import retrofit2.Response;
 
 import java.io.IOException;
+import java.util.List;
 
 public class BlockServiceImpl extends BaseImpl implements BlockService {
 
@@ -72,5 +74,33 @@ public class BlockServiceImpl extends BaseImpl implements BlockService {
         } catch (IOException exp){
             throw new APIException("Exception while fetching block in epoch: " + epochNumber + " in slot: " + slotNumber, exp);
         }
+    }
+
+    @Override
+    public List<String> getTransactionsInLatestBlock(int count, int page, OrderEnum order) throws APIException {
+        Call<List<String>> transactionsInLatestBlockCall = blocksApi.blocksLatestTxsGet(getProjectId(), count, page, order.name());
+
+        try{
+            Response<List<String>> transactionsInLatestBlockResponse = transactionsInLatestBlockCall.execute();
+            return processResponse(transactionsInLatestBlockResponse);
+        } catch (IOException exp){
+            throw new APIException("Exception while fetching transactions in latest block", exp);
+        }
+    }
+
+    @Override
+    public List<String> getTransactionsInLatestBlock(int count, int page) throws APIException {
+        return getTransactionsInLatestBlock(count, page, OrderEnum.asc);
+    }
+
+    //TODO: Implement
+    @Override
+    public List<String> getTransactionsInLatestBlock(OrderEnum order) throws APIException {
+        return null;
+    }
+
+    @Override
+    public List<String> getTransactionsInLatestBlock() throws APIException {
+        return getTransactionsInLatestBlock(OrderEnum.asc);
     }
 }

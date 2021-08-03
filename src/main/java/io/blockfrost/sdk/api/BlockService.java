@@ -2,6 +2,9 @@ package io.blockfrost.sdk.api;
 
 import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.api.model.BlockContent;
+import io.blockfrost.sdk.api.util.OrderEnum;
+
+import java.util.List;
 
 public interface BlockService {
 
@@ -36,5 +39,41 @@ public interface BlockService {
      * @return BlockContent
      */
     BlockContent getBlockInEpochInSlot(int epochNumber, int slotNumber) throws APIException;
+
+    /**
+     * Latest block transactions
+     * Return the transactions within the latest block.
+     * @param count The number of results displayed on one page.
+     * @param page The page number for listing the results.
+     * @param order Ordered by tx index in the block. The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last
+     * @return List&lt;String&gt;
+     */
+    List<String> getTransactionsInLatestBlock(int count, int page, OrderEnum order) throws APIException;
+
+    /**
+     * Latest block transactions
+     * Return the transactions within the latest block ordered from the point of view of the blockchain, not the page listing itself.
+     * @param count The number of results displayed on one page.
+     * @param page The page number for listing the results.
+     * @return List&lt;String&gt;
+     */
+    List<String> getTransactionsInLatestBlock(int count, int page) throws APIException;
+
+
+    /**
+     * Latest block transactions
+     * Return all the transactions within the latest block.
+     * @param order Ordered by tx index in the block. The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last
+     * @return List&lt;String&gt;
+     */
+    List<String> getTransactionsInLatestBlock(OrderEnum order) throws APIException;
+
+    /**
+     * Latest block transactions
+     * Return all the transactions within the latest block ordered from the point of view of the blockchain, not the page listing itself.
+     * @return List&lt;String&gt;
+     */
+    List<String> getTransactionsInLatestBlock() throws APIException;
+
 
 }

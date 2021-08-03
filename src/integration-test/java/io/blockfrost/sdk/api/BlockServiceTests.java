@@ -3,9 +3,14 @@ package io.blockfrost.sdk.api;
 import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.api.model.BlockContent;
 import io.blockfrost.sdk.api.util.Constants;
+import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.BlockServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -98,4 +103,27 @@ public class BlockServiceTests extends TestBase {
         assertThat(blockInSlot, samePropertyValuesAs(expectedBlockContent, "confirmations"));
 
     }
+
+    @Nested
+    @DisplayName("GetTransactionsInLatestBlock Tests")
+    class GetTransactionsInLatestBlockTests {
+
+        @Test
+        public void transactionsInLatestBlock_willReturn_transactionsInLatestBlockForCountPageAndAscendingOrder() throws APIException {
+
+            List<String> transactionsInLatestBlock = blockService.getTransactionsInLatestBlock(5, 1, OrderEnum.asc);
+
+            assertThat(transactionsInLatestBlock, hasSize(lessThanOrEqualTo(5)));
+        }
+
+        @Test
+        public void transactionsInLatestBlock_willReturn_transactionsInLatestBlockForCountPage() throws APIException {
+
+            List<String> transactionsInLatestBlock = blockService.getTransactionsInLatestBlock(5, 1);
+
+            assertThat(transactionsInLatestBlock, hasSize(lessThanOrEqualTo(5)));
+        }
+
+    }
+
 }
