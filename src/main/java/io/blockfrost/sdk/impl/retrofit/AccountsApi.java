@@ -11,6 +11,7 @@ public interface AccountsApi {
     /**
      * Specific account address
      * Obtain information about a specific stake account.
+     *
      * @param stakeAddress Bech32 stake address. (required)
      * @return Call&lt;Account&gt;
      */
