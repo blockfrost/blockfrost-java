@@ -14,6 +14,7 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class BlockServiceTests extends TestBase {
 
@@ -122,6 +123,43 @@ public class BlockServiceTests extends TestBase {
             List<String> transactionsInLatestBlock = blockService.getTransactionsInLatestBlock(5, 1);
 
             assertThat(transactionsInLatestBlock, hasSize(lessThanOrEqualTo(5)));
+        }
+
+    }
+
+    @Nested
+    @DisplayName("GetNextBlocks Tests")
+    class GetNextBlocks {
+
+        @Test
+        public void nextBlocks_willReturn_nextBlocksForCountAndPage() throws APIException {
+
+            BlockContent expectedBlockContent = BlockContent.builder()
+                    .time(1564020256)
+                    .height(2)
+                    .hash("f4e96309537d15682211fcac4c249c2bdff8464476e047be99d80edf97bcf3ff")
+                    .slot(1032)
+                    .epoch(0)
+                    .epochSlot(1032)
+                    .slotLeader("ByronGenesis-42186a6a0079ef39")
+                    .size(5799)
+                    .txCount(0)
+                    .previousBlock("388a82f053603f3552717d61644a353188f2d5500f4c6354cc1ad27a36a7ea91")
+                    .nextBlock("067e773e6ffd66ea06f7f1c967e18a1ee0916797f6a1c1abdf410379eb8b1dbe")
+                    .confirmations(2803485)
+                    .build();
+
+            List<BlockContent> nextBlocks = blockService.getNextBlocks("1", 1, 1);
+
+            assertThat(nextBlocks, hasSize(1));
+            assertThat(nextBlocks.get(0), samePropertyValuesAs(expectedBlockContent, "confirmations"));
+        }
+
+        @Test
+        public void nextBlocks_willThrowAPIException_onNullHash() {
+
+            Exception exception = assertThrows(APIException.class, () -> blockService.getNextBlocks(null, 5, 1));
+            assertThat(exception.getMessage(), is("Hash cannot be null or empty"));
         }
 
     }

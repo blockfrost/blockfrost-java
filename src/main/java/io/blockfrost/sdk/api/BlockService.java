@@ -43,7 +43,7 @@ public interface BlockService {
     /**
      * Latest block transactions
      * Return the transactions within the latest block.
-     * @param count The number of results displayed on one page.
+     * @param count The number of results displayed on one page. (&lt;=100).
      * @param page The page number for listing the results.
      * @param order Ordered by tx index in the block. The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last
      * @return List&lt;String&gt;
@@ -53,7 +53,7 @@ public interface BlockService {
     /**
      * Latest block transactions
      * Return the transactions within the latest block ordered from the point of view of the blockchain, not the page listing itself.
-     * @param count The number of results displayed on one page.
+     * @param count The number of results displayed on one page. (&lt;=100).
      * @param page The page number for listing the results.
      * @return List&lt;String&gt;
      */
@@ -74,6 +74,24 @@ public interface BlockService {
      * @return List&lt;String&gt;
      */
     List<String> getTransactionsInLatestBlock() throws APIException;
+
+    /**
+     * Listing of next blocks
+     * Return the list of blocks following a specific block.
+     * @param hashOrNumber Hash of the requested block.
+     * @param count The number of results displayed on one page. (&lt;=100).
+     * @param page The page number for listing the results.
+     * @return List&lt;BlockContent&gt
+     */
+    List<BlockContent> getNextBlocks(String hashOrNumber, int count, int page) throws APIException;
+
+    /**
+     * Listing of next blocks
+     * Return the list of all blocks following a specific block.
+     * @param hashOrNumber Hash of the requested block.
+     * @return List&lt;BlockContent&gt
+     */
+    List<BlockContent> getNextBlocks(String hashOrNumber) throws APIException;
 
 
 }

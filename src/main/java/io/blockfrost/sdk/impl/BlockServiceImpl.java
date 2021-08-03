@@ -20,6 +20,11 @@ public class BlockServiceImpl extends BaseImpl implements BlockService {
         blocksApi = getRetrofit().create(BlocksApi.class);
     }
 
+    private void validateHashOrNumber(String hashOrNumber) throws APIException {
+        if ( hashOrNumber == null || hashOrNumber.equals("")){
+            throw new APIException("Hash cannot be null or empty");
+        }
+    }
 
     @Override
     public BlockContent getLatestBlock() throws APIException {
@@ -35,10 +40,8 @@ public class BlockServiceImpl extends BaseImpl implements BlockService {
 
     @Override
     public BlockContent getBlock(String hashOrNumber) throws APIException {
-        
-        if ( hashOrNumber == null || hashOrNumber.equals("")){
-            throw new APIException("Hash cannot be null or empty");
-        }
+
+        validateHashOrNumber(hashOrNumber);
         
         Call<BlockContent> blockCall = blocksApi.blocksHashOrNumberGet(getProjectId(), hashOrNumber);
 
@@ -102,5 +105,26 @@ public class BlockServiceImpl extends BaseImpl implements BlockService {
     @Override
     public List<String> getTransactionsInLatestBlock() throws APIException {
         return getTransactionsInLatestBlock(OrderEnum.asc);
+    }
+
+    @Override
+    public List<BlockContent> getNextBlocks(String hashOrNumber, int count, int page) throws APIException {
+
+        validateHashOrNumber(hashOrNumber);
+
+        Call<List<BlockContent>> nextBlocksCall = blocksApi.blocksHashOrNumberNextGet(getProjectId(), hashOrNumber, count, page);
+
+        try{
+            Response<List<BlockContent>> nextBlocksResponse = nextBlocksCall.execute();
+            return processResponse(nextBlocksResponse);
+        } catch (IOException exp){
+            throw new APIException("Exception while fetching next blocks for block: " + hashOrNumber, exp);
+        }
+    }
+
+    //TODO: Implement
+    @Override
+    public List<BlockContent> getNextBlocks(String hashOrNumber) throws APIException {
+        return null;
     }
 }
