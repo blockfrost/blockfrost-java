@@ -37,4 +37,25 @@ public class EpochServiceTests extends TestBase {
 
     }
 
+    @Test
+    public void getEpoch_willReturn_epochForEpochNumber() throws APIException {
+
+        Epoch expectedEpoch = Epoch.builder()
+                .epoch(1)
+                .startTime(1564431616)
+                .endTime(1564863616)
+                .firstBlockTime(1564431616)
+                .lastBlockTime(1564863596)
+                .blockCount(21601)
+                .txCount(305)
+                .output("152336265877919")
+                .fees("54105620")
+                .activeStake(null)
+                .build();
+
+        Epoch epoch = epochService.getEpoch(1);
+        assertThat(epoch, is(expectedEpoch));
+
+    }
+
 }

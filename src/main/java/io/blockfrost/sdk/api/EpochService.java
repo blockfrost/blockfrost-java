@@ -10,4 +10,6 @@ public interface EpochService {
 
     EpochParam getLatestEpochParam() throws APIException;
 
+    Epoch getEpoch(int epochNumber) throws APIException;
+
 }

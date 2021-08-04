@@ -43,4 +43,16 @@ public class EpochServiceImpl extends BaseImpl implements EpochService {
             throw new APIException("Exception while fetching latest epoch parameters", exp);
         }
     }
+
+    @Override
+    public Epoch getEpoch(int epochNumber) throws APIException {
+        Call<Epoch> epochCall = epochsApi.epochsNumberGet(getProjectId(), epochNumber);
+
+        try{
+            Response<Epoch> epochResponse = epochCall.execute();
+            return processResponse(epochResponse);
+        } catch (IOException exp){
+            throw new APIException("Exception while fetching epoch for epoch number: " + epochNumber, exp);
+        }
+    }
 }
