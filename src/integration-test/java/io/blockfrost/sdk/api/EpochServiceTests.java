@@ -189,5 +189,27 @@ public class EpochServiceTests extends TestBase {
         assertThat(blocksForEpoch, hasItem(blockHash));
 
     }
+
+    @Test
+    public void blocksForEpochAndPool_willReturn_blocksForEpochAndPoolForCountPageAndOrder() throws APIException {
+
+        Epoch latestEpoch = epochService.getLatestEpoch();
+        List<Stake> activeStakes = epochService.getActiveStakesForEpoch(latestEpoch.getEpoch(), 1, 1);
+        List<String> blocksForEpoch = epochService.getBlocksForEpochAndPool(latestEpoch.getEpoch(), activeStakes.get(0).getPoolId(), 5, 1, OrderEnum.asc);
+
+        assertThat(blocksForEpoch, hasSize(lessThanOrEqualTo(5)));
+
+    }
+
+    @Test
+    public void blocksForEpochAndPool_willReturn_blocksForEpochAndPoolForCountPage() throws APIException {
+
+        Epoch latestEpoch = epochService.getLatestEpoch();
+        List<Stake> activeStakes = epochService.getActiveStakesForEpoch(latestEpoch.getEpoch(), 1, 1);
+        List<String> blocksForEpoch = epochService.getBlocksForEpochAndPool(latestEpoch.getEpoch(), activeStakes.get(0).getPoolId(), 5, 1);
+
+        assertThat(blocksForEpoch, hasSize(lessThanOrEqualTo(5)));
+
+    }
 }
 

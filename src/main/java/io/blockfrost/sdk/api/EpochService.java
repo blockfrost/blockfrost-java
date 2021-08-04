@@ -169,4 +169,49 @@ public interface EpochService {
      */
     List<String> getBlocksForEpoch(int number) throws APIException;
 
+    /**
+     * Block distribution
+     * Return the blocks minted for the epoch specified by stake pool
+     *
+     * @param number Number of the epoch (required)
+     * @param poolId NetworkStake pool ID to filter (required)
+     * @param count  The number of results displayed on one page. (&lt;=100)
+     * @param page   The page number for listing the results.
+     * @param order  The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
+     * @return List&lt;String&gt;
+     */
+    List<String> getBlocksForEpochAndPool(int number, String poolId, int count, int page, OrderEnum order) throws APIException;
+
+    /**
+     * Block distribution
+     * Return the blocks minted for the epoch specified by stake pool ordered ascending from the point of view of the blockchain, not the page listing itself.
+     *
+     * @param number Number of the epoch (required)
+     * @param poolId NetworkStake pool ID to filter (required)
+     * @param count  The number of results displayed on one page. (&lt;=100)
+     * @param page   The page number for listing the results.
+     * @return List&lt;String&gt;
+     */
+    List<String> getBlocksForEpochAndPool(int number, String poolId, int count, int page) throws APIException;
+
+    /**
+     * Block distribution
+     * Return all the blocks minted for the epoch specified by stake pool
+     *
+     * @param number Number of the epoch (required)
+     * @param poolId NetworkStake pool ID to filter (required)
+     * @param order  The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
+     * @return List&lt;String&gt;
+     */
+    List<String> getBlocksForEpochAndPool(int number, String poolId, OrderEnum order) throws APIException;
+
+    /**
+     * Block distribution
+     * Return the blocks minted for the epoch specified by stake pool ordered ascending from the point of view of the blockchain, not the page listing itself.
+     *
+     * @param number Number of the epoch (required)
+     * @param poolId NetworkStake pool ID to filter (required)
+     * @return List&lt;String&gt;
+     */
+    List<String> getBlocksForEpochAndPool(int number, String poolId) throws APIException;
 }

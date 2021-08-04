@@ -168,6 +168,7 @@ public class EpochServiceImpl extends BaseImpl implements EpochService {
         return getBlocksForEpoch(number, count, page, OrderEnum.asc);
     }
 
+    //TODO: Implement
     @Override
     public List<String> getBlocksForEpoch(int number, OrderEnum order) throws APIException {
         return null;
@@ -177,4 +178,33 @@ public class EpochServiceImpl extends BaseImpl implements EpochService {
     public List<String> getBlocksForEpoch(int number) throws APIException {
         return getBlocksForEpoch(number, OrderEnum.asc);
     }
+
+    @Override
+    public List<String> getBlocksForEpochAndPool(int number, String poolId, int count, int page, OrderEnum order) throws APIException {
+        Call<List<String>> blocksForEpochAndPoolCall = epochsApi.epochsNumberBlocksPoolIdGet(getProjectId(), number, poolId, count, page, order.name());
+
+        try{
+            Response<List<String>> blocksForEpochAndPoolResponse = blocksForEpochAndPoolCall.execute();
+            return processResponse(blocksForEpochAndPoolResponse);
+        } catch (IOException exp){
+            throw new APIException("Exception while fetching blocks for epoch: " + number + " and poolId: " + poolId, exp);
+        }
+    }
+
+    @Override
+    public List<String> getBlocksForEpochAndPool(int number, String poolId, int count, int page) throws APIException {
+        return getBlocksForEpochAndPool(number, poolId, count, page, OrderEnum.asc);
+    }
+
+    //TODO: Implement
+    @Override
+    public List<String> getBlocksForEpochAndPool(int number, String poolId, OrderEnum order) throws APIException {
+        return null;
+    }
+
+    @Override
+    public List<String> getBlocksForEpochAndPool(int number, String poolId) throws APIException {
+        return getBlocksForEpochAndPool(number, poolId, OrderEnum.asc);
+    }
+
 }
