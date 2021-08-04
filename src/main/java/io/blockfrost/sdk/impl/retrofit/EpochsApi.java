@@ -164,7 +164,7 @@ public interface EpochsApi {
      * @return Call&lt;List&lt;Object&gt;&gt;
      */
     @GET("epochs/{number}/stakes/{pool_id}")
-    Call<List<Object>> epochsNumberStakesPoolIdGet(
+    Call<List<Stake>> epochsNumberStakesPoolIdGet(
             @Header("project_id") String projectId,
             @Path("number") Integer number,
             @Path("pool_id") String poolId,

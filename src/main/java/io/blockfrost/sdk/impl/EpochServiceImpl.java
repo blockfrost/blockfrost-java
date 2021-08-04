@@ -114,4 +114,27 @@ public class EpochServiceImpl extends BaseImpl implements EpochService {
     public List<Stake> getActiveStakesForEpoch(int number) throws APIException {
         return null;
     }
+
+    @Override
+    public List<Stake> getActiveStakesForEpochAndPool(int number, String poolId, int count, int page) throws APIException {
+
+        if ( poolId== null || poolId.equals("") ){
+            throw new APIException("PoolId cannot be null or empty");
+        }
+
+        Call<List<Stake>> activeStakesCall = epochsApi.epochsNumberStakesPoolIdGet(getProjectId(), number, poolId, count, page);
+
+        try{
+            Response<List<Stake>> activeStakesResponse = activeStakesCall.execute();
+            return processResponse(activeStakesResponse);
+        } catch (IOException exp){
+            throw new APIException("Exception while fetching active stakes for epoch number: " + number + " and poolId: " + poolId, exp);
+        }
+    }
+
+    //TODO: Implement
+    @Override
+    public List<Stake> getActiveStakesForEpochAndPool(int number, String poolId) throws APIException {
+        return null;
+    }
 }

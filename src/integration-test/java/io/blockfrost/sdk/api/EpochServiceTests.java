@@ -13,6 +13,7 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class EpochServiceTests extends TestBase {
 
@@ -105,11 +106,30 @@ public class EpochServiceTests extends TestBase {
     }
 
     @Test
-    public void activeStakes_willReturn_activeStakesForCountAndPage() throws APIException {
+    public void activeStakesForEpoch_willReturn_activeStakesForEpochForCountAndPage() throws APIException {
 
-        List<Stake> activeStakes = epochService.getActiveStakesForEpoch(1, 5, 1);
+        Epoch latestEpoch = epochService.getLatestEpoch();
+        List<Stake> activeStakes = epochService.getActiveStakesForEpoch(latestEpoch.getEpoch(), 5, 1);
 
         assertThat(activeStakes, hasSize(lessThanOrEqualTo(5)));
 
+    }
+
+    @Test
+    public void activeStakesForEpochAndPool_willReturn_activeStakesForEpochAndPoolForCountAndPage() throws APIException {
+
+        Epoch latestEpoch = epochService.getLatestEpoch();
+        List<Stake> activeStakes = epochService.getActiveStakesForEpoch(latestEpoch.getEpoch(), 1, 1);
+        List<Stake> activeStakesForPool = epochService.getActiveStakesForEpochAndPool(latestEpoch.getEpoch(), activeStakes.get(0).getPoolId(), 5, 1);
+
+        assertThat(activeStakes, hasSize(lessThanOrEqualTo(5)));
+
+    }
+
+    @Test
+    public void activeStakesForEpochAndPool_willThrowAPIException_onNullPoolId() {
+
+        Exception exception = assertThrows(APIException.class, () -> epochService.getActiveStakesForEpochAndPool(1, null, 5, 1));
+        assertThat(exception.getMessage(), is("PoolId cannot be null or empty"));
     }
 }

@@ -94,4 +94,26 @@ public interface EpochService {
      * @return List&lt;Stake&gt;
      */
     List<Stake> getActiveStakesForEpoch(int number) throws APIException;
+
+    /**
+     * Stake distribution
+     * Return the active stakes for the epoch specified by networkStake pool.
+     *
+     * @param number Number of the epoch (required)
+     * @param poolId
+     * @param count  The number of results displayed on one page. (&lt;=100)
+     * @param page   The page number for listing the results.
+     * @return List&lt;Stake&gt;
+     */
+    List<Stake> getActiveStakesForEpochAndPool(int number, String poolId, int count, int page) throws APIException;
+
+    /**
+     * Stake distribution
+     * Return all the active stakes for the epoch specified by networkStake pool.
+     *
+     * @param number Number of the epoch (required)
+     * @param poolId
+     * @return List&lt;Stake&gt;
+     */
+    List<Stake> getActiveStakesForEpochAndPool(int number, String poolId) throws APIException;
 }
