@@ -53,4 +53,24 @@ public interface EpochService {
      */
     List<Epoch> getNextEpochs(int number) throws APIException;
 
+
+    /**
+     * Listing of previous epochs
+     * Return the list of epochs following a specific epoch.
+     *
+     * @param number Number of the requested epoch. (required)
+     * @param count  The number of results displayed on one page. (&lt;=100)
+     * @param page   The page number for listing the results.
+     * @return List&lt;Epoch&gt;
+     */
+    List<Epoch> getPreviousEpochs(int number, int count, int page) throws APIException;
+
+    /**
+     * Listing of previous epochs
+     * Return the list of all epochs preceding a specific epoch.
+     *
+     * @param number Number of the requested epoch. (required)
+     * @return List&lt;Epoch&gt;
+     */
+    List<Epoch> getPreviousEpochs(int number) throws APIException;    
 }

@@ -80,5 +80,26 @@ public class EpochServiceTests extends TestBase {
         assertThat(nextEpochs, hasSize(5));
         assertThat(nextEpochs, hasItem(samePropertyValuesAs(expectedEpoch)));
     }
-    
+
+    @Test
+    public void previousEpochs_willReturn_previousEpochsForCountAndPage() throws APIException {
+
+        Epoch expectedEpoch = Epoch.builder()
+                .epoch(1)
+                .startTime(1564431616)
+                .endTime(1564863616)
+                .firstBlockTime(1564431616)
+                .lastBlockTime(1564863596)
+                .blockCount(21601)
+                .txCount(305)
+                .output("152336265877919")
+                .fees("54105620")
+                .activeStake(null)
+                .build();
+
+        List<Epoch> previousEpochs = epochService.getPreviousEpochs(2, 1, 1);
+
+        assertThat(previousEpochs, hasSize(1));
+        assertThat(previousEpochs, hasItem(samePropertyValuesAs(expectedEpoch)));
+    }    
 }

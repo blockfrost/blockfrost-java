@@ -75,4 +75,23 @@ public class EpochServiceImpl extends BaseImpl implements EpochService {
     public List<Epoch> getNextEpochs(int number) throws APIException {
         return null;
     }
+
+    @Override
+    public List<Epoch> getPreviousEpochs(int number, int count, int page) throws APIException {
+
+        Call<List<Epoch>> previousEpochsCall = epochsApi.epochsNumberPreviousGet(getProjectId(), number, count, page);
+
+        try{
+            Response<List<Epoch>> previousEpochsResponse = previousEpochsCall.execute();
+            return processResponse(previousEpochsResponse);
+        } catch (IOException exp){
+            throw new APIException("Exception while fetching previous epochs for epoch number: " + number, exp);
+        }
+    }
+
+    //TODO: Implement
+    @Override
+    public List<Epoch> getPreviousEpochs(int number) throws APIException {
+        return null;
+    }
 }
