@@ -116,4 +116,13 @@ public interface EpochService {
      * @return List&lt;Stake&gt;
      */
     List<Stake> getActiveStakesForEpochAndPool(int number, String poolId) throws APIException;
+
+    /**
+     * Protocol parameters
+     * Return the protocol parameters for the epoch specified.
+     *
+     * @param number Number of the epoch (required)
+     * @return EpochParam
+     */
+    EpochParam getEpochParam(int number) throws APIException;
 }

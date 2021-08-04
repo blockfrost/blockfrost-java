@@ -137,4 +137,16 @@ public class EpochServiceImpl extends BaseImpl implements EpochService {
     public List<Stake> getActiveStakesForEpochAndPool(int number, String poolId) throws APIException {
         return null;
     }
+
+    @Override
+    public EpochParam getEpochParam(int number) throws APIException {
+        Call<EpochParam> epochParamCall = epochsApi.epochsNumberParametersGet(getProjectId(), number);
+
+        try{
+            Response<EpochParam> epochParamResponse = epochParamCall.execute();
+            return processResponse(epochParamResponse);
+        } catch (IOException exp){
+            throw new APIException("Exception while fetching epoch parameters for epoch: " + number, exp);
+        }
+    }
 }
