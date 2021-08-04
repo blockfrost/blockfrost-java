@@ -19,7 +19,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
 /**
- * EpochContent
+ * Epoch
  */
 @Data
 @Builder
@@ -29,7 +29,7 @@ import lombok.*;
 @ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class EpochContent {
+public class Epoch {
   private Integer epoch;
   private Integer startTime;
   private Integer endTime;

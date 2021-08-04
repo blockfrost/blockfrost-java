@@ -21,7 +21,7 @@ import lombok.*;
 import java.math.BigDecimal;
 
 /**
- * EpochParamContent
+ * EpochParam
  */
 @Data
 @Builder
@@ -31,7 +31,7 @@ import java.math.BigDecimal;
 @ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class EpochParamContent {
+public class EpochParam {
   private Integer epoch;
   private Integer minFeeA;
   private Integer minFeeB;

@@ -1,10 +1,13 @@
 package io.blockfrost.sdk.api;
 
 import io.blockfrost.sdk.api.exception.APIException;
-import io.blockfrost.sdk.api.model.EpochContent;
+import io.blockfrost.sdk.api.model.Epoch;
+import io.blockfrost.sdk.api.model.EpochParam;
 
 public interface EpochService {
 
-    EpochContent getLatestEpoch() throws APIException;
+    Epoch getLatestEpoch() throws APIException;
+
+    EpochParam getLatestEpochParam() throws APIException;
 
 }
