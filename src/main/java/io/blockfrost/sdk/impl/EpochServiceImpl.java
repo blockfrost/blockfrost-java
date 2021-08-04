@@ -9,6 +9,7 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 import java.io.IOException;
+import java.util.List;
 
 public class EpochServiceImpl extends BaseImpl implements EpochService {
 
@@ -18,7 +19,6 @@ public class EpochServiceImpl extends BaseImpl implements EpochService {
         super(baseUrl, projectId);
         epochsApi = getRetrofit().create(EpochsApi.class);
     }
-
 
     @Override
     public Epoch getLatestEpoch() throws APIException {
@@ -45,14 +45,34 @@ public class EpochServiceImpl extends BaseImpl implements EpochService {
     }
 
     @Override
-    public Epoch getEpoch(int epochNumber) throws APIException {
-        Call<Epoch> epochCall = epochsApi.epochsNumberGet(getProjectId(), epochNumber);
+    public Epoch getEpoch(int number) throws APIException {
+        
+        Call<Epoch> epochCall = epochsApi.epochsNumberGet(getProjectId(), number);
 
         try{
             Response<Epoch> epochResponse = epochCall.execute();
             return processResponse(epochResponse);
         } catch (IOException exp){
-            throw new APIException("Exception while fetching epoch for epoch number: " + epochNumber, exp);
+            throw new APIException("Exception while fetching epoch for epoch number: " + number, exp);
         }
+    }
+
+    @Override
+    public List<Epoch> getNextEpochs(int number, int count, int page) throws APIException {
+        
+        Call<List<Epoch>> nextEpochsCall = epochsApi.epochsNumberNextGet(getProjectId(), number, count, page);
+
+        try{
+            Response<List<Epoch>> nextEpochsResponse = nextEpochsCall.execute();
+            return processResponse(nextEpochsResponse);
+        } catch (IOException exp){
+            throw new APIException("Exception while fetching next epochs for epoch number: " + number, exp);
+        }
+    }
+
+    //TODO: Implement
+    @Override
+    public List<Epoch> getNextEpochs(int number) throws APIException {
+        return null;
     }
 }

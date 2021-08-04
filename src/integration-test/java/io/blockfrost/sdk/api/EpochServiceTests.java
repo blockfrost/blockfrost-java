@@ -8,9 +8,10 @@ import io.blockfrost.sdk.impl.EpochServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.*;
 
 public class EpochServiceTests extends TestBase {
 
@@ -58,4 +59,26 @@ public class EpochServiceTests extends TestBase {
 
     }
 
+    @Test
+    public void nextEpochs_willReturn_nextEpochsForCountAndPage() throws APIException {
+
+        Epoch expectedEpoch = Epoch.builder()
+                .epoch(2)
+                .startTime(1564863616)
+                .endTime(1565295616)
+                .firstBlockTime(1564863616)
+                .lastBlockTime(1565295596)
+                .blockCount(21601)
+                .txCount(182)
+                .output("35581408008991")
+                .fees("40548594")
+                .activeStake(null)
+                .build();
+
+        List<Epoch> nextEpochs = epochService.getNextEpochs(1, 5, 1);
+
+        assertThat(nextEpochs, hasSize(5));
+        assertThat(nextEpochs, hasItem(samePropertyValuesAs(expectedEpoch)));
+    }
+    
 }
