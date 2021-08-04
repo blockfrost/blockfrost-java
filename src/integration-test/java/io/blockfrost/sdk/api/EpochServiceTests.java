@@ -5,6 +5,7 @@ import io.blockfrost.sdk.api.model.Epoch;
 import io.blockfrost.sdk.api.model.EpochParam;
 import io.blockfrost.sdk.api.model.Stake;
 import io.blockfrost.sdk.api.util.Constants;
+import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.EpochServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -164,4 +165,29 @@ public class EpochServiceTests extends TestBase {
         assertThat(latestEpochParam, is(expectedEpochParam));
 
     }
+
+    @Test
+    public void blocksForEpoch_willReturn_blocksForEpochForCountPageAndOrder() throws APIException {
+
+        String blockHash = "7e8b2df7730261d8831fe0206591570734d353c15d5266b7fe77097090d33cbd";
+
+        List<String> blocksForEpoch = epochService.getBlocksForEpoch(1, 5, 1, OrderEnum.asc);
+
+        assertThat(blocksForEpoch, hasSize(lessThanOrEqualTo(5)));
+        assertThat(blocksForEpoch, hasItem(blockHash));
+
+    }
+
+    @Test
+    public void blocksForEpoch_willReturn_blocksForEpochForCountPage() throws APIException {
+
+        String blockHash = "7e8b2df7730261d8831fe0206591570734d353c15d5266b7fe77097090d33cbd";
+
+        List<String> blocksForEpoch = epochService.getBlocksForEpoch(1, 5, 1);
+
+        assertThat(blocksForEpoch, hasSize(lessThanOrEqualTo(5)));
+        assertThat(blocksForEpoch, hasItem(blockHash));
+
+    }
 }
+

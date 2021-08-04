@@ -5,6 +5,7 @@ import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.api.model.Epoch;
 import io.blockfrost.sdk.api.model.EpochParam;
 import io.blockfrost.sdk.api.model.Stake;
+import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.retrofit.EpochsApi;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -148,5 +149,32 @@ public class EpochServiceImpl extends BaseImpl implements EpochService {
         } catch (IOException exp){
             throw new APIException("Exception while fetching epoch parameters for epoch: " + number, exp);
         }
+    }
+
+    @Override
+    public List<String> getBlocksForEpoch(int number, int count, int page, OrderEnum order) throws APIException {
+        Call<List<String>> blocksCall = epochsApi.epochsNumberBlocksGet(getProjectId(), number, count, page, order.name());
+
+        try{
+            Response<List<String>> blocksResponse = blocksCall.execute();
+            return processResponse(blocksResponse);
+        } catch (IOException exp){
+            throw new APIException("Exception while fetching blocks for epoch: " + number, exp);
+        }
+    }
+
+    @Override
+    public List<String> getBlocksForEpoch(int number, int count, int page) throws APIException {
+        return getBlocksForEpoch(number, count, page, OrderEnum.asc);
+    }
+
+    @Override
+    public List<String> getBlocksForEpoch(int number, OrderEnum order) throws APIException {
+        return null;
+    }
+
+    @Override
+    public List<String> getBlocksForEpoch(int number) throws APIException {
+        return getBlocksForEpoch(number, OrderEnum.asc);
     }
 }
