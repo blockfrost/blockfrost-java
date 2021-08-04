@@ -4,6 +4,7 @@ import io.blockfrost.sdk.api.EpochService;
 import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.api.model.Epoch;
 import io.blockfrost.sdk.api.model.EpochParam;
+import io.blockfrost.sdk.api.model.Stake;
 import io.blockfrost.sdk.impl.retrofit.EpochsApi;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -92,6 +93,25 @@ public class EpochServiceImpl extends BaseImpl implements EpochService {
     //TODO: Implement
     @Override
     public List<Epoch> getPreviousEpochs(int number) throws APIException {
+        return null;
+    }
+
+    @Override
+    public List<Stake> getActiveStakesForEpoch(int number, int count, int page) throws APIException {
+
+        Call<List<Stake>> activeStakesCall = epochsApi.epochsNumberStakesGet(getProjectId(), number, count, page);
+
+        try{
+            Response<List<Stake>> activeStakesResponse = activeStakesCall.execute();
+            return processResponse(activeStakesResponse);
+        } catch (IOException exp){
+            throw new APIException("Exception while fetching active stakes for epoch number: " + number, exp);
+        }
+    }
+
+    //TODO: Implement
+    @Override
+    public List<Stake> getActiveStakesForEpoch(int number) throws APIException {
         return null;
     }
 }

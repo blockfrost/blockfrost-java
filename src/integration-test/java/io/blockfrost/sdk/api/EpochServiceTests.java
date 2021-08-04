@@ -3,6 +3,7 @@ package io.blockfrost.sdk.api;
 import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.api.model.Epoch;
 import io.blockfrost.sdk.api.model.EpochParam;
+import io.blockfrost.sdk.api.model.Stake;
 import io.blockfrost.sdk.api.util.Constants;
 import io.blockfrost.sdk.impl.EpochServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -101,5 +102,14 @@ public class EpochServiceTests extends TestBase {
 
         assertThat(previousEpochs, hasSize(1));
         assertThat(previousEpochs, hasItem(samePropertyValuesAs(expectedEpoch)));
-    }    
+    }
+
+    @Test
+    public void activeStakes_willReturn_activeStakesForCountAndPage() throws APIException {
+
+        List<Stake> activeStakes = epochService.getActiveStakesForEpoch(1, 5, 1);
+
+        assertThat(activeStakes, hasSize(lessThanOrEqualTo(5)));
+
+    }
 }

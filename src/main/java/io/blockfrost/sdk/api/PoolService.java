@@ -9,8 +9,8 @@ import java.util.List;
 public interface PoolService {
 
     /**
-     * List of stake pools
-     * List of registered stake pools.
+     * List of networkStake pools
+     * List of registered networkStake pools.
      * @param count The numbers of pools per page.
      * @param page The page number for listing the results.
      * @param order The ordering of items from the point of view of the blockchain, not the page listing itself. We return oldest first, newest last.
@@ -19,8 +19,8 @@ public interface PoolService {
     List<String> getPools(int count, int page, OrderEnum order) throws APIException;
 
     /**
-     * List of stake pools
-     * List of registered stake pools ordered from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
+     * List of networkStake pools
+     * List of registered networkStake pools ordered from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
      * @param count The numbers of pools per page (&lt;=100).
      * @param page The page number for listing the results.
      * @return List&lt;String&gt;
@@ -29,8 +29,8 @@ public interface PoolService {
 
 
     /**
-     * List of stake pools
-     * List of all registered stake pools.
+     * List of networkStake pools
+     * List of all registered networkStake pools.
      * @param order The ordering of items from the point of view of the blockchain.
      * @return List&lt;String&gt;
      */
@@ -38,8 +38,8 @@ public interface PoolService {
     List<String> getPools(OrderEnum order) throws APIException;
 
     /**
-     * List of stake pools
-     * List of all registered stake pools in ascending order from the point of view of the blockchain. We return oldest first, newest last
+     * List of networkStake pools
+     * List of all registered networkStake pools in ascending order from the point of view of the blockchain. We return oldest first, newest last
      * @return List&lt;String&gt;
      */
     List<String> getPools() throws APIException;
@@ -47,7 +47,7 @@ public interface PoolService {
 
     /**
      * List of retired pools
-     * List of retired stake pools.
+     * List of retired networkStake pools.
      * @param count The numbers of pools per page.
      * @param page The page number for listing the results.
      * @param order The ordering of items from the point of view of the blockchain, not the page listing itself. We return oldest first, newest last.
@@ -57,7 +57,7 @@ public interface PoolService {
 
     /**
      * List of retired pools
-     * List of retired stake pools ordered from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
+     * List of retired networkStake pools ordered from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
      * @param count The numbers of pools per page (&lt;=100).
      * @param page The page number for listing the results.
      * @return List&lt;PoolRetirementInfo&gt;
@@ -67,7 +67,7 @@ public interface PoolService {
 
     /**
      * List of retired pools
-     * List of all retired stake pools.
+     * List of all retired networkStake pools.
      * @param order The ordering of items from the point of view of the blockchain.
      * @return List&lt;PoolRetirementInfo&gt;
      */
@@ -76,14 +76,14 @@ public interface PoolService {
 
     /**
      * List of retired pools
-     * List of all retired stake pools in ascending order from the point of view of the blockchain. We return oldest first, newest last
+     * List of all retired networkStake pools in ascending order from the point of view of the blockchain. We return oldest first, newest last
      * @return List&lt;PoolRetirementInfo&gt;
      */
     List<PoolRetirementInfo> getRetiredPools() throws APIException;
 
     /**
      * List of retiring pools
-     * List of retiring stake pools.
+     * List of retiring networkStake pools.
      * @param count The numbers of pools per page.
      * @param page The page number for listing the results.
      * @param order The ordering of items from the point of view of the blockchain, not the page listing itself. We return oldest first, newest last.
@@ -93,7 +93,7 @@ public interface PoolService {
 
     /**
      * List of retiring pools
-     * List of retiring stake pools ordered from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
+     * List of retiring networkStake pools ordered from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
      * @param count The numbers of pools per page (&lt;=100).
      * @param page The page number for listing the results.
      * @return List&lt;PoolRetirementInfo&gt;
@@ -103,7 +103,7 @@ public interface PoolService {
 
     /**
      * List of retiring pools
-     * List of all retiring stake pools.
+     * List of all retiring networkStake pools.
      * @param order The ordering of items from the point of view of the blockchain.
      * @return List&lt;PoolRetirementInfo&gt;
      */
@@ -112,13 +112,13 @@ public interface PoolService {
 
     /**
      * List of retiring pools
-     * List of all retiring stake pools in ascending order from the point of view of the blockchain. We return oldest first, newest last
+     * List of all retiring networkStake pools in ascending order from the point of view of the blockchain. We return oldest first, newest last
      * @return List&lt;PoolRetirementInfo&gt;
      */
     List<PoolRetirementInfo> getRetiringPools() throws APIException;
 
     /**
-     * Specific stake pool
+     * Specific networkStake pool
      * Pool information.
      * @param poolId Bech32 or hexadecimal pool ID. (required)
      * @return Pool
@@ -126,8 +126,8 @@ public interface PoolService {
     Pool getPool(String poolId) throws APIException;
 
     /**
-     * Stake pool history
-     * History of stake pool parameters over epochs.
+     * NetworkStake pool history
+     * History of networkStake pool parameters over epochs.
      * @param poolId Bech32 or hexadecimal pool ID. (required)
      * @param count The number of results displayed on one page.
      * @param page The page number for listing the results.
@@ -138,7 +138,7 @@ public interface PoolService {
 
     /**
      * List of retiring pools
-     * List of retiring stake pools ordered from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
+     * List of retiring networkStake pools ordered from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
      * @param poolId Bech32 or hexadecimal pool ID. (required)
      * @param count The numbers of pools per page (&lt;=100).
      * @param page The page number for listing the results.
@@ -149,7 +149,7 @@ public interface PoolService {
 
     /**
      * List of retiring pools
-     * List of all retiring stake pools.
+     * List of all retiring networkStake pools.
      * @param poolId Bech32 or hexadecimal pool ID. (required)
      * @param order The ordering of items from the point of view of the blockchain.
      * @return List&lt;PoolHistory&gt;
@@ -159,31 +159,31 @@ public interface PoolService {
 
     /**
      * List of retiring pools
-     * List of all retiring stake pools in ascending order from the point of view of the blockchain. We return oldest first, newest last
+     * List of all retiring networkStake pools in ascending order from the point of view of the blockchain. We return oldest first, newest last
      * @param poolId Bech32 or hexadecimal pool ID. (required)
      * @return List&lt;PoolHistory&gt;
      */
     List<PoolHistory> getPoolHistory(String poolId) throws APIException;
 
     /**
-     * Stake pool metadata
-     * Stake pool registration metadata.
+     * NetworkStake pool metadata
+     * NetworkStake pool registration metadata.
      * @param poolId Bech32 or hexadecimal pool ID. (required)
      * @return PoolMetadata
      */
     PoolMetadata getPoolMetadata(String poolId) throws APIException;
 
     /**
-     * Stake pool relays
-     * Relays of a stake pool.
+     * NetworkStake pool relays
+     * Relays of a networkStake pool.
      * @param poolId Bech32 or hexadecimal pool ID. (required)
      * @return List&lt;Object&gt;
      */
     List<PoolRelay> getPoolRelays(String poolId) throws APIException;
 
     /**
-     * Stake pool delegators
-     * List of current stake pools delegators.
+     * NetworkStake pool delegators
+     * List of current networkStake pools delegators.
      * @param poolId Bech32 or hexadecimal pool ID. (required)
      * @param count The number of results displayed on one page.
      * @param page The page number for listing the results.
@@ -193,8 +193,8 @@ public interface PoolService {
     List<PoolDelegator> getPoolDelegators(String poolId, int count, int page, OrderEnum order) throws APIException;
 
     /**
-     * List of stake pool delegators
-     * List of stake pool delegators ordered from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
+     * List of networkStake pool delegators
+     * List of networkStake pool delegators ordered from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
      * @param poolId Bech32 or hexadecimal pool ID. (required)
      * @param count The numbers of pools per page (&lt;=100).
      * @param page The page number for listing the results.
@@ -204,8 +204,8 @@ public interface PoolService {
 
 
     /**
-     * List of stake pool delegators
-     * List of stake pool delegators
+     * List of networkStake pool delegators
+     * List of networkStake pool delegators
      * @param poolId Bech32 or hexadecimal pool ID. (required)
      * @param order The ordering of items from the point of view of the blockchain.
      * @return List&lt;PoolDelegator&gt;
@@ -214,16 +214,16 @@ public interface PoolService {
     List<PoolDelegator> getPoolDelegators(String poolId, OrderEnum order) throws APIException;
 
     /**
-     * List of stake pool delegators
-     * List of stake pool delegators in ascending order from the point of view of the blockchain. We return oldest first, newest last
+     * List of networkStake pool delegators
+     * List of networkStake pool delegators in ascending order from the point of view of the blockchain. We return oldest first, newest last
      * @param poolId Bech32 or hexadecimal pool ID. (required)
      * @return List&lt;PoolDelegator&gt;
      */
     List<PoolDelegator> getPoolDelegators(String poolId) throws APIException;
 
     /**
-     * Stake pool blocks
-     * List of stake pools blocks.
+     * NetworkStake pool blocks
+     * List of networkStake pools blocks.
      * @param poolId Bech32 or hexadecimal pool ID. (required)
      * @param count The number of results displayed on one page.
      * @param page The page number for listing the results.
@@ -233,8 +233,8 @@ public interface PoolService {
     List<String> getPoolBlocks(String poolId, int count, int page, OrderEnum order) throws APIException;
 
     /**
-     * Stake pool blocks
-     * List of stake pools blocks. ordered from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
+     * NetworkStake pool blocks
+     * List of networkStake pools blocks. ordered from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
      * @param poolId Bech32 or hexadecimal pool ID. (required)
      * @param count The numbers of pools per page (&lt;=100).
      * @param page The page number for listing the results.
@@ -244,8 +244,8 @@ public interface PoolService {
 
 
     /**
-     * Stake pool blocks
-     * List of stake pools blocks.
+     * NetworkStake pool blocks
+     * List of networkStake pools blocks.
      * @param poolId Bech32 or hexadecimal pool ID. (required)
      * @param order The ordering of items from the point of view of the blockchain.
      * @return List&lt;String&gt;
@@ -254,16 +254,16 @@ public interface PoolService {
     List<String> getPoolBlocks(String poolId, OrderEnum order) throws APIException;
 
     /**
-     * Stake pool blocks
-     * List of stake pools blocks. in ascending order from the point of view of the blockchain. We return oldest first, newest last
+     * NetworkStake pool blocks
+     * List of networkStake pools blocks. in ascending order from the point of view of the blockchain. We return oldest first, newest last
      * @param poolId Bech32 or hexadecimal pool ID. (required)
      * @return List&lt;String&gt;
      */
     List<String> getPoolBlocks(String poolId) throws APIException;
 
     /**
-     * Stake pool updates
-     * List of certificate updates to the stake pool.
+     * NetworkStake pool updates
+     * List of certificate updates to the networkStake pool.
      * @param poolId Bech32 or hexadecimal pool ID. (required)
      * @param count The number of results displayed on one page. (optional, default to 100)
      * @param page The page number for listing the results. (optional, default to 1)
@@ -273,8 +273,8 @@ public interface PoolService {
     List<PoolUpdate> getPoolUpdates(String poolId, int count, int page, OrderEnum order) throws APIException;
 
     /**
-     * Stake pool updates
-     * List of certificate updates to the stake pool. ordered from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
+     * NetworkStake pool updates
+     * List of certificate updates to the networkStake pool. ordered from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
      * @param poolId Bech32 or hexadecimal pool ID. (required)
      * @param count The numbers of pools per page (&lt;=100).
      * @param page The page number for listing the results.
@@ -284,8 +284,8 @@ public interface PoolService {
 
 
     /**
-     * Stake pool updates
-     * List of certificate updates to the stake pool.
+     * NetworkStake pool updates
+     * List of certificate updates to the networkStake pool.
      * @param poolId Bech32 or hexadecimal pool ID. (required)
      * @param order The ordering of items from the point of view of the blockchain.
      * @return List&lt;PoolUpdate&gt;
@@ -294,8 +294,8 @@ public interface PoolService {
     List<PoolUpdate> getPoolUpdates(String poolId, OrderEnum order) throws APIException;
 
     /**
-     * Stake pool updates
-     * List of certificate updates to the stake pool. in ascending order from the point of view of the blockchain. We return oldest first, newest last
+     * NetworkStake pool updates
+     * List of certificate updates to the networkStake pool. in ascending order from the point of view of the blockchain. We return oldest first, newest last
      * @param poolId Bech32 or hexadecimal pool ID. (required)
      * @return List&lt;PoolUpdate&gt;
      */

@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
 /**
- * Stake
+ * NetworkStake
  */
 @Data
 @Builder
@@ -16,7 +16,8 @@ import lombok.*;
 @ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class Stake{
-    private String live;
-    private String active;
+public class Stake {
+    private String stakeAddress;
+    private String poolId;
+    private String amount;
 }

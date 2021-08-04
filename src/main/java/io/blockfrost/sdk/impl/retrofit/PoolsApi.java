@@ -11,8 +11,8 @@ import java.util.List;
 
 public interface PoolsApi {
     /**
-     * List of stake pools
-     * List of registered stake pools.
+     * List of networkStake pools
+     * List of registered networkStake pools.
      *
      * @param count The numbers of pools per page. (optional, default to 100)
      * @param page  The page number for listing the results. (optional, default to 1)
@@ -28,8 +28,8 @@ public interface PoolsApi {
     );
 
     /**
-     * Stake pool blocks
-     * List of stake pools blocks.
+     * NetworkStake pool blocks
+     * List of networkStake pools blocks.
      *
      * @param poolId Bech32 or hexadecimal pool ID. (required)
      * @param count  The number of results displayed on one page. (optional, default to 100)
@@ -47,8 +47,8 @@ public interface PoolsApi {
     );
 
     /**
-     * Stake pool delegators
-     * List of current stake pools delegators.
+     * NetworkStake pool delegators
+     * List of current networkStake pools delegators.
      *
      * @param poolId Bech32 or hexadecimal pool ID. (required)
      * @param count  The number of results displayed on one page. (optional, default to 100)
@@ -66,7 +66,7 @@ public interface PoolsApi {
     );
 
     /**
-     * Specific stake pool
+     * Specific networkStake pool
      * Pool information.
      *
      * @param poolId Bech32 or hexadecimal pool ID. (required)
@@ -79,8 +79,8 @@ public interface PoolsApi {
     );
 
     /**
-     * Stake pool history
-     * History of stake pool parameters over epochs.
+     * NetworkStake pool history
+     * History of networkStake pool parameters over epochs.
      *
      * @param poolId Bech32 or hexadecimal pool ID. (required)
      * @param count  The number of results displayed on one page. (optional, default to 100)
@@ -98,8 +98,8 @@ public interface PoolsApi {
     );
 
     /**
-     * Stake pool metadata
-     * Stake pool registration metadata.
+     * NetworkStake pool metadata
+     * NetworkStake pool registration metadata.
      *
      * @param poolId Bech32 or hexadecimal pool ID. (required)
      * @return Call&lt;PoolMetadata&gt;
@@ -111,8 +111,8 @@ public interface PoolsApi {
     );
 
     /**
-     * Stake pool relays
-     * Relays of a stake pool.
+     * NetworkStake pool relays
+     * Relays of a networkStake pool.
      *
      * @param poolId Bech32 or hexadecimal pool ID. (required)
      * @return Call&lt;List&lt;Object&gt;&gt;
@@ -124,8 +124,8 @@ public interface PoolsApi {
     );
 
     /**
-     * Stake pool updates
-     * List of certificate updates to the stake pool.
+     * NetworkStake pool updates
+     * List of certificate updates to the networkStake pool.
      *
      * @param poolId Bech32 or hexadecimal pool ID. (required)
      * @param count  The number of results displayed on one page. (optional, default to 100)
@@ -143,7 +143,7 @@ public interface PoolsApi {
     );
 
     /**
-     * List of retired stake pools
+     * List of retired networkStake pools
      * List of already retired pools.
      *
      * @param count The numbers of pools per page. (optional, default to 100)
@@ -160,8 +160,8 @@ public interface PoolsApi {
     );
 
     /**
-     * List of retiring stake pools
-     * List of stake pools retiring in the upcoming epochs
+     * List of retiring networkStake pools
+     * List of networkStake pools retiring in the upcoming epochs
      *
      * @param count The number of results displayed on one page. (optional, default to 100)
      * @param page  The page number for listing the results. (optional, default to 1)

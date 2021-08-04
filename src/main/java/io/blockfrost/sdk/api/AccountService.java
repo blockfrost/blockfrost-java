@@ -9,8 +9,8 @@ import io.blockfrost.sdk.api.model.Account;
 public interface AccountService {
 
     /**
-     * Obtain information about a specific stake account.
-     * @param stakeAddress Bech32 stake address. (required)
+     * Obtain information about a specific networkStake account.
+     * @param stakeAddress Bech32 networkStake address. (required)
      * @return Account
      */
     public Account getAccountByStakeAddress(String stakeAddress) throws APIException;

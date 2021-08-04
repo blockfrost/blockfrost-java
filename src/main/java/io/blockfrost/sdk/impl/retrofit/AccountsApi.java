@@ -10,9 +10,9 @@ public interface AccountsApi {
 
     /**
      * Specific account address
-     * Obtain information about a specific stake account.
+     * Obtain information about a specific networkStake account.
      *
-     * @param stakeAddress Bech32 stake address. (required)
+     * @param stakeAddress Bech32 networkStake address. (required)
      * @return Call&lt;Account&gt;
      */
     @GET("accounts/{stake_address}")

@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
 /**
- * Supply
+ * NetworkSupply
  */
 @Data
 @Builder
@@ -16,7 +16,7 @@ import lombok.*;
 @ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class Supply{
+public class NetworkSupply {
     private String max;
     private String total;
     private String circulating;

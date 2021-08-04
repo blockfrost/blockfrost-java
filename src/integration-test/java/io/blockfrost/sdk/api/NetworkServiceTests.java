@@ -22,14 +22,14 @@ public class NetworkServiceTests extends TestBase {
     @Test
     public void network_willReturn_networkInfo() throws APIException {
 
-        //TODO: This changes frequently. Can we rely on max supply or do we need to remove that also.
+        //TODO: This changes frequently. Can we rely on max networkSupply or do we need to remove that also.
 
 //        Network expectedNetwork = Network.builder()
-//                .stake( Stake.builder()
+//                .networkStake( NetworkStake.builder()
 //                        .live("14278864583150094")
 //                        .active("13690202531062820")
 //                        .build())
-//                .supply( Supply.builder()
+//                .networkSupply( NetworkSupply.builder()
 //                        .max("45000000000000000")
 //                        .total("40236648947239373")
 //                        .circulating("42051490630229286")

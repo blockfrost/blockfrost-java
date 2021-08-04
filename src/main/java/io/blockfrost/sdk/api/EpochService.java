@@ -3,6 +3,7 @@ package io.blockfrost.sdk.api;
 import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.api.model.Epoch;
 import io.blockfrost.sdk.api.model.EpochParam;
+import io.blockfrost.sdk.api.model.Stake;
 
 import java.util.List;
 
@@ -72,5 +73,25 @@ public interface EpochService {
      * @param number Number of the requested epoch. (required)
      * @return List&lt;Epoch&gt;
      */
-    List<Epoch> getPreviousEpochs(int number) throws APIException;    
+    List<Epoch> getPreviousEpochs(int number) throws APIException;
+
+    /**
+     * Stake distribution
+     * Return the active stakes for the epoch specified.
+     *
+     * @param number Number of the epoch (required)
+     * @param count  The number of results displayed on one page. (&lt;=100)
+     * @param page   The page number for listing the results.
+     * @return List&lt;Stake&gt;
+     */
+    List<Stake> getActiveStakesForEpoch(int number, int count, int page) throws APIException;
+
+    /**
+     * Stake distribution
+     * Return all active stakes for the epoch specified.
+     *
+     * @param number Number of the epoch (required)
+     * @return List&lt;Stake&gt;
+     */
+    List<Stake> getActiveStakesForEpoch(int number) throws APIException;
 }

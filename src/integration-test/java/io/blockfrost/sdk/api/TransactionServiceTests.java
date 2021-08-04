@@ -106,7 +106,7 @@ public class TransactionServiceTests extends TestBase {
     }
 
 
-    //TODO: Need to use a Transaction has with actual stake certificate for validation.
+    //TODO: Need to use a Transaction has with actual networkStake certificate for validation.
     @Test
     public void transactionStakes_willReturn_transactionStakesForAHash() throws APIException {
 

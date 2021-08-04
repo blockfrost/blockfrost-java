@@ -2,6 +2,7 @@ package io.blockfrost.sdk.impl.retrofit;
 
 import io.blockfrost.sdk.api.model.Epoch;
 import io.blockfrost.sdk.api.model.EpochParam;
+import io.blockfrost.sdk.api.model.Stake;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
@@ -56,10 +57,10 @@ public interface EpochsApi {
 
     /**
      * Block distribution
-     * Return the block minted for the epoch specified by stake pool.
+     * Return the block minted for the epoch specified by networkStake pool.
      *
      * @param number Number of the epoch (required)
-     * @param poolId Stake pool ID to filter (required)
+     * @param poolId NetworkStake pool ID to filter (required)
      * @param count  The number of results displayed on one page. (optional, default to 100)
      * @param page   The page number for listing the results. (optional, default to 1)
      * @param order  The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.  (optional, default to asc)
@@ -136,8 +137,8 @@ public interface EpochsApi {
     );
 
     /**
-     * Stake distribution
-     * Return the active stake distribution for the epoch specified.
+     * NetworkStake distribution
+     * Return the active networkStake distribution for the epoch specified.
      *
      * @param number Number of the epoch (required)
      * @param count  The number of results displayed on one page. (optional, default to 100)
@@ -145,7 +146,7 @@ public interface EpochsApi {
      * @return Call&lt;List&lt;Object&gt;&gt;
      */
     @GET("epochs/{number}/stakes")
-    Call<List<Object>> epochsNumberStakesGet(
+    Call<List<Stake>> epochsNumberStakesGet(
             @Header("project_id") String projectId,
             @Path("number") Integer number,
             @Query("count") Integer count,
@@ -153,11 +154,11 @@ public interface EpochsApi {
     );
 
     /**
-     * Stake distribution by pool
-     * Return the active stake distribution for the epoch specified by stake pool.
+     * NetworkStake distribution by pool
+     * Return the active networkStake distribution for the epoch specified by networkStake pool.
      *
      * @param number Number of the epoch (required)
-     * @param poolId Stake pool ID to filter (required)
+     * @param poolId NetworkStake pool ID to filter (required)
      * @param count  The number of results displayed on one page. (optional, default to 100)
      * @param page   The page number for listing the results. (optional, default to 1)
      * @return Call&lt;List&lt;Object&gt;&gt;

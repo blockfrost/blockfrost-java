@@ -24,8 +24,8 @@ public interface TransactionService {
     TransactionUtxo getTransactionUtxo(String hash) throws APIException;
 
     /**
-     * Transaction stake addresses certificates
-     * Obtain information about (de)registration of stake addresses within a transaction.
+     * Transaction networkStake addresses certificates
+     * Obtain information about (de)registration of networkStake addresses within a transaction.
      * @param hash Hash of the requested transaction. (required)
      * @return List&lt;TransactionStake&gt;
      */
@@ -56,16 +56,16 @@ public interface TransactionService {
     List<TransactionMir> getTransactionMirs(String hash) throws APIException;
 
     /**
-     * Transaction stake pool registration and update certificates
-     * Obtain information about stake pool registration and update certificates of a specific transaction.
+     * Transaction networkStake pool registration and update certificates
+     * Obtain information about networkStake pool registration and update certificates of a specific transaction.
      * @param hash Hash of the requested transaction (required)
      * @return List&lt;TransactionPoolUpdate&gt;
      */
     List<TransactionPoolUpdate> getTransactionPoolUpdates(String hash) throws APIException;
 
     /**
-     * Transaction stake pool retirement certificates
-     * Obtain information about stake pool retirements within a specific transaction.
+     * Transaction networkStake pool retirement certificates
+     * Obtain information about networkStake pool retirements within a specific transaction.
      * @param hash Hash of the requested transaction (required)
      * @return List&lt;TransactionPoolRetire&gt;
      */
