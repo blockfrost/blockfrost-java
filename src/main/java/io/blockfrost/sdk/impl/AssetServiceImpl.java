@@ -3,6 +3,7 @@ package io.blockfrost.sdk.impl;
 import io.blockfrost.sdk.api.AssetService;
 import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.api.model.Asset;
+import io.blockfrost.sdk.api.model.AssetHistory;
 import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.retrofit.AssetsApi;
 import retrofit2.Call;
@@ -59,5 +60,33 @@ public class AssetServiceImpl extends BaseImpl implements AssetService {
     @Override
     public List<Asset> getAssets() throws APIException {
         return getAssets(OrderEnum.asc);
+    }
+
+    @Override
+    public List<AssetHistory> getAssetHistory(String asset, int count, int page, OrderEnum order) throws APIException {
+        Call<List<AssetHistory>> assetHistoryCall = assetsApi.assetsAssetHistoryGet(getProjectId(), asset, count, page, order.name());
+
+        try{
+            Response<List<AssetHistory>> assetHistoryResponse = assetHistoryCall.execute();
+            return processResponse(assetHistoryResponse);
+        } catch (IOException exp){
+            throw new APIException("Exception while fetching asset history for asset: " + asset, exp);
+        }
+    }
+
+    @Override
+    public List<AssetHistory> getAssetHistory(String asset, int count, int page) throws APIException {
+        return getAssetHistory(asset, count, page, OrderEnum.asc);
+    }
+
+    //TODO: Implement
+    @Override
+    public List<AssetHistory> getAssetHistory(String asset, OrderEnum order) throws APIException {
+        return null;
+    }
+
+    @Override
+    public List<AssetHistory> getAssetHistory(String asset) throws APIException {
+        return getAssetHistory(asset, OrderEnum.asc);
     }
 }

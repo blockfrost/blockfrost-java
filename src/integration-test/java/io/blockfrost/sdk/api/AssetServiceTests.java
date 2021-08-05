@@ -2,6 +2,8 @@ package io.blockfrost.sdk.api;
 
 import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.api.model.Asset;
+import io.blockfrost.sdk.api.model.AssetAction;
+import io.blockfrost.sdk.api.model.AssetHistory;
 import io.blockfrost.sdk.api.util.Constants;
 import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.AssetServiceImpl;
@@ -67,4 +69,31 @@ public class AssetServiceTests extends TestBase {
         assertThat(assetList, hasItem(expectedAsset));
     }
 
+    @Test
+    public void getAssetHistory_willReturn_assetHistoryForCountPageAndOrder() throws APIException {
+
+        AssetHistory expectedAssetHistory = AssetHistory.builder()
+                .txHash("e067ca567df4920f4ac3babc4d805d2afe860e21aa7f6f78dbe8538caf9d8262")
+                .amount("1")
+                .action(AssetAction.minted.name())
+                .build();
+
+        List<AssetHistory> assetHistoryList = assetService.getAssetHistory("476039a0949cf0b22f6a800f56780184c44533887ca6e821007840c36e7574636f696e", 5, 1, OrderEnum.asc);
+        assertThat(assetHistoryList, hasSize(lessThanOrEqualTo(5)));
+        assertThat(assetHistoryList, hasItem(expectedAssetHistory));
+    }
+
+    @Test
+    public void getAssetHistory_willReturn_assetHistoryForCountAndPage() throws APIException {
+
+        AssetHistory expectedAssetHistory = AssetHistory.builder()
+                .txHash("e067ca567df4920f4ac3babc4d805d2afe860e21aa7f6f78dbe8538caf9d8262")
+                .amount("1")
+                .action(AssetAction.minted.name())
+                .build();
+
+        List<AssetHistory> assetHistoryList = assetService.getAssetHistory("476039a0949cf0b22f6a800f56780184c44533887ca6e821007840c36e7574636f696e", 5, 1);
+        assertThat(assetHistoryList, hasSize(lessThanOrEqualTo(5)));
+        assertThat(assetHistoryList, hasItem(expectedAssetHistory));
+    }
 }
