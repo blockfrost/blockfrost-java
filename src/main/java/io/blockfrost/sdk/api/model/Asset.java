@@ -38,7 +38,7 @@ public class Asset {
   private String quantity;
   private String initialMintTxHash;
   private Integer mintOrBurnCount;
-  private Map<String, Object> onchainMetadata;
+  private Map<String, String> onchainMetadata;
   private AssetMetadata metadata;
 }
 

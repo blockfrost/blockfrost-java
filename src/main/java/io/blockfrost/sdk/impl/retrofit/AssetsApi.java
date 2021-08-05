@@ -105,7 +105,7 @@ public interface AssetsApi {
    * @return Call&lt;List&lt;Object&gt;&gt;
    */
   @GET("assets")
-  Call<List<Object>> assetsGet(
+  Call<List<Asset>> assetsGet(
           @Header("project_id") String projectId,
           @Query("count") Integer count,
           @Query("page") Integer page,
