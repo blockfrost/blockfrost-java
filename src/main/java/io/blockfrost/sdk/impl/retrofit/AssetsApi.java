@@ -2,6 +2,7 @@ package io.blockfrost.sdk.impl.retrofit;
 
 import io.blockfrost.sdk.api.model.Asset;
 import io.blockfrost.sdk.api.model.AssetHistory;
+import io.blockfrost.sdk.api.model.AssetTransaction;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
@@ -73,7 +74,7 @@ public interface AssetsApi {
      * @return Call&lt;List&lt;Object&gt;&gt;
      */
     @GET("assets/{asset}/transactions")
-    Call<List<Object>> assetsAssetTransactionsGet(
+    Call<List<AssetTransaction>> assetsAssetTransactionsGet(
             @Header("project_id") String projectId,
             @Path("asset") String asset,
             @Query("count") Integer count,
@@ -94,7 +95,7 @@ public interface AssetsApi {
      */
     @Deprecated
     @GET("assets/{asset}/txs")
-    Call<List<String>> assetsAssetTxsGet(
+    Call<List<Object>> assetsAssetTxsGet(
             @Header("project_id") String projectId,
             @Path("asset") String asset,
             @Query("count") Integer count,

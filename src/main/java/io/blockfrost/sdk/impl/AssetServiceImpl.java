@@ -4,6 +4,7 @@ import io.blockfrost.sdk.api.AssetService;
 import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.api.model.Asset;
 import io.blockfrost.sdk.api.model.AssetHistory;
+import io.blockfrost.sdk.api.model.AssetTransaction;
 import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.retrofit.AssetsApi;
 import retrofit2.Call;
@@ -21,6 +22,11 @@ public class AssetServiceImpl extends BaseImpl implements AssetService {
         assetsApi = getRetrofit().create(AssetsApi.class);
     }
 
+    private void validateAsset(String asset) throws APIException {
+        if ( asset == null || asset.equals("" )){
+            throw new APIException("Asset cannot be null or empty");
+        }
+    }
 
     @Override
     public Asset getAsset(String asset) throws APIException {
@@ -64,6 +70,9 @@ public class AssetServiceImpl extends BaseImpl implements AssetService {
 
     @Override
     public List<AssetHistory> getAssetHistory(String asset, int count, int page, OrderEnum order) throws APIException {
+
+        validateAsset(asset);
+
         Call<List<AssetHistory>> assetHistoryCall = assetsApi.assetsAssetHistoryGet(getProjectId(), asset, count, page, order.name());
 
         try{
@@ -88,5 +97,36 @@ public class AssetServiceImpl extends BaseImpl implements AssetService {
     @Override
     public List<AssetHistory> getAssetHistory(String asset) throws APIException {
         return getAssetHistory(asset, OrderEnum.asc);
+    }
+
+    @Override
+    public List<AssetTransaction> getAssetTransactions(String asset, int count, int page, OrderEnum order) throws APIException {
+
+        validateAsset(asset);
+
+        Call<List<AssetTransaction>> assetTransactionCall = assetsApi.assetsAssetTransactionsGet(getProjectId(), asset, count, page, order.name());
+
+        try{
+            Response<List<AssetTransaction>> assetTransactionResponse = assetTransactionCall.execute();
+            return processResponse(assetTransactionResponse);
+        } catch (IOException exp){
+            throw new APIException("Exception while fetching transactions for asset: " + asset, exp);
+        }
+    }
+
+    @Override
+    public List<AssetTransaction> getAssetTransactions(String asset, int count, int page) throws APIException {
+        return getAssetTransactions(asset, count, page, OrderEnum.asc);
+    }
+
+    //TODO: Implement
+    @Override
+    public List<AssetTransaction> getAssetTransactions(String asset, OrderEnum order) throws APIException {
+        return null;
+    }
+
+    @Override
+    public List<AssetTransaction> getAssetTransactions(String asset) throws APIException {
+        return getAssetTransactions(asset, OrderEnum.asc);
     }
 }

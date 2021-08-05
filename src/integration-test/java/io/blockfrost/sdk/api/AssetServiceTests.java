@@ -4,6 +4,7 @@ import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.api.model.Asset;
 import io.blockfrost.sdk.api.model.AssetAction;
 import io.blockfrost.sdk.api.model.AssetHistory;
+import io.blockfrost.sdk.api.model.AssetTransaction;
 import io.blockfrost.sdk.api.util.Constants;
 import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.AssetServiceImpl;
@@ -14,6 +15,7 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AssetServiceTests extends TestBase {
 
@@ -95,5 +97,47 @@ public class AssetServiceTests extends TestBase {
         List<AssetHistory> assetHistoryList = assetService.getAssetHistory("476039a0949cf0b22f6a800f56780184c44533887ca6e821007840c36e7574636f696e", 5, 1);
         assertThat(assetHistoryList, hasSize(lessThanOrEqualTo(5)));
         assertThat(assetHistoryList, hasItem(expectedAssetHistory));
+    }
+
+    @Test
+    public void getAssetHistory_willThrowAPIException_onNullAsset() {
+
+        Exception exception = assertThrows(APIException.class, () -> assetService.getAssetHistory(null, 5, 1));
+        assertThat(exception.getMessage(), is("Asset cannot be null or empty"));
+    }
+
+    @Test
+    public void getAssetTransaction_willReturn_assetTransactionForCountPageAndOrder() throws APIException {
+
+        AssetTransaction expectedAssetTransaction = AssetTransaction.builder()
+                .txHash("e067ca567df4920f4ac3babc4d805d2afe860e21aa7f6f78dbe8538caf9d8262")
+                .blockHeight(2287021)
+                .txIndex(0)
+                .build();
+
+        List<AssetTransaction> assetTransactionList = assetService.getAssetTransactions("476039a0949cf0b22f6a800f56780184c44533887ca6e821007840c36e7574636f696e", 5, 1, OrderEnum.asc);
+        assertThat(assetTransactionList, hasSize(lessThanOrEqualTo(5)));
+        assertThat(assetTransactionList, hasItem(expectedAssetTransaction));
+    }
+
+    @Test
+    public void getAssetTransaction_willReturn_assetTransactionForCountAndPage() throws APIException {
+
+        AssetTransaction expectedAssetTransaction = AssetTransaction.builder()
+                .txHash("e067ca567df4920f4ac3babc4d805d2afe860e21aa7f6f78dbe8538caf9d8262")
+                .blockHeight(2287021)
+                .txIndex(0)
+                .build();
+
+        List<AssetTransaction> assetTransactionList = assetService.getAssetTransactions("476039a0949cf0b22f6a800f56780184c44533887ca6e821007840c36e7574636f696e", 5, 1);
+        assertThat(assetTransactionList, hasSize(lessThanOrEqualTo(5)));
+        assertThat(assetTransactionList, hasItem(expectedAssetTransaction));
+    }
+
+    @Test
+    public void getAssetTransaction_willThrowAPIException_onNullAsset() {
+
+        Exception exception = assertThrows(APIException.class, () -> assetService.getAssetTransactions(null, 5, 1));
+        assertThat(exception.getMessage(), is("Asset cannot be null or empty"));
     }
 }
