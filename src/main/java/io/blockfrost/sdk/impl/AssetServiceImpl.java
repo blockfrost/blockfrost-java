@@ -3,6 +3,7 @@ package io.blockfrost.sdk.impl;
 import io.blockfrost.sdk.api.AssetService;
 import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.api.model.Asset;
+import io.blockfrost.sdk.api.model.AssetAddress;
 import io.blockfrost.sdk.api.model.AssetHistory;
 import io.blockfrost.sdk.api.model.AssetTransaction;
 import io.blockfrost.sdk.api.util.OrderEnum;
@@ -30,6 +31,9 @@ public class AssetServiceImpl extends BaseImpl implements AssetService {
 
     @Override
     public Asset getAsset(String asset) throws APIException {
+
+        validateAsset(asset);
+
         Call<Asset> assetCall = assetsApi.assetsAssetGet(getProjectId(), asset);
 
         try{
@@ -128,5 +132,35 @@ public class AssetServiceImpl extends BaseImpl implements AssetService {
     @Override
     public List<AssetTransaction> getAssetTransactions(String asset) throws APIException {
         return getAssetTransactions(asset, OrderEnum.asc);
+    }
+
+    @Override
+    public List<AssetAddress> getAssetAddresses(String asset, int count, int page, OrderEnum order) throws APIException {
+        validateAsset(asset);
+
+        Call<List<AssetAddress>> assetAddressCall = assetsApi.assetsAssetAddressesGet(getProjectId(), asset, count, page, order.name());
+
+        try{
+            Response<List<AssetAddress>> assetAddressResponse = assetAddressCall.execute();
+            return processResponse(assetAddressResponse);
+        } catch (IOException exp){
+            throw new APIException("Exception while fetching addresses for asset: " + asset, exp);
+        }
+    }
+
+    @Override
+    public List<AssetAddress> getAssetAddresses(String asset, int count, int page) throws APIException {
+        return getAssetAddresses(asset, count, page, OrderEnum.asc);
+    }
+
+    //TODO: Implement
+    @Override
+    public List<AssetAddress> getAssetAddresses(String asset, OrderEnum order) throws APIException {
+        return null;
+    }
+
+    @Override
+    public List<AssetAddress> getAssetAddresses(String asset) throws APIException {
+        return getAssetAddresses(asset, OrderEnum.asc);
     }
 }
