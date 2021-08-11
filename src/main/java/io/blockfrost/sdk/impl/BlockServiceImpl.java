@@ -2,7 +2,7 @@ package io.blockfrost.sdk.impl;
 
 import io.blockfrost.sdk.api.BlockService;
 import io.blockfrost.sdk.api.exception.APIException;
-import io.blockfrost.sdk.api.model.BlockContent;
+import io.blockfrost.sdk.api.model.Block;
 import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.retrofit.BlocksApi;
 import retrofit2.Call;
@@ -27,11 +27,11 @@ public class BlockServiceImpl extends BaseImpl implements BlockService {
     }
 
     @Override
-    public BlockContent getLatestBlock() throws APIException {
-        Call<BlockContent> latestBlockCall = blocksApi.blocksLatestGet(getProjectId());
+    public Block getLatestBlock() throws APIException {
+        Call<Block> latestBlockCall = blocksApi.blocksLatestGet(getProjectId());
 
         try{
-            Response<BlockContent> latestBlockResponse = latestBlockCall.execute();
+            Response<Block> latestBlockResponse = latestBlockCall.execute();
             return processResponse(latestBlockResponse);
         } catch (IOException exp){
             throw new APIException("Exception while fetching latest block", exp);
@@ -39,14 +39,14 @@ public class BlockServiceImpl extends BaseImpl implements BlockService {
     }
 
     @Override
-    public BlockContent getBlock(String hashOrNumber) throws APIException {
+    public Block getBlock(String hashOrNumber) throws APIException {
 
         validateHashOrNumber(hashOrNumber);
         
-        Call<BlockContent> blockCall = blocksApi.blocksHashOrNumberGet(getProjectId(), hashOrNumber);
+        Call<Block> blockCall = blocksApi.blocksHashOrNumberGet(getProjectId(), hashOrNumber);
 
         try{
-            Response<BlockContent> blockResponse = blockCall.execute();
+            Response<Block> blockResponse = blockCall.execute();
             return processResponse(blockResponse);
         } catch (IOException exp){
             throw new APIException("Exception while fetching block for hash: " + hashOrNumber, exp);
@@ -54,12 +54,12 @@ public class BlockServiceImpl extends BaseImpl implements BlockService {
     }
 
     @Override
-    public BlockContent getBlockInSlot(int slotNumber) throws APIException {
+    public Block getBlockInSlot(int slotNumber) throws APIException {
 
-        Call<BlockContent> blockInSlotCall = blocksApi.blocksSlotSlotNumberGet(getProjectId(), slotNumber);
+        Call<Block> blockInSlotCall = blocksApi.blocksSlotSlotNumberGet(getProjectId(), slotNumber);
 
         try{
-            Response<BlockContent> blockInSlotResponse = blockInSlotCall.execute();
+            Response<Block> blockInSlotResponse = blockInSlotCall.execute();
             return processResponse(blockInSlotResponse);
         } catch (IOException exp){
             throw new APIException("Exception while fetching block in slot: " + slotNumber, exp);
@@ -67,12 +67,12 @@ public class BlockServiceImpl extends BaseImpl implements BlockService {
     }
 
     @Override
-    public BlockContent getBlockInEpochInSlot(int epochNumber, int slotNumber) throws APIException {
+    public Block getBlockInEpochInSlot(int epochNumber, int slotNumber) throws APIException {
 
-        Call<BlockContent> blockInEpochInSlotCall = blocksApi.blocksEpochEpochNumberSlotSlotNumberGet(getProjectId(), epochNumber, slotNumber);
+        Call<Block> blockInEpochInSlotCall = blocksApi.blocksEpochEpochNumberSlotSlotNumberGet(getProjectId(), epochNumber, slotNumber);
 
         try{
-            Response<BlockContent> blockInEpochInSlotResponse = blockInEpochInSlotCall.execute();
+            Response<Block> blockInEpochInSlotResponse = blockInEpochInSlotCall.execute();
             return processResponse(blockInEpochInSlotResponse);
         } catch (IOException exp){
             throw new APIException("Exception while fetching block in epoch: " + epochNumber + " in slot: " + slotNumber, exp);
@@ -108,14 +108,14 @@ public class BlockServiceImpl extends BaseImpl implements BlockService {
     }
 
     @Override
-    public List<BlockContent> getNextBlocks(String hashOrNumber, int count, int page) throws APIException {
+    public List<Block> getNextBlocks(String hashOrNumber, int count, int page) throws APIException {
 
         validateHashOrNumber(hashOrNumber);
 
-        Call<List<BlockContent>> nextBlocksCall = blocksApi.blocksHashOrNumberNextGet(getProjectId(), hashOrNumber, count, page);
+        Call<List<Block>> nextBlocksCall = blocksApi.blocksHashOrNumberNextGet(getProjectId(), hashOrNumber, count, page);
 
         try{
-            Response<List<BlockContent>> nextBlocksResponse = nextBlocksCall.execute();
+            Response<List<Block>> nextBlocksResponse = nextBlocksCall.execute();
             return processResponse(nextBlocksResponse);
         } catch (IOException exp){
             throw new APIException("Exception while fetching next blocks for block: " + hashOrNumber, exp);
@@ -124,18 +124,18 @@ public class BlockServiceImpl extends BaseImpl implements BlockService {
 
     //TODO: Implement
     @Override
-    public List<BlockContent> getNextBlocks(String hashOrNumber) throws APIException {
+    public List<Block> getNextBlocks(String hashOrNumber) throws APIException {
         return null;
     }
 
     @Override
-    public List<BlockContent> getPreviousBlocks(String hashOrNumber, int count, int page) throws APIException {
+    public List<Block> getPreviousBlocks(String hashOrNumber, int count, int page) throws APIException {
         validateHashOrNumber(hashOrNumber);
 
-        Call<List<BlockContent>> previousBlocksCall = blocksApi.blocksHashOrNumberPreviousGet(getProjectId(), hashOrNumber, count, page);
+        Call<List<Block>> previousBlocksCall = blocksApi.blocksHashOrNumberPreviousGet(getProjectId(), hashOrNumber, count, page);
 
         try{
-            Response<List<BlockContent>> previousBlocksResponse = previousBlocksCall.execute();
+            Response<List<Block>> previousBlocksResponse = previousBlocksCall.execute();
             return processResponse(previousBlocksResponse);
         } catch (IOException exp){
             throw new APIException("Exception while fetching previous blocks for block: " + hashOrNumber, exp);
@@ -144,7 +144,7 @@ public class BlockServiceImpl extends BaseImpl implements BlockService {
 
     //TODO: Implement
     @Override
-    public List<BlockContent> getPreviousBlocks(String hashOrNumber) throws APIException {
+    public List<Block> getPreviousBlocks(String hashOrNumber) throws APIException {
         return null;
     }
 }

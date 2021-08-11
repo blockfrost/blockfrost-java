@@ -1,7 +1,7 @@
 package io.blockfrost.sdk.api;
 
 import io.blockfrost.sdk.api.exception.APIException;
-import io.blockfrost.sdk.api.model.BlockContent;
+import io.blockfrost.sdk.api.model.Block;
 import io.blockfrost.sdk.api.util.Constants;
 import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.BlockServiceImpl;
@@ -28,7 +28,7 @@ public class BlockServiceTests extends TestBase {
     @Test
     public void latestBlock_willReturn_latestBlock() throws APIException {
 
-        BlockContent latestBlock = blockService.getLatestBlock();
+        Block latestBlock = blockService.getLatestBlock();
         assertThat(latestBlock, is(notNullValue()));
 
     }
@@ -36,7 +36,7 @@ public class BlockServiceTests extends TestBase {
     @Test
     public void block_willReturn_BlockForHash() throws APIException {
 
-        BlockContent expectedBlockContent = BlockContent.builder()
+        Block expectedBlock = Block.builder()
                 .time(1564020236)
                 .height(1)
                 .hash("388a82f053603f3552717d61644a353188f2d5500f4c6354cc1ad27a36a7ea91")
@@ -51,16 +51,16 @@ public class BlockServiceTests extends TestBase {
                 .confirmations(2793414)
                 .build();
 
-        BlockContent blockForHash = blockService.getBlock("1");
+        Block blockForHash = blockService.getBlock("1");
         assertThat(blockForHash, is(notNullValue()));
-        assertThat(blockForHash, samePropertyValuesAs(expectedBlockContent, "confirmations"));
+        assertThat(blockForHash, samePropertyValuesAs(expectedBlock, "confirmations"));
 
     }
 
     @Test
     public void blockForSlot_willReturn_blockForGivenSlot() throws APIException {
 
-        BlockContent expectedBlockContent = BlockContent.builder()
+        Block expectedBlock = Block.builder()
                 .time(1564020236)
                 .height(1)
                 .hash("388a82f053603f3552717d61644a353188f2d5500f4c6354cc1ad27a36a7ea91")
@@ -75,16 +75,16 @@ public class BlockServiceTests extends TestBase {
                 .confirmations(2793414)
                 .build();
 
-        BlockContent blockInSlot = blockService.getBlockInSlot(1031);
+        Block blockInSlot = blockService.getBlockInSlot(1031);
         assertThat(blockInSlot, is(notNullValue()));
-        assertThat(blockInSlot, samePropertyValuesAs(expectedBlockContent, "confirmations"));
+        assertThat(blockInSlot, samePropertyValuesAs(expectedBlock, "confirmations"));
 
     }
 
     @Test
     public void blockForEpochSlot_willReturn_blockForGivenEpochAndSlot() throws APIException {
 
-        BlockContent expectedBlockContent = BlockContent.builder()
+        Block expectedBlock = Block.builder()
                 .time(1564020236)
                 .height(1)
                 .hash("388a82f053603f3552717d61644a353188f2d5500f4c6354cc1ad27a36a7ea91")
@@ -99,9 +99,9 @@ public class BlockServiceTests extends TestBase {
                 .confirmations(2793414)
                 .build();
 
-        BlockContent blockInSlot = blockService.getBlockInEpochInSlot(0, 1031);
+        Block blockInSlot = blockService.getBlockInEpochInSlot(0, 1031);
         assertThat(blockInSlot, is(notNullValue()));
-        assertThat(blockInSlot, samePropertyValuesAs(expectedBlockContent, "confirmations"));
+        assertThat(blockInSlot, samePropertyValuesAs(expectedBlock, "confirmations"));
 
     }
 
@@ -134,7 +134,7 @@ public class BlockServiceTests extends TestBase {
         @Test
         public void nextBlocks_willReturn_nextBlocksForCountAndPage() throws APIException {
 
-            BlockContent expectedBlockContent = BlockContent.builder()
+            Block expectedBlock = Block.builder()
                     .time(1564020256)
                     .height(2)
                     .hash("f4e96309537d15682211fcac4c249c2bdff8464476e047be99d80edf97bcf3ff")
@@ -149,10 +149,10 @@ public class BlockServiceTests extends TestBase {
                     .confirmations(2803485)
                     .build();
 
-            List<BlockContent> nextBlocks = blockService.getNextBlocks("1", 1, 1);
+            List<Block> nextBlocks = blockService.getNextBlocks("1", 1, 1);
 
             assertThat(nextBlocks, hasSize(1));
-            assertThat(nextBlocks, hasItem(samePropertyValuesAs(expectedBlockContent, "confirmations")));
+            assertThat(nextBlocks, hasItem(samePropertyValuesAs(expectedBlock, "confirmations")));
         }
 
         @Test
@@ -171,7 +171,7 @@ public class BlockServiceTests extends TestBase {
         @Test
         public void previousBlocks_willReturn_previousBlocksForCountAndPage() throws APIException {
 
-            BlockContent expectedBlockContent = BlockContent.builder()
+            Block expectedBlock = Block.builder()
                     .time(1564020236)
                     .height(1)
                     .hash("388a82f053603f3552717d61644a353188f2d5500f4c6354cc1ad27a36a7ea91")
@@ -186,10 +186,10 @@ public class BlockServiceTests extends TestBase {
                     .confirmations(2793414)
                     .build();
 
-            List<BlockContent> previousBlocks = blockService.getPreviousBlocks("2", 1, 1);
+            List<Block> previousBlocks = blockService.getPreviousBlocks("2", 1, 1);
 
             assertThat(previousBlocks, hasSize(1));
-            assertThat(previousBlocks, hasItem(samePropertyValuesAs(expectedBlockContent, "confirmations")));
+            assertThat(previousBlocks, hasItem(samePropertyValuesAs(expectedBlock, "confirmations")));
         }
 
         @Test

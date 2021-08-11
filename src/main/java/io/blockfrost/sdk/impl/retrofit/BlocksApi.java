@@ -1,6 +1,6 @@
 package io.blockfrost.sdk.impl.retrofit;
 
-import io.blockfrost.sdk.api.model.BlockContent;
+import io.blockfrost.sdk.api.model.Block;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
@@ -16,10 +16,10 @@ public interface BlocksApi {
      *
      * @param epochNumber Epoch for specific epoch slot. (required)
      * @param slotNumber  Slot position for requested block. (required)
-     * @return Call&lt;BlockContent&gt;
+     * @return Call&lt;Block&gt;
      */
     @GET("blocks/epoch/{epoch_number}/slot/{slot_number}")
-    Call<BlockContent> blocksEpochEpochNumberSlotSlotNumberGet(
+    Call<Block> blocksEpochEpochNumberSlotSlotNumberGet(
             @Header("project_id") String projectId,
             @Path("epoch_number") Integer epochNumber,
             @Path("slot_number") Integer slotNumber
@@ -30,10 +30,10 @@ public interface BlocksApi {
      * Return the content of a requested block.
      *
      * @param hashOrNumber Hash of the requested block. (required)
-     * @return Call&lt;BlockContent&gt;
+     * @return Call&lt;Block&gt;
      */
     @GET("blocks/{hash_or_number}")
-    Call<BlockContent> blocksHashOrNumberGet(
+    Call<Block> blocksHashOrNumberGet(
             @Header("project_id") String projectId,
             @Path("hash_or_number") String hashOrNumber
     );
@@ -45,10 +45,10 @@ public interface BlocksApi {
      * @param hashOrNumber Hash of the requested block. (required)
      * @param count        The number of results displayed on one page. (optional, default to 100)
      * @param page         The page number for listing the results. (optional, default to 1)
-     * @return Call&lt;List&lt;BlockContent&gt;&gt;
+     * @return Call&lt;List&lt;Block&gt;&gt;
      */
     @GET("blocks/{hash_or_number}/next")
-    Call<List<BlockContent>> blocksHashOrNumberNextGet(
+    Call<List<Block>> blocksHashOrNumberNextGet(
             @Header("project_id") String projectId,
             @Path("hash_or_number") String hashOrNumber,
             @Query("count") Integer count,
@@ -62,10 +62,10 @@ public interface BlocksApi {
      * @param hashOrNumber Hash of the requested block (required)
      * @param count        The number of results displayed on one page. (optional, default to 100)
      * @param page         The page number for listing the results. (optional, default to 1)
-     * @return Call&lt;List&lt;BlockContent&gt;&gt;
+     * @return Call&lt;List&lt;Block&gt;&gt;
      */
     @GET("blocks/{hash_or_number}/previous")
-    Call<List<BlockContent>> blocksHashOrNumberPreviousGet(
+    Call<List<Block>> blocksHashOrNumberPreviousGet(
             @Header("project_id") String projectId,
             @Path("hash_or_number") String hashOrNumber,
             @Query("count") Integer count,
@@ -91,10 +91,10 @@ public interface BlocksApi {
      * Latest block
      * Return the latest block available to the backends, also known as the tip of the blockchain.
      *
-     * @return Call&lt;BlockContent&gt;
+     * @return Call&lt;Block&gt;
      */
     @GET("blocks/latest")
-    Call<BlockContent> blocksLatestGet(@Header("project_id") String projectId);
+    Call<Block> blocksLatestGet(@Header("project_id") String projectId);
 
 
     /**
@@ -119,10 +119,10 @@ public interface BlocksApi {
      * Return the content of a requested block for a specific slot.
      *
      * @param slotNumber Slot position for requested block. (required)
-     * @return Call&lt;BlockContent&gt;
+     * @return Call&lt;Block&gt;
      */
     @GET("blocks/slot/{slot_number}")
-    Call<BlockContent> blocksSlotSlotNumberGet(
+    Call<Block> blocksSlotSlotNumberGet(
             @Header("project_id") String projectId,
             @Path("slot_number") Integer slotNumber
     );

@@ -18,32 +18,23 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * BlockContent
+ * Address
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 @ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class BlockContent {
-  private Integer time;
-  private Integer height;
-  private String hash;
-  private Integer slot;
-  private Integer epoch;
-  private Integer epochSlot;
-  private String slotLeader;
-  private Integer size;
-  private Integer txCount;
-  private String output;
-  private String fees;
-  private String blockVrf;
-  private String previousBlock;
-  private String nextBlock;
-  private Integer confirmations;
+public class Address {
+  private String address;
+  private List<TransactionOutputAmount> amount = new ArrayList<TransactionOutputAmount>();
+  private String stakeAddress;
+  private AddressType type;
 }
 
