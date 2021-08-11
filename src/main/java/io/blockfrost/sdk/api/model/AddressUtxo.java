@@ -5,8 +5,11 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * PoolUpdate
+ * AddressUtxo
  */
 @Data
 @Builder
@@ -16,11 +19,11 @@ import lombok.*;
 @ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-
-public class PoolUpdate {
+public class AddressUtxo {
     private String txHash;
-    private Integer certIndex;
-    private String action;
+    private Integer outputIndex;
+    private List<TransactionOutputAmount> amount = new ArrayList<TransactionOutputAmount>();
+    private String block;
 
 }
 

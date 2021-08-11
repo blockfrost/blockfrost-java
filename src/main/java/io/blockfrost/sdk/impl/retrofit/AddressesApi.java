@@ -2,6 +2,7 @@ package io.blockfrost.sdk.impl.retrofit;
 
 import io.blockfrost.sdk.api.model.Address;
 import io.blockfrost.sdk.api.model.AddressTotal;
+import io.blockfrost.sdk.api.model.AddressUtxo;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
@@ -71,7 +72,7 @@ public interface AddressesApi {
      * @return Call&lt;List&lt;Object&gt;&gt;
      */
     @GET("addresses/{address}/utxos")
-    Call<List<Object>> addressesAddressUtxosGet(
+    Call<List<AddressUtxo>> addressesAddressUtxosGet(
             @Header("project_id") String projectId,
             @Path("address") String address,
             @Query("count") Integer count,
