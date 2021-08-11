@@ -3,11 +3,14 @@ package io.blockfrost.sdk.impl;
 import io.blockfrost.sdk.api.AccountService;
 import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.api.model.Account;
+import io.blockfrost.sdk.api.model.AccountHistory;
+import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.retrofit.AccountsApi;
 import retrofit2.Call;
 import retrofit2.Response;
 
 import java.io.IOException;
+import java.util.List;
 
 public class AccountServiceImpl extends BaseImpl implements AccountService {
 
@@ -18,8 +21,17 @@ public class AccountServiceImpl extends BaseImpl implements AccountService {
         this.accountsApi = getApiClient(AccountsApi.class);
     }
 
+    private void validateStakeAddress(String address) throws APIException {
+        if ( address == null || address.equals("" )){
+            throw new APIException("Stake address cannot be null or empty");
+        }
+    }
+
     @Override
     public Account getAccountByStakeAddress(String stakeAddress) throws APIException {
+
+        validateStakeAddress(stakeAddress);
+
         Call<Account> call = accountsApi.accountsStakeAddressGet(getProjectId(), stakeAddress);
 
         try{
@@ -28,5 +40,36 @@ public class AccountServiceImpl extends BaseImpl implements AccountService {
         } catch (IOException exp){
             throw new APIException("Exception while fetching account info by stakeAddress", exp);
         }
+    }
+
+    @Override
+    public List<AccountHistory> getAccountHistory(String stakeAddress, int count, int page, OrderEnum order) throws APIException {
+
+        validateStakeAddress(stakeAddress);
+
+        Call<List<AccountHistory>> call = accountsApi.accountsStakeAddressHistoryGet(getProjectId(), stakeAddress, count, page, order.name());
+
+        try{
+            Response<List<AccountHistory>> response = call.execute();
+            return processResponse(response);
+        } catch (IOException exp){
+            throw new APIException("Exception while fetching account history for stakeAddress: " + stakeAddress, exp);
+        }
+    }
+
+    @Override
+    public List<AccountHistory> getAccountHistory(String stakeAddress, int count, int page) throws APIException {
+        return getAccountHistory(stakeAddress, count, page, OrderEnum.asc);
+    }
+
+    //TODO: Implement
+    @Override
+    public List<AccountHistory> getAccountHistory(String stakeAddress, OrderEnum order) throws APIException {
+        return null;
+    }
+
+    @Override
+    public List<AccountHistory> getAccountHistory(String stakeAddress) throws APIException {
+        return getAccountHistory(stakeAddress, OrderEnum.asc);
     }
 }
