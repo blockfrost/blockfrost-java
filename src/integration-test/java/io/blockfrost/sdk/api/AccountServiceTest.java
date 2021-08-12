@@ -65,7 +65,7 @@ public class AccountServiceTest extends TestBase {
         }
 
         @Test
-        public void poolUpdates_willThrowAPIException_onNullPoolId() {
+        public void history_willThrowAPIException_onNullPoolId() {
 
             Exception exception = assertThrows(APIException.class, () -> accountService.getAccountHistory(null, 3, 1));
             assertThat(exception.getMessage(), is("Stake address cannot be null or empty"));
@@ -78,23 +78,23 @@ public class AccountServiceTest extends TestBase {
     class GetAccountRewardHistory {
 
         @Test
-        public void history_willReturn_historyForCountPageAndAscendingOrder() throws APIException {
+        public void rewardHistory_willReturn_rewardHistoryForCountPageAndAscendingOrder() throws APIException {
 
-            List<AccountRewardHistory> historyList = accountService.getAccountRewardHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha", 3, 1, OrderEnum.asc);
+            List<AccountRewardHistory> rewardHistoryList = accountService.getAccountRewardHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha", 3, 1, OrderEnum.asc);
 
-            assertThat(historyList, hasSize(lessThanOrEqualTo(3)));
+            assertThat(rewardHistoryList, hasSize(lessThanOrEqualTo(3)));
         }
 
         @Test
-        public void history_willReturn_historyForCountAndPage() throws APIException {
+        public void rewardHistory_willReturn_rewardHistoryForCountAndPage() throws APIException {
 
-            List<AccountRewardHistory> historyList = accountService.getAccountRewardHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha", 3, 1);
+            List<AccountRewardHistory> rewardHistoryList = accountService.getAccountRewardHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha", 3, 1);
 
-            assertThat(historyList, hasSize(lessThanOrEqualTo(3)));
+            assertThat(rewardHistoryList, hasSize(lessThanOrEqualTo(3)));
         }
 
         @Test
-        public void poolUpdates_willThrowAPIException_onNullPoolId() {
+        public void rewardHistory_willThrowAPIException_onNullPoolId() {
 
             Exception exception = assertThrows(APIException.class, () -> accountService.getAccountRewardHistory(null, 3, 1));
             assertThat(exception.getMessage(), is("Stake address cannot be null or empty"));
@@ -107,23 +107,23 @@ public class AccountServiceTest extends TestBase {
     class GetAccountDelegationHistory {
 
         @Test
-        public void history_willReturn_historyForCountPageAndAscendingOrder() throws APIException {
+        public void delegationHistory_willReturn_delegationHistoryForCountPageAndAscendingOrder() throws APIException {
 
-            List<AccountDelegationHistory> historyList = accountService.getAccountDelegationHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha", 3, 1, OrderEnum.asc);
+            List<AccountDelegationHistory> delegationHistoryList = accountService.getAccountDelegationHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha", 3, 1, OrderEnum.asc);
 
-            assertThat(historyList, hasSize(lessThanOrEqualTo(3)));
+            assertThat(delegationHistoryList, hasSize(lessThanOrEqualTo(3)));
         }
 
         @Test
-        public void history_willReturn_historyForCountAndPage() throws APIException {
+        public void delegationHistory_willReturn_delegationHistoryForCountAndPage() throws APIException {
 
-            List<AccountDelegationHistory> historyList = accountService.getAccountDelegationHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha", 3, 1);
+            List<AccountDelegationHistory> delegationHistoryList = accountService.getAccountDelegationHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha", 3, 1);
 
-            assertThat(historyList, hasSize(lessThanOrEqualTo(3)));
+            assertThat(delegationHistoryList, hasSize(lessThanOrEqualTo(3)));
         }
 
         @Test
-        public void poolUpdates_willThrowAPIException_onNullPoolId() {
+        public void delegationHistory_willThrowAPIException_onNullPoolId() {
 
             Exception exception = assertThrows(APIException.class, () -> accountService.getAccountDelegationHistory(null, 3, 1));
             assertThat(exception.getMessage(), is("Stake address cannot be null or empty"));
@@ -136,23 +136,23 @@ public class AccountServiceTest extends TestBase {
     class GetAccountRegistrationHistory {
 
         @Test
-        public void history_willReturn_historyForCountPageAndAscendingOrder() throws APIException {
+        public void registrationHistory_willReturn_registrationHistoryForCountPageAndAscendingOrder() throws APIException {
 
-            List<AccountRegistrationHistory> historyList = accountService.getAccountRegistrationHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha", 3, 1, OrderEnum.asc);
+            List<AccountRegistrationHistory> registrationHistoryList = accountService.getAccountRegistrationHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha", 3, 1, OrderEnum.asc);
 
-            assertThat(historyList, hasSize(lessThanOrEqualTo(3)));
+            assertThat(registrationHistoryList, hasSize(lessThanOrEqualTo(3)));
         }
 
         @Test
-        public void history_willReturn_historyForCountAndPage() throws APIException {
+        public void registrationHistory_willReturn_registrationHistoryForCountAndPage() throws APIException {
 
-            List<AccountRegistrationHistory> historyList = accountService.getAccountRegistrationHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha", 3, 1);
+            List<AccountRegistrationHistory> registrationHistoryList = accountService.getAccountRegistrationHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha", 3, 1);
 
-            assertThat(historyList, hasSize(lessThanOrEqualTo(3)));
+            assertThat(registrationHistoryList, hasSize(lessThanOrEqualTo(3)));
         }
 
         @Test
-        public void poolUpdates_willThrowAPIException_onNullPoolId() {
+        public void registrationHistory_willThrowAPIException_onNullPoolId() {
 
             Exception exception = assertThrows(APIException.class, () -> accountService.getAccountRegistrationHistory(null, 3, 1));
             assertThat(exception.getMessage(), is("Stake address cannot be null or empty"));
@@ -165,23 +165,23 @@ public class AccountServiceTest extends TestBase {
     class GetAccountWithdrawalHistory {
 
         @Test
-        public void history_willReturn_historyForCountPageAndAscendingOrder() throws APIException {
+        public void withdrawalHistory_willReturn_withdrawalHistoryForCountPageAndAscendingOrder() throws APIException {
 
-            List<AccountWithdrawalHistory> historyList = accountService.getAccountWithdrawalHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha", 3, 1, OrderEnum.asc);
+            List<AccountWithdrawalHistory> withdrawalHistoryList = accountService.getAccountWithdrawalHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha", 3, 1, OrderEnum.asc);
 
-            assertThat(historyList, hasSize(lessThanOrEqualTo(3)));
+            assertThat(withdrawalHistoryList, hasSize(lessThanOrEqualTo(3)));
         }
 
         @Test
-        public void history_willReturn_historyForCountAndPage() throws APIException {
+        public void withdrawalHistory_willReturn_withdrawalHistoryForCountAndPage() throws APIException {
 
-            List<AccountWithdrawalHistory> historyList = accountService.getAccountWithdrawalHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha", 3, 1);
+            List<AccountWithdrawalHistory> withdrawalHistoryList = accountService.getAccountWithdrawalHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha", 3, 1);
 
-            assertThat(historyList, hasSize(lessThanOrEqualTo(3)));
+            assertThat(withdrawalHistoryList, hasSize(lessThanOrEqualTo(3)));
         }
 
         @Test
-        public void poolUpdates_willThrowAPIException_onNullPoolId() {
+        public void withdrawalHistory_willThrowAPIException_onNullPoolId() {
 
             Exception exception = assertThrows(APIException.class, () -> accountService.getAccountWithdrawalHistory(null, 3, 1));
             assertThat(exception.getMessage(), is("Stake address cannot be null or empty"));
@@ -194,23 +194,23 @@ public class AccountServiceTest extends TestBase {
     class GetAccountMirHistory {
 
         @Test
-        public void history_willReturn_historyForCountPageAndAscendingOrder() throws APIException {
+        public void mirHistory_willReturn_mirHistoryForCountPageAndAscendingOrder() throws APIException {
 
-            List<AccountMirHistory> historyList = accountService.getAccountMirHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha", 3, 1, OrderEnum.asc);
+            List<AccountMirHistory> mirHistoryList = accountService.getAccountMirHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha", 3, 1, OrderEnum.asc);
 
-            assertThat(historyList, hasSize(lessThanOrEqualTo(3)));
+            assertThat(mirHistoryList, hasSize(lessThanOrEqualTo(3)));
         }
 
         @Test
-        public void history_willReturn_historyForCountAndPage() throws APIException {
+        public void mirHistory_willReturn_mirHistoryForCountAndPage() throws APIException {
 
-            List<AccountMirHistory> historyList = accountService.getAccountMirHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha", 3, 1);
+            List<AccountMirHistory> mirHistoryList = accountService.getAccountMirHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha", 3, 1);
 
-            assertThat(historyList, hasSize(lessThanOrEqualTo(3)));
+            assertThat(mirHistoryList, hasSize(lessThanOrEqualTo(3)));
         }
 
         @Test
-        public void poolUpdates_willThrowAPIException_onNullPoolId() {
+        public void mirHistory_willThrowAPIException_onNullPoolId() {
 
             Exception exception = assertThrows(APIException.class, () -> accountService.getAccountMirHistory(null, 3, 1));
             assertThat(exception.getMessage(), is("Stake address cannot be null or empty"));

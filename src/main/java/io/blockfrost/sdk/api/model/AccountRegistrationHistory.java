@@ -17,5 +17,5 @@ import lombok.*;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class AccountRegistrationHistory {
     private String txHash;
-    private String action;
+    private AccountRegistrationAction action;
 }
