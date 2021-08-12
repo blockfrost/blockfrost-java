@@ -13,7 +13,7 @@ public class LedgerServiceImpl extends BaseImpl implements LedgerService {
 
     LedgerApi ledgerApi;
 
-    public LedgerServiceImpl(String baseUrl, String projectId){
+    public LedgerServiceImpl(String baseUrl, String projectId) {
         super(baseUrl, projectId);
         ledgerApi = getRetrofit().create(LedgerApi.class);
     }
@@ -22,10 +22,10 @@ public class LedgerServiceImpl extends BaseImpl implements LedgerService {
     public Genesis getGenesis() throws APIException {
         Call<Genesis> genesisCall = ledgerApi.genesisGet(getProjectId());
 
-        try{
+        try {
             Response<Genesis> genesisResponse = genesisCall.execute();
             return processResponse(genesisResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching blockchain genesis", exp);
         }
     }

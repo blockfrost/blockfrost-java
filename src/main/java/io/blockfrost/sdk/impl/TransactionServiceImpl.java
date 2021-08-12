@@ -14,7 +14,7 @@ public class TransactionServiceImpl extends BaseImpl implements TransactionServi
 
     TransactionsApi transactionsApi;
 
-    public TransactionServiceImpl(String baseUrl, String projectId){
+    public TransactionServiceImpl(String baseUrl, String projectId) {
         super(baseUrl, projectId);
         transactionsApi = getRetrofit().create(TransactionsApi.class);
     }
@@ -23,10 +23,10 @@ public class TransactionServiceImpl extends BaseImpl implements TransactionServi
     public Transaction getTransaction(String hash) throws APIException {
         Call<Transaction> transactionCall = transactionsApi.txsHashGet(getProjectId(), hash);
 
-        try{
+        try {
             Response<Transaction> transactionResponse = transactionCall.execute();
             return processResponse(transactionResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching transaction for hash " + hash, exp);
         }
     }
@@ -35,10 +35,10 @@ public class TransactionServiceImpl extends BaseImpl implements TransactionServi
     public TransactionUtxo getTransactionUtxo(String hash) throws APIException {
         Call<TransactionUtxo> transactionUtxoCall = transactionsApi.txsHashUtxosGet(getProjectId(), hash);
 
-        try{
+        try {
             Response<TransactionUtxo> transactionUtxoResponse = transactionUtxoCall.execute();
             return processResponse(transactionUtxoResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching transaction utxos for hash " + hash, exp);
         }
     }
@@ -47,10 +47,10 @@ public class TransactionServiceImpl extends BaseImpl implements TransactionServi
     public List<TransactionStake> getTransactionStakes(String hash) throws APIException {
         Call<List<TransactionStake>> transactionStakesCall = transactionsApi.txsHashStakesGet(getProjectId(), hash);
 
-        try{
+        try {
             Response<List<TransactionStake>> transactionStakesResponse = transactionStakesCall.execute();
             return processResponse(transactionStakesResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching transaction stakes for hash " + hash, exp);
         }
     }
@@ -59,10 +59,10 @@ public class TransactionServiceImpl extends BaseImpl implements TransactionServi
     public List<TransactionDelegation> getTransactionDelegations(String hash) throws APIException {
         Call<List<TransactionDelegation>> transactionDelegationCall = transactionsApi.txsHashDelegationsGet(getProjectId(), hash);
 
-        try{
+        try {
             Response<List<TransactionDelegation>> transactionDelegationsResponse = transactionDelegationCall.execute();
             return processResponse(transactionDelegationsResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching transaction delegations for hash " + hash, exp);
         }
     }
@@ -71,10 +71,10 @@ public class TransactionServiceImpl extends BaseImpl implements TransactionServi
     public List<TransactionWithdrawal> getTransactionWithdrawals(String hash) throws APIException {
         Call<List<TransactionWithdrawal>> transactionWithdrawalCall = transactionsApi.txsHashWithdrawalsGet(getProjectId(), hash);
 
-        try{
+        try {
             Response<List<TransactionWithdrawal>> transactionWithdrawalsResponse = transactionWithdrawalCall.execute();
             return processResponse(transactionWithdrawalsResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching transaction withdrawals for hash " + hash, exp);
         }
     }
@@ -83,10 +83,10 @@ public class TransactionServiceImpl extends BaseImpl implements TransactionServi
     public List<TransactionMir> getTransactionMirs(String hash) throws APIException {
         Call<List<TransactionMir>> transactionMirCall = transactionsApi.txsHashMirsGet(getProjectId(), hash);
 
-        try{
+        try {
             Response<List<TransactionMir>> transactionMirsResponse = transactionMirCall.execute();
             return processResponse(transactionMirsResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching transaction mirs for hash " + hash, exp);
         }
     }
@@ -95,10 +95,10 @@ public class TransactionServiceImpl extends BaseImpl implements TransactionServi
     public List<TransactionPoolUpdate> getTransactionPoolUpdates(String hash) throws APIException {
         Call<List<TransactionPoolUpdate>> transactionPoolUpdateCall = transactionsApi.txsHashPoolUpdatesGet(getProjectId(), hash);
 
-        try{
+        try {
             Response<List<TransactionPoolUpdate>> transactionPoolUpdatesResponse = transactionPoolUpdateCall.execute();
             return processResponse(transactionPoolUpdatesResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching transaction pool updates for hash " + hash, exp);
         }
     }
@@ -107,10 +107,10 @@ public class TransactionServiceImpl extends BaseImpl implements TransactionServi
     public List<TransactionPoolRetire> getTransactionPoolRetires(String hash) throws APIException {
         Call<List<TransactionPoolRetire>> transactionPoolRetireCall = transactionsApi.txsHashPoolRetiresGet(getProjectId(), hash);
 
-        try{
+        try {
             Response<List<TransactionPoolRetire>> transactionPoolRetiresResponse = transactionPoolRetireCall.execute();
             return processResponse(transactionPoolRetiresResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching transaction pool retires for hash " + hash, exp);
         }
     }
@@ -119,10 +119,10 @@ public class TransactionServiceImpl extends BaseImpl implements TransactionServi
     public List<TransactionMetadataJson> getTransactionMetadata(String hash) throws APIException {
         Call<List<TransactionMetadataJson>> transactionMetadataCall = transactionsApi.txsHashMetadataGet(getProjectId(), hash);
 
-        try{
+        try {
             Response<List<TransactionMetadataJson>> transactionMetadataResponse = transactionMetadataCall.execute();
             return processResponse(transactionMetadataResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching transaction metadata for hash " + hash, exp);
         }
     }
@@ -131,10 +131,10 @@ public class TransactionServiceImpl extends BaseImpl implements TransactionServi
     public List<TransactionMetadataCbor> getTransactionMetadataCbor(String hash) throws APIException {
         Call<List<TransactionMetadataCbor>> transactionCborMetadataCall = transactionsApi.txsHashMetadataCborGet(getProjectId(), hash);
 
-        try{
+        try {
             Response<List<TransactionMetadataCbor>> transactionCborMetadataResponse = transactionCborMetadataCall.execute();
             return processResponse(transactionCborMetadataResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching transaction cbor metadata for hash " + hash, exp);
         }
     }
@@ -143,10 +143,10 @@ public class TransactionServiceImpl extends BaseImpl implements TransactionServi
     public String submitTransaction(byte[] serializedTransaction) throws APIException {
         Call<String> transactionSubmitCall = transactionsApi.txSubmitPost(getProjectId(), "application/cbor");
 
-        try{
+        try {
             Response<String> transactionSubmitResponse = transactionSubmitCall.execute();
             return processResponse(transactionSubmitResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while submitting transaction  " + new String(serializedTransaction), exp);
         }
     }

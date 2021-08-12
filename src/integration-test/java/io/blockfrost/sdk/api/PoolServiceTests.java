@@ -25,7 +25,7 @@ public class PoolServiceTests extends TestBase {
     PoolService poolService;
 
     @BeforeEach
-    public void setup(){
+    public void setup() {
         poolService = new PoolServiceImpl(Constants.BLOCKFROST_TESTNET_URL, projectId);
     }
 

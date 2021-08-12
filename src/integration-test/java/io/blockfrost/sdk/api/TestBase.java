@@ -6,7 +6,7 @@ public class TestBase {
 
     public TestBase() {
         projectId = System.getProperty("BF_PROJECT_ID");
-        if(projectId == null || projectId.isEmpty()) {
+        if (projectId == null || projectId.isEmpty()) {
             projectId = System.getenv("BF_PROJECT_ID");
         }
     }

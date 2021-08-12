@@ -10,6 +10,7 @@ public interface TransactionService {
     /**
      * Specific transaction
      * Return content of the requested transaction.
+     *
      * @param hash Hash of the requested transaction (required)
      * @return Transaction;
      */
@@ -18,6 +19,7 @@ public interface TransactionService {
     /**
      * Transaction UTXOs
      * Return the inputs and UTXOs of the specific transaction.
+     *
      * @param hash Hash of the requested transaction (required)
      * @return TransactionUtxo;
      */
@@ -26,6 +28,7 @@ public interface TransactionService {
     /**
      * Transaction networkStake addresses certificates
      * Obtain information about (de)registration of networkStake addresses within a transaction.
+     *
      * @param hash Hash of the requested transaction. (required)
      * @return List&lt;TransactionStake&gt;
      */
@@ -34,6 +37,7 @@ public interface TransactionService {
     /**
      * Transaction delegation certificates
      * Obtain information about delegation certificates of a specific transaction.
+     *
      * @param hash Hash of the requested transaction. (required)
      * @return List&lt;TransactionDelegation&gt;
      */
@@ -42,6 +46,7 @@ public interface TransactionService {
     /**
      * Transaction withdrawal
      * Obtain information about withdrawals of a specific transaction.
+     *
      * @param hash Hash of the requested transaction. (required)
      * @return List&lt;TransactionWithdrawal&gt;
      */
@@ -50,6 +55,7 @@ public interface TransactionService {
     /**
      * Transaction MIRs
      * Obtain information about Move Instantaneous Rewards (MIRs) of a specific transaction.
+     *
      * @param hash Hash of the requested transaction. (required)
      * @return List&lt;TransactionMir&gt;
      */
@@ -58,6 +64,7 @@ public interface TransactionService {
     /**
      * Transaction networkStake pool registration and update certificates
      * Obtain information about networkStake pool registration and update certificates of a specific transaction.
+     *
      * @param hash Hash of the requested transaction (required)
      * @return List&lt;TransactionPoolUpdate&gt;
      */
@@ -66,15 +73,18 @@ public interface TransactionService {
     /**
      * Transaction networkStake pool retirement certificates
      * Obtain information about networkStake pool retirements within a specific transaction.
+     *
      * @param hash Hash of the requested transaction (required)
      * @return List&lt;TransactionPoolRetire&gt;
      */
     List<TransactionPoolRetire> getTransactionPoolRetires(String hash) throws APIException;
 
     //TODO: Check the implementation of JsonMetadata
+
     /**
      * Transaction metadata
      * Obtain the transaction metadata.
+     *
      * @param hash Hash of the requested transaction (required)
      * @return List&lt;TransactionMetadataJson&gt;
      */
@@ -83,6 +93,7 @@ public interface TransactionService {
     /**
      * Transaction metadata in CBOR
      * Obtain the transaction metadata in CBOR.
+     *
      * @param hash Hash of the requested transaction (required)
      * @return List&lt;TransactionMetadataCbor&gt;
      */
@@ -91,6 +102,7 @@ public interface TransactionService {
     /**
      * Submit a transaction
      * Submit an already serialized transaction to the network.
+     *
      * @param serializedTransaction Serialized transaction in Cbor (required)
      * @return String
      */

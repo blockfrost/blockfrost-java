@@ -17,13 +17,13 @@ public class AddressServiceImpl extends BaseImpl implements AddressService {
 
     AddressesApi addressesApi;
 
-    public AddressServiceImpl(String baseUrl, String projectId){
+    public AddressServiceImpl(String baseUrl, String projectId) {
         super(baseUrl, projectId);
         addressesApi = getRetrofit().create(AddressesApi.class);
     }
 
     private void validateAddress(String address) throws APIException {
-        if ( address == null || address.equals("" )){
+        if (address == null || address.equals("")) {
             throw new APIException("Address cannot be null or empty");
         }
     }
@@ -33,10 +33,10 @@ public class AddressServiceImpl extends BaseImpl implements AddressService {
     public Address getAddress(String address) throws APIException {
         Call<Address> addressCall = addressesApi.addressesAddressGet(getProjectId(), address);
 
-        try{
+        try {
             Response<Address> addressResponse = addressCall.execute();
             return processResponse(addressResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching address data for address: " + address, exp);
         }
     }
@@ -45,10 +45,10 @@ public class AddressServiceImpl extends BaseImpl implements AddressService {
     public AddressTotal getAddressDetails(String address) throws APIException {
         Call<AddressTotal> addressTotalCall = addressesApi.addressesAddressTotalGet(getProjectId(), address);
 
-        try{
+        try {
             Response<AddressTotal> addressTotalResponse = addressTotalCall.execute();
             return processResponse(addressTotalResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching address details for address: " + address, exp);
         }
     }
@@ -60,10 +60,10 @@ public class AddressServiceImpl extends BaseImpl implements AddressService {
 
         Call<List<AddressUtxo>> addressUtxoCall = addressesApi.addressesAddressUtxosGet(getProjectId(), address, count, page, order.name());
 
-        try{
+        try {
             Response<List<AddressUtxo>> addressUtxoResponse = addressUtxoCall.execute();
             return processResponse(addressUtxoResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching address utxos for address: " + address, exp);
         }
     }

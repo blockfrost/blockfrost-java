@@ -13,7 +13,7 @@ public class NetworkServiceImpl extends BaseImpl implements NetworkService {
 
     NetworkApi networkApi;
 
-    public NetworkServiceImpl(String baseUrl, String projectId){
+    public NetworkServiceImpl(String baseUrl, String projectId) {
         super(baseUrl, projectId);
         networkApi = getRetrofit().create(NetworkApi.class);
     }
@@ -22,10 +22,10 @@ public class NetworkServiceImpl extends BaseImpl implements NetworkService {
     public Network getNetwork() throws APIException {
         Call<Network> networkCall = networkApi.networkGet(getProjectId());
 
-        try{
+        try {
             Response<Network> networkResponse = networkCall.execute();
             return processResponse(networkResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching network", exp);
         }
     }

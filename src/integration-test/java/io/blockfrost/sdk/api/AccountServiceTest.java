@@ -21,7 +21,7 @@ public class AccountServiceTest extends TestBase {
     AccountService accountService;
 
     @BeforeEach
-    public void setup(){
+    public void setup() {
         accountService = new AccountServiceImpl(Constants.BLOCKFROST_TESTNET_URL, projectId);
     }
 

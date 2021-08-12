@@ -15,7 +15,7 @@ public class NetworkServiceTests extends TestBase {
     NetworkService networkService;
 
     @BeforeEach
-    public void setup(){
+    public void setup() {
         networkService = new NetworkServiceImpl(Constants.BLOCKFROST_TESTNET_URL, projectId);
     }
 

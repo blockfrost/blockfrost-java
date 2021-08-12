@@ -22,7 +22,7 @@ public class EpochServiceTests extends TestBase {
     EpochService epochService;
 
     @BeforeEach
-    public void setup(){
+    public void setup() {
         epochService = new EpochServiceImpl(Constants.BLOCKFROST_TESTNET_URL, projectId);
     }
 

@@ -16,13 +16,13 @@ public class PoolServiceImpl extends BaseImpl implements PoolService {
 
     PoolsApi poolsApi;
 
-    public PoolServiceImpl(String baseUrl, String projectId){
+    public PoolServiceImpl(String baseUrl, String projectId) {
         super(baseUrl, projectId);
         poolsApi = getRetrofit().create(PoolsApi.class);
     }
 
     private void validatePoolId(String poolId) throws APIException {
-        if ( poolId == null || poolId.equals("") ){
+        if (poolId == null || poolId.equals("")) {
             throw new APIException("PoolId cannot be null or empty");
         }
     }
@@ -34,10 +34,10 @@ public class PoolServiceImpl extends BaseImpl implements PoolService {
 
         Call<List<String>> poolsCall = poolsApi.poolsGet(getProjectId(), count, page, order.name());
 
-        try{
+        try {
             Response<List<String>> poolsResponse = poolsCall.execute();
             return processResponse(poolsResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching pools ", exp);
         }
     }
@@ -65,10 +65,10 @@ public class PoolServiceImpl extends BaseImpl implements PoolService {
 
         Call<List<PoolRetirementInfo>> poolsCall = poolsApi.poolsRetiredGet(getProjectId(), count, page, order.name());
 
-        try{
+        try {
             Response<List<PoolRetirementInfo>> poolsResponse = poolsCall.execute();
             return processResponse(poolsResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching retired pools ", exp);
         }
     }
@@ -96,10 +96,10 @@ public class PoolServiceImpl extends BaseImpl implements PoolService {
 
         Call<List<PoolRetirementInfo>> poolsCall = poolsApi.poolsRetiringGet(getProjectId(), count, page, order.name());
 
-        try{
+        try {
             Response<List<PoolRetirementInfo>> poolsResponse = poolsCall.execute();
             return processResponse(poolsResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching retiring pools ", exp);
         }
 
@@ -128,10 +128,10 @@ public class PoolServiceImpl extends BaseImpl implements PoolService {
 
         Call<Pool> poolCall = poolsApi.poolsPoolIdGet(getProjectId(), poolId);
 
-        try{
+        try {
             Response<Pool> poolResponse = poolCall.execute();
             return processResponse(poolResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching pool for poolId: " + poolId, exp);
         }
     }
@@ -145,10 +145,10 @@ public class PoolServiceImpl extends BaseImpl implements PoolService {
 
         Call<List<PoolHistory>> poolHistoryCall = poolsApi.poolsPoolIdHistoryGet(getProjectId(), poolId, count, page, order.name());
 
-        try{
+        try {
             Response<List<PoolHistory>> poolHistoryResponse = poolHistoryCall.execute();
             return processResponse(poolHistoryResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching history for poolId: " + poolId, exp);
         }
     }
@@ -171,15 +171,15 @@ public class PoolServiceImpl extends BaseImpl implements PoolService {
 
     @Override
     public PoolMetadata getPoolMetadata(String poolId) throws APIException {
-        
+
         validatePoolId(poolId);
 
         Call<PoolMetadata> poolMetadataCall = poolsApi.poolsPoolIdMetadataGet(getProjectId(), poolId);
 
-        try{
+        try {
             Response<PoolMetadata> poolMetadataResponse = poolMetadataCall.execute();
             return processResponse(poolMetadataResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching pool metadata for poolId: " + poolId, exp);
         }
     }
@@ -191,10 +191,10 @@ public class PoolServiceImpl extends BaseImpl implements PoolService {
 
         Call<List<PoolRelay>> poolRelayCall = poolsApi.poolsPoolIdRelaysGet(getProjectId(), poolId);
 
-        try{
+        try {
             Response<List<PoolRelay>> poolRelaysResponse = poolRelayCall.execute();
             return processResponse(poolRelaysResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching pool relays for poolId: " + poolId, exp);
         }
     }
@@ -208,10 +208,10 @@ public class PoolServiceImpl extends BaseImpl implements PoolService {
 
         Call<List<PoolDelegator>> poolDelegatorCall = poolsApi.poolsPoolIdDelegatorsGet(getProjectId(), poolId, count, page, order.name());
 
-        try{
+        try {
             Response<List<PoolDelegator>> poolDelegatorsResponse = poolDelegatorCall.execute();
             return processResponse(poolDelegatorsResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching pool delegators for poolId: " + poolId, exp);
         }
     }
@@ -241,10 +241,10 @@ public class PoolServiceImpl extends BaseImpl implements PoolService {
 
         Call<List<String>> poolBlockCall = poolsApi.poolsPoolIdBlocksGet(getProjectId(), poolId, count, page, order.name());
 
-        try{
+        try {
             Response<List<String>> poolBlocksResponse = poolBlockCall.execute();
             return processResponse(poolBlocksResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching pool blocks for poolId: " + poolId, exp);
         }
     }
@@ -273,10 +273,10 @@ public class PoolServiceImpl extends BaseImpl implements PoolService {
 
         Call<List<PoolUpdate>> poolUpdateCall = poolsApi.poolsPoolIdUpdatesGet(getProjectId(), poolId, count, page, order.name());
 
-        try{
+        try {
             Response<List<PoolUpdate>> poolUpdatesResponse = poolUpdateCall.execute();
             return processResponse(poolUpdatesResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching pool blocks for poolId: " + poolId, exp);
         }
     }

@@ -2,8 +2,8 @@ package io.blockfrost.sdk.impl;
 
 import io.blockfrost.sdk.api.MetadataService;
 import io.blockfrost.sdk.api.exception.APIException;
-import io.blockfrost.sdk.api.model.TransactionMetadataLabelCbor;
 import io.blockfrost.sdk.api.model.TransactionMetadataLabel;
+import io.blockfrost.sdk.api.model.TransactionMetadataLabelCbor;
 import io.blockfrost.sdk.api.model.TransactionMetadataLabelJson;
 import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.helper.ValidationHelper;
@@ -18,13 +18,13 @@ public class MetadataServiceImpl extends BaseImpl implements MetadataService {
 
     MetadataApi metadataApi;
 
-    public MetadataServiceImpl(String baseUrl, String projectId){
+    public MetadataServiceImpl(String baseUrl, String projectId) {
         super(baseUrl, projectId);
         metadataApi = getRetrofit().create(MetadataApi.class);
     }
 
     private void validateLabel(String label) throws APIException {
-        if ( label == null || label.equals("") ){
+        if (label == null || label.equals("")) {
             throw new APIException("Label cannot be null or empty");
         }
     }
@@ -36,10 +36,10 @@ public class MetadataServiceImpl extends BaseImpl implements MetadataService {
 
         Call<List<TransactionMetadataLabel>> metadataLabelCall = metadataApi.metadataTxsLabelsGet(getProjectId(), count, page, order.name());
 
-        try{
+        try {
             Response<List<TransactionMetadataLabel>> metadataLabelsResponse = metadataLabelCall.execute();
             return processResponse(metadataLabelsResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching metadata labels", exp);
         }
 
@@ -70,10 +70,10 @@ public class MetadataServiceImpl extends BaseImpl implements MetadataService {
 
         Call<List<TransactionMetadataLabelCbor>> metadataCborCall = metadataApi.metadataTxsLabelsLabelCborGet(getProjectId(), label, count, page, order.name());
 
-        try{
+        try {
             Response<List<TransactionMetadataLabelCbor>> metadataCborResponse = metadataCborCall.execute();
             return processResponse(metadataCborResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching transaction metadata in CBOR for label: " + label, exp);
         }
     }
@@ -103,10 +103,10 @@ public class MetadataServiceImpl extends BaseImpl implements MetadataService {
 
         Call<List<TransactionMetadataLabelJson>> metadataJsonCall = metadataApi.metadataTxsLabelsLabelGet(getProjectId(), label, count, page, order.name());
 
-        try{
+        try {
             Response<List<TransactionMetadataLabelJson>> metadataJsonResponse = metadataJsonCall.execute();
             return processResponse(metadataJsonResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching transaction metadata in JSON for label: " + label, exp);
         }
     }

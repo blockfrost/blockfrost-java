@@ -1,9 +1,9 @@
 package io.blockfrost.sdk.api;
 
 import io.blockfrost.sdk.api.exception.APIException;
-import io.blockfrost.sdk.impl.LedgerServiceImpl;
-import io.blockfrost.sdk.api.util.Constants;
 import io.blockfrost.sdk.api.model.Genesis;
+import io.blockfrost.sdk.api.util.Constants;
+import io.blockfrost.sdk.impl.LedgerServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +17,7 @@ public class LedgerServiceTests extends TestBase {
     LedgerService ledgerService;
 
     @BeforeEach
-    public void setup(){
+    public void setup() {
         ledgerService = new LedgerServiceImpl(Constants.BLOCKFROST_TESTNET_URL, projectId);
     }
 

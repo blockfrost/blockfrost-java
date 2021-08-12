@@ -25,7 +25,7 @@ public class MetadataServiceTests extends TestBase {
     MetadataService metadataService;
 
     @BeforeEach
-    public void setup(){
+    public void setup() {
         metadataService = new MetadataServiceImpl(Constants.BLOCKFROST_TESTNET_URL, projectId);
     }
 
@@ -98,7 +98,7 @@ public class MetadataServiceTests extends TestBase {
                             .build()
             );
 
-            List<TransactionMetadataLabelCbor> transactionMetadataLabelCborList = metadataService.getTransactionMetadataCborForLabel("0",  3, 1, OrderEnum.asc);
+            List<TransactionMetadataLabelCbor> transactionMetadataLabelCborList = metadataService.getTransactionMetadataCborForLabel("0", 3, 1, OrderEnum.asc);
 
             assertThat(transactionMetadataLabelCborList, hasSize(3));
             assertThat(transactionMetadataLabelCborList, contains(expectedTransactionMetadataLabelCborList.toArray()));
@@ -169,7 +169,7 @@ public class MetadataServiceTests extends TestBase {
                             .build()
             );
 
-            List<TransactionMetadataLabelJson> transactionMetadataLabelJsonList = metadataService.getTransactionMetadataJsonForLabel("0",  3, 1, OrderEnum.asc);
+            List<TransactionMetadataLabelJson> transactionMetadataLabelJsonList = metadataService.getTransactionMetadataJsonForLabel("0", 3, 1, OrderEnum.asc);
 
             assertThat(transactionMetadataLabelJsonList, hasSize(3));
             assertThat(transactionMetadataLabelJsonList, contains(expectedTransactionMetadataLabelJsonList.toArray()));
@@ -220,6 +220,6 @@ public class MetadataServiceTests extends TestBase {
 
         }
 
-    }    
+    }
 
 }

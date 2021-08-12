@@ -17,7 +17,7 @@ public class EpochServiceImpl extends BaseImpl implements EpochService {
 
     EpochsApi epochsApi;
 
-    public EpochServiceImpl(String baseUrl, String projectId){
+    public EpochServiceImpl(String baseUrl, String projectId) {
         super(baseUrl, projectId);
         epochsApi = getRetrofit().create(EpochsApi.class);
     }
@@ -26,10 +26,10 @@ public class EpochServiceImpl extends BaseImpl implements EpochService {
     public Epoch getLatestEpoch() throws APIException {
         Call<Epoch> latestEpochCall = epochsApi.epochsLatestGet(getProjectId());
 
-        try{
+        try {
             Response<Epoch> latestEpochResponse = latestEpochCall.execute();
             return processResponse(latestEpochResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching latest epoch", exp);
         }
     }
@@ -38,36 +38,36 @@ public class EpochServiceImpl extends BaseImpl implements EpochService {
     public EpochParam getLatestEpochParam() throws APIException {
         Call<EpochParam> latestEpochParamCall = epochsApi.epochsLatestParametersGet(getProjectId());
 
-        try{
+        try {
             Response<EpochParam> latestEpochParamResponse = latestEpochParamCall.execute();
             return processResponse(latestEpochParamResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching latest epoch parameters", exp);
         }
     }
 
     @Override
     public Epoch getEpoch(int number) throws APIException {
-        
+
         Call<Epoch> epochCall = epochsApi.epochsNumberGet(getProjectId(), number);
 
-        try{
+        try {
             Response<Epoch> epochResponse = epochCall.execute();
             return processResponse(epochResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching epoch for epoch number: " + number, exp);
         }
     }
 
     @Override
     public List<Epoch> getNextEpochs(int number, int count, int page) throws APIException {
-        
+
         Call<List<Epoch>> nextEpochsCall = epochsApi.epochsNumberNextGet(getProjectId(), number, count, page);
 
-        try{
+        try {
             Response<List<Epoch>> nextEpochsResponse = nextEpochsCall.execute();
             return processResponse(nextEpochsResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching next epochs for epoch number: " + number, exp);
         }
     }
@@ -83,10 +83,10 @@ public class EpochServiceImpl extends BaseImpl implements EpochService {
 
         Call<List<Epoch>> previousEpochsCall = epochsApi.epochsNumberPreviousGet(getProjectId(), number, count, page);
 
-        try{
+        try {
             Response<List<Epoch>> previousEpochsResponse = previousEpochsCall.execute();
             return processResponse(previousEpochsResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching previous epochs for epoch number: " + number, exp);
         }
     }
@@ -102,10 +102,10 @@ public class EpochServiceImpl extends BaseImpl implements EpochService {
 
         Call<List<Stake>> activeStakesCall = epochsApi.epochsNumberStakesGet(getProjectId(), number, count, page);
 
-        try{
+        try {
             Response<List<Stake>> activeStakesResponse = activeStakesCall.execute();
             return processResponse(activeStakesResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching active stakes for epoch number: " + number, exp);
         }
     }
@@ -119,16 +119,16 @@ public class EpochServiceImpl extends BaseImpl implements EpochService {
     @Override
     public List<Stake> getActiveStakesForEpochAndPool(int number, String poolId, int count, int page) throws APIException {
 
-        if ( poolId== null || poolId.equals("") ){
+        if (poolId == null || poolId.equals("")) {
             throw new APIException("PoolId cannot be null or empty");
         }
 
         Call<List<Stake>> activeStakesCall = epochsApi.epochsNumberStakesPoolIdGet(getProjectId(), number, poolId, count, page);
 
-        try{
+        try {
             Response<List<Stake>> activeStakesResponse = activeStakesCall.execute();
             return processResponse(activeStakesResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching active stakes for epoch number: " + number + " and poolId: " + poolId, exp);
         }
     }
@@ -143,10 +143,10 @@ public class EpochServiceImpl extends BaseImpl implements EpochService {
     public EpochParam getEpochParam(int number) throws APIException {
         Call<EpochParam> epochParamCall = epochsApi.epochsNumberParametersGet(getProjectId(), number);
 
-        try{
+        try {
             Response<EpochParam> epochParamResponse = epochParamCall.execute();
             return processResponse(epochParamResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching epoch parameters for epoch: " + number, exp);
         }
     }
@@ -155,10 +155,10 @@ public class EpochServiceImpl extends BaseImpl implements EpochService {
     public List<String> getBlocksForEpoch(int number, int count, int page, OrderEnum order) throws APIException {
         Call<List<String>> blocksCall = epochsApi.epochsNumberBlocksGet(getProjectId(), number, count, page, order.name());
 
-        try{
+        try {
             Response<List<String>> blocksResponse = blocksCall.execute();
             return processResponse(blocksResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching blocks for epoch: " + number, exp);
         }
     }
@@ -183,10 +183,10 @@ public class EpochServiceImpl extends BaseImpl implements EpochService {
     public List<String> getBlocksForEpochAndPool(int number, String poolId, int count, int page, OrderEnum order) throws APIException {
         Call<List<String>> blocksForEpochAndPoolCall = epochsApi.epochsNumberBlocksPoolIdGet(getProjectId(), number, poolId, count, page, order.name());
 
-        try{
+        try {
             Response<List<String>> blocksForEpochAndPoolResponse = blocksForEpochAndPoolCall.execute();
             return processResponse(blocksForEpochAndPoolResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching blocks for epoch: " + number + " and poolId: " + poolId, exp);
         }
     }

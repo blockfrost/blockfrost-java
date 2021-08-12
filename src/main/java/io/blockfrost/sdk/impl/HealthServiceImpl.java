@@ -15,7 +15,7 @@ public class HealthServiceImpl extends BaseImpl implements HealthService {
 
     private HealthApi healthApi;
 
-    public HealthServiceImpl(String baseUrl, String projectId){
+    public HealthServiceImpl(String baseUrl, String projectId) {
         super(baseUrl, projectId);
         healthApi = getRetrofit().create(HealthApi.class);
     }
@@ -25,10 +25,10 @@ public class HealthServiceImpl extends BaseImpl implements HealthService {
 
         Call<Health> healthCall = healthApi.healthGet(getProjectId());
 
-        try{
+        try {
             Response<Health> healthResponse = healthCall.execute();
             return processResponse(healthResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching health status", exp);
         }
     }
@@ -37,10 +37,10 @@ public class HealthServiceImpl extends BaseImpl implements HealthService {
     public Clock getCurrentBackendTime() throws APIException {
         Call<Clock> clockCall = healthApi.healthClockGet(getProjectId());
 
-        try{
+        try {
             Response<Clock> clockResponse = clockCall.execute();
             return processResponse(clockResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching current backend time", exp);
         }
     }
@@ -50,12 +50,12 @@ public class HealthServiceImpl extends BaseImpl implements HealthService {
 
         Call<ResponseBody> apiRootCall = healthApi.rootGet(getProjectId());
 
-        try{
+        try {
             Response<ResponseBody> apiRootResponse = apiRootCall.execute();
             ResponseBody responseBody = apiRootResponse.raw().body();
             //return processResponse(apiRootResponse);
             return "done";
-        } catch (Exception exp){
+        } catch (Exception exp) {
             throw new APIException("Exception while fetching Api Root", exp);
         }
 

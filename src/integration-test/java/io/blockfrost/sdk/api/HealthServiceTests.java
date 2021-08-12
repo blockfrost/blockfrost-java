@@ -1,10 +1,10 @@
 package io.blockfrost.sdk.api;
 
 import io.blockfrost.sdk.api.exception.APIException;
-import io.blockfrost.sdk.impl.HealthServiceImpl;
-import io.blockfrost.sdk.api.util.Constants;
 import io.blockfrost.sdk.api.model.Clock;
 import io.blockfrost.sdk.api.model.Health;
+import io.blockfrost.sdk.api.util.Constants;
+import io.blockfrost.sdk.impl.HealthServiceImpl;
 import org.exparity.hamcrest.date.DateMatchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,7 +20,7 @@ public class HealthServiceTests extends TestBase {
     HealthService healthService;
 
     @BeforeEach
-    public void setup(){
+    public void setup() {
         healthService = new HealthServiceImpl(Constants.BLOCKFROST_TESTNET_URL, projectId);
     }
 

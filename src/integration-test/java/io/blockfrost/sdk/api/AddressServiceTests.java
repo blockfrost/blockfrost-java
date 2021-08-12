@@ -25,7 +25,7 @@ public class AddressServiceTests extends TestBase {
     AddressService addressService;
 
     @BeforeEach
-    public void setup(){
+    public void setup() {
         addressService = new AddressServiceImpl(Constants.BLOCKFROST_TESTNET_URL, projectId);
     }
 

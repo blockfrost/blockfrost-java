@@ -13,6 +13,7 @@ public interface AccountService {
 
     /**
      * Obtain information about a specific networkStake account.
+     *
      * @param stakeAddress Bech32 networkStake address. (required)
      * @return Account
      */

@@ -15,7 +15,7 @@ public class MetricsServiceImpl extends BaseImpl implements MetricsService {
 
     private MetricsApi metricsApi;
 
-    public MetricsServiceImpl(String baseUrl, String projectId){
+    public MetricsServiceImpl(String baseUrl, String projectId) {
         super(baseUrl, projectId);
         metricsApi = getRetrofit().create(MetricsApi.class);
     }
@@ -24,10 +24,10 @@ public class MetricsServiceImpl extends BaseImpl implements MetricsService {
     public List<UsageMetric> getUsageMetrics() throws APIException {
         Call<List<UsageMetric>> usageMetricsCall = metricsApi.metricsGet(getProjectId());
 
-        try{
+        try {
             Response<List<UsageMetric>> usageMetricsResponse = usageMetricsCall.execute();
             return processResponse(usageMetricsResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching usage metrics", exp);
         }
     }
@@ -36,10 +36,10 @@ public class MetricsServiceImpl extends BaseImpl implements MetricsService {
     public List<EndpointUsageMetric> getEndpointUsageMetrics() throws APIException {
         Call<List<EndpointUsageMetric>> endpointUsageMetricsCall = metricsApi.metricsEndpointsGet(getProjectId());
 
-        try{
+        try {
             Response<List<EndpointUsageMetric>> endpointUsageMetricsResponse = endpointUsageMetricsCall.execute();
             return processResponse(endpointUsageMetricsResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching endpoint usage metrics", exp);
         }
     }

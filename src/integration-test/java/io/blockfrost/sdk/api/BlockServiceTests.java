@@ -21,7 +21,7 @@ public class BlockServiceTests extends TestBase {
     BlockService blockService;
 
     @BeforeEach
-    public void setup(){
+    public void setup() {
         blockService = new BlockServiceImpl(Constants.BLOCKFROST_TESTNET_URL, projectId);
     }
 
@@ -199,6 +199,6 @@ public class BlockServiceTests extends TestBase {
             assertThat(exception.getMessage(), is("Hash cannot be null or empty"));
         }
 
-    }    
+    }
 
 }

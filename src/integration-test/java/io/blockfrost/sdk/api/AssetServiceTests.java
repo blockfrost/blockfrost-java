@@ -21,7 +21,7 @@ public class AssetServiceTests extends TestBase {
     AssetService assetService;
 
     @BeforeEach
-    public void setup(){
+    public void setup() {
         assetService = new AssetServiceImpl(Constants.BLOCKFROST_TESTNET_URL, projectId);
     }
 

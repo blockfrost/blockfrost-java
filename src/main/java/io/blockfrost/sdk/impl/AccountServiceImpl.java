@@ -21,7 +21,7 @@ public class AccountServiceImpl extends BaseImpl implements AccountService {
     }
 
     private void validateStakeAddress(String address) throws APIException {
-        if ( address == null || address.equals("" )){
+        if (address == null || address.equals("")) {
             throw new APIException("Stake address cannot be null or empty");
         }
     }
@@ -33,10 +33,10 @@ public class AccountServiceImpl extends BaseImpl implements AccountService {
 
         Call<Account> call = accountsApi.accountsStakeAddressGet(getProjectId(), stakeAddress);
 
-        try{
+        try {
             Response<Account> response = call.execute();
             return processResponse(response);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching account info by stakeAddress", exp);
         }
     }
@@ -48,10 +48,10 @@ public class AccountServiceImpl extends BaseImpl implements AccountService {
 
         Call<List<AccountHistory>> call = accountsApi.accountsStakeAddressHistoryGet(getProjectId(), stakeAddress, count, page, order.name());
 
-        try{
+        try {
             Response<List<AccountHistory>> response = call.execute();
             return processResponse(response);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching account history for stakeAddress: " + stakeAddress, exp);
         }
     }
@@ -79,10 +79,10 @@ public class AccountServiceImpl extends BaseImpl implements AccountService {
 
         Call<List<AccountRewardHistory>> call = accountsApi.accountsStakeAddressRewardsGet(getProjectId(), stakeAddress, count, page, order.name());
 
-        try{
+        try {
             Response<List<AccountRewardHistory>> response = call.execute();
             return processResponse(response);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching account reward history for stakeAddress: " + stakeAddress, exp);
         }
     }
@@ -109,10 +109,10 @@ public class AccountServiceImpl extends BaseImpl implements AccountService {
 
         Call<List<AccountDelegationHistory>> call = accountsApi.accountsStakeAddressDelegationsGet(getProjectId(), stakeAddress, count, page, order.name());
 
-        try{
+        try {
             Response<List<AccountDelegationHistory>> response = call.execute();
             return processResponse(response);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching account delegation history for stakeAddress: " + stakeAddress, exp);
         }
     }
@@ -139,10 +139,10 @@ public class AccountServiceImpl extends BaseImpl implements AccountService {
 
         Call<List<AccountRegistrationHistory>> call = accountsApi.accountsStakeAddressRegistrationsGet(getProjectId(), stakeAddress, count, page, order.name());
 
-        try{
+        try {
             Response<List<AccountRegistrationHistory>> response = call.execute();
             return processResponse(response);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching account registration history for stakeAddress: " + stakeAddress, exp);
         }
     }
@@ -169,10 +169,10 @@ public class AccountServiceImpl extends BaseImpl implements AccountService {
 
         Call<List<AccountWithdrawalHistory>> call = accountsApi.accountsStakeAddressWithdrawalsGet(getProjectId(), stakeAddress, count, page, order.name());
 
-        try{
+        try {
             Response<List<AccountWithdrawalHistory>> response = call.execute();
             return processResponse(response);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching account withdrawal history for stakeAddress: " + stakeAddress, exp);
         }
     }
@@ -199,10 +199,10 @@ public class AccountServiceImpl extends BaseImpl implements AccountService {
 
         Call<List<AccountMirHistory>> call = accountsApi.accountsStakeAddressMirsGet(getProjectId(), stakeAddress, count, page, order.name());
 
-        try{
+        try {
             Response<List<AccountMirHistory>> response = call.execute();
             return processResponse(response);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching account MIR history for stakeAddress: " + stakeAddress, exp);
         }
     }
@@ -229,10 +229,10 @@ public class AccountServiceImpl extends BaseImpl implements AccountService {
 
         Call<List<AccountAddress>> call = accountsApi.accountsStakeAddressAddressesGet(getProjectId(), stakeAddress, count, page, order.name());
 
-        try{
+        try {
             Response<List<AccountAddress>> response = call.execute();
             return processResponse(response);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching account addresses for stakeAddress: " + stakeAddress, exp);
         }
     }
@@ -259,10 +259,10 @@ public class AccountServiceImpl extends BaseImpl implements AccountService {
 
         Call<List<AccountAsset>> call = accountsApi.accountsStakeAddressAddressesAssetsGet(getProjectId(), stakeAddress, count, page, order.name());
 
-        try{
+        try {
             Response<List<AccountAsset>> response = call.execute();
             return processResponse(response);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching account assets for stakeAddress: " + stakeAddress, exp);
         }
     }

@@ -23,7 +23,7 @@ public class BaseImpl {
         this.baseUrl = baseUrl;
         this.projectId = projectId;
 
-        if(LOG.isDebugEnabled()) {
+        if (LOG.isDebugEnabled()) {
             LOG.debug("Blockfrost URL : " + baseUrl);
         }
     }
@@ -44,8 +44,8 @@ public class BaseImpl {
     }
 
 
-    protected  <T> T processResponse(Response<T> response) throws APIException, IOException {
-        if (response.isSuccessful()){
+    protected <T> T processResponse(Response<T> response) throws APIException, IOException {
+        if (response.isSuccessful()) {
             return response.body();
         } else {
             ResponseError responseError = OBJECT_MAPPER.readValue(response.errorBody().bytes(), ResponseError.class);

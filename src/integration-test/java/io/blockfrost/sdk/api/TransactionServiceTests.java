@@ -2,8 +2,8 @@ package io.blockfrost.sdk.api;
 
 import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.api.model.*;
-import io.blockfrost.sdk.impl.TransactionServiceImpl;
 import io.blockfrost.sdk.api.util.Constants;
+import io.blockfrost.sdk.impl.TransactionServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +20,7 @@ public class TransactionServiceTests extends TestBase {
     TransactionService transactionService;
 
     @BeforeEach
-    public void setup(){
+    public void setup() {
         transactionService = new TransactionServiceImpl(Constants.BLOCKFROST_TESTNET_URL, projectId);
     }
 
@@ -180,8 +180,8 @@ public class TransactionServiceTests extends TestBase {
 
     //TODO: Use a real serialized transaction if possible
     @Test
-    public void transactionPost_willReturn_transactionId(){
-        Exception exception = assertThrows( APIException.class, () -> transactionService.submitTransaction(new byte[0]));
+    public void transactionPost_willReturn_transactionId() {
+        Exception exception = assertThrows(APIException.class, () -> transactionService.submitTransaction(new byte[0]));
         assertThat(exception.getMessage(), containsString("Bad Request"));
     }
 }

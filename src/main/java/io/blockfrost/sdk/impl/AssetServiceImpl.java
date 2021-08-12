@@ -18,13 +18,13 @@ public class AssetServiceImpl extends BaseImpl implements AssetService {
 
     AssetsApi assetsApi;
 
-    public AssetServiceImpl(String baseUrl, String projectId){
+    public AssetServiceImpl(String baseUrl, String projectId) {
         super(baseUrl, projectId);
         assetsApi = getRetrofit().create(AssetsApi.class);
     }
 
     private void validateAsset(String asset) throws APIException {
-        if ( asset == null || asset.equals("" )){
+        if (asset == null || asset.equals("")) {
             throw new APIException("Asset cannot be null or empty");
         }
     }
@@ -36,10 +36,10 @@ public class AssetServiceImpl extends BaseImpl implements AssetService {
 
         Call<Asset> assetCall = assetsApi.assetsAssetGet(getProjectId(), asset);
 
-        try{
+        try {
             Response<Asset> assetResponse = assetCall.execute();
             return processResponse(assetResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching asset: " + asset, exp);
         }
     }
@@ -48,10 +48,10 @@ public class AssetServiceImpl extends BaseImpl implements AssetService {
     public List<Asset> getAssets(int count, int page, OrderEnum order) throws APIException {
         Call<List<Asset>> assetsCall = assetsApi.assetsGet(getProjectId(), count, page, order.name());
 
-        try{
+        try {
             Response<List<Asset>> assetsResponse = assetsCall.execute();
             return processResponse(assetsResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching assets", exp);
         }
     }
@@ -79,10 +79,10 @@ public class AssetServiceImpl extends BaseImpl implements AssetService {
 
         Call<List<AssetHistory>> assetHistoryCall = assetsApi.assetsAssetHistoryGet(getProjectId(), asset, count, page, order.name());
 
-        try{
+        try {
             Response<List<AssetHistory>> assetHistoryResponse = assetHistoryCall.execute();
             return processResponse(assetHistoryResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching asset history for asset: " + asset, exp);
         }
     }
@@ -110,10 +110,10 @@ public class AssetServiceImpl extends BaseImpl implements AssetService {
 
         Call<List<AssetTransaction>> assetTransactionCall = assetsApi.assetsAssetTransactionsGet(getProjectId(), asset, count, page, order.name());
 
-        try{
+        try {
             Response<List<AssetTransaction>> assetTransactionResponse = assetTransactionCall.execute();
             return processResponse(assetTransactionResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching transactions for asset: " + asset, exp);
         }
     }
@@ -140,10 +140,10 @@ public class AssetServiceImpl extends BaseImpl implements AssetService {
 
         Call<List<AssetAddress>> assetAddressCall = assetsApi.assetsAssetAddressesGet(getProjectId(), asset, count, page, order.name());
 
-        try{
+        try {
             Response<List<AssetAddress>> assetAddressResponse = assetAddressCall.execute();
             return processResponse(assetAddressResponse);
-        } catch (IOException exp){
+        } catch (IOException exp) {
             throw new APIException("Exception while fetching addresses for asset: " + asset, exp);
         }
     }
