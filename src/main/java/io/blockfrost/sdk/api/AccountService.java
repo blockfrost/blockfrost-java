@@ -185,4 +185,46 @@ public interface AccountService {
      * @return List&lt;AccountRegistrationHistory&gt;
      */
     public List<AccountRegistrationHistory> getAccountRegistrationHistory(String stakeAddress) throws APIException;
+
+    /**
+     * Account withdrawal history
+     * Obtain information about the withdrawals of a specific account.
+     *
+     * @param stakeAddress Bech32 stake address. (required)
+     * @param count        The number of results displayed on one page. (optional, default to 100)
+     * @param page         The page number for listing the results. (optional, default to 1)
+     * @param order        The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.  (optional, default to asc)
+     * @return List&lt;AccountWithdrawalHistory&gt;
+     */
+    public List<AccountWithdrawalHistory> getAccountWithdrawalHistory(String stakeAddress, int count, int page, OrderEnum order) throws APIException;
+
+    /**
+     * Account withdrawal history
+     * Obtain information about the withdrawals of a specific account in ascending order from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
+     *
+     * @param stakeAddress Bech32 stake address. (required)
+     * @param count        The number of results displayed on one page.
+     * @param page         The page number for listing the results.
+     * @return List&lt;AccountWithdrawalHistory&gt;
+     */
+    public List<AccountWithdrawalHistory> getAccountWithdrawalHistory(String stakeAddress, int count, int page) throws APIException;
+
+    /**
+     * Account withdrawal history
+     * Obtain information about all the withdrawals of a specific account.
+     *
+     * @param stakeAddress Bech32 stake address. (required)
+     * @param order        The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
+     * @return List&lt;AccountWithdrawalHistory&gt;
+     */
+    public List<AccountWithdrawalHistory> getAccountWithdrawalHistory(String stakeAddress, OrderEnum order) throws APIException;
+
+    /**
+     * Account withdrawal history
+     * Obtain information about all the withdrawals of a specific account in ascending order from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
+     *
+     * @param stakeAddress Bech32 stake address. (required)
+     * @return List&lt;AccountWithdrawalHistory&gt;
+     */
+    public List<AccountWithdrawalHistory> getAccountWithdrawalHistory(String stakeAddress) throws APIException;
 }

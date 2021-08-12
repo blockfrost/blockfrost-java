@@ -160,4 +160,33 @@ public class AccountServiceTest extends TestBase {
 
     }
 
+    @Nested
+    @DisplayName("GetAccountWithdrawalHistory Tests")
+    class GetAccountWithdrawalHistory {
+
+        @Test
+        public void history_willReturn_historyForCountPageAndAscendingOrder() throws APIException {
+
+            List<AccountWithdrawalHistory> historyList = accountService.getAccountWithdrawalHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha", 3, 1, OrderEnum.asc);
+
+            assertThat(historyList, hasSize(lessThanOrEqualTo(3)));
+        }
+
+        @Test
+        public void history_willReturn_historyForCountAndPage() throws APIException {
+
+            List<AccountWithdrawalHistory> historyList = accountService.getAccountWithdrawalHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha", 3, 1);
+
+            assertThat(historyList, hasSize(lessThanOrEqualTo(3)));
+        }
+
+        @Test
+        public void poolUpdates_willThrowAPIException_onNullPoolId() {
+
+            Exception exception = assertThrows(APIException.class, () -> accountService.getAccountWithdrawalHistory(null, 3, 1));
+            assertThat(exception.getMessage(), is("Stake address cannot be null or empty"));
+        }
+
+    }
+
 }

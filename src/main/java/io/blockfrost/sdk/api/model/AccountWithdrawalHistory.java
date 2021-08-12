@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
 /**
- * Account Registration History
+ * Account Withdrawal History
  */
 @Data
 @Builder
@@ -15,7 +15,7 @@ import lombok.*;
 @ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class AccountRegistrationHistory {
+public class AccountWithdrawalHistory {
     private String txHash;
-    private String action;
+    private String amount;
 }

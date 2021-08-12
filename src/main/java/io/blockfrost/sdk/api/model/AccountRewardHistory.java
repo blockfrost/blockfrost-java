@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
 /**
- * Account
+ * Account Reward History
  */
 @Data
 @Builder
