@@ -4,6 +4,7 @@ import io.blockfrost.sdk.api.AccountService;
 import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.api.model.Account;
 import io.blockfrost.sdk.api.model.AccountHistory;
+import io.blockfrost.sdk.api.model.AccountRewardHistory;
 import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.retrofit.AccountsApi;
 import retrofit2.Call;
@@ -72,4 +73,35 @@ public class AccountServiceImpl extends BaseImpl implements AccountService {
     public List<AccountHistory> getAccountHistory(String stakeAddress) throws APIException {
         return getAccountHistory(stakeAddress, OrderEnum.asc);
     }
+
+    @Override
+    public List<AccountRewardHistory> getAccountRewardHistory(String stakeAddress, int count, int page, OrderEnum order) throws APIException {
+
+        validateStakeAddress(stakeAddress);
+
+        Call<List<AccountRewardHistory>> call = accountsApi.accountsStakeAddressRewardsGet(getProjectId(), stakeAddress, count, page, order.name());
+
+        try{
+            Response<List<AccountRewardHistory>> response = call.execute();
+            return processResponse(response);
+        } catch (IOException exp){
+            throw new APIException("Exception while fetching account reward history for stakeAddress: " + stakeAddress, exp);
+        }
+    }
+
+    @Override
+    public List<AccountRewardHistory> getAccountRewardHistory(String stakeAddress, int count, int page) throws APIException {
+        return getAccountRewardHistory(stakeAddress, count, page, OrderEnum.asc);
+    }
+
+    //TODO: Implement
+    @Override
+    public List<AccountRewardHistory> getAccountRewardHistory(String stakeAddress, OrderEnum order) throws APIException {
+        return null;
+    }
+
+    @Override
+    public List<AccountRewardHistory> getAccountRewardHistory(String stakeAddress) throws APIException {
+        return getAccountRewardHistory(stakeAddress, OrderEnum.asc);
+    }    
 }

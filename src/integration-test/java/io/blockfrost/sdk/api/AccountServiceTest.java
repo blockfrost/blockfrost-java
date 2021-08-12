@@ -3,6 +3,7 @@ package io.blockfrost.sdk.api;
 import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.api.model.Account;
 import io.blockfrost.sdk.api.model.AccountHistory;
+import io.blockfrost.sdk.api.model.AccountRewardHistory;
 import io.blockfrost.sdk.api.util.Constants;
 import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.AccountServiceImpl;
@@ -73,5 +74,34 @@ public class AccountServiceTest extends TestBase {
         }
 
     }
+
+    @Nested
+    @DisplayName("GetAccountRewardHistory Tests")
+    class GetAccountRewardHistory {
+
+        @Test
+        public void history_willReturn_historyForCountPageAndAscendingOrder() throws APIException {
+
+            List<AccountRewardHistory> historyList = accountService.getAccountRewardHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha", 3, 1, OrderEnum.asc);
+
+            assertThat(historyList, hasSize(lessThanOrEqualTo(3)));
+        }
+
+        @Test
+        public void history_willReturn_historyForCountAndPage() throws APIException {
+
+            List<AccountRewardHistory> historyList = accountService.getAccountRewardHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha", 3, 1);
+
+            assertThat(historyList, hasSize(lessThanOrEqualTo(3)));
+        }
+
+        @Test
+        public void poolUpdates_willThrowAPIException_onNullPoolId() {
+
+            Exception exception = assertThrows(APIException.class, () -> accountService.getAccountRewardHistory(null, 3, 1));
+            assertThat(exception.getMessage(), is("Stake address cannot be null or empty"));
+        }
+
+    }    
 
 }
