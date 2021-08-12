@@ -252,4 +252,34 @@ public class AccountServiceImpl extends BaseImpl implements AccountService {
     public List<AccountAddress> getAccountAddresses(String stakeAddress) throws APIException {
         return getAccountAddresses(stakeAddress, OrderEnum.asc);
     }
+
+    @Override
+    public List<AccountAsset> getAccountAssets(String stakeAddress, int count, int page, OrderEnum order) throws APIException {
+        validateStakeAddress(stakeAddress);
+
+        Call<List<AccountAsset>> call = accountsApi.accountsStakeAddressAddressesAssetsGet(getProjectId(), stakeAddress, count, page, order.name());
+
+        try{
+            Response<List<AccountAsset>> response = call.execute();
+            return processResponse(response);
+        } catch (IOException exp){
+            throw new APIException("Exception while fetching account assets for stakeAddress: " + stakeAddress, exp);
+        }
+    }
+
+    @Override
+    public List<AccountAsset> getAccountAssets(String stakeAddress, int count, int page) throws APIException {
+        return getAccountAssets(stakeAddress, count, page, OrderEnum.asc);
+    }
+
+    //TODO: Implement
+    @Override
+    public List<AccountAsset> getAccountAssets(String stakeAddress, OrderEnum order) throws APIException {
+        return null;
+    }
+
+    @Override
+    public List<AccountAsset> getAccountAssets(String stakeAddress) throws APIException {
+        return getAccountAssets(stakeAddress, OrderEnum.asc);
+    }
 }

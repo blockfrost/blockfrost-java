@@ -247,5 +247,33 @@ public class AccountServiceTest extends TestBase {
 
     }
 
+    @Nested
+    @DisplayName("GetAccountAssets Tests")
+    class GetAccountAssets {
+
+        @Test
+        public void assets_willReturn_assetsForCountPageAndAscendingOrder() throws APIException {
+
+            List<AccountAsset> assetsList = accountService.getAccountAssets("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha", 3, 1, OrderEnum.asc);
+
+            assertThat(assetsList, hasSize(lessThanOrEqualTo(3)));
+        }
+
+        @Test
+        public void assets_willReturn_assetsForCountAndPage() throws APIException {
+
+            List<AccountAsset> assetsList = accountService.getAccountAssets("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha", 3, 1);
+
+            assertThat(assetsList, hasSize(lessThanOrEqualTo(3)));
+        }
+
+        @Test
+        public void assets_willThrowAPIException_onNullPoolId() {
+
+            Exception exception = assertThrows(APIException.class, () -> accountService.getAccountAssets(null, 3, 1));
+            assertThat(exception.getMessage(), is("Stake address cannot be null or empty"));
+        }
+
+    }
 
 }

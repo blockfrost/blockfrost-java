@@ -311,4 +311,50 @@ public interface AccountService {
      * @return List&lt;AccountAddress&gt;
      */
     public List<AccountAddress> getAccountAddresses(String stakeAddress) throws APIException;
+
+    /**
+     * Assets associated with the account addresses
+     * Obtain information about assets associated with addresses of a specific account.
+     * &lt;b&gt;Be careful&lt;/b&gt;, as an account could be part of a mangled address and does not necessarily mean the addresses are owned by user as the account.
+     *
+     * @param stakeAddress Bech32 stake address. (required)
+     * @param count        The number of results displayed on one page. (optional, default to 100)
+     * @param page         The page number for listing the results. (optional, default to 1)
+     * @param order        The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.  (optional, default to asc)
+     * @return List&lt;AccountAsset&gt;
+     */
+    public List<AccountAsset> getAccountAssets(String stakeAddress, int count, int page, OrderEnum order) throws APIException;
+
+    /**
+     * Assets associated with the account addresses
+     * Obtain information about assets associated with addresses of a specific account in ascending order from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
+     * &lt;b&gt;Be careful&lt;/b&gt;, as an account could be part of a mangled address and does not necessarily mean the addresses are owned by user as the account.
+     *
+     * @param stakeAddress Bech32 stake address. (required)
+     * @param count        The number of results displayed on one page.
+     * @param page         The page number for listing the results.
+     * @return List&lt;AccountAsset&gt;
+     */
+    public List<AccountAsset> getAccountAssets(String stakeAddress, int count, int page) throws APIException;
+
+    /**
+     * Assets associated with the account addresses
+     * Obtain information about assets associated with addresses of a specific account.
+     * &lt;b&gt;Be careful&lt;/b&gt;, as an account could be part of a mangled address and does not necessarily mean the addresses are owned by user as the account.
+     *
+     * @param stakeAddress Bech32 stake address. (required)
+     * @param order        The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
+     * @return List&lt;AccountAsset&gt;
+     */
+    public List<AccountAsset> getAccountAssets(String stakeAddress, OrderEnum order) throws APIException;
+
+    /**
+     * Assets associated with the account addresses
+     * Obtain information about assets associated with addresses of a specific account in ascending order from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
+     * &lt;b&gt;Be careful&lt;/b&gt;, as an account could be part of a mangled address and does not necessarily mean the addresses are owned by user as the account.
+     *
+     * @param stakeAddress Bech32 stake address. (required)
+     * @return List&lt;AccountAsset&gt;
+     */
+    public List<AccountAsset> getAccountAssets(String stakeAddress) throws APIException;
 }
