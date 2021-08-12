@@ -222,4 +222,34 @@ public class AccountServiceImpl extends BaseImpl implements AccountService {
     public List<AccountMirHistory> getAccountMirHistory(String stakeAddress) throws APIException {
         return getAccountMirHistory(stakeAddress, OrderEnum.asc);
     }
+
+    @Override
+    public List<AccountAddress> getAccountAddresses(String stakeAddress, int count, int page, OrderEnum order) throws APIException {
+        validateStakeAddress(stakeAddress);
+
+        Call<List<AccountAddress>> call = accountsApi.accountsStakeAddressAddressesGet(getProjectId(), stakeAddress, count, page, order.name());
+
+        try{
+            Response<List<AccountAddress>> response = call.execute();
+            return processResponse(response);
+        } catch (IOException exp){
+            throw new APIException("Exception while fetching account addresses for stakeAddress: " + stakeAddress, exp);
+        }
+    }
+
+    @Override
+    public List<AccountAddress> getAccountAddresses(String stakeAddress, int count, int page) throws APIException {
+        return getAccountAddresses(stakeAddress, count, page, OrderEnum.asc);
+    }
+
+    //TODO: Implement
+    @Override
+    public List<AccountAddress> getAccountAddresses(String stakeAddress, OrderEnum order) throws APIException {
+        return null;
+    }
+
+    @Override
+    public List<AccountAddress> getAccountAddresses(String stakeAddress) throws APIException {
+        return getAccountAddresses(stakeAddress, OrderEnum.asc);
+    }
 }

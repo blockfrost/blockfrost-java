@@ -48,10 +48,10 @@ public interface AccountsApi {
      * @param count        The number of results displayed on one page. (optional, default to 100)
      * @param page         The page number for listing the results. (optional, default to 1)
      * @param order        The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.  (optional, default to asc)
-     * @return Call&lt;List&lt;Object&gt;&gt;
+     * @return List&lt;AccountAddress&gt;
      */
     @GET("accounts/{stake_address}/addresses")
-    Call<List<Object>> accountsStakeAddressAddressesGet(
+    Call<List<AccountAddress>> accountsStakeAddressAddressesGet(
             @Header("project_id") String projectId,
             @Path("stake_address") String stakeAddress,
             @Query("count") Integer count,
