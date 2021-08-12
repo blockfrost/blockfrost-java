@@ -1,6 +1,7 @@
 package io.blockfrost.sdk.impl.retrofit;
 
 import io.blockfrost.sdk.api.model.Account;
+import io.blockfrost.sdk.api.model.AccountDelegationHistory;
 import io.blockfrost.sdk.api.model.AccountHistory;
 import io.blockfrost.sdk.api.model.AccountRewardHistory;
 import retrofit2.Call;
@@ -72,7 +73,7 @@ public interface AccountsApi {
      * @return Call&lt;List&lt;Object&gt;&gt;
      */
     @GET("accounts/{stake_address}/delegations")
-    Call<List<Object>> accountsStakeAddressDelegationsGet(
+    Call<List<AccountDelegationHistory>> accountsStakeAddressDelegationsGet(
             @Header("project_id") String projectId,
             @Path("stake_address") String stakeAddress,
             @Query("count") Integer count,
