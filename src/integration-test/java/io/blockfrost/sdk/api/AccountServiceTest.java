@@ -1,10 +1,7 @@
 package io.blockfrost.sdk.api;
 
 import io.blockfrost.sdk.api.exception.APIException;
-import io.blockfrost.sdk.api.model.Account;
-import io.blockfrost.sdk.api.model.AccountDelegationHistory;
-import io.blockfrost.sdk.api.model.AccountHistory;
-import io.blockfrost.sdk.api.model.AccountRewardHistory;
+import io.blockfrost.sdk.api.model.*;
 import io.blockfrost.sdk.api.util.Constants;
 import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.AccountServiceImpl;
@@ -129,6 +126,35 @@ public class AccountServiceTest extends TestBase {
         public void poolUpdates_willThrowAPIException_onNullPoolId() {
 
             Exception exception = assertThrows(APIException.class, () -> accountService.getAccountDelegationHistory(null, 3, 1));
+            assertThat(exception.getMessage(), is("Stake address cannot be null or empty"));
+        }
+
+    }
+
+    @Nested
+    @DisplayName("GetAccountRegistrationHistory Tests")
+    class GetAccountRegistrationHistory {
+
+        @Test
+        public void history_willReturn_historyForCountPageAndAscendingOrder() throws APIException {
+
+            List<AccountRegistrationHistory> historyList = accountService.getAccountRegistrationHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha", 3, 1, OrderEnum.asc);
+
+            assertThat(historyList, hasSize(lessThanOrEqualTo(3)));
+        }
+
+        @Test
+        public void history_willReturn_historyForCountAndPage() throws APIException {
+
+            List<AccountRegistrationHistory> historyList = accountService.getAccountRegistrationHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha", 3, 1);
+
+            assertThat(historyList, hasSize(lessThanOrEqualTo(3)));
+        }
+
+        @Test
+        public void poolUpdates_willThrowAPIException_onNullPoolId() {
+
+            Exception exception = assertThrows(APIException.class, () -> accountService.getAccountRegistrationHistory(null, 3, 1));
             assertThat(exception.getMessage(), is("Stake address cannot be null or empty"));
         }
 

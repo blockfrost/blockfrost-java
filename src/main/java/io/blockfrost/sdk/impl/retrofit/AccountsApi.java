@@ -1,9 +1,6 @@
 package io.blockfrost.sdk.impl.retrofit;
 
-import io.blockfrost.sdk.api.model.Account;
-import io.blockfrost.sdk.api.model.AccountDelegationHistory;
-import io.blockfrost.sdk.api.model.AccountHistory;
-import io.blockfrost.sdk.api.model.AccountRewardHistory;
+import io.blockfrost.sdk.api.model.*;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
@@ -127,10 +124,10 @@ public interface AccountsApi {
      * @param count        The number of results displayed on one page. (optional, default to 100)
      * @param page         The page number for listing the results. (optional, default to 1)
      * @param order        The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.  (optional, default to asc)
-     * @return Call&lt;List&lt;Object&gt;&gt;
+     * @return Call&lt;List&lt;AccountRegistrationHistory&gt;&gt;
      */
     @GET("accounts/{stake_address}/registrations")
-    Call<List<Object>> accountsStakeAddressRegistrationsGet(
+    Call<List<AccountRegistrationHistory>> accountsStakeAddressRegistrationsGet(
             @Header("project_id") String projectId,
             @Path("stake_address") String stakeAddress,
             @Query("count") Integer count,

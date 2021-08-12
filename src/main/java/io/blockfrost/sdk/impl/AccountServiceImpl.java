@@ -2,10 +2,7 @@ package io.blockfrost.sdk.impl;
 
 import io.blockfrost.sdk.api.AccountService;
 import io.blockfrost.sdk.api.exception.APIException;
-import io.blockfrost.sdk.api.model.Account;
-import io.blockfrost.sdk.api.model.AccountDelegationHistory;
-import io.blockfrost.sdk.api.model.AccountHistory;
-import io.blockfrost.sdk.api.model.AccountRewardHistory;
+import io.blockfrost.sdk.api.model.*;
 import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.retrofit.AccountsApi;
 import retrofit2.Call;
@@ -134,5 +131,35 @@ public class AccountServiceImpl extends BaseImpl implements AccountService {
     @Override
     public List<AccountDelegationHistory> getAccountDelegationHistory(String stakeAddress) throws APIException {
         return getAccountDelegationHistory(stakeAddress, OrderEnum.asc);
+    }
+
+    @Override
+    public List<AccountRegistrationHistory> getAccountRegistrationHistory(String stakeAddress, int count, int page, OrderEnum order) throws APIException {
+        validateStakeAddress(stakeAddress);
+
+        Call<List<AccountRegistrationHistory>> call = accountsApi.accountsStakeAddressRegistrationsGet(getProjectId(), stakeAddress, count, page, order.name());
+
+        try{
+            Response<List<AccountRegistrationHistory>> response = call.execute();
+            return processResponse(response);
+        } catch (IOException exp){
+            throw new APIException("Exception while fetching account registration history for stakeAddress: " + stakeAddress, exp);
+        }
+    }
+
+    @Override
+    public List<AccountRegistrationHistory> getAccountRegistrationHistory(String stakeAddress, int count, int page) throws APIException {
+        return getAccountRegistrationHistory(stakeAddress, count, page, OrderEnum.asc);
+    }
+
+    //TODO: Implement
+    @Override
+    public List<AccountRegistrationHistory> getAccountRegistrationHistory(String stakeAddress, OrderEnum order) throws APIException {
+        return null;
+    }
+
+    @Override
+    public List<AccountRegistrationHistory> getAccountRegistrationHistory(String stakeAddress) throws APIException {
+        return getAccountRegistrationHistory(stakeAddress, OrderEnum.asc);
     }
 }
