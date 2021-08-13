@@ -11,15 +11,15 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 
 import java.io.IOException;
 
-public class BaseImpl {
+public class BaseService {
 
-    private final static Logger LOG = LoggerFactory.getLogger(BaseImpl.class);
+    private final static Logger LOG = LoggerFactory.getLogger(BaseService.class);
     private final static ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     private String baseUrl;
     private String projectId;
 
-    public BaseImpl(String baseUrl, String projectId) {
+    public BaseService(String baseUrl, String projectId) {
         this.baseUrl = baseUrl;
         this.projectId = projectId;
 

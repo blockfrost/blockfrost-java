@@ -11,7 +11,7 @@ import retrofit2.Response;
 
 import java.io.IOException;
 
-public class HealthServiceImpl extends BaseImpl implements HealthService {
+public class HealthServiceImpl extends BaseService implements HealthService {
 
     private HealthApi healthApi;
 

@@ -12,7 +12,7 @@ import retrofit2.Response;
 import java.io.IOException;
 import java.util.List;
 
-public class PoolServiceImpl extends BaseImpl implements PoolService {
+public class PoolServiceImpl extends BaseService implements PoolService {
 
     PoolsApi poolsApi;
 

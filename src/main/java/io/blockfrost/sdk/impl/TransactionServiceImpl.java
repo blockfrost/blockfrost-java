@@ -10,7 +10,7 @@ import retrofit2.Response;
 import java.io.IOException;
 import java.util.List;
 
-public class TransactionServiceImpl extends BaseImpl implements TransactionService {
+public class TransactionServiceImpl extends BaseService implements TransactionService {
 
     TransactionsApi transactionsApi;
 

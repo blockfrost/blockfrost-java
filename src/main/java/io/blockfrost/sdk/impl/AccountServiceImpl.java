@@ -11,7 +11,7 @@ import retrofit2.Response;
 import java.io.IOException;
 import java.util.List;
 
-public class AccountServiceImpl extends BaseImpl implements AccountService {
+public class AccountServiceImpl extends BaseService implements AccountService {
 
     private AccountsApi accountsApi;
 

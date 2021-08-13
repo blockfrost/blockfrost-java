@@ -9,7 +9,7 @@ import retrofit2.Response;
 
 import java.io.IOException;
 
-public class LedgerServiceImpl extends BaseImpl implements LedgerService {
+public class LedgerServiceImpl extends BaseService implements LedgerService {
 
     LedgerApi ledgerApi;
 
