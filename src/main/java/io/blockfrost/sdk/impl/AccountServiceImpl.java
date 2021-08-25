@@ -2,20 +2,18 @@ package io.blockfrost.sdk.impl;
 
 import io.blockfrost.sdk.api.AccountService;
 import io.blockfrost.sdk.api.exception.APIException;
+import io.blockfrost.sdk.api.exception.RuntimeAPIException;
 import io.blockfrost.sdk.api.model.*;
+import io.blockfrost.sdk.api.util.ConfigHelper;
 import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.retrofit.AccountsApi;
-import lombok.SneakyThrows;
 import retrofit2.Call;
 import retrofit2.Response;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ForkJoinPool;
-import java.util.concurrent.Future;
+import java.util.concurrent.CompletableFuture;
 
 public class AccountServiceImpl extends BaseService implements AccountService {
 
@@ -67,10 +65,42 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         return getAccountHistory(stakeAddress, count, page, OrderEnum.asc);
     }
 
-    //TODO: Implement
     @Override
     public List<AccountHistory> getAccountHistory(String stakeAddress, OrderEnum order) throws APIException {
-        return null;
+
+        List<AccountHistory> responseList = new ArrayList<>();
+        boolean stopExecution = false;
+        int currentPageCount = 1;
+        int numThreads = ConfigHelper.threadCount();
+
+        while (!stopExecution) {
+
+            List<CompletableFuture<List<AccountHistory>>> completableFutures = new ArrayList<>();
+
+            for (int i = 0; i < numThreads; i++) {
+
+                int finalCurrentPageCount = currentPageCount + i;
+
+                completableFutures.add(CompletableFuture.supplyAsync(() -> {
+                    try {
+                        return getAccountHistory(stakeAddress, 100, finalCurrentPageCount, order);
+                    } catch (APIException e) {
+                        throw new RuntimeAPIException(e);
+                    }
+                }));
+            }
+
+            try {
+                stopExecution = fetchData(completableFutures, responseList);
+            } catch (Exception e) {
+                throw new APIException("Exception while fetching account history");
+            }
+
+            currentPageCount += numThreads;
+        }
+
+        return responseList;
+
     }
 
     @Override
@@ -98,10 +128,42 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         return getAccountRewardHistory(stakeAddress, count, page, OrderEnum.asc);
     }
 
-    //TODO: Implement
     @Override
     public List<AccountRewardHistory> getAccountRewardHistory(String stakeAddress, OrderEnum order) throws APIException {
-        return null;
+
+        List<AccountRewardHistory> responseList = new ArrayList<>();
+        boolean stopExecution = false;
+        int currentPageCount = 1;
+        int numThreads = ConfigHelper.threadCount();
+
+        while (!stopExecution) {
+
+            List<CompletableFuture<List<AccountRewardHistory>>> completableFutures = new ArrayList<>();
+
+            for (int i = 0; i < numThreads; i++) {
+
+                int finalCurrentPageCount = currentPageCount + i;
+
+                completableFutures.add(CompletableFuture.supplyAsync(() -> {
+                    try {
+                        return getAccountRewardHistory(stakeAddress, 100, finalCurrentPageCount, order);
+                    } catch (APIException e) {
+                        throw new RuntimeAPIException(e);
+                    }
+                }));
+            }
+
+            try {
+                stopExecution = fetchData(completableFutures, responseList);
+            } catch (Exception e) {
+                throw new APIException("Exception while fetching account history");
+            }
+
+            currentPageCount += numThreads;
+        }
+
+        return responseList;
+
     }
 
     @Override
@@ -128,10 +190,42 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         return getAccountDelegationHistory(stakeAddress, count, page, OrderEnum.asc);
     }
 
-    //TODO: Implement
     @Override
     public List<AccountDelegationHistory> getAccountDelegationHistory(String stakeAddress, OrderEnum order) throws APIException {
-        return null;
+
+        List<AccountDelegationHistory> responseList = new ArrayList<>();
+        boolean stopExecution = false;
+        int currentPageCount = 1;
+        int numThreads = ConfigHelper.threadCount();
+
+        while (!stopExecution) {
+
+            List<CompletableFuture<List<AccountDelegationHistory>>> completableFutures = new ArrayList<>();
+
+            for (int i = 0; i < numThreads; i++) {
+
+                int finalCurrentPageCount = currentPageCount + i;
+
+                completableFutures.add(CompletableFuture.supplyAsync(() -> {
+                    try {
+                        return getAccountDelegationHistory(stakeAddress, 100, finalCurrentPageCount, order);
+                    } catch (APIException e) {
+                        throw new RuntimeAPIException(e);
+                    }
+                }));
+            }
+
+            try {
+                stopExecution = fetchData(completableFutures, responseList);
+            } catch (Exception e) {
+                throw new APIException("Exception while fetching account history");
+            }
+
+            currentPageCount += numThreads;
+        }
+
+        return responseList;
+
     }
 
     @Override
@@ -158,10 +252,42 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         return getAccountRegistrationHistory(stakeAddress, count, page, OrderEnum.asc);
     }
 
-    //TODO: Implement
     @Override
     public List<AccountRegistrationHistory> getAccountRegistrationHistory(String stakeAddress, OrderEnum order) throws APIException {
-        return null;
+
+        List<AccountRegistrationHistory> responseList = new ArrayList<>();
+        boolean stopExecution = false;
+        int currentPageCount = 1;
+        int numThreads = ConfigHelper.threadCount();
+
+        while (!stopExecution) {
+
+            List<CompletableFuture<List<AccountRegistrationHistory>>> completableFutures = new ArrayList<>();
+
+            for (int i = 0; i < numThreads; i++) {
+
+                int finalCurrentPageCount = currentPageCount + i;
+
+                completableFutures.add(CompletableFuture.supplyAsync(() -> {
+                    try {
+                        return getAccountRegistrationHistory(stakeAddress, 100, finalCurrentPageCount, order);
+                    } catch (APIException e) {
+                        throw new RuntimeAPIException(e);
+                    }
+                }));
+            }
+
+            try {
+                stopExecution = fetchData(completableFutures, responseList);
+            } catch (Exception e) {
+                throw new APIException("Exception while fetching account history");
+            }
+
+            currentPageCount += numThreads;
+        }
+
+        return responseList;
+
     }
 
     @Override
@@ -188,10 +314,42 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         return getAccountWithdrawalHistory(stakeAddress, count, page, OrderEnum.asc);
     }
 
-    //TODO: Implement
     @Override
     public List<AccountWithdrawalHistory> getAccountWithdrawalHistory(String stakeAddress, OrderEnum order) throws APIException {
-        return null;
+
+        List<AccountWithdrawalHistory> responseList = new ArrayList<>();
+        boolean stopExecution = false;
+        int currentPageCount = 1;
+        int numThreads = ConfigHelper.threadCount();
+
+        while (!stopExecution) {
+
+            List<CompletableFuture<List<AccountWithdrawalHistory>>> completableFutures = new ArrayList<>();
+
+            for (int i = 0; i < numThreads; i++) {
+
+                int finalCurrentPageCount = currentPageCount + i;
+
+                completableFutures.add(CompletableFuture.supplyAsync(() -> {
+                    try {
+                        return getAccountWithdrawalHistory(stakeAddress, 100, finalCurrentPageCount, order);
+                    } catch (APIException e) {
+                        throw new RuntimeAPIException(e);
+                    }
+                }));
+            }
+
+            try {
+                stopExecution = fetchData(completableFutures, responseList);
+            } catch (Exception e) {
+                throw new APIException("Exception while fetching account history");
+            }
+
+            currentPageCount += numThreads;
+        }
+
+        return responseList;
+
     }
 
     @Override
@@ -218,10 +376,43 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         return getAccountMirHistory(stakeAddress, count, page, OrderEnum.asc);
     }
 
-    //TODO: Implement
+
     @Override
     public List<AccountMirHistory> getAccountMirHistory(String stakeAddress, OrderEnum order) throws APIException {
-        return null;
+
+        List<AccountMirHistory> responseList = new ArrayList<>();
+        boolean stopExecution = false;
+        int currentPageCount = 1;
+        int numThreads = ConfigHelper.threadCount();
+
+        while (!stopExecution) {
+
+            List<CompletableFuture<List<AccountMirHistory>>> completableFutures = new ArrayList<>();
+
+            for (int i = 0; i < numThreads; i++) {
+
+                int finalCurrentPageCount = currentPageCount + i;
+
+                completableFutures.add(CompletableFuture.supplyAsync(() -> {
+                    try {
+                        return getAccountMirHistory(stakeAddress, 100, finalCurrentPageCount, order);
+                    } catch (APIException e) {
+                        throw new RuntimeAPIException(e);
+                    }
+                }));
+            }
+
+            try {
+                stopExecution = fetchData(completableFutures, responseList);
+            } catch (Exception e) {
+                throw new APIException("Exception while fetching account history");
+            }
+
+            currentPageCount += numThreads;
+        }
+
+        return responseList;
+
     }
 
     @Override
@@ -248,10 +439,42 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         return getAccountAddresses(stakeAddress, count, page, OrderEnum.asc);
     }
 
-    //TODO: Implement
     @Override
     public List<AccountAddress> getAccountAddresses(String stakeAddress, OrderEnum order) throws APIException {
-        return null;
+
+        List<AccountAddress> responseList = new ArrayList<>();
+        boolean stopExecution = false;
+        int currentPageCount = 1;
+        int numThreads = ConfigHelper.threadCount();
+
+        while (!stopExecution) {
+
+            List<CompletableFuture<List<AccountAddress>>> completableFutures = new ArrayList<>();
+
+            for (int i = 0; i < numThreads; i++) {
+
+                int finalCurrentPageCount = currentPageCount + i;
+
+                completableFutures.add(CompletableFuture.supplyAsync(() -> {
+                    try {
+                        return getAccountAddresses(stakeAddress, 100, finalCurrentPageCount, order);
+                    } catch (APIException e) {
+                        throw new RuntimeAPIException(e);
+                    }
+                }));
+            }
+
+            try {
+                stopExecution = fetchData(completableFutures, responseList);
+            } catch (Exception e) {
+                throw new APIException("Exception while fetching account history");
+            }
+
+            currentPageCount += numThreads;
+        }
+
+        return responseList;
+
     }
 
     @Override
@@ -278,44 +501,42 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         return getAccountAssets(stakeAddress, count, page, OrderEnum.asc);
     }
 
-    //TODO: Implement
-    @SneakyThrows
     @Override
     public List<AccountAsset> getAccountAssets(String stakeAddress, OrderEnum order) throws APIException {
-        ForkJoinPool pool = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
+
         List<AccountAsset> responseList = new ArrayList<>();
         boolean stopExecution = false;
-        int currentPageCount = 0;
+        int currentPageCount = 1;
+        int numThreads = ConfigHelper.threadCount();
 
         while (!stopExecution) {
 
-            Collection<Callable<List<AccountAsset>>> tasks = new ArrayList<>();
+            List<CompletableFuture<List<AccountAsset>>> completableFutures = new ArrayList<>();
 
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < numThreads; i++) {
 
-                int finalCurrentPageCount = currentPageCount;
-                tasks.add(new Callable<List<AccountAsset>>() {
-                    @Override
-                    public List<AccountAsset> call() throws Exception {
-                        return getAccountAssets(stakeAddress, 100, finalCurrentPageCount + 1, order);
+                int finalCurrentPageCount = currentPageCount + i;
+
+                completableFutures.add(CompletableFuture.supplyAsync(() -> {
+                    try {
+                        return getAccountAssets(stakeAddress, 100, finalCurrentPageCount, order);
+                    } catch (APIException e) {
+                        throw new RuntimeAPIException(e);
                     }
-                });
+                }));
             }
 
-            List<Future<List<AccountAsset>>> results = pool.invokeAll(tasks);
-            for(Future<List<AccountAsset>> response : results){
-                List<AccountAsset> singleExecutionList = response.get();
-                responseList.addAll(singleExecutionList);
-
-                if ( singleExecutionList.size() < 100 ){
-                    stopExecution = true;
-                }
+            try {
+                stopExecution = fetchData(completableFutures, responseList);
+            } catch (Exception e) {
+                throw new APIException("Exception while fetching account history");
             }
 
-            currentPageCount += 5;
+            currentPageCount += numThreads;
         }
 
         return responseList;
+
     }
 
     @Override

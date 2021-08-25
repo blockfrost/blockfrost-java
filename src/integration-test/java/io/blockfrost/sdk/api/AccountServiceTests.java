@@ -65,6 +65,15 @@ public class AccountServiceTests extends TestBase {
         }
 
         @Test
+        public void history_willReturn_entireHistory() throws APIException {
+
+            List<AccountHistory> historyList = accountService.getAccountHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha");
+
+            assertThat(historyList, hasSize(greaterThanOrEqualTo(0)));
+            assertThat(historyList, hasItem(allOf(hasProperty("poolId", is(notNullValue())))));
+        }
+
+        @Test
         public void history_willThrowAPIException_onNullPoolId() {
 
             Exception exception = assertThrows(APIException.class, () -> accountService.getAccountHistory(null, 3, 1));
@@ -91,6 +100,14 @@ public class AccountServiceTests extends TestBase {
             List<AccountRewardHistory> rewardHistoryList = accountService.getAccountRewardHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha", 3, 1);
 
             assertThat(rewardHistoryList, hasSize(lessThanOrEqualTo(3)));
+        }
+
+        @Test
+        public void rewardHistory_willReturn_entireRewardHistory() throws APIException {
+
+            List<AccountRewardHistory> rewardHistoryList = accountService.getAccountRewardHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha");
+
+            assertThat(rewardHistoryList, hasSize(greaterThanOrEqualTo(0)));
         }
 
         @Test
@@ -123,6 +140,14 @@ public class AccountServiceTests extends TestBase {
         }
 
         @Test
+        public void delegationHistory_willReturn_entireDelegationHistory() throws APIException {
+
+            List<AccountDelegationHistory> delegationHistoryList = accountService.getAccountDelegationHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha");
+
+            assertThat(delegationHistoryList, hasSize(greaterThanOrEqualTo(0)));
+        }
+
+        @Test
         public void delegationHistory_willThrowAPIException_onNullPoolId() {
 
             Exception exception = assertThrows(APIException.class, () -> accountService.getAccountDelegationHistory(null, 3, 1));
@@ -149,6 +174,14 @@ public class AccountServiceTests extends TestBase {
             List<AccountRegistrationHistory> registrationHistoryList = accountService.getAccountRegistrationHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha", 3, 1);
 
             assertThat(registrationHistoryList, hasSize(lessThanOrEqualTo(3)));
+        }
+
+        @Test
+        public void registrationHistory_willReturn_entireRegistrationHistory() throws APIException {
+
+            List<AccountRegistrationHistory> registrationHistoryList = accountService.getAccountRegistrationHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha");
+
+            assertThat(registrationHistoryList, hasSize(greaterThanOrEqualTo(0)));
         }
 
         @Test
@@ -181,6 +214,14 @@ public class AccountServiceTests extends TestBase {
         }
 
         @Test
+        public void withdrawalHistory_willReturn_entireWithdrawalHistory() throws APIException {
+
+            List<AccountWithdrawalHistory> withdrawalHistoryList = accountService.getAccountWithdrawalHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha");
+
+            assertThat(withdrawalHistoryList, hasSize(greaterThanOrEqualTo(0)));
+        }
+
+        @Test
         public void withdrawalHistory_willThrowAPIException_onNullPoolId() {
 
             Exception exception = assertThrows(APIException.class, () -> accountService.getAccountWithdrawalHistory(null, 3, 1));
@@ -210,6 +251,14 @@ public class AccountServiceTests extends TestBase {
         }
 
         @Test
+        public void mirHistory_willReturn_entireMirHistory() throws APIException {
+
+            List<AccountMirHistory> mirHistoryList = accountService.getAccountMirHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha");
+
+            assertThat(mirHistoryList, hasSize(greaterThanOrEqualTo(0)));
+        }
+
+        @Test
         public void mirHistory_willThrowAPIException_onNullPoolId() {
 
             Exception exception = assertThrows(APIException.class, () -> accountService.getAccountMirHistory(null, 3, 1));
@@ -236,6 +285,14 @@ public class AccountServiceTests extends TestBase {
             List<AccountAddress> addressesList = accountService.getAccountAddresses("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha", 3, 1);
 
             assertThat(addressesList, hasSize(lessThanOrEqualTo(3)));
+        }
+
+        @Test
+        public void addresses_willReturn_allAddresses() throws APIException {
+
+            List<AccountAddress> addressesList = accountService.getAccountAddresses("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha");
+
+            assertThat(addressesList, hasSize(greaterThanOrEqualTo(0)));
         }
 
         @Test
@@ -272,7 +329,7 @@ public class AccountServiceTests extends TestBase {
 
             List<AccountAsset> assetsList = accountService.getAccountAssets("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha");
 
-            assertThat(assetsList, hasSize(lessThanOrEqualTo(3)));
+            assertThat(assetsList, hasSize(greaterThanOrEqualTo(0)));
         }
 
         @Test
