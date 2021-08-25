@@ -3,6 +3,8 @@ package io.blockfrost.sdk.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.api.model.ResponseError;
+import io.blockfrost.sdk.api.util.RateLimitHelper;
+import io.github.resilience4j.retrofit.RateLimiterCallAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import retrofit2.Response;
@@ -10,6 +12,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class BaseImpl {
 
@@ -29,10 +33,13 @@ public class BaseImpl {
     }
 
     protected Retrofit getRetrofit() {
+
         return new Retrofit.Builder()
+                .addCallAdapterFactory( RateLimiterCallAdapter.of(RateLimitHelper.rateLimiter()))
                 .baseUrl(getBaseUrl())
                 .addConverterFactory(JacksonConverterFactory.create())
                 .build();
+
     }
 
     public String getBaseUrl() {
@@ -56,6 +63,28 @@ public class BaseImpl {
 
     protected <T> T getApiClient(Class<T> clazz) {
         return getRetrofit().create(clazz);
+    }
+
+    protected <T> boolean fetchData(List<CompletableFuture<List<T>>> completableFutureList, List<T> returnList ) throws Exception {
+
+        boolean noMoreData = false;
+
+        CompletableFuture<Void> combinedFuture
+                = CompletableFuture.allOf(completableFutureList.toArray(new CompletableFuture[completableFutureList.size()]));
+
+        combinedFuture.get();
+
+        for ( CompletableFuture<List<T>> completableFuture : completableFutureList ){
+           List<T> result = completableFuture.join();
+           returnList.addAll(result);
+
+            if ( result.size() < 100 ){
+                noMoreData = true;
+            }
+        }
+
+        return noMoreData;
+
     }
 
 }

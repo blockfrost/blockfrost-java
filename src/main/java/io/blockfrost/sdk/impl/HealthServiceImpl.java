@@ -10,6 +10,7 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 public class HealthServiceImpl extends BaseImpl implements HealthService {
 
@@ -54,6 +55,7 @@ public class HealthServiceImpl extends BaseImpl implements HealthService {
             Response<ResponseBody> apiRootResponse = apiRootCall.execute();
             ResponseBody responseBody = apiRootResponse.raw().body();
             //return processResponse(apiRootResponse);
+            TimeUnit.SECONDS.sleep(1);
             return "done";
         } catch (Exception exp) {
             throw new APIException("Exception while fetching Api Root", exp);

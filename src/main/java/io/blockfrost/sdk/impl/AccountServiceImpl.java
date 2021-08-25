@@ -5,11 +5,17 @@ import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.api.model.*;
 import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.retrofit.AccountsApi;
+import lombok.SneakyThrows;
 import retrofit2.Call;
 import retrofit2.Response;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.Future;
 
 public class AccountServiceImpl extends BaseImpl implements AccountService {
 
@@ -273,9 +279,43 @@ public class AccountServiceImpl extends BaseImpl implements AccountService {
     }
 
     //TODO: Implement
+    @SneakyThrows
     @Override
     public List<AccountAsset> getAccountAssets(String stakeAddress, OrderEnum order) throws APIException {
-        return null;
+        ForkJoinPool pool = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
+        List<AccountAsset> responseList = new ArrayList<>();
+        boolean stopExecution = false;
+        int currentPageCount = 0;
+
+        while (!stopExecution) {
+
+            Collection<Callable<List<AccountAsset>>> tasks = new ArrayList<>();
+
+            for (int i = 0; i < 5; i++) {
+
+                int finalCurrentPageCount = currentPageCount;
+                tasks.add(new Callable<List<AccountAsset>>() {
+                    @Override
+                    public List<AccountAsset> call() throws Exception {
+                        return getAccountAssets(stakeAddress, 100, finalCurrentPageCount + 1, order);
+                    }
+                });
+            }
+
+            List<Future<List<AccountAsset>>> results = pool.invokeAll(tasks);
+            for(Future<List<AccountAsset>> response : results){
+                List<AccountAsset> singleExecutionList = response.get();
+                responseList.addAll(singleExecutionList);
+
+                if ( singleExecutionList.size() < 100 ){
+                    stopExecution = true;
+                }
+            }
+
+            currentPageCount += 5;
+        }
+
+        return responseList;
     }
 
     @Override

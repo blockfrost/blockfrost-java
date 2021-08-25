@@ -111,6 +111,15 @@ public class PoolServiceTests extends TestBase {
         }
 
         @Test
+        public void pools_willReturn_allPools() throws APIException {
+
+            List<String> poolList = poolService.getPools();
+
+            assertThat(poolList, hasSize(greaterThanOrEqualTo(0)));
+
+        }
+
+        @Test
         public void pools_willThrowAPIException_onCountGreaterThan100() {
 
             Exception exception = assertThrows(APIException.class, () -> poolService.getPools(101, 1));
@@ -155,6 +164,15 @@ public class PoolServiceTests extends TestBase {
         }
 
         @Test
+        public void retiredPools_willReturn_allRetiredPools() throws APIException {
+
+            List<PoolRetirementInfo> poolList = poolService.getRetiredPools();
+
+            assertThat(poolList, hasSize(greaterThanOrEqualTo(0)));
+
+        }
+
+        @Test
         public void retiredPools_willThrowAPIException_onCountGreaterThan100() {
 
             Exception exception = assertThrows(APIException.class, () -> poolService.getRetiredPools(101, 1));
@@ -182,6 +200,15 @@ public class PoolServiceTests extends TestBase {
             List<PoolRetirementInfo> poolList = poolService.getRetiringPools(2, 1);
 
             assertThat(poolList, hasSize(lessThanOrEqualTo(2)));
+        }
+
+        @Test
+        public void retiringPools_willReturn_allRetiringPools() throws APIException {
+
+            List<PoolRetirementInfo> poolList = poolService.getRetiredPools();
+
+            assertThat(poolList, hasSize(greaterThanOrEqualTo(0)));
+
         }
 
         @Test
@@ -279,6 +306,17 @@ public class PoolServiceTests extends TestBase {
         }
 
         @Test
+        public void poolHistory_willReturn_entireHistory() throws APIException {
+
+            List<PoolHistory> poolList = poolService.getPoolHistory("pool1adur9jcn0dkjpm3v8ayf94yn3fe5xfk2rqfz7rfpuh6cw6evd7w");
+
+            assertThat(poolList, hasSize(greaterThanOrEqualTo(0)));
+
+        }
+
+
+
+        @Test
         public void poolHistory_willThrowAPIException_onCountGreaterThan100() {
 
             Exception exception = assertThrows(APIException.class, () -> poolService.getPoolHistory("pool1adur9jcn0dkjpm3v8ayf94yn3fe5xfk2rqfz7rfpuh6cw6evd7w", 101, 1));
@@ -320,7 +358,7 @@ public class PoolServiceTests extends TestBase {
         }
 
         @Test
-        public void pool_willThrowAPIException_onNullPoolId() {
+        public void poolMetadata_willThrowAPIException_onNullPoolId() {
 
             Exception exception = assertThrows(APIException.class, () -> poolService.getPoolMetadata(null));
             assertThat(exception.getMessage(), is("PoolId cannot be null or empty"));
@@ -350,7 +388,7 @@ public class PoolServiceTests extends TestBase {
         }
 
         @Test
-        public void pool_willThrowAPIException_onNullPoolId() {
+        public void poolRelays_willThrowAPIException_onNullPoolId() {
 
             Exception exception = assertThrows(APIException.class, () -> poolService.getPoolRelays(null));
             assertThat(exception.getMessage(), is("PoolId cannot be null or empty"));
@@ -395,6 +433,15 @@ public class PoolServiceTests extends TestBase {
         }
 
         @Test
+        public void poolDelegators_willReturn_allPoolDelegators() throws APIException {
+
+            List<PoolDelegator> poolList = poolService.getPoolDelegators("pool126zlx7728y7xs08s8epg9qp393kyafy9rzr89g4qkvv4cv93zem");
+
+            assertThat(poolList, hasSize(greaterThanOrEqualTo(0)));
+
+        }
+
+        @Test
         public void poolDelegators_willThrowAPIException_onCountGreaterThan100() {
 
             Exception exception = assertThrows(APIException.class, () -> poolService.getPoolDelegators("pool126zlx7728y7xs08s8epg9qp393kyafy9rzr89g4qkvv4cv93zem", 101, 1));
@@ -430,6 +477,15 @@ public class PoolServiceTests extends TestBase {
             List<String> poolBlockList = poolService.getPoolBlocks("pool126zlx7728y7xs08s8epg9qp393kyafy9rzr89g4qkvv4cv93zem", 3, 1, OrderEnum.asc);
 
             assertThat(poolBlockList, hasSize(0));
+
+        }
+
+        @Test
+        public void poolBlocks_willReturn_allPoolBlocks() throws APIException {
+
+            List<String> poolList = poolService.getPoolBlocks("pool126zlx7728y7xs08s8epg9qp393kyafy9rzr89g4qkvv4cv93zem");
+
+            assertThat(poolList, hasSize(greaterThanOrEqualTo(0)));
 
         }
 
@@ -497,6 +553,15 @@ public class PoolServiceTests extends TestBase {
 
             assertThat(poolUpdateList, hasSize(2));
             assertThat(poolUpdateList, contains(expectedPoolUpdateList.toArray()));
+
+        }
+
+        @Test
+        public void poolUpdates_willReturn_allPoolUpdates() throws APIException {
+
+            List<PoolUpdate> poolList = poolService.getPoolUpdates("pool126zlx7728y7xs08s8epg9qp393kyafy9rzr89g4qkvv4cv93zem");
+
+            assertThat(poolList, hasSize(greaterThanOrEqualTo(0)));
 
         }
 

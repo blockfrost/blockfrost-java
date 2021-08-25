@@ -18,6 +18,10 @@ dependencies {
 //    implementation group: 'com.google.guava', name: 'guava', version: '30.1.1-jre'
 //    implementation("com.squareup.okhttp3:okhttp:4.9.1")
 
+    compile "io.github.resilience4j:resilience4j-ratelimiter:1.7.1"
+    compile "io.github.resilience4j:resilience4j-retry:1.7.1"
+    implementation group: 'io.github.resilience4j', name: 'resilience4j-retrofit', version: '0.9.0'
+
     compileOnly 'org.projectlombok:lombok:1.18.20'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
 

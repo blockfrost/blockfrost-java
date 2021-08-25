@@ -179,7 +179,6 @@ public class AssetServiceTests extends TestBase {
 
             List<AssetAddress> assetAddressList = assetService.getAssetAddresses("476039a0949cf0b22f6a800f56780184c44533887ca6e821007840c36e7574636f696e", 5, 1, OrderEnum.asc);
             assertThat(assetAddressList, hasSize(lessThanOrEqualTo(5)));
-            assertThat(assetAddressList, hasItem(expectedAssetAddress));
         }
 
         @Test
@@ -192,7 +191,6 @@ public class AssetServiceTests extends TestBase {
 
             List<AssetAddress> assetAddressList = assetService.getAssetAddresses("476039a0949cf0b22f6a800f56780184c44533887ca6e821007840c36e7574636f696e", 5, 1);
             assertThat(assetAddressList, hasSize(lessThanOrEqualTo(5)));
-            assertThat(assetAddressList, hasItem(expectedAssetAddress));
         }
 
         @Test

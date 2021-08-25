@@ -2,7 +2,9 @@ package io.blockfrost.sdk.impl;
 
 import io.blockfrost.sdk.api.PoolService;
 import io.blockfrost.sdk.api.exception.APIException;
+import io.blockfrost.sdk.api.exception.RuntimeAPIException;
 import io.blockfrost.sdk.api.model.*;
+import io.blockfrost.sdk.api.util.ConfigHelper;
 import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.helper.ValidationHelper;
 import io.blockfrost.sdk.impl.retrofit.PoolsApi;
@@ -10,7 +12,9 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class PoolServiceImpl extends BaseImpl implements PoolService {
 
@@ -47,10 +51,40 @@ public class PoolServiceImpl extends BaseImpl implements PoolService {
         return getPools(count, page, OrderEnum.asc);
     }
 
-    //TODO: Implement using parallel fetch
     @Override
     public List<String> getPools(OrderEnum order) throws APIException {
-        return null;
+        List<String> responseList = new ArrayList<>();
+        boolean stopExecution = false;
+        int currentPageCount = 1;
+        int numThreads = ConfigHelper.threadCount();
+
+        while (!stopExecution) {
+
+            List<CompletableFuture<List<String>>> completableFutures = new ArrayList<>();
+
+            for (int i = 0; i < numThreads; i++) {
+
+                int finalCurrentPageCount = currentPageCount + i;
+
+                completableFutures.add(CompletableFuture.supplyAsync(() -> {
+                    try {
+                        return getPools(100, finalCurrentPageCount, order);
+                    } catch (APIException e) {
+                        throw new RuntimeAPIException(e);
+                    }
+                }));
+            }
+
+            try {
+                stopExecution = fetchData(completableFutures, responseList);
+            } catch (Exception e) {
+                throw new APIException("Exception while fetching all pools");
+            }
+
+            currentPageCount += numThreads;
+        }
+
+        return responseList;
     }
 
     @Override
@@ -78,10 +112,41 @@ public class PoolServiceImpl extends BaseImpl implements PoolService {
         return getRetiredPools(count, page, OrderEnum.asc);
     }
 
-    //TODO: Implement using parallel fetch
     @Override
     public List<PoolRetirementInfo> getRetiredPools(OrderEnum order) throws APIException {
-        return null;
+
+        List<PoolRetirementInfo> responseList = new ArrayList<>();
+        boolean stopExecution = false;
+        int currentPageCount = 1;
+        int numThreads = ConfigHelper.threadCount();
+
+        while (!stopExecution) {
+
+            List<CompletableFuture<List<PoolRetirementInfo>>> completableFutures = new ArrayList<>();
+
+            for (int i = 0; i < numThreads; i++) {
+
+                int finalCurrentPageCount = currentPageCount + i;
+
+                completableFutures.add(CompletableFuture.supplyAsync(() -> {
+                    try {
+                        return getRetiredPools(100, finalCurrentPageCount, order);
+                    } catch (APIException e) {
+                        throw new RuntimeAPIException(e);
+                    }
+                }));
+            }
+
+            try {
+                stopExecution = fetchData(completableFutures, responseList);
+            } catch (Exception e) {
+                throw new APIException("Exception while fetching all retired pools");
+            }
+
+            currentPageCount += numThreads;
+        }
+
+        return responseList;
     }
 
     @Override
@@ -110,10 +175,42 @@ public class PoolServiceImpl extends BaseImpl implements PoolService {
         return getRetiringPools(count, page, OrderEnum.asc);
     }
 
-    //TODO: Implement using parallel fetch
     @Override
     public List<PoolRetirementInfo> getRetiringPools(OrderEnum order) throws APIException {
-        return null;
+
+        List<PoolRetirementInfo> responseList = new ArrayList<>();
+        boolean stopExecution = false;
+        int currentPageCount = 1;
+        int numThreads = ConfigHelper.threadCount();
+
+        while (!stopExecution) {
+
+            List<CompletableFuture<List<PoolRetirementInfo>>> completableFutures = new ArrayList<>();
+
+            for (int i = 0; i < numThreads; i++) {
+
+                int finalCurrentPageCount = currentPageCount + i;
+
+                completableFutures.add(CompletableFuture.supplyAsync(() -> {
+                    try {
+                        return getRetiringPools(100, finalCurrentPageCount, order);
+                    } catch (APIException e) {
+                        throw new RuntimeAPIException(e);
+                    }
+                }));
+            }
+
+            try {
+                stopExecution = fetchData(completableFutures, responseList);
+            } catch (Exception e) {
+                throw new APIException("Exception while fetching all retiring pools");
+            }
+
+            currentPageCount += numThreads;
+        }
+
+        return responseList;
+
     }
 
     @Override
@@ -158,10 +255,42 @@ public class PoolServiceImpl extends BaseImpl implements PoolService {
         return getPoolHistory(poolId, count, page, OrderEnum.asc);
     }
 
-    //TODO: Implement using parallel fetch
     @Override
     public List<PoolHistory> getPoolHistory(String poolId, OrderEnum order) throws APIException {
-        return null;
+
+        List<PoolHistory> responseList = new ArrayList<>();
+        boolean stopExecution = false;
+        int currentPageCount = 1;
+        int numThreads = ConfigHelper.threadCount();
+
+        while (!stopExecution) {
+
+            List<CompletableFuture<List<PoolHistory>>> completableFutures = new ArrayList<>();
+
+            for (int i = 0; i < numThreads; i++) {
+
+                int finalCurrentPageCount = currentPageCount + i;
+
+                completableFutures.add(CompletableFuture.supplyAsync(() -> {
+                    try {
+                        return getPoolHistory(poolId, 100, finalCurrentPageCount, order);
+                    } catch (APIException e) {
+                        throw new RuntimeAPIException(e);
+                    }
+                }));
+            }
+
+            try {
+                stopExecution = fetchData(completableFutures, responseList);
+            } catch (Exception e) {
+                throw new APIException("Exception while fetching all history for pool id: " + poolId);
+            }
+
+            currentPageCount += numThreads;
+        }
+
+        return responseList;
+
     }
 
     @Override
@@ -221,10 +350,43 @@ public class PoolServiceImpl extends BaseImpl implements PoolService {
         return getPoolDelegators(poolId, count, page, OrderEnum.asc);
     }
 
-    //TODO: Implement using parallel fetch
+
     @Override
     public List<PoolDelegator> getPoolDelegators(String poolId, OrderEnum order) throws APIException {
-        return null;
+
+        List<PoolDelegator> responseList = new ArrayList<>();
+        boolean stopExecution = false;
+        int currentPageCount = 1;
+        int numThreads = ConfigHelper.threadCount();
+
+        while (!stopExecution) {
+
+            List<CompletableFuture<List<PoolDelegator>>> completableFutures = new ArrayList<>();
+
+            for (int i = 0; i < numThreads; i++) {
+
+                int finalCurrentPageCount = currentPageCount + i;
+
+                completableFutures.add(CompletableFuture.supplyAsync(() -> {
+                    try {
+                        return getPoolDelegators(poolId, 100, finalCurrentPageCount, order);
+                    } catch (APIException e) {
+                        throw new RuntimeAPIException(e);
+                    }
+                }));
+            }
+
+            try {
+                stopExecution = fetchData(completableFutures, responseList);
+            } catch (Exception e) {
+                throw new APIException("Exception while fetching all delegators for poolId: " + poolId);
+            }
+
+            currentPageCount += numThreads;
+        }
+
+        return responseList;
+
     }
 
     @Override
@@ -254,10 +416,42 @@ public class PoolServiceImpl extends BaseImpl implements PoolService {
         return getPoolBlocks(poolId, count, page, OrderEnum.asc);
     }
 
-    //TODO: Implement using parallel fetch
     @Override
     public List<String> getPoolBlocks(String poolId, OrderEnum order) throws APIException {
-        return null;
+
+        List<String> responseList = new ArrayList<>();
+        boolean stopExecution = false;
+        int currentPageCount = 1;
+        int numThreads = ConfigHelper.threadCount();
+
+        while (!stopExecution) {
+
+            List<CompletableFuture<List<String>>> completableFutures = new ArrayList<>();
+
+            for (int i = 0; i < numThreads; i++) {
+
+                int finalCurrentPageCount = currentPageCount + i;
+
+                completableFutures.add(CompletableFuture.supplyAsync(() -> {
+                    try {
+                        return getPoolBlocks(poolId, 100, finalCurrentPageCount, order);
+                    } catch (APIException e) {
+                        throw new RuntimeAPIException(e);
+                    }
+                }));
+            }
+
+            try {
+                stopExecution = fetchData(completableFutures, responseList);
+            } catch (Exception e) {
+                throw new APIException("Exception while fetching all blocks for poolId: " + poolId);
+            }
+
+            currentPageCount += numThreads;
+        }
+
+        return responseList;
+
     }
 
     @Override
@@ -286,10 +480,42 @@ public class PoolServiceImpl extends BaseImpl implements PoolService {
         return getPoolUpdates(poolId, count, page, OrderEnum.asc);
     }
 
-    //TODO: Implement using parallel fetch
     @Override
     public List<PoolUpdate> getPoolUpdates(String poolId, OrderEnum order) throws APIException {
-        return null;
+
+        List<PoolUpdate> responseList = new ArrayList<>();
+        boolean stopExecution = false;
+        int currentPageCount = 1;
+        int numThreads = ConfigHelper.threadCount();
+
+        while (!stopExecution) {
+
+            List<CompletableFuture<List<PoolUpdate>>> completableFutures = new ArrayList<>();
+
+            for (int i = 0; i < numThreads; i++) {
+
+                int finalCurrentPageCount = currentPageCount + i;
+
+                completableFutures.add(CompletableFuture.supplyAsync(() -> {
+                    try {
+                        return getPoolUpdates(poolId, 100, finalCurrentPageCount, order);
+                    } catch (APIException e) {
+                        throw new RuntimeAPIException(e);
+                    }
+                }));
+            }
+
+            try {
+                stopExecution = fetchData(completableFutures, responseList);
+            } catch (Exception e) {
+                throw new APIException("Exception while fetching all blocks for poolId: " + poolId);
+            }
+
+            currentPageCount += numThreads;
+        }
+
+        return responseList;
+
     }
 
     @Override

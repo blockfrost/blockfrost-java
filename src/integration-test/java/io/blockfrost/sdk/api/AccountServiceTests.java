@@ -16,7 +16,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class AccountServiceTest extends TestBase {
+public class AccountServiceTests extends TestBase {
 
     AccountService accountService;
 
@@ -263,6 +263,14 @@ public class AccountServiceTest extends TestBase {
         public void assets_willReturn_assetsForCountAndPage() throws APIException {
 
             List<AccountAsset> assetsList = accountService.getAccountAssets("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha", 3, 1);
+
+            assertThat(assetsList, hasSize(lessThanOrEqualTo(3)));
+        }
+
+        @Test
+        public void assets_willReturn_allAssets() throws APIException {
+
+            List<AccountAsset> assetsList = accountService.getAccountAssets("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha");
 
             assertThat(assetsList, hasSize(lessThanOrEqualTo(3)));
         }
