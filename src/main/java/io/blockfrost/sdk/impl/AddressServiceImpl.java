@@ -2,16 +2,20 @@ package io.blockfrost.sdk.impl;
 
 import io.blockfrost.sdk.api.AddressService;
 import io.blockfrost.sdk.api.exception.APIException;
+import io.blockfrost.sdk.api.exception.RuntimeAPIException;
 import io.blockfrost.sdk.api.model.Address;
 import io.blockfrost.sdk.api.model.AddressTotal;
 import io.blockfrost.sdk.api.model.AddressUtxo;
+import io.blockfrost.sdk.api.util.ConfigHelper;
 import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.retrofit.AddressesApi;
 import retrofit2.Call;
 import retrofit2.Response;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class AddressServiceImpl extends BaseService implements AddressService {
 
@@ -74,10 +78,42 @@ public class AddressServiceImpl extends BaseService implements AddressService {
         return getAddressUtxos(address, count, page, OrderEnum.asc);
     }
 
-    //TODO: Implement
     @Override
     public List<AddressUtxo> getAddressUtxos(String address, OrderEnum order) throws APIException {
-        return null;
+
+        List<AddressUtxo> responseList = new ArrayList<>();
+        boolean stopExecution = false;
+        int currentPageCount = 1;
+        int numThreads = ConfigHelper.threadCount();
+
+        while (!stopExecution) {
+
+            List<CompletableFuture<List<AddressUtxo>>> completableFutures = new ArrayList<>();
+
+            for (int i = 0; i < numThreads; i++) {
+
+                int finalCurrentPageCount = currentPageCount + i;
+
+                completableFutures.add(CompletableFuture.supplyAsync(() -> {
+                    try {
+                        return getAddressUtxos(address, 100, finalCurrentPageCount, order);
+                    } catch (APIException e) {
+                        throw new RuntimeAPIException(e);
+                    }
+                }));
+            }
+
+            try {
+                stopExecution = fetchData(completableFutures, responseList);
+            } catch (Exception e) {
+                throw new APIException("Exception while fetching all UTXos for address: " + address);
+            }
+
+            currentPageCount += numThreads;
+        }
+
+        return responseList;
+
     }
 
     @Override

@@ -17,6 +17,7 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -66,6 +67,15 @@ public class AddressServiceTests extends TestBase {
             List<AddressUtxo> addressUtxoList = addressService.getAddressUtxos("addr_test1qqy07jaue8tru20877ak7wxpuagrqqpm2pdacfjjtv4z3elcn8dnk52656jspgq03ts2sl6jvefwakdacwfy605m9ydselehdg", 2, 1);
 
             assertThat(addressUtxoList, hasSize(2));
+        }
+
+        @Test
+        public void addressUtxos_willReturn_allAddressUtxos() throws APIException {
+
+
+            List<AddressUtxo> addressUtxoList = addressService.getAddressUtxos("addr_test1qqy07jaue8tru20877ak7wxpuagrqqpm2pdacfjjtv4z3elcn8dnk52656jspgq03ts2sl6jvefwakdacwfy605m9ydselehdg");
+
+            assertThat(addressUtxoList, hasSize(greaterThanOrEqualTo(0)));
         }
 
         @Test
