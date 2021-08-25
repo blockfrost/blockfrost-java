@@ -53,6 +53,14 @@ public class AssetServiceTests extends TestBase {
             assertThat(assetList, hasSize(lessThanOrEqualTo(5)));
             assertThat(assetList, hasItem(expectedAsset));
         }
+
+        @Test
+        public void getAssets_willReturn_allAssets() throws APIException {
+
+            List<Asset> assetList = assetService.getAssets();
+            assertThat(assetList, hasSize(greaterThanOrEqualTo(0)));
+
+        }
     }
 
     @Nested
@@ -117,6 +125,14 @@ public class AssetServiceTests extends TestBase {
         }
 
         @Test
+        public void getAssetHistory_willReturn_allAssetHistory() throws APIException {
+
+            List<AssetHistory> assetHistoryList = assetService.getAssetHistory("476039a0949cf0b22f6a800f56780184c44533887ca6e821007840c36e7574636f696e");
+            assertThat(assetHistoryList, hasSize(greaterThanOrEqualTo(0)));
+
+        }
+
+        @Test
         public void getAssetHistory_willThrowAPIException_onNullAsset() {
 
             Exception exception = assertThrows(APIException.class, () -> assetService.getAssetHistory(null, 5, 1));
@@ -157,6 +173,14 @@ public class AssetServiceTests extends TestBase {
         }
 
         @Test
+        public void getAssetTransaction_willReturn_allAssetTransactions() throws APIException {
+
+            List<AssetTransaction> assetTransactionList = assetService.getAssetTransactions("476039a0949cf0b22f6a800f56780184c44533887ca6e821007840c36e7574636f696e");
+            assertThat(assetTransactionList, hasSize(greaterThanOrEqualTo(0)));
+
+        }
+
+        @Test
         public void getAssetTransaction_willThrowAPIException_onNullAsset() {
 
             Exception exception = assertThrows(APIException.class, () -> assetService.getAssetTransactions(null, 5, 1));
@@ -191,6 +215,13 @@ public class AssetServiceTests extends TestBase {
 
             List<AssetAddress> assetAddressList = assetService.getAssetAddresses("476039a0949cf0b22f6a800f56780184c44533887ca6e821007840c36e7574636f696e", 5, 1);
             assertThat(assetAddressList, hasSize(lessThanOrEqualTo(5)));
+        }
+
+        @Test
+        public void getAssetAddresses_willReturn_allAssetAddresses() throws APIException {
+
+            List<AssetAddress> assetAddressList = assetService.getAssetAddresses("476039a0949cf0b22f6a800f56780184c44533887ca6e821007840c36e7574636f696e");
+            assertThat(assetAddressList, hasSize(greaterThanOrEqualTo(0)));
         }
 
         @Test

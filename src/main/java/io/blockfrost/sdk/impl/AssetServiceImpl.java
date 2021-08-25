@@ -2,17 +2,18 @@ package io.blockfrost.sdk.impl;
 
 import io.blockfrost.sdk.api.AssetService;
 import io.blockfrost.sdk.api.exception.APIException;
-import io.blockfrost.sdk.api.model.Asset;
-import io.blockfrost.sdk.api.model.AssetAddress;
-import io.blockfrost.sdk.api.model.AssetHistory;
-import io.blockfrost.sdk.api.model.AssetTransaction;
+import io.blockfrost.sdk.api.exception.RuntimeAPIException;
+import io.blockfrost.sdk.api.model.*;
+import io.blockfrost.sdk.api.util.ConfigHelper;
 import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.retrofit.AssetsApi;
 import retrofit2.Call;
 import retrofit2.Response;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class AssetServiceImpl extends BaseService implements AssetService {
 
@@ -61,10 +62,42 @@ public class AssetServiceImpl extends BaseService implements AssetService {
         return getAssets(count, page, OrderEnum.asc);
     }
 
-    //TODO: Implement
     @Override
     public List<Asset> getAssets(OrderEnum order) throws APIException {
-        return null;
+
+        List<Asset> responseList = new ArrayList<>();
+        boolean stopExecution = false;
+        int currentPageCount = 1;
+        int numThreads = ConfigHelper.threadCount();
+
+        while (!stopExecution) {
+
+            List<CompletableFuture<List<Asset>>> completableFutures = new ArrayList<>();
+
+            for (int i = 0; i < numThreads; i++) {
+
+                int finalCurrentPageCount = currentPageCount + i;
+
+                completableFutures.add(CompletableFuture.supplyAsync(() -> {
+                    try {
+                        return getAssets( 100, finalCurrentPageCount, order);
+                    } catch (APIException e) {
+                        throw new RuntimeAPIException(e);
+                    }
+                }));
+            }
+
+            try {
+                stopExecution = fetchData(completableFutures, responseList);
+            } catch (Exception e) {
+                throw new APIException("Exception while fetching all assets");
+            }
+
+            currentPageCount += numThreads;
+        }
+
+        return responseList;
+
     }
 
     @Override
@@ -92,10 +125,42 @@ public class AssetServiceImpl extends BaseService implements AssetService {
         return getAssetHistory(asset, count, page, OrderEnum.asc);
     }
 
-    //TODO: Implement
     @Override
     public List<AssetHistory> getAssetHistory(String asset, OrderEnum order) throws APIException {
-        return null;
+
+        List<AssetHistory> responseList = new ArrayList<>();
+        boolean stopExecution = false;
+        int currentPageCount = 1;
+        int numThreads = ConfigHelper.threadCount();
+
+        while (!stopExecution) {
+
+            List<CompletableFuture<List<AssetHistory>>> completableFutures = new ArrayList<>();
+
+            for (int i = 0; i < numThreads; i++) {
+
+                int finalCurrentPageCount = currentPageCount + i;
+
+                completableFutures.add(CompletableFuture.supplyAsync(() -> {
+                    try {
+                        return getAssetHistory(asset, 100, finalCurrentPageCount, order);
+                    } catch (APIException e) {
+                        throw new RuntimeAPIException(e);
+                    }
+                }));
+            }
+
+            try {
+                stopExecution = fetchData(completableFutures, responseList);
+            } catch (Exception e) {
+                throw new APIException("Exception while fetching entire asset history");
+            }
+
+            currentPageCount += numThreads;
+        }
+
+        return responseList;
+
     }
 
     @Override
@@ -123,10 +188,42 @@ public class AssetServiceImpl extends BaseService implements AssetService {
         return getAssetTransactions(asset, count, page, OrderEnum.asc);
     }
 
-    //TODO: Implement
     @Override
     public List<AssetTransaction> getAssetTransactions(String asset, OrderEnum order) throws APIException {
-        return null;
+
+        List<AssetTransaction> responseList = new ArrayList<>();
+        boolean stopExecution = false;
+        int currentPageCount = 1;
+        int numThreads = ConfigHelper.threadCount();
+
+        while (!stopExecution) {
+
+            List<CompletableFuture<List<AssetTransaction>>> completableFutures = new ArrayList<>();
+
+            for (int i = 0; i < numThreads; i++) {
+
+                int finalCurrentPageCount = currentPageCount + i;
+
+                completableFutures.add(CompletableFuture.supplyAsync(() -> {
+                    try {
+                        return getAssetTransactions(asset, 100, finalCurrentPageCount, order);
+                    } catch (APIException e) {
+                        throw new RuntimeAPIException(e);
+                    }
+                }));
+            }
+
+            try {
+                stopExecution = fetchData(completableFutures, responseList);
+            } catch (Exception e) {
+                throw new APIException("Exception while fetching asset transactions");
+            }
+
+            currentPageCount += numThreads;
+        }
+
+        return responseList;
+
     }
 
     @Override
@@ -153,10 +250,42 @@ public class AssetServiceImpl extends BaseService implements AssetService {
         return getAssetAddresses(asset, count, page, OrderEnum.asc);
     }
 
-    //TODO: Implement
     @Override
     public List<AssetAddress> getAssetAddresses(String asset, OrderEnum order) throws APIException {
-        return null;
+
+        List<AssetAddress> responseList = new ArrayList<>();
+        boolean stopExecution = false;
+        int currentPageCount = 1;
+        int numThreads = ConfigHelper.threadCount();
+
+        while (!stopExecution) {
+
+            List<CompletableFuture<List<AssetAddress>>> completableFutures = new ArrayList<>();
+
+            for (int i = 0; i < numThreads; i++) {
+
+                int finalCurrentPageCount = currentPageCount + i;
+
+                completableFutures.add(CompletableFuture.supplyAsync(() -> {
+                    try {
+                        return getAssetAddresses(asset, 100, finalCurrentPageCount, order);
+                    } catch (APIException e) {
+                        throw new RuntimeAPIException(e);
+                    }
+                }));
+            }
+
+            try {
+                stopExecution = fetchData(completableFutures, responseList);
+            } catch (Exception e) {
+                throw new APIException("Exception while fetching asset addresses");
+            }
+
+            currentPageCount += numThreads;
+        }
+
+        return responseList;
+
     }
 
     @Override
