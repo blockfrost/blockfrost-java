@@ -86,6 +86,15 @@ public class EpochServiceTests extends TestBase {
     }
 
     @Test
+    public void nextEpochs_willReturn_allNextEpochs() throws APIException {
+
+        Epoch latestEpoch = epochService.getLatestEpoch();
+        List<Epoch> nextEpochs = epochService.getNextEpochs(latestEpoch.getEpoch() - 5 );
+        assertThat(nextEpochs, hasSize(greaterThanOrEqualTo(0)));
+
+    }
+
+    @Test
     public void previousEpochs_willReturn_previousEpochsForCountAndPage() throws APIException {
 
         Epoch expectedEpoch = Epoch.builder()
@@ -108,12 +117,29 @@ public class EpochServiceTests extends TestBase {
     }
 
     @Test
+    public void previousEpochs_willReturn_allPreviousEpochs() throws APIException {
+
+        List<Epoch> previousEpochs = epochService.getPreviousEpochs(2);
+        assertThat(previousEpochs, hasSize(greaterThanOrEqualTo(0)));
+    }
+
+    @Test
     public void activeStakesForEpoch_willReturn_activeStakesForEpochForCountAndPage() throws APIException {
 
         Epoch latestEpoch = epochService.getLatestEpoch();
         List<Stake> activeStakes = epochService.getActiveStakesForEpoch(latestEpoch.getEpoch(), 5, 1);
 
         assertThat(activeStakes, hasSize(lessThanOrEqualTo(5)));
+
+    }
+
+    @Test
+    public void activeStakesForEpoch_willReturn_allActiveStakesForEpoch() throws APIException {
+
+        Epoch latestEpoch = epochService.getLatestEpoch();
+        List<Stake> activeStakes = epochService.getActiveStakesForEpoch(latestEpoch.getEpoch());
+
+        assertThat(activeStakes, hasSize(greaterThanOrEqualTo(0)));
 
     }
 
@@ -125,6 +151,17 @@ public class EpochServiceTests extends TestBase {
         List<Stake> activeStakesForPool = epochService.getActiveStakesForEpochAndPool(latestEpoch.getEpoch(), activeStakes.get(0).getPoolId(), 5, 1);
 
         assertThat(activeStakes, hasSize(lessThanOrEqualTo(5)));
+
+    }
+
+    @Test
+    public void activeStakesForEpochAndPool_willReturn_allActiveStakesForEpochAndPool() throws APIException {
+
+        Epoch latestEpoch = epochService.getLatestEpoch();
+        List<Stake> activeStakes = epochService.getActiveStakesForEpoch(latestEpoch.getEpoch(), 1, 1);
+        List<Stake> activeStakesForPool = epochService.getActiveStakesForEpochAndPool(latestEpoch.getEpoch(), activeStakes.get(0).getPoolId());
+
+        assertThat(activeStakes, hasSize(greaterThanOrEqualTo(0)));
 
     }
 
@@ -191,6 +228,15 @@ public class EpochServiceTests extends TestBase {
     }
 
     @Test
+    public void blocksForEpoch_willReturn_allBlocksForEpoch() throws APIException {
+
+        Epoch latestEpoch = epochService.getLatestEpoch();
+        List<String> blocksForEpoch = epochService.getBlocksForEpoch(latestEpoch.getEpoch());
+        assertThat(blocksForEpoch, hasSize(greaterThanOrEqualTo(0)));
+
+    }
+
+    @Test
     public void blocksForEpochAndPool_willReturn_blocksForEpochAndPoolForCountPageAndOrder() throws APIException {
 
         Epoch latestEpoch = epochService.getLatestEpoch();
@@ -209,6 +255,17 @@ public class EpochServiceTests extends TestBase {
         List<String> blocksForEpoch = epochService.getBlocksForEpochAndPool(latestEpoch.getEpoch(), activeStakes.get(0).getPoolId(), 5, 1);
 
         assertThat(blocksForEpoch, hasSize(lessThanOrEqualTo(5)));
+
+    }
+
+    @Test
+    public void blocksForEpochAndPool_willReturn_allBlocksForEpochAndPool() throws APIException {
+
+        Epoch latestEpoch = epochService.getLatestEpoch();
+        List<Stake> activeStakes = epochService.getActiveStakesForEpoch(latestEpoch.getEpoch(), 1, 1);
+        List<String> blocksForEpoch = epochService.getBlocksForEpochAndPool(latestEpoch.getEpoch(), activeStakes.get(0).getPoolId());
+
+        assertThat(blocksForEpoch, hasSize(greaterThanOrEqualTo(0)));
 
     }
 }

@@ -2,16 +2,20 @@ package io.blockfrost.sdk.impl;
 
 import io.blockfrost.sdk.api.EpochService;
 import io.blockfrost.sdk.api.exception.APIException;
+import io.blockfrost.sdk.api.exception.RuntimeAPIException;
 import io.blockfrost.sdk.api.model.Epoch;
 import io.blockfrost.sdk.api.model.EpochParam;
 import io.blockfrost.sdk.api.model.Stake;
+import io.blockfrost.sdk.api.util.ConfigHelper;
 import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.retrofit.EpochsApi;
 import retrofit2.Call;
 import retrofit2.Response;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class EpochServiceImpl extends BaseService implements EpochService {
 
@@ -72,10 +76,42 @@ public class EpochServiceImpl extends BaseService implements EpochService {
         }
     }
 
-    //TODO: Implement
     @Override
     public List<Epoch> getNextEpochs(int number) throws APIException {
-        return null;
+
+        List<Epoch> responseList = new ArrayList<>();
+        boolean stopExecution = false;
+        int currentPageCount = 1;
+        int numThreads = ConfigHelper.threadCount();
+
+        while (!stopExecution) {
+
+            List<CompletableFuture<List<Epoch>>> completableFutures = new ArrayList<>();
+
+            for (int i = 0; i < numThreads; i++) {
+
+                int finalCurrentPageCount = currentPageCount + i;
+
+                completableFutures.add(CompletableFuture.supplyAsync(() -> {
+                    try {
+                        return getNextEpochs(number, 100, finalCurrentPageCount);
+                    } catch (APIException e) {
+                        throw new RuntimeAPIException(e);
+                    }
+                }));
+            }
+
+            try {
+                stopExecution = fetchData(completableFutures, responseList);
+            } catch (Exception e) {
+                throw new APIException("Exception while fetching all next epochs for epoch number: " + number, e );
+            }
+
+            currentPageCount += numThreads;
+        }
+
+        return responseList;
+
     }
 
     @Override
@@ -91,10 +127,42 @@ public class EpochServiceImpl extends BaseService implements EpochService {
         }
     }
 
-    //TODO: Implement
     @Override
     public List<Epoch> getPreviousEpochs(int number) throws APIException {
-        return null;
+
+        List<Epoch> responseList = new ArrayList<>();
+        boolean stopExecution = false;
+        int currentPageCount = 1;
+        int numThreads = ConfigHelper.threadCount();
+
+        while (!stopExecution) {
+
+            List<CompletableFuture<List<Epoch>>> completableFutures = new ArrayList<>();
+
+            for (int i = 0; i < numThreads; i++) {
+
+                int finalCurrentPageCount = currentPageCount + i;
+
+                completableFutures.add(CompletableFuture.supplyAsync(() -> {
+                    try {
+                        return getPreviousEpochs(number, 100, finalCurrentPageCount);
+                    } catch (APIException e) {
+                        throw new RuntimeAPIException(e);
+                    }
+                }));
+            }
+
+            try {
+                stopExecution = fetchData(completableFutures, responseList);
+            } catch (Exception e) {
+                throw new APIException("Exception while fetching all previous epochs for epoch number: " + number, e );
+            }
+
+            currentPageCount += numThreads;
+        }
+
+        return responseList;
+
     }
 
     @Override
@@ -110,10 +178,42 @@ public class EpochServiceImpl extends BaseService implements EpochService {
         }
     }
 
-    //TODO: Implement
     @Override
     public List<Stake> getActiveStakesForEpoch(int number) throws APIException {
-        return null;
+
+        List<Stake> responseList = new ArrayList<>();
+        boolean stopExecution = false;
+        int currentPageCount = 1;
+        int numThreads = ConfigHelper.threadCount();
+
+        while (!stopExecution) {
+
+            List<CompletableFuture<List<Stake>>> completableFutures = new ArrayList<>();
+
+            for (int i = 0; i < numThreads; i++) {
+
+                int finalCurrentPageCount = currentPageCount + i;
+
+                completableFutures.add(CompletableFuture.supplyAsync(() -> {
+                    try {
+                        return getActiveStakesForEpoch(number, 100, finalCurrentPageCount);
+                    } catch (APIException e) {
+                        throw new RuntimeAPIException(e);
+                    }
+                }));
+            }
+
+            try {
+                stopExecution = fetchData(completableFutures, responseList);
+            } catch (Exception e) {
+                throw new APIException("Exception while fetching all active stakes for epoch number: " + number, e );
+            }
+
+            currentPageCount += numThreads;
+        }
+
+        return responseList;
+
     }
 
     @Override
@@ -133,10 +233,42 @@ public class EpochServiceImpl extends BaseService implements EpochService {
         }
     }
 
-    //TODO: Implement
     @Override
     public List<Stake> getActiveStakesForEpochAndPool(int number, String poolId) throws APIException {
-        return null;
+
+        List<Stake> responseList = new ArrayList<>();
+        boolean stopExecution = false;
+        int currentPageCount = 1;
+        int numThreads = ConfigHelper.threadCount();
+
+        while (!stopExecution) {
+
+            List<CompletableFuture<List<Stake>>> completableFutures = new ArrayList<>();
+
+            for (int i = 0; i < numThreads; i++) {
+
+                int finalCurrentPageCount = currentPageCount + i;
+
+                completableFutures.add(CompletableFuture.supplyAsync(() -> {
+                    try {
+                        return getActiveStakesForEpochAndPool(number, poolId, 100, finalCurrentPageCount);
+                    } catch (APIException e) {
+                        throw new RuntimeAPIException(e);
+                    }
+                }));
+            }
+
+            try {
+                stopExecution = fetchData(completableFutures, responseList);
+            } catch (Exception e) {
+                throw new APIException("Exception while fetching all active stakes for epoch number: " + number + " and poolId: " + poolId, e );
+            }
+
+            currentPageCount += numThreads;
+        }
+
+        return responseList;
+
     }
 
     @Override
@@ -168,10 +300,42 @@ public class EpochServiceImpl extends BaseService implements EpochService {
         return getBlocksForEpoch(number, count, page, OrderEnum.asc);
     }
 
-    //TODO: Implement
     @Override
     public List<String> getBlocksForEpoch(int number, OrderEnum order) throws APIException {
-        return null;
+
+        List<String> responseList = new ArrayList<>();
+        boolean stopExecution = false;
+        int currentPageCount = 1;
+        int numThreads = ConfigHelper.threadCount();
+
+        while (!stopExecution) {
+
+            List<CompletableFuture<List<String>>> completableFutures = new ArrayList<>();
+
+            for (int i = 0; i < numThreads; i++) {
+
+                int finalCurrentPageCount = currentPageCount + i;
+
+                completableFutures.add(CompletableFuture.supplyAsync(() -> {
+                    try {
+                        return getBlocksForEpoch(number, 100, finalCurrentPageCount, order);
+                    } catch (APIException e) {
+                        throw new RuntimeAPIException(e);
+                    }
+                }));
+            }
+
+            try {
+                stopExecution = fetchData(completableFutures, responseList);
+            } catch (Exception e) {
+                throw new APIException("Exception while fetching all blocks for epoch number: " + number, e);
+            }
+
+            currentPageCount += numThreads;
+        }
+
+        return responseList;
+
     }
 
     @Override
@@ -196,10 +360,42 @@ public class EpochServiceImpl extends BaseService implements EpochService {
         return getBlocksForEpochAndPool(number, poolId, count, page, OrderEnum.asc);
     }
 
-    //TODO: Implement
     @Override
     public List<String> getBlocksForEpochAndPool(int number, String poolId, OrderEnum order) throws APIException {
-        return null;
+
+        List<String> responseList = new ArrayList<>();
+        boolean stopExecution = false;
+        int currentPageCount = 1;
+        int numThreads = ConfigHelper.threadCount();
+
+        while (!stopExecution) {
+
+            List<CompletableFuture<List<String>>> completableFutures = new ArrayList<>();
+
+            for (int i = 0; i < numThreads; i++) {
+
+                int finalCurrentPageCount = currentPageCount + i;
+
+                completableFutures.add(CompletableFuture.supplyAsync(() -> {
+                    try {
+                        return getBlocksForEpochAndPool(number, poolId, 100, finalCurrentPageCount);
+                    } catch (APIException e) {
+                        throw new RuntimeAPIException(e);
+                    }
+                }));
+            }
+
+            try {
+                stopExecution = fetchData(completableFutures, responseList);
+            } catch (Exception e) {
+                throw new APIException("Exception while fetching all blocks for epoch number: " + number + " and poolId: " + poolId, e );
+            }
+
+            currentPageCount += numThreads;
+        }
+
+        return responseList;
+
     }
 
     @Override

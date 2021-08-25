@@ -55,8 +55,12 @@ public class BaseService {
         if (response.isSuccessful()) {
             return response.body();
         } else {
-            ResponseError responseError = OBJECT_MAPPER.readValue(response.errorBody().bytes(), ResponseError.class);
-            String errorMessage = responseError.getError() + " : " + responseError.getMessage();
+            String errorMessage = response.errorBody().string();
+            try {
+                ResponseError responseError = OBJECT_MAPPER.readValue(response.errorBody().bytes(), ResponseError.class);
+                errorMessage = responseError.getError() + " : " + responseError.getMessage();
+            } catch (Exception exp ){
+            }
             throw new APIException(errorMessage);
         }
     }

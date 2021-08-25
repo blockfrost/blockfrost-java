@@ -12,7 +12,7 @@ public class RateLimitHelper {
         RateLimiterConfig rateLimiterConfig = RateLimiterConfig.custom().
                 limitForPeriod(10).
                 limitRefreshPeriod(Duration.ofSeconds(1)).
-                timeoutDuration(Duration.ofMillis(100)).build();
+                timeoutDuration(Duration.ofMillis(500)).build();
 
         return RateLimiter.of("blockfrostAPI", rateLimiterConfig );
 
