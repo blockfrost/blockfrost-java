@@ -8,10 +8,7 @@ import io.blockfrost.sdk.api.util.Constants;
 import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.MetadataServiceImpl;
 import io.blockfrost.sdk.impl.helper.ValidationHelper;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -63,6 +60,14 @@ public class MetadataServiceTests extends TestBase {
 
             assertThat(metadataList, hasSize(3));
             assertThat(metadataList.get(0), samePropertyValuesAs(expectedTransactionMetadataLabelsList.get(0), "count"));
+
+        }
+
+        @Test
+        public void transactionMetadataLabels_willReturn_allTransactionMetadataLabels() throws APIException {
+
+            List<TransactionMetadataLabel> metadataList = metadataService.getTransactionMetadataLabels();
+            assertThat(metadataList, hasSize(greaterThanOrEqualTo(0)));
 
         }
 
@@ -127,6 +132,16 @@ public class MetadataServiceTests extends TestBase {
 
             assertThat(transactionMetadataLabelCborList, hasSize(3));
             assertThat(transactionMetadataLabelCborList, contains(expectedTransactionMetadataLabelCborList.toArray()));
+
+        }
+
+        //TODO: Some issue with the underlying API. The response is always 404 after some pages. Need to check.
+        @Test
+        @Disabled
+        public void transactionMetadataCborForLabel_willReturn_allTransactionMetadataLabelCbors() throws APIException {
+
+            List<TransactionMetadataLabelCbor> transactionMetadataLabelCborList = metadataService.getTransactionMetadataCborForLabel("100");
+            assertThat(transactionMetadataLabelCborList, hasSize(greaterThanOrEqualTo(0)));
 
         }
 
@@ -198,6 +213,16 @@ public class MetadataServiceTests extends TestBase {
 
             assertThat(transactionMetadataLabelJsonList, hasSize(3));
             assertThat(transactionMetadataLabelJsonList, contains(expectedTransactionMetadataLabelJsonList.toArray()));
+
+        }
+
+        //TODO: Some issue with the underlying API. The response is always 404 after some pages. Need to check.
+        @Test
+        @Disabled
+        public void transactionMetadataJsonForLabel_willReturn_allTransactionMetadataLabelJson() throws APIException {
+
+            List<TransactionMetadataLabelJson> transactionMetadataLabelJsonList = metadataService.getTransactionMetadataJsonForLabel("10");
+            assertThat(transactionMetadataLabelJsonList, hasSize(greaterThanOrEqualTo(0)));
 
         }
 
