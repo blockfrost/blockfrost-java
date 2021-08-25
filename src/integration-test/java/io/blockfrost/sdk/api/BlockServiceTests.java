@@ -125,6 +125,14 @@ public class BlockServiceTests extends TestBase {
             assertThat(transactionsInLatestBlock, hasSize(lessThanOrEqualTo(5)));
         }
 
+        @Test
+        public void transactionsInLatestBlock_willReturn_allTransactionsInLatestBlock() throws APIException {
+
+            List<String> transactionsInLatestBlock = blockService.getTransactionsInLatestBlock();
+
+            assertThat(transactionsInLatestBlock, hasSize(greaterThanOrEqualTo(0)));
+        }
+
     }
 
     @Nested
@@ -153,6 +161,16 @@ public class BlockServiceTests extends TestBase {
 
             assertThat(nextBlocks, hasSize(1));
             assertThat(nextBlocks, hasItem(samePropertyValuesAs(expectedBlock, "confirmations")));
+        }
+
+        @Test
+        public void nextBlocks_willReturn_allNextBlocks() throws APIException {
+
+            Block block = blockService.getLatestBlock();
+            int latestBlockNumber = block.getHeight();
+            List<Block> nextBlocks = blockService.getNextBlocks( String.valueOf(latestBlockNumber - 5) );
+            assertThat(nextBlocks, hasSize(greaterThanOrEqualTo(0)));
+
         }
 
         @Test
@@ -190,6 +208,14 @@ public class BlockServiceTests extends TestBase {
 
             assertThat(previousBlocks, hasSize(1));
             assertThat(previousBlocks, hasItem(samePropertyValuesAs(expectedBlock, "confirmations")));
+        }
+
+        @Test
+        public void previousBlocks_willReturn_allPreviousBlocks() throws APIException {
+
+            List<Block> previousBlocks = blockService.getPreviousBlocks("2");
+            assertThat(previousBlocks, hasSize(greaterThanOrEqualTo(0)));
+
         }
 
         @Test

@@ -2,14 +2,18 @@ package io.blockfrost.sdk.impl;
 
 import io.blockfrost.sdk.api.BlockService;
 import io.blockfrost.sdk.api.exception.APIException;
+import io.blockfrost.sdk.api.exception.RuntimeAPIException;
 import io.blockfrost.sdk.api.model.Block;
+import io.blockfrost.sdk.api.util.ConfigHelper;
 import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.retrofit.BlocksApi;
 import retrofit2.Call;
 import retrofit2.Response;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class BlockServiceImpl extends BaseService implements BlockService {
 
@@ -96,10 +100,42 @@ public class BlockServiceImpl extends BaseService implements BlockService {
         return getTransactionsInLatestBlock(count, page, OrderEnum.asc);
     }
 
-    //TODO: Implement
     @Override
     public List<String> getTransactionsInLatestBlock(OrderEnum order) throws APIException {
-        return null;
+
+        List<String> responseList = new ArrayList<>();
+        boolean stopExecution = false;
+        int currentPageCount = 1;
+        int numThreads = ConfigHelper.threadCount();
+
+        while (!stopExecution) {
+
+            List<CompletableFuture<List<String>>> completableFutures = new ArrayList<>();
+
+            for (int i = 0; i < numThreads; i++) {
+
+                int finalCurrentPageCount = currentPageCount + i;
+
+                completableFutures.add(CompletableFuture.supplyAsync(() -> {
+                    try {
+                        return getTransactionsInLatestBlock(100, finalCurrentPageCount, order);
+                    } catch (APIException e) {
+                        throw new RuntimeAPIException(e);
+                    }
+                }));
+            }
+
+            try {
+                stopExecution = fetchData(completableFutures, responseList);
+            } catch (Exception e) {
+                throw new APIException("Exception while fetching all transactions in latest block");
+            }
+
+            currentPageCount += numThreads;
+        }
+
+        return responseList;
+
     }
 
     @Override
@@ -122,10 +158,43 @@ public class BlockServiceImpl extends BaseService implements BlockService {
         }
     }
 
-    //TODO: Implement
+
     @Override
     public List<Block> getNextBlocks(String hashOrNumber) throws APIException {
-        return null;
+
+        List<Block> responseList = new ArrayList<>();
+        boolean stopExecution = false;
+        int currentPageCount = 1;
+        int numThreads = ConfigHelper.threadCount();
+
+        while (!stopExecution) {
+
+            List<CompletableFuture<List<Block>>> completableFutures = new ArrayList<>();
+
+            for (int i = 0; i < numThreads; i++) {
+
+                int finalCurrentPageCount = currentPageCount + i;
+
+                completableFutures.add(CompletableFuture.supplyAsync(() -> {
+                    try {
+                        return getNextBlocks(hashOrNumber, 100, finalCurrentPageCount );
+                    } catch (APIException e) {
+                        throw new RuntimeAPIException(e);
+                    }
+                }));
+            }
+
+            try {
+                stopExecution = fetchData(completableFutures, responseList);
+            } catch (Exception e) {
+                throw new APIException("Exception while fetching all next blocks");
+            }
+
+            currentPageCount += numThreads;
+        }
+
+        return responseList;
+
     }
 
     @Override
@@ -142,9 +211,41 @@ public class BlockServiceImpl extends BaseService implements BlockService {
         }
     }
 
-    //TODO: Implement
     @Override
     public List<Block> getPreviousBlocks(String hashOrNumber) throws APIException {
-        return null;
+
+        List<Block> responseList = new ArrayList<>();
+        boolean stopExecution = false;
+        int currentPageCount = 1;
+        int numThreads = ConfigHelper.threadCount();
+
+        while (!stopExecution) {
+
+            List<CompletableFuture<List<Block>>> completableFutures = new ArrayList<>();
+
+            for (int i = 0; i < numThreads; i++) {
+
+                int finalCurrentPageCount = currentPageCount + i;
+
+                completableFutures.add(CompletableFuture.supplyAsync(() -> {
+                    try {
+                        return getPreviousBlocks(hashOrNumber, 100, finalCurrentPageCount );
+                    } catch (APIException e) {
+                        throw new RuntimeAPIException(e);
+                    }
+                }));
+            }
+
+            try {
+                stopExecution = fetchData(completableFutures, responseList);
+            } catch (Exception e) {
+                throw new APIException("Exception while fetching all previous blocks");
+            }
+
+            currentPageCount += numThreads;
+        }
+
+        return responseList;
+
     }
 }

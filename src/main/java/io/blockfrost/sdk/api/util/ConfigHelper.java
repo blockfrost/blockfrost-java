@@ -14,7 +14,7 @@ public class ConfigHelper {
         try {
             threadCount = Integer.parseInt(strThreadCount);
         } catch (Exception exp){
-            System.out.println("Exception while parsing thread count. Using default count of 10.");
+            //Use the default value 10
         }
         return threadCount;
 
