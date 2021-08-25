@@ -90,7 +90,7 @@ public class AssetServiceImpl extends BaseService implements AssetService {
             try {
                 stopExecution = fetchData(completableFutures, responseList);
             } catch (Exception e) {
-                throw new APIException("Exception while fetching all assets");
+                throw new APIException("Exception while fetching all assets", e);
             }
 
             currentPageCount += numThreads;
@@ -153,7 +153,7 @@ public class AssetServiceImpl extends BaseService implements AssetService {
             try {
                 stopExecution = fetchData(completableFutures, responseList);
             } catch (Exception e) {
-                throw new APIException("Exception while fetching entire asset history");
+                throw new APIException("Exception while fetching entire asset history", e);
             }
 
             currentPageCount += numThreads;
@@ -216,7 +216,7 @@ public class AssetServiceImpl extends BaseService implements AssetService {
             try {
                 stopExecution = fetchData(completableFutures, responseList);
             } catch (Exception e) {
-                throw new APIException("Exception while fetching asset transactions");
+                throw new APIException("Exception while fetching asset transactions", e);
             }
 
             currentPageCount += numThreads;
@@ -278,7 +278,7 @@ public class AssetServiceImpl extends BaseService implements AssetService {
             try {
                 stopExecution = fetchData(completableFutures, responseList);
             } catch (Exception e) {
-                throw new APIException("Exception while fetching asset addresses");
+                throw new APIException("Exception while fetching asset addresses", e);
             }
 
             currentPageCount += numThreads;

@@ -106,7 +106,7 @@ public class AddressServiceImpl extends BaseService implements AddressService {
             try {
                 stopExecution = fetchData(completableFutures, responseList);
             } catch (Exception e) {
-                throw new APIException("Exception while fetching all UTXos for address: " + address);
+                throw new APIException("Exception while fetching all UTXos for address: " + address, e);
             }
 
             currentPageCount += numThreads;

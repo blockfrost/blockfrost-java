@@ -78,7 +78,7 @@ public class PoolServiceImpl extends BaseService implements PoolService {
             try {
                 stopExecution = fetchData(completableFutures, responseList);
             } catch (Exception e) {
-                throw new APIException("Exception while fetching all pools");
+                throw new APIException("Exception while fetching all pools", e);
             }
 
             currentPageCount += numThreads;
@@ -140,7 +140,7 @@ public class PoolServiceImpl extends BaseService implements PoolService {
             try {
                 stopExecution = fetchData(completableFutures, responseList);
             } catch (Exception e) {
-                throw new APIException("Exception while fetching all retired pools");
+                throw new APIException("Exception while fetching all retired pools", e);
             }
 
             currentPageCount += numThreads;
@@ -203,7 +203,7 @@ public class PoolServiceImpl extends BaseService implements PoolService {
             try {
                 stopExecution = fetchData(completableFutures, responseList);
             } catch (Exception e) {
-                throw new APIException("Exception while fetching all retiring pools");
+                throw new APIException("Exception while fetching all retiring pools", e);
             }
 
             currentPageCount += numThreads;
@@ -283,7 +283,7 @@ public class PoolServiceImpl extends BaseService implements PoolService {
             try {
                 stopExecution = fetchData(completableFutures, responseList);
             } catch (Exception e) {
-                throw new APIException("Exception while fetching all history for pool id: " + poolId);
+                throw new APIException("Exception while fetching all history for pool id: " + poolId, e);
             }
 
             currentPageCount += numThreads;
@@ -379,7 +379,7 @@ public class PoolServiceImpl extends BaseService implements PoolService {
             try {
                 stopExecution = fetchData(completableFutures, responseList);
             } catch (Exception e) {
-                throw new APIException("Exception while fetching all delegators for poolId: " + poolId);
+                throw new APIException("Exception while fetching all delegators for poolId: " + poolId, e);
             }
 
             currentPageCount += numThreads;
@@ -444,7 +444,7 @@ public class PoolServiceImpl extends BaseService implements PoolService {
             try {
                 stopExecution = fetchData(completableFutures, responseList);
             } catch (Exception e) {
-                throw new APIException("Exception while fetching all blocks for poolId: " + poolId);
+                throw new APIException("Exception while fetching all blocks for poolId: " + poolId, e);
             }
 
             currentPageCount += numThreads;
@@ -508,7 +508,7 @@ public class PoolServiceImpl extends BaseService implements PoolService {
             try {
                 stopExecution = fetchData(completableFutures, responseList);
             } catch (Exception e) {
-                throw new APIException("Exception while fetching all blocks for poolId: " + poolId);
+                throw new APIException("Exception while fetching all blocks for poolId: " + poolId, e);
             }
 
             currentPageCount += numThreads;

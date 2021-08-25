@@ -128,7 +128,7 @@ public class BlockServiceImpl extends BaseService implements BlockService {
             try {
                 stopExecution = fetchData(completableFutures, responseList);
             } catch (Exception e) {
-                throw new APIException("Exception while fetching all transactions in latest block");
+                throw new APIException("Exception while fetching all transactions in latest block", e);
             }
 
             currentPageCount += numThreads;
@@ -187,7 +187,7 @@ public class BlockServiceImpl extends BaseService implements BlockService {
             try {
                 stopExecution = fetchData(completableFutures, responseList);
             } catch (Exception e) {
-                throw new APIException("Exception while fetching all next blocks");
+                throw new APIException("Exception while fetching all next blocks", e);
             }
 
             currentPageCount += numThreads;
@@ -239,7 +239,7 @@ public class BlockServiceImpl extends BaseService implements BlockService {
             try {
                 stopExecution = fetchData(completableFutures, responseList);
             } catch (Exception e) {
-                throw new APIException("Exception while fetching all previous blocks");
+                throw new APIException("Exception while fetching all previous blocks", e);
             }
 
             currentPageCount += numThreads;

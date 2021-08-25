@@ -93,7 +93,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
             try {
                 stopExecution = fetchData(completableFutures, responseList);
             } catch (Exception e) {
-                throw new APIException("Exception while fetching account history");
+                throw new APIException("Exception while fetching account history", e);
             }
 
             currentPageCount += numThreads;
@@ -156,7 +156,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
             try {
                 stopExecution = fetchData(completableFutures, responseList);
             } catch (Exception e) {
-                throw new APIException("Exception while fetching account history");
+                throw new APIException("Exception while fetching account history", e);
             }
 
             currentPageCount += numThreads;
@@ -218,7 +218,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
             try {
                 stopExecution = fetchData(completableFutures, responseList);
             } catch (Exception e) {
-                throw new APIException("Exception while fetching account history");
+                throw new APIException("Exception while fetching account history", e);
             }
 
             currentPageCount += numThreads;
@@ -280,7 +280,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
             try {
                 stopExecution = fetchData(completableFutures, responseList);
             } catch (Exception e) {
-                throw new APIException("Exception while fetching account history");
+                throw new APIException("Exception while fetching account history", e);
             }
 
             currentPageCount += numThreads;
@@ -342,7 +342,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
             try {
                 stopExecution = fetchData(completableFutures, responseList);
             } catch (Exception e) {
-                throw new APIException("Exception while fetching account history");
+                throw new APIException("Exception while fetching account history", e);
             }
 
             currentPageCount += numThreads;
@@ -405,7 +405,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
             try {
                 stopExecution = fetchData(completableFutures, responseList);
             } catch (Exception e) {
-                throw new APIException("Exception while fetching account history");
+                throw new APIException("Exception while fetching account history", e);
             }
 
             currentPageCount += numThreads;
@@ -467,7 +467,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
             try {
                 stopExecution = fetchData(completableFutures, responseList);
             } catch (Exception e) {
-                throw new APIException("Exception while fetching account history");
+                throw new APIException("Exception while fetching account history", e);
             }
 
             currentPageCount += numThreads;
@@ -529,7 +529,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
             try {
                 stopExecution = fetchData(completableFutures, responseList);
             } catch (Exception e) {
-                throw new APIException("Exception while fetching account history");
+                throw new APIException("Exception while fetching account history", e);
             }
 
             currentPageCount += numThreads;
