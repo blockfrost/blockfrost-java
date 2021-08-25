@@ -13,7 +13,7 @@ import retrofit2.Response;
 import java.io.IOException;
 import java.util.List;
 
-public class AddressServiceImpl extends BaseImpl implements AddressService {
+public class AddressServiceImpl extends BaseService implements AddressService {
 
     AddressesApi addressesApi;
 

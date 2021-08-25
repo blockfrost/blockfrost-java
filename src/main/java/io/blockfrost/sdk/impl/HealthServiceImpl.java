@@ -12,7 +12,7 @@ import retrofit2.Response;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-public class HealthServiceImpl extends BaseImpl implements HealthService {
+public class HealthServiceImpl extends BaseService implements HealthService {
 
     private HealthApi healthApi;
 

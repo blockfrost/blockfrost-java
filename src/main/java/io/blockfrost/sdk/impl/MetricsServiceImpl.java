@@ -11,7 +11,7 @@ import retrofit2.Response;
 import java.io.IOException;
 import java.util.List;
 
-public class MetricsServiceImpl extends BaseImpl implements MetricsService {
+public class MetricsServiceImpl extends BaseService implements MetricsService {
 
     private MetricsApi metricsApi;
 

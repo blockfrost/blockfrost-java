@@ -9,7 +9,7 @@ import retrofit2.Response;
 
 import java.io.IOException;
 
-public class NetworkServiceImpl extends BaseImpl implements NetworkService {
+public class NetworkServiceImpl extends BaseService implements NetworkService {
 
     NetworkApi networkApi;
 

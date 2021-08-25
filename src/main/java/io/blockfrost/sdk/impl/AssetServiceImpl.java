@@ -14,7 +14,7 @@ import retrofit2.Response;
 import java.io.IOException;
 import java.util.List;
 
-public class AssetServiceImpl extends BaseImpl implements AssetService {
+public class AssetServiceImpl extends BaseService implements AssetService {
 
     AssetsApi assetsApi;
 

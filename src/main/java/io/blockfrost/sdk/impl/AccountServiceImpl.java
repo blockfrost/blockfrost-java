@@ -17,7 +17,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.Future;
 
-public class AccountServiceImpl extends BaseImpl implements AccountService {
+public class AccountServiceImpl extends BaseService implements AccountService {
 
     private AccountsApi accountsApi;
 

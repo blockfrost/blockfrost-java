@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-public class PoolServiceImpl extends BaseImpl implements PoolService {
+public class PoolServiceImpl extends BaseService implements PoolService {
 
     PoolsApi poolsApi;
 

@@ -11,7 +11,7 @@ import retrofit2.Response;
 import java.io.IOException;
 import java.util.List;
 
-public class BlockServiceImpl extends BaseImpl implements BlockService {
+public class BlockServiceImpl extends BaseService implements BlockService {
 
     BlocksApi blocksApi;
 

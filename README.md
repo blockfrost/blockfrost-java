@@ -4,6 +4,8 @@
 
 Java SDK for the Blockfrost.io API.
 
+**Compatible with Blockfrost.io OpenAPI version 0.1.26**
+
 ## Build
 
 ```

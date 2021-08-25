@@ -14,7 +14,7 @@ import retrofit2.Response;
 import java.io.IOException;
 import java.util.List;
 
-public class MetadataServiceImpl extends BaseImpl implements MetadataService {
+public class MetadataServiceImpl extends BaseService implements MetadataService {
 
     MetadataApi metadataApi;
 
