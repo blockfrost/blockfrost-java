@@ -6,7 +6,7 @@ public class ConfigHelper {
 
         String strThreadCount = System.getProperty("BF_API_MAX_THREADS");
         if (strThreadCount == null || strThreadCount.isEmpty()) {
-            strThreadCount = System.getenv("BF_PROJECT_ID");
+            strThreadCount = System.getenv("BF_API_MAX_THREADS");
         }
 
         int threadCount = 10;
