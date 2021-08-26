@@ -48,7 +48,8 @@ public interface AssetService {
      * @param order The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
      * @return List&lt;Asset&gt;
      */
-    List<Asset> getAssets(OrderEnum order) throws APIException;
+    //TODO It's not practical to get all assets
+    //List<Asset> getAssets(OrderEnum order) throws APIException;
 
     /**
      * Assets
@@ -56,7 +57,8 @@ public interface AssetService {
      *
      * @return List&lt;Asset&gt;
      */
-    List<Asset> getAssets() throws APIException;
+    //TODO It's not practical to get all assets
+    //List<Asset> getAssets() throws APIException;
 
     /**
      * Asset history

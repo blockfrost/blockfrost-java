@@ -96,7 +96,7 @@ public class AddressServiceImpl extends BaseService implements AddressService {
 
                 completableFutures.add(CompletableFuture.supplyAsync(() -> {
                     try {
-                        return getAddressUtxos(address, 100, finalCurrentPageCount, order);
+                        return getAddressUtxos(address, getDefaultFetchSize(), finalCurrentPageCount, order);
                     } catch (APIException e) {
                         throw new RuntimeAPIException(e);
                     }

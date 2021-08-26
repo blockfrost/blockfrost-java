@@ -83,7 +83,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
 
                 completableFutures.add(CompletableFuture.supplyAsync(() -> {
                     try {
-                        return getAccountHistory(stakeAddress, 100, finalCurrentPageCount, order);
+                        return getAccountHistory(stakeAddress, getDefaultFetchSize(), finalCurrentPageCount, order);
                     } catch (APIException e) {
                         throw new RuntimeAPIException(e);
                     }
@@ -146,7 +146,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
 
                 completableFutures.add(CompletableFuture.supplyAsync(() -> {
                     try {
-                        return getAccountRewardHistory(stakeAddress, 100, finalCurrentPageCount, order);
+                        return getAccountRewardHistory(stakeAddress, getDefaultFetchSize(), finalCurrentPageCount, order);
                     } catch (APIException e) {
                         throw new RuntimeAPIException(e);
                     }
@@ -208,7 +208,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
 
                 completableFutures.add(CompletableFuture.supplyAsync(() -> {
                     try {
-                        return getAccountDelegationHistory(stakeAddress, 100, finalCurrentPageCount, order);
+                        return getAccountDelegationHistory(stakeAddress, getDefaultFetchSize(), finalCurrentPageCount, order);
                     } catch (APIException e) {
                         throw new RuntimeAPIException(e);
                     }
@@ -270,7 +270,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
 
                 completableFutures.add(CompletableFuture.supplyAsync(() -> {
                     try {
-                        return getAccountRegistrationHistory(stakeAddress, 100, finalCurrentPageCount, order);
+                        return getAccountRegistrationHistory(stakeAddress, getDefaultFetchSize(), finalCurrentPageCount, order);
                     } catch (APIException e) {
                         throw new RuntimeAPIException(e);
                     }
@@ -332,7 +332,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
 
                 completableFutures.add(CompletableFuture.supplyAsync(() -> {
                     try {
-                        return getAccountWithdrawalHistory(stakeAddress, 100, finalCurrentPageCount, order);
+                        return getAccountWithdrawalHistory(stakeAddress, getDefaultFetchSize(), finalCurrentPageCount, order);
                     } catch (APIException e) {
                         throw new RuntimeAPIException(e);
                     }
@@ -395,7 +395,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
 
                 completableFutures.add(CompletableFuture.supplyAsync(() -> {
                     try {
-                        return getAccountMirHistory(stakeAddress, 100, finalCurrentPageCount, order);
+                        return getAccountMirHistory(stakeAddress, getDefaultFetchSize(), finalCurrentPageCount, order);
                     } catch (APIException e) {
                         throw new RuntimeAPIException(e);
                     }
@@ -457,7 +457,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
 
                 completableFutures.add(CompletableFuture.supplyAsync(() -> {
                     try {
-                        return getAccountAddresses(stakeAddress, 100, finalCurrentPageCount, order);
+                        return getAccountAddresses(stakeAddress, getDefaultFetchSize(), finalCurrentPageCount, order);
                     } catch (APIException e) {
                         throw new RuntimeAPIException(e);
                     }
@@ -519,7 +519,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
 
                 completableFutures.add(CompletableFuture.supplyAsync(() -> {
                     try {
-                        return getAccountAssets(stakeAddress, 100, finalCurrentPageCount, order);
+                        return getAccountAssets(stakeAddress, getDefaultFetchSize(), finalCurrentPageCount, order);
                     } catch (APIException e) {
                         throw new RuntimeAPIException(e);
                     }

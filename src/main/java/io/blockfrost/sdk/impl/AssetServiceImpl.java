@@ -62,6 +62,7 @@ public class AssetServiceImpl extends BaseService implements AssetService {
         return getAssets(count, page, OrderEnum.asc);
     }
 
+    /*
     @Override
     public List<Asset> getAssets(OrderEnum order) throws APIException {
 
@@ -80,7 +81,7 @@ public class AssetServiceImpl extends BaseService implements AssetService {
 
                 completableFutures.add(CompletableFuture.supplyAsync(() -> {
                     try {
-                        return getAssets( 100, finalCurrentPageCount, order);
+                        return getAssets( getDefaultFetchSize(), finalCurrentPageCount, order);
                     } catch (APIException e) {
                         throw new RuntimeAPIException(e);
                     }
@@ -98,12 +99,12 @@ public class AssetServiceImpl extends BaseService implements AssetService {
 
         return responseList;
 
-    }
+    }*/
 
-    @Override
-    public List<Asset> getAssets() throws APIException {
-        return getAssets(OrderEnum.asc);
-    }
+//    @Override
+//    public List<Asset> getAssets() throws APIException {
+//        return getAssets(OrderEnum.asc);
+//    }
 
     @Override
     public List<AssetHistory> getAssetHistory(String asset, int count, int page, OrderEnum order) throws APIException {
@@ -143,7 +144,7 @@ public class AssetServiceImpl extends BaseService implements AssetService {
 
                 completableFutures.add(CompletableFuture.supplyAsync(() -> {
                     try {
-                        return getAssetHistory(asset, 100, finalCurrentPageCount, order);
+                        return getAssetHistory(asset, getDefaultFetchSize(), finalCurrentPageCount, order);
                     } catch (APIException e) {
                         throw new RuntimeAPIException(e);
                     }
@@ -206,7 +207,7 @@ public class AssetServiceImpl extends BaseService implements AssetService {
 
                 completableFutures.add(CompletableFuture.supplyAsync(() -> {
                     try {
-                        return getAssetTransactions(asset, 100, finalCurrentPageCount, order);
+                        return getAssetTransactions(asset, getDefaultFetchSize(), finalCurrentPageCount, order);
                     } catch (APIException e) {
                         throw new RuntimeAPIException(e);
                     }
@@ -268,7 +269,7 @@ public class AssetServiceImpl extends BaseService implements AssetService {
 
                 completableFutures.add(CompletableFuture.supplyAsync(() -> {
                     try {
-                        return getAssetAddresses(asset, 100, finalCurrentPageCount, order);
+                        return getAssetAddresses(asset, getDefaultFetchSize(), finalCurrentPageCount, order);
                     } catch (APIException e) {
                         throw new RuntimeAPIException(e);
                     }

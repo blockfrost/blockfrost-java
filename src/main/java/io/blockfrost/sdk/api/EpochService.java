@@ -158,7 +158,8 @@ public interface EpochService {
      * @param order  The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
      * @return List&lt;String&gt;
      */
-    List<String> getBlocksForEpoch(int number, OrderEnum order) throws APIException;
+    //TODO Commented as it's not practical to get all the blocks in an epoch
+//    List<String> getBlocksForEpoch(int number, OrderEnum order) throws APIException;
 
     /**
      * Block distribution
@@ -167,7 +168,8 @@ public interface EpochService {
      * @param number Number of the epoch (required)
      * @return List&lt;String&gt;
      */
-    List<String> getBlocksForEpoch(int number) throws APIException;
+    //TODO Commented as it's not practical to get all the blocks in an epoch
+    //List<String> getBlocksForEpoch(int number) throws APIException;
 
     /**
      * Block distribution

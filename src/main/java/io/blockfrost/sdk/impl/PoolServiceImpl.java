@@ -68,7 +68,7 @@ public class PoolServiceImpl extends BaseService implements PoolService {
 
                 completableFutures.add(CompletableFuture.supplyAsync(() -> {
                     try {
-                        return getPools(100, finalCurrentPageCount, order);
+                        return getPools(getDefaultFetchSize(), finalCurrentPageCount, order);
                     } catch (APIException e) {
                         throw new RuntimeAPIException(e);
                     }
@@ -130,7 +130,7 @@ public class PoolServiceImpl extends BaseService implements PoolService {
 
                 completableFutures.add(CompletableFuture.supplyAsync(() -> {
                     try {
-                        return getRetiredPools(100, finalCurrentPageCount, order);
+                        return getRetiredPools(getDefaultFetchSize(), finalCurrentPageCount, order);
                     } catch (APIException e) {
                         throw new RuntimeAPIException(e);
                     }
@@ -193,7 +193,7 @@ public class PoolServiceImpl extends BaseService implements PoolService {
 
                 completableFutures.add(CompletableFuture.supplyAsync(() -> {
                     try {
-                        return getRetiringPools(100, finalCurrentPageCount, order);
+                        return getRetiringPools(getDefaultFetchSize(), finalCurrentPageCount, order);
                     } catch (APIException e) {
                         throw new RuntimeAPIException(e);
                     }
@@ -273,7 +273,7 @@ public class PoolServiceImpl extends BaseService implements PoolService {
 
                 completableFutures.add(CompletableFuture.supplyAsync(() -> {
                     try {
-                        return getPoolHistory(poolId, 100, finalCurrentPageCount, order);
+                        return getPoolHistory(poolId, getDefaultFetchSize(), finalCurrentPageCount, order);
                     } catch (APIException e) {
                         throw new RuntimeAPIException(e);
                     }
@@ -369,7 +369,7 @@ public class PoolServiceImpl extends BaseService implements PoolService {
 
                 completableFutures.add(CompletableFuture.supplyAsync(() -> {
                     try {
-                        return getPoolDelegators(poolId, 100, finalCurrentPageCount, order);
+                        return getPoolDelegators(poolId, getDefaultFetchSize(), finalCurrentPageCount, order);
                     } catch (APIException e) {
                         throw new RuntimeAPIException(e);
                     }
@@ -434,7 +434,7 @@ public class PoolServiceImpl extends BaseService implements PoolService {
 
                 completableFutures.add(CompletableFuture.supplyAsync(() -> {
                     try {
-                        return getPoolBlocks(poolId, 100, finalCurrentPageCount, order);
+                        return getPoolBlocks(poolId, getDefaultFetchSize(), finalCurrentPageCount, order);
                     } catch (APIException e) {
                         throw new RuntimeAPIException(e);
                     }
@@ -498,7 +498,7 @@ public class PoolServiceImpl extends BaseService implements PoolService {
 
                 completableFutures.add(CompletableFuture.supplyAsync(() -> {
                     try {
-                        return getPoolUpdates(poolId, 100, finalCurrentPageCount, order);
+                        return getPoolUpdates(poolId, getDefaultFetchSize(), finalCurrentPageCount, order);
                     } catch (APIException e) {
                         throw new RuntimeAPIException(e);
                     }

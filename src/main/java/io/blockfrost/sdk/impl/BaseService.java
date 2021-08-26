@@ -82,13 +82,17 @@ public class BaseService {
            List<T> result = completableFuture.join();
            returnList.addAll(result);
 
-            if ( result.size() < 100 ){
+            if ( result.size() < getDefaultFetchSize() ){
                 noMoreData = true;
             }
         }
 
         return noMoreData;
 
+    }
+
+    protected int getDefaultFetchSize() {
+        return 100;
     }
 
 }

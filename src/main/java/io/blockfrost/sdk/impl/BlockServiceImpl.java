@@ -118,7 +118,7 @@ public class BlockServiceImpl extends BaseService implements BlockService {
 
                 completableFutures.add(CompletableFuture.supplyAsync(() -> {
                     try {
-                        return getTransactionsInLatestBlock(100, finalCurrentPageCount, order);
+                        return getTransactionsInLatestBlock(getDefaultFetchSize(), finalCurrentPageCount, order);
                     } catch (APIException e) {
                         throw new RuntimeAPIException(e);
                     }
@@ -177,7 +177,7 @@ public class BlockServiceImpl extends BaseService implements BlockService {
 
                 completableFutures.add(CompletableFuture.supplyAsync(() -> {
                     try {
-                        return getNextBlocks(hashOrNumber, 100, finalCurrentPageCount );
+                        return getNextBlocks(hashOrNumber, getDefaultFetchSize(), finalCurrentPageCount );
                     } catch (APIException e) {
                         throw new RuntimeAPIException(e);
                     }
@@ -229,7 +229,7 @@ public class BlockServiceImpl extends BaseService implements BlockService {
 
                 completableFutures.add(CompletableFuture.supplyAsync(() -> {
                     try {
-                        return getPreviousBlocks(hashOrNumber, 100, finalCurrentPageCount );
+                        return getPreviousBlocks(hashOrNumber, getDefaultFetchSize(), finalCurrentPageCount );
                     } catch (APIException e) {
                         throw new RuntimeAPIException(e);
                     }

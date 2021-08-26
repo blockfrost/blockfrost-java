@@ -227,14 +227,14 @@ public class EpochServiceTests extends TestBase {
 
     }
 
-    @Test
-    public void blocksForEpoch_willReturn_allBlocksForEpoch() throws APIException {
-
-        Epoch latestEpoch = epochService.getLatestEpoch();
-        List<String> blocksForEpoch = epochService.getBlocksForEpoch(latestEpoch.getEpoch());
-        assertThat(blocksForEpoch, hasSize(greaterThanOrEqualTo(0)));
-
-    }
+//    @Test
+//    public void blocksForEpoch_willReturn_allBlocksForEpoch() throws APIException {
+//
+//        Epoch latestEpoch = epochService.getLatestEpoch();
+//        List<String> blocksForEpoch = epochService.getBlocksForEpoch(latestEpoch.getEpoch());
+//        assertThat(blocksForEpoch, hasSize(greaterThanOrEqualTo(0)));
+//
+//    }
 
     @Test
     public void blocksForEpochAndPool_willReturn_blocksForEpochAndPoolForCountPageAndOrder() throws APIException {

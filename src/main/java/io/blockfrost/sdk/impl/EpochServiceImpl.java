@@ -94,7 +94,7 @@ public class EpochServiceImpl extends BaseService implements EpochService {
 
                 completableFutures.add(CompletableFuture.supplyAsync(() -> {
                     try {
-                        return getNextEpochs(number, 100, finalCurrentPageCount);
+                        return getNextEpochs(number, getDefaultFetchSize(), finalCurrentPageCount);
                     } catch (APIException e) {
                         throw new RuntimeAPIException(e);
                     }
@@ -145,7 +145,7 @@ public class EpochServiceImpl extends BaseService implements EpochService {
 
                 completableFutures.add(CompletableFuture.supplyAsync(() -> {
                     try {
-                        return getPreviousEpochs(number, 100, finalCurrentPageCount);
+                        return getPreviousEpochs(number, getDefaultFetchSize(), finalCurrentPageCount);
                     } catch (APIException e) {
                         throw new RuntimeAPIException(e);
                     }
@@ -196,7 +196,7 @@ public class EpochServiceImpl extends BaseService implements EpochService {
 
                 completableFutures.add(CompletableFuture.supplyAsync(() -> {
                     try {
-                        return getActiveStakesForEpoch(number, 100, finalCurrentPageCount);
+                        return getActiveStakesForEpoch(number, getDefaultFetchSize(), finalCurrentPageCount);
                     } catch (APIException e) {
                         throw new RuntimeAPIException(e);
                     }
@@ -251,7 +251,7 @@ public class EpochServiceImpl extends BaseService implements EpochService {
 
                 completableFutures.add(CompletableFuture.supplyAsync(() -> {
                     try {
-                        return getActiveStakesForEpochAndPool(number, poolId, 100, finalCurrentPageCount);
+                        return getActiveStakesForEpochAndPool(number, poolId, getDefaultFetchSize(), finalCurrentPageCount);
                     } catch (APIException e) {
                         throw new RuntimeAPIException(e);
                     }
@@ -300,7 +300,7 @@ public class EpochServiceImpl extends BaseService implements EpochService {
         return getBlocksForEpoch(number, count, page, OrderEnum.asc);
     }
 
-    @Override
+ /*   @Override
     public List<String> getBlocksForEpoch(int number, OrderEnum order) throws APIException {
 
         List<String> responseList = new ArrayList<>();
@@ -318,7 +318,7 @@ public class EpochServiceImpl extends BaseService implements EpochService {
 
                 completableFutures.add(CompletableFuture.supplyAsync(() -> {
                     try {
-                        return getBlocksForEpoch(number, 100, finalCurrentPageCount, order);
+                        return getBlocksForEpoch(number, getDefaultFetchSize(), finalCurrentPageCount, order);
                     } catch (APIException e) {
                         throw new RuntimeAPIException(e);
                     }
@@ -336,12 +336,13 @@ public class EpochServiceImpl extends BaseService implements EpochService {
 
         return responseList;
 
-    }
+    }*/
 
-    @Override
-    public List<String> getBlocksForEpoch(int number) throws APIException {
-        return getBlocksForEpoch(number, OrderEnum.asc);
-    }
+    //@Override
+    //TODO not used
+//    public List<String> getBlocksForEpoch(int number) throws APIException {
+//        return getBlocksForEpoch(number, OrderEnum.asc);
+//    }
 
     @Override
     public List<String> getBlocksForEpochAndPool(int number, String poolId, int count, int page, OrderEnum order) throws APIException {
@@ -378,7 +379,7 @@ public class EpochServiceImpl extends BaseService implements EpochService {
 
                 completableFutures.add(CompletableFuture.supplyAsync(() -> {
                     try {
-                        return getBlocksForEpochAndPool(number, poolId, 100, finalCurrentPageCount);
+                        return getBlocksForEpochAndPool(number, poolId, getDefaultFetchSize(), finalCurrentPageCount);
                     } catch (APIException e) {
                         throw new RuntimeAPIException(e);
                     }

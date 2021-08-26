@@ -72,7 +72,7 @@ public class MetadataServiceImpl extends BaseService implements MetadataService 
 
                 completableFutures.add(CompletableFuture.supplyAsync(() -> {
                     try {
-                        return getTransactionMetadataLabels(100, finalCurrentPageCount, order);
+                        return getTransactionMetadataLabels(getDefaultFetchSize(), finalCurrentPageCount, order);
                     } catch (APIException e) {
                         throw new RuntimeAPIException(e);
                     }
@@ -138,7 +138,7 @@ public class MetadataServiceImpl extends BaseService implements MetadataService 
 
                 completableFutures.add(CompletableFuture.supplyAsync(() -> {
                     try {
-                        return getTransactionMetadataCborForLabel(label, 100, finalCurrentPageCount, order);
+                        return getTransactionMetadataCborForLabel(label, getDefaultFetchSize(), finalCurrentPageCount, order);
                     } catch (APIException e) {
                         throw new RuntimeAPIException(e);
                     }
@@ -203,7 +203,7 @@ public class MetadataServiceImpl extends BaseService implements MetadataService 
 
                 completableFutures.add(CompletableFuture.supplyAsync(() -> {
                     try {
-                        return getTransactionMetadataJsonForLabel(label, 100, finalCurrentPageCount, order);
+                        return getTransactionMetadataJsonForLabel(label, getDefaultFetchSize(), finalCurrentPageCount, order);
                     } catch (APIException e) {
                         throw new RuntimeAPIException(e);
                     }
