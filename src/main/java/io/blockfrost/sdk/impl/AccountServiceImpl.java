@@ -71,7 +71,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         List<AccountHistory> responseList = new ArrayList<>();
         boolean stopExecution = false;
         int currentPageCount = 1;
-        int numThreads = ConfigHelper.threadCount();
+        int numThreads = ConfigHelper.INSTANCE.getThreadCount();
 
         while (!stopExecution) {
 
@@ -134,7 +134,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         List<AccountRewardHistory> responseList = new ArrayList<>();
         boolean stopExecution = false;
         int currentPageCount = 1;
-        int numThreads = ConfigHelper.threadCount();
+        int numThreads = ConfigHelper.INSTANCE.getThreadCount();
 
         while (!stopExecution) {
 
@@ -196,7 +196,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         List<AccountDelegationHistory> responseList = new ArrayList<>();
         boolean stopExecution = false;
         int currentPageCount = 1;
-        int numThreads = ConfigHelper.threadCount();
+        int numThreads = ConfigHelper.INSTANCE.getThreadCount();
 
         while (!stopExecution) {
 
@@ -258,7 +258,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         List<AccountRegistrationHistory> responseList = new ArrayList<>();
         boolean stopExecution = false;
         int currentPageCount = 1;
-        int numThreads = ConfigHelper.threadCount();
+        int numThreads = ConfigHelper.INSTANCE.getThreadCount();
 
         while (!stopExecution) {
 
@@ -320,7 +320,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         List<AccountWithdrawalHistory> responseList = new ArrayList<>();
         boolean stopExecution = false;
         int currentPageCount = 1;
-        int numThreads = ConfigHelper.threadCount();
+        int numThreads = ConfigHelper.INSTANCE.getThreadCount();
 
         while (!stopExecution) {
 
@@ -383,7 +383,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         List<AccountMirHistory> responseList = new ArrayList<>();
         boolean stopExecution = false;
         int currentPageCount = 1;
-        int numThreads = ConfigHelper.threadCount();
+        int numThreads = ConfigHelper.INSTANCE.getThreadCount();
 
         while (!stopExecution) {
 
@@ -445,7 +445,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         List<AccountAddress> responseList = new ArrayList<>();
         boolean stopExecution = false;
         int currentPageCount = 1;
-        int numThreads = ConfigHelper.threadCount();
+        int numThreads = ConfigHelper.INSTANCE.getThreadCount();
 
         while (!stopExecution) {
 
@@ -507,7 +507,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
         List<AccountAsset> responseList = new ArrayList<>();
         boolean stopExecution = false;
         int currentPageCount = 1;
-        int numThreads = ConfigHelper.threadCount();
+        int numThreads = ConfigHelper.INSTANCE.getThreadCount();
 
         while (!stopExecution) {
 

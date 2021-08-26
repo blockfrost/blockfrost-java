@@ -1,22 +1,79 @@
 package io.blockfrost.sdk.api.util;
 
-public class ConfigHelper {
+import static io.blockfrost.sdk.api.util.ConfigConstants.*;
 
-    public static int threadCount(){
+/**
+ * Use this to set config parameters
+ */
+public enum ConfigHelper {
+    INSTANCE();
 
-        String strThreadCount = System.getProperty("BF_API_MAX_THREADS");
-        if (strThreadCount == null || strThreadCount.isEmpty()) {
-            strThreadCount = System.getenv("BF_API_MAX_THREADS");
+    private int threadCount;
+    private int rateLimitForPeriod;
+    private int rateLimitRefreshPeriodInSec;
+    private int timeoutDurationInMillis;
+
+    ConfigHelper() {
+        initEnv();
+    }
+
+    private ConfigHelper getInstance() {
+        return INSTANCE;
+    }
+
+    public void initEnv() {
+        //Init threadCount
+        threadCount = getPropertyIntValue(BF_API_MAX_THREADS, 10);
+        rateLimitForPeriod = getPropertyIntValue(BF_RATE_LIMIT_FOR_PERIOD, 10);
+        rateLimitRefreshPeriodInSec = getPropertyIntValue(BF_RATE_LIMIT_REFRESH_PERIOD_IN_SEC, 1);
+        timeoutDurationInMillis = getPropertyIntValue(BF_TIMEOUT_DURATION_IN_MILLIS, 500);
+    }
+
+    public int getThreadCount() {
+        return threadCount;
+    }
+
+    public void setThreadCount(int threadCount) {
+        this.threadCount = threadCount;
+    }
+
+    public int getRateLimitForPeriod() {
+        return rateLimitForPeriod;
+    }
+
+    public void setRateLimitForPeriod(int rateLimitForPeriod) {
+        this.rateLimitForPeriod = rateLimitForPeriod;
+    }
+
+    public int getRateLimitRefreshPeriodInSec() {
+        return rateLimitRefreshPeriodInSec;
+    }
+
+    public void setRateLimitRefreshPeriodInSec(int rateLimitRefreshPeriodInSec) {
+        this.rateLimitRefreshPeriodInSec = rateLimitRefreshPeriodInSec;
+    }
+
+    public int getTimeoutDurationInMillis() {
+        return timeoutDurationInMillis;
+    }
+
+    public void setTimeoutDurationInMillis(int timeoutDurationInMillis) {
+        this.timeoutDurationInMillis = timeoutDurationInMillis;
+    }
+
+    private int getPropertyIntValue(String envName, int defaultValue) {
+        String strValue = System.getProperty(envName);
+        if (strValue == null || strValue.isEmpty()) {
+            strValue = System.getenv(envName);
         }
 
-        int threadCount = 10;
+        if(strValue == null || strValue.isEmpty())
+            return defaultValue;
 
         try {
-            threadCount = Integer.parseInt(strThreadCount);
+            return Integer.parseInt(strValue);
         } catch (Exception exp){
-            //Use the default value 10
+            return defaultValue;
         }
-        return threadCount;
-
     }
 }

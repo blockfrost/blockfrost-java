@@ -56,7 +56,7 @@ public class PoolServiceImpl extends BaseService implements PoolService {
         List<String> responseList = new ArrayList<>();
         boolean stopExecution = false;
         int currentPageCount = 1;
-        int numThreads = ConfigHelper.threadCount();
+        int numThreads = ConfigHelper.INSTANCE.getThreadCount();
 
         while (!stopExecution) {
 
@@ -118,7 +118,7 @@ public class PoolServiceImpl extends BaseService implements PoolService {
         List<PoolRetirementInfo> responseList = new ArrayList<>();
         boolean stopExecution = false;
         int currentPageCount = 1;
-        int numThreads = ConfigHelper.threadCount();
+        int numThreads = ConfigHelper.INSTANCE.getThreadCount();
 
         while (!stopExecution) {
 
@@ -181,7 +181,7 @@ public class PoolServiceImpl extends BaseService implements PoolService {
         List<PoolRetirementInfo> responseList = new ArrayList<>();
         boolean stopExecution = false;
         int currentPageCount = 1;
-        int numThreads = ConfigHelper.threadCount();
+        int numThreads = ConfigHelper.INSTANCE.getThreadCount();
 
         while (!stopExecution) {
 
@@ -261,7 +261,7 @@ public class PoolServiceImpl extends BaseService implements PoolService {
         List<PoolHistory> responseList = new ArrayList<>();
         boolean stopExecution = false;
         int currentPageCount = 1;
-        int numThreads = ConfigHelper.threadCount();
+        int numThreads = ConfigHelper.INSTANCE.getThreadCount();
 
         while (!stopExecution) {
 
@@ -357,7 +357,7 @@ public class PoolServiceImpl extends BaseService implements PoolService {
         List<PoolDelegator> responseList = new ArrayList<>();
         boolean stopExecution = false;
         int currentPageCount = 1;
-        int numThreads = ConfigHelper.threadCount();
+        int numThreads = ConfigHelper.INSTANCE.getThreadCount();
 
         while (!stopExecution) {
 
@@ -422,7 +422,7 @@ public class PoolServiceImpl extends BaseService implements PoolService {
         List<String> responseList = new ArrayList<>();
         boolean stopExecution = false;
         int currentPageCount = 1;
-        int numThreads = ConfigHelper.threadCount();
+        int numThreads = ConfigHelper.INSTANCE.getThreadCount();
 
         while (!stopExecution) {
 
@@ -486,7 +486,7 @@ public class PoolServiceImpl extends BaseService implements PoolService {
         List<PoolUpdate> responseList = new ArrayList<>();
         boolean stopExecution = false;
         int currentPageCount = 1;
-        int numThreads = ConfigHelper.threadCount();
+        int numThreads = ConfigHelper.INSTANCE.getThreadCount();
 
         while (!stopExecution) {
 

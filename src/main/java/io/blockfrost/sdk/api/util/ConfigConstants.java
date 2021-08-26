@@ -1,0 +1,8 @@
+package io.blockfrost.sdk.api.util;
+
+public interface ConfigConstants {
+    String BF_API_MAX_THREADS = "BF_API_MAX_THREADS";
+    String BF_RATE_LIMIT_FOR_PERIOD = "BR_RATE_LIMIT_FOR_PERIOD";
+    String BF_RATE_LIMIT_REFRESH_PERIOD_IN_SEC = "BF_RATE_LIMIT_REFRESH_PERIOD_IN_SEC";
+    String BF_TIMEOUT_DURATION_IN_MILLIS = "BF_TIMEOUT_DURATION_IN_MILLIS";
+}

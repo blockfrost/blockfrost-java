@@ -84,7 +84,7 @@ public class AddressServiceImpl extends BaseService implements AddressService {
         List<AddressUtxo> responseList = new ArrayList<>();
         boolean stopExecution = false;
         int currentPageCount = 1;
-        int numThreads = ConfigHelper.threadCount();
+        int numThreads = ConfigHelper.INSTANCE.getThreadCount();
 
         while (!stopExecution) {
 

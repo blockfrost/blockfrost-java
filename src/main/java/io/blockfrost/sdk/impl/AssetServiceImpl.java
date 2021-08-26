@@ -132,7 +132,7 @@ public class AssetServiceImpl extends BaseService implements AssetService {
         List<AssetHistory> responseList = new ArrayList<>();
         boolean stopExecution = false;
         int currentPageCount = 1;
-        int numThreads = ConfigHelper.threadCount();
+        int numThreads = ConfigHelper.INSTANCE.getThreadCount();
 
         while (!stopExecution) {
 
@@ -195,7 +195,7 @@ public class AssetServiceImpl extends BaseService implements AssetService {
         List<AssetTransaction> responseList = new ArrayList<>();
         boolean stopExecution = false;
         int currentPageCount = 1;
-        int numThreads = ConfigHelper.threadCount();
+        int numThreads = ConfigHelper.INSTANCE.getThreadCount();
 
         while (!stopExecution) {
 
@@ -257,7 +257,7 @@ public class AssetServiceImpl extends BaseService implements AssetService {
         List<AssetAddress> responseList = new ArrayList<>();
         boolean stopExecution = false;
         int currentPageCount = 1;
-        int numThreads = ConfigHelper.threadCount();
+        int numThreads = ConfigHelper.INSTANCE.getThreadCount();
 
         while (!stopExecution) {
 

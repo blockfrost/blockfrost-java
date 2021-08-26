@@ -3,7 +3,7 @@ package io.blockfrost.sdk.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.api.model.ResponseError;
-import io.blockfrost.sdk.api.util.RateLimitHelper;
+import io.blockfrost.sdk.impl.util.RateLimitHelper;
 import io.github.resilience4j.retrofit.RateLimiterCallAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

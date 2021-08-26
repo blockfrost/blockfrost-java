@@ -82,7 +82,7 @@ public class EpochServiceImpl extends BaseService implements EpochService {
         List<Epoch> responseList = new ArrayList<>();
         boolean stopExecution = false;
         int currentPageCount = 1;
-        int numThreads = ConfigHelper.threadCount();
+        int numThreads = ConfigHelper.INSTANCE.getThreadCount();
 
         while (!stopExecution) {
 
@@ -133,7 +133,7 @@ public class EpochServiceImpl extends BaseService implements EpochService {
         List<Epoch> responseList = new ArrayList<>();
         boolean stopExecution = false;
         int currentPageCount = 1;
-        int numThreads = ConfigHelper.threadCount();
+        int numThreads = ConfigHelper.INSTANCE.getThreadCount();
 
         while (!stopExecution) {
 
@@ -184,7 +184,7 @@ public class EpochServiceImpl extends BaseService implements EpochService {
         List<Stake> responseList = new ArrayList<>();
         boolean stopExecution = false;
         int currentPageCount = 1;
-        int numThreads = ConfigHelper.threadCount();
+        int numThreads = ConfigHelper.INSTANCE.getThreadCount();
 
         while (!stopExecution) {
 
@@ -239,7 +239,7 @@ public class EpochServiceImpl extends BaseService implements EpochService {
         List<Stake> responseList = new ArrayList<>();
         boolean stopExecution = false;
         int currentPageCount = 1;
-        int numThreads = ConfigHelper.threadCount();
+        int numThreads = ConfigHelper.INSTANCE.getThreadCount();
 
         while (!stopExecution) {
 
@@ -367,7 +367,7 @@ public class EpochServiceImpl extends BaseService implements EpochService {
         List<String> responseList = new ArrayList<>();
         boolean stopExecution = false;
         int currentPageCount = 1;
-        int numThreads = ConfigHelper.threadCount();
+        int numThreads = ConfigHelper.INSTANCE.getThreadCount();
 
         while (!stopExecution) {
 
