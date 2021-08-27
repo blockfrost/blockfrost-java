@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
 /**
- * Account Withdrawal History
+ * AccountMirHistory
  */
 @Data
 @Builder
@@ -16,6 +16,12 @@ import lombok.*;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class AccountMirHistory {
+    /**
+     * Hash of the transaction containing the MIR
+     */
     private String txHash;
+    /**
+     * MIR amount in Lovelaces
+     */
     private String amount;
 }

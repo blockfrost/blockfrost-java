@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
 /**
- * Account Registration History
+ * AccountRegistrationHistory
  */
 @Data
 @Builder
@@ -16,6 +16,13 @@ import lombok.*;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class AccountRegistrationHistory {
+    /**
+     * Hash of the transaction containing the (de)registration certificate
+     */
     private String txHash;
+    /**
+     * Enum: "registered" "deregistered"
+     * Action in the certificate
+     */
     private AccountRegistrationAction action;
 }

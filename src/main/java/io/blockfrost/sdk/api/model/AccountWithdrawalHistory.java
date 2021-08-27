@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
 /**
- * Account Withdrawal History
+ * AccountWithdrawalHistory
  */
 @Data
 @Builder
@@ -16,6 +16,12 @@ import lombok.*;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class AccountWithdrawalHistory {
+    /**
+     * Hash of the transaction containing the withdrawal
+     */
     private String txHash;
+    /**
+     * Withdrawal amount in Lovelaces
+     */
     private String amount;
 }

@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
 /**
- * Account Address
+ * AccountAddress
  */
 @Data
 @Builder
@@ -16,6 +16,9 @@ import lombok.*;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class AccountAddress {
+    /**
+     * Address associated with the stake key
+     */
     private String address;
 }
 

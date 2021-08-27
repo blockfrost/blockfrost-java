@@ -15,7 +15,13 @@ import lombok.*;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class UsageMetric {
 
+    /**
+     * Starting time of the call count interval (ends midnight UTC) in UNIX time.
+     */
     Long time;
+    /**
+     * Sum of all calls for a particular day and endpoint.
+     */
     Long calls;
 
 }

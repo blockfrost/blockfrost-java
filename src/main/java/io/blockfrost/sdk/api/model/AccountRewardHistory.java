@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
 /**
- * Account Reward History
+ * AccountRewardHistory
  */
 @Data
 @Builder
@@ -16,7 +16,16 @@ import lombok.*;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class AccountRewardHistory {
+    /**
+     * Epoch of the associated reward
+     */
     private Integer epoch;
+    /**
+     * Rewards for given epoch in Lovelaces
+     */
     private String amount;
+    /**
+     * Bech32 pool ID being delegated to
+     */
     private String poolId;
 }

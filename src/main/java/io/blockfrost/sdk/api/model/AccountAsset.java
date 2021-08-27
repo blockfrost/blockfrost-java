@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
 /**
- * Account Asset
+ * AccountAsset
  */
 @Data
 @Builder
@@ -16,7 +16,14 @@ import lombok.*;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class AccountAsset {
+    /**
+     * The unit of the value
+     * Concatenation of asset policy_id and hex-encoded asset_name
+     */
     private String unit;
+    /**
+     * The quantity of the unit
+     */
     private String quantity;
 }
 

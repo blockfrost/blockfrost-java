@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
 /**
- * Account History
+ * AccountHistory
  */
 @Data
 @Builder
@@ -16,7 +16,16 @@ import lombok.*;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class AccountHistory {
+    /**
+     * Epoch in which the stake was active.
+     */
     private Integer activeEpoch;
+    /**
+     * Stake amount in Lovelaces
+     */
     private String amount;
+    /**
+     * Bech32 ID of pool being delegated to
+     */
     private String poolId;
 }
