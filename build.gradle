@@ -91,6 +91,7 @@ task integrationTest(type: Test) {
     outputs.upToDateWhen { false }
     // mustRunAfter(tasks.named('test'))
     systemProperty('BF_PROJECT_ID', findProperty("BF_PROJECT_ID"))
+    systemProperty('BF_IPFS_PROJECT_ID', findProperty("BF_IPFS_PROJECT_ID"))
     testLogging {
         showStandardStreams = true
     }

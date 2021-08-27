@@ -16,6 +16,8 @@ $> ./gradlew clean build
 ## Run Integration tests
 To run integration tests, you need Blockfrost Project Id for Cardano Testnet.
 ```
-export BF_PROJECT_ID=<Blockfrost Testnet Project Id>
-./gradlew integrationTest -PBF_PROJECT_ID=${BF_PROJECT_ID} 
+export BF_PROJECT_ID=<Blockfrost Cardano Testnet Project Id>
+export BF_IPFS_PROJECT_ID=<Blockfrost Ipfs Project Id>
+
+./gradlew integrationTest -PBF_PROJECT_ID=${BF_PROJECT_ID} -PBF_IPFS_PROJECT_ID=${BF_IPFS_PROJECT_ID}
 ```
