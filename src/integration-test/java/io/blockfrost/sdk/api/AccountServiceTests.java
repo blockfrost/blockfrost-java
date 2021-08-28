@@ -5,7 +5,7 @@ import io.blockfrost.sdk.api.model.*;
 import io.blockfrost.sdk.api.util.Constants;
 import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.AccountServiceImpl;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -18,10 +18,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class AccountServiceTests extends TestBase {
 
-    AccountService accountService;
+    static AccountService accountService;
 
-    @BeforeEach
-    public void setup() {
+    @BeforeAll
+    public static void setup() {
         accountService = new AccountServiceImpl(Constants.BLOCKFROST_TESTNET_URL, projectId);
     }
 

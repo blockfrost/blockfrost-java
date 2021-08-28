@@ -4,6 +4,7 @@ import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.api.model.Genesis;
 import io.blockfrost.sdk.api.util.Constants;
 import io.blockfrost.sdk.impl.LedgerServiceImpl;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,10 +15,10 @@ import static org.hamcrest.Matchers.is;
 
 public class LedgerServiceTests extends TestBase {
 
-    LedgerService ledgerService;
+    static LedgerService ledgerService;
 
-    @BeforeEach
-    public void setup() {
+    @BeforeAll
+    public static void setup() {
         ledgerService = new LedgerServiceImpl(Constants.BLOCKFROST_TESTNET_URL, projectId);
     }
 

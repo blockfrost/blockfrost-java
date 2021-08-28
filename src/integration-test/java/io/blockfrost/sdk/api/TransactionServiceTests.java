@@ -4,6 +4,7 @@ import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.api.model.*;
 import io.blockfrost.sdk.api.util.Constants;
 import io.blockfrost.sdk.impl.TransactionServiceImpl;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,10 +18,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TransactionServiceTests extends TestBase {
 
-    TransactionService transactionService;
+    static TransactionService transactionService;
 
-    @BeforeEach
-    public void setup() {
+    @BeforeAll
+    public static void setup() {
         transactionService = new TransactionServiceImpl(Constants.BLOCKFROST_TESTNET_URL, projectId);
     }
 

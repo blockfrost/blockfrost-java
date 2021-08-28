@@ -19,10 +19,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MetadataServiceTests extends TestBase {
 
-    MetadataService metadataService;
+    static MetadataService metadataService;
 
-    @BeforeEach
-    public void setup() {
+    @BeforeAll
+    public static void setup() {
         metadataService = new MetadataServiceImpl(Constants.BLOCKFROST_TESTNET_URL, projectId);
     }
 

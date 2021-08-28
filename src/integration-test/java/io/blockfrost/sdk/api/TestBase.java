@@ -2,10 +2,10 @@ package io.blockfrost.sdk.api;
 
 public class TestBase {
 
-    public String projectId;
-    public String ipfsProjectId;
+    public static String projectId;
+    public static String ipfsProjectId;
 
-    public TestBase() {
+    static {
         projectId = System.getProperty("BF_PROJECT_ID");
         if (projectId == null || projectId.isEmpty()) {
             projectId = System.getenv("BF_PROJECT_ID");
@@ -15,6 +15,10 @@ public class TestBase {
         if (ipfsProjectId == null || ipfsProjectId.isEmpty()) {
             ipfsProjectId = System.getenv("BF_IPFS_PROJECT_ID");
         }
+    }
+
+    public TestBase() {
+
     }
 
 }

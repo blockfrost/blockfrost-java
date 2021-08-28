@@ -8,10 +8,7 @@ import io.blockfrost.sdk.api.util.Constants;
 import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.AddressServiceImpl;
 import org.hamcrest.Matchers;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.List;
 
@@ -23,10 +20,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AddressServiceTests extends TestBase {
 
-    AddressService addressService;
+    static AddressService addressService;
 
-    @BeforeEach
-    public void setup() {
+    @BeforeAll
+    public static void setup() {
         addressService = new AddressServiceImpl(Constants.BLOCKFROST_TESTNET_URL, projectId);
     }
 

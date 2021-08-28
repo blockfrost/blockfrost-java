@@ -5,10 +5,7 @@ import io.blockfrost.sdk.api.model.*;
 import io.blockfrost.sdk.api.util.Constants;
 import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.AssetServiceImpl;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.List;
 
@@ -18,10 +15,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AssetServiceTests extends TestBase {
 
-    AssetService assetService;
+    static AssetService assetService;
 
-    @BeforeEach
-    public void setup() {
+    @BeforeAll
+    public static void setup() {
         assetService = new AssetServiceImpl(Constants.BLOCKFROST_TESTNET_URL, projectId);
     }
 
