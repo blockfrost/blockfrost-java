@@ -19,9 +19,22 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class Address {
+    /**
+     * Bech32 encoded addresses
+     */
     private String address;
+    /**
+     * Array of TransactionOutputAmount objects
+     */
     private List<TransactionOutputAmount> amount = new ArrayList<TransactionOutputAmount>();
+    /**
+     * Stake address that controls the key
+     */
     private String stakeAddress;
+    /**
+     * Enum: "byron" "shelley"
+     * Address era
+     */
     private AddressType type;
 }
 

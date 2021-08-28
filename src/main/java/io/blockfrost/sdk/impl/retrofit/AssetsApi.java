@@ -1,9 +1,6 @@
 package io.blockfrost.sdk.impl.retrofit;
 
-import io.blockfrost.sdk.api.model.Asset;
-import io.blockfrost.sdk.api.model.AssetAddress;
-import io.blockfrost.sdk.api.model.AssetHistory;
-import io.blockfrost.sdk.api.model.AssetTransaction;
+import io.blockfrost.sdk.api.model.*;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
@@ -109,10 +106,10 @@ public interface AssetsApi {
      * @param count    The number of results displayed on one page. (optional, default to 100)
      * @param page     The page number for listing the results. (optional, default to 1)
      * @param order    The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.  (optional, default to asc)
-     * @return Call&lt;List&lt;Object&gt;&gt;
+     * @return Call&lt;List&lt;PolicyAsset&gt;&gt;
      */
     @GET("assets/policy/{policy_id}")
-    Call<List<Object>> assetsPolicyPolicyIdGet(
+    Call<List<PolicyAsset>> assetsPolicyPolicyIdGet(
             @Header("project_id") String projectId,
             @Path("policy_id") String policyId,
             @Query("count") Integer count,

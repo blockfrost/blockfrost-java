@@ -18,14 +18,43 @@ import java.util.Map;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class Asset {
+    /**
+     * Hex-encoded asset full name
+     */
     private String asset;
+    /**
+     * Policy ID of the asset
+     */
     private String policyId;
+    /**
+     * Hex-encoded asset name of the asset
+     */
     private String assetName;
+    /**
+     * CIP14 based user-facing fingerprint
+     */
     private String fingerprint;
+    /**
+     * Current asset quantity
+     */
     private String quantity;
+    /**
+     * ID of the initial minting transaction
+     */
     private String initialMintTxHash;
+    /**
+     * Count of mint and burn transactions
+     */
     private Integer mintOrBurnCount;
+    /**
+     * On-chain metadata stored in the minting transaction under label 721,
+     * community discussion around the standard ongoing at
+     * https://github.com/cardano-foundation/CIPs/pull/85
+     */
     private Map<String, String> onchainMetadata;
+    /**
+     * Asset metadata
+     */
     private AssetMetadata metadata;
 }
 

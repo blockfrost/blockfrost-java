@@ -20,9 +20,21 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class AddressUtxo {
+    /**
+     * Transaction hash of the UTXO
+     */
     private String txHash;
+    /**
+     * UTXO index in the transaction
+     */
     private Integer outputIndex;
+    /**
+     * Array of TransactionOutputAmount objects
+     */
     private List<TransactionOutputAmount> amount = new ArrayList<TransactionOutputAmount>();
+    /**
+     * Block number of the UTXO
+     */
     private String block;
 
 }
