@@ -22,6 +22,7 @@ public class BaseService {
 
     private String baseUrl;
     private String projectId;
+    private int defaultFetchSize = 100;
 
     public BaseService(String baseUrl, String projectId) {
         this.baseUrl = baseUrl;
@@ -91,8 +92,12 @@ public class BaseService {
 
     }
 
-    protected int getDefaultFetchSize() {
-        return 100;
+    public int getDefaultFetchSize() {
+        return defaultFetchSize;
+    }
+
+    public void setDefaultFetchSize(int size) {
+        defaultFetchSize = size;
     }
 
 }

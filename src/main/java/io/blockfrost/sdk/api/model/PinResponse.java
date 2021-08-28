@@ -9,11 +9,11 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 @ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class IPFSObject {
-    private String name;
+public class PinResponse {
     private String ipfsHash;
-    private Integer size;
+    private PinState state;
 }

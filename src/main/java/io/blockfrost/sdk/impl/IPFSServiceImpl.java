@@ -2,7 +2,12 @@ package io.blockfrost.sdk.impl;
 
 import io.blockfrost.sdk.api.IPFSService;
 import io.blockfrost.sdk.api.exception.APIException;
+import io.blockfrost.sdk.api.exception.RuntimeAPIException;
 import io.blockfrost.sdk.api.model.IPFSObject;
+import io.blockfrost.sdk.api.model.PinItem;
+import io.blockfrost.sdk.api.model.PinResponse;
+import io.blockfrost.sdk.api.util.ConfigHelper;
+import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.retrofit.IPFSApi;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -13,6 +18,9 @@ import retrofit2.Response;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class IPFSServiceImpl extends BaseService implements IPFSService {
 
@@ -60,6 +68,96 @@ public class IPFSServiceImpl extends BaseService implements IPFSService {
             return processResponse(getResponse).bytes();
         } catch (IOException exp) {
             throw new APIException("Exception while getting content for ipfsPath : " + ipfsPath, exp);
+        }
+    }
+
+    @Override
+    public PinResponse pinAdd(String ipfsPath) throws APIException {
+        Call<PinResponse> pinCall = ipfsApi.pinAdd(getProjectId(), ipfsPath);
+
+        try {
+            Response<PinResponse> response = pinCall.execute();
+            return processResponse(response);
+        } catch (IOException exp) {
+            throw new APIException("Exception while adding pin for ipfsPath : " + ipfsPath, exp);
+        }
+    }
+
+    @Override
+    public List<PinItem> getPinnedObjects(int count, int page, OrderEnum order) throws APIException {
+        Call<List<PinItem>> listCall = ipfsApi.pinList(getProjectId(), count, page, order.name());
+
+        try {
+            Response<List<PinItem>> response = listCall.execute();
+            return processResponse(response);
+        } catch (IOException exp) {
+            throw new APIException("Exception while getting pinned objects", exp);
+        }
+    }
+
+    @Override
+    public List<PinItem> getPinnedObjects() throws APIException {
+        return getPinnedObjects(OrderEnum.asc);
+    }
+
+    @Override
+    public List<PinItem> getPinnedObjects(OrderEnum order) throws APIException {
+
+        List<PinItem> responseList = new ArrayList<>();
+        boolean stopExecution = false;
+        int currentPageCount = 1;
+        int numThreads = ConfigHelper.INSTANCE.getThreadCount();
+
+        while (!stopExecution) {
+
+            List<CompletableFuture<List<PinItem>>> completableFutures = new ArrayList<>();
+
+            for (int i = 0; i < numThreads; i++) {
+
+                int finalCurrentPageCount = currentPageCount + i;
+
+                completableFutures.add(CompletableFuture.supplyAsync(() -> {
+                    try {
+                        return getPinnedObjects(getDefaultFetchSize(), finalCurrentPageCount, order);
+                    } catch (APIException e) {
+                        throw new RuntimeAPIException(e);
+                    }
+                }));
+            }
+
+            try {
+                stopExecution = fetchData(completableFutures, responseList);
+            } catch (Exception e) {
+                throw new APIException("Exception while get all pinned object in local storage ", e);
+            }
+
+            currentPageCount += numThreads;
+        }
+
+        return responseList;
+    }
+
+    @Override
+    public PinItem getPinnedObjectByIpfsPath(String ipfsPath) throws APIException {
+        Call<PinItem> call = ipfsApi.pinListByIpfsPath(getProjectId(), ipfsPath);
+
+        try {
+            Response<PinItem> response = call.execute();
+            return processResponse(response);
+        } catch (IOException exp) {
+            throw new APIException("Exception while getting pinned object by ipfspath : " + ipfsPath, exp);
+        }
+    }
+
+    @Override
+    public PinItem removePinnedObject(String ipfsPath) throws APIException {
+        Call<PinItem> call = ipfsApi.pinRemove(getProjectId(), ipfsPath);
+
+        try {
+            Response<PinItem> response = call.execute();
+            return processResponse(response);
+        } catch (IOException exp) {
+            throw new APIException("Exception while removing pinned object by ipfspath : " + ipfsPath, exp);
         }
     }
 }
