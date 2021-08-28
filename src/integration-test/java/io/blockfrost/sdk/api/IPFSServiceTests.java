@@ -26,13 +26,8 @@ public class IPFSServiceTests extends TestBase {
     static IPFSService ipfsService;
 
     @BeforeAll
-    public static void init() {
+    public static void setup() {
         ipfsService = new IPFSServiceImpl(Constants.BLOCKFROST_IPFS_URL, ipfsProjectId);
-    }
-
-    @BeforeEach
-    public void setup() {
-
     }
 
     @Test

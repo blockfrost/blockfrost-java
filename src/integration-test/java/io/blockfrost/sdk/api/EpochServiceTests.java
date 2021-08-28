@@ -7,6 +7,7 @@ import io.blockfrost.sdk.api.model.Stake;
 import io.blockfrost.sdk.api.util.Constants;
 import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.EpochServiceImpl;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,10 +20,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class EpochServiceTests extends TestBase {
 
-    EpochService epochService;
+    static EpochService epochService;
 
-    @BeforeEach
-    public void setup() {
+    @BeforeAll
+    public static void setup() {
         epochService = new EpochServiceImpl(Constants.BLOCKFROST_TESTNET_URL, projectId);
     }
 

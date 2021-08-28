@@ -5,6 +5,7 @@ import io.blockfrost.sdk.api.model.EndpointUsageMetric;
 import io.blockfrost.sdk.api.model.UsageMetric;
 import io.blockfrost.sdk.api.util.Constants;
 import io.blockfrost.sdk.impl.MetricsServiceImpl;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,10 +17,10 @@ import static org.hamcrest.Matchers.hasSize;
 
 public class MetricsServiceTests extends TestBase {
 
-    MetricsService metricsService;
+    static MetricsService metricsService;
 
-    @BeforeEach
-    public void setup() {
+    @BeforeAll
+    public static void setup() {
         metricsService = new MetricsServiceImpl(Constants.BLOCKFROST_TESTNET_URL, projectId);
     }
 

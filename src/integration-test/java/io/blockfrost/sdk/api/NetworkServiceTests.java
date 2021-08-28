@@ -4,6 +4,7 @@ import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.api.model.Network;
 import io.blockfrost.sdk.api.util.Constants;
 import io.blockfrost.sdk.impl.NetworkServiceImpl;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,10 +13,10 @@ import static org.hamcrest.Matchers.is;
 
 public class NetworkServiceTests extends TestBase {
 
-    NetworkService networkService;
+    static NetworkService networkService;
 
-    @BeforeEach
-    public void setup() {
+    @BeforeAll
+    public static void setup() {
         networkService = new NetworkServiceImpl(Constants.BLOCKFROST_TESTNET_URL, projectId);
     }
 

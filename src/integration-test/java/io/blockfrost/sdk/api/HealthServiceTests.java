@@ -6,6 +6,7 @@ import io.blockfrost.sdk.api.model.Health;
 import io.blockfrost.sdk.api.util.Constants;
 import io.blockfrost.sdk.impl.HealthServiceImpl;
 import org.exparity.hamcrest.date.DateMatchers;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -22,10 +23,10 @@ import static org.hamcrest.Matchers.is;
 
 public class HealthServiceTests extends TestBase {
 
-    HealthService healthService;
+    static HealthService healthService;
 
-    @BeforeEach
-    public void setup() {
+    @BeforeAll
+    public static void setup() {
         healthService = new HealthServiceImpl(Constants.BLOCKFROST_TESTNET_URL, projectId);
     }
 

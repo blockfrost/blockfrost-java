@@ -5,10 +5,7 @@ import io.blockfrost.sdk.api.model.Block;
 import io.blockfrost.sdk.api.util.Constants;
 import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.BlockServiceImpl;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.List;
 
@@ -18,10 +15,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class BlockServiceTests extends TestBase {
 
-    BlockService blockService;
+    static BlockService blockService;
 
-    @BeforeEach
-    public void setup() {
+    @BeforeAll
+    public static void setup() {
         blockService = new BlockServiceImpl(Constants.BLOCKFROST_TESTNET_URL, projectId);
     }
 
