@@ -60,6 +60,13 @@ compileJava {
     options.compilerArgs += ["-Aproject=${project.group}/${project.name}"]
 }
 
+jar {
+    manifest {
+        attributes 'Implementation-Title': artifactId,
+                'Implementation-Version': archiveVersion
+    }
+}
+
 task sourceJar(type: Jar) {
     classifier "sources"
     from sourceSets.main.allJava
