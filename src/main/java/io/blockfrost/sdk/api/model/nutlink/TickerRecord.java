@@ -39,5 +39,5 @@ public class TickerRecord {
     /**
      * Content of the ticker
      */
-    private List<TickerPayload> payload;
+    private Object payload;
 }
