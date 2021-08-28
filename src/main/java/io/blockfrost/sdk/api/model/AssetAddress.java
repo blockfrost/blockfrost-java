@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
 /**
- * Asset Address
+ * AssetAddress
  */
 @Data
 @Builder
@@ -16,7 +16,13 @@ import lombok.*;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class AssetAddress {
+    /**
+     * Address containing the specific asset
+     */
     private String address;
+    /**
+     * Asset quantity on the specific address
+     */
     private String quantity;
 }
 

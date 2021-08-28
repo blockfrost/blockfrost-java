@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
 /**
- * AssetMetadata
+ * PolicyAsset
  */
 @Data
 @Builder
@@ -15,30 +15,14 @@ import lombok.*;
 @ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class AssetMetadata {
+public class PolicyAsset {
     /**
-     * Name
+     * Concatenation of the policy_id and hex-encoded asset_name
      */
-    private String name;
+    private String asset;
     /**
-     * Description
+     * Current asset quantity
      */
-    private String description;
-    /**
-     * Ticker
-     */
-    private String ticker;
-    /**
-     * URL
-     */
-    private String url;
-    /**
-     * Logo
-     */
-    private String logo;
-    /**
-     * Decimals
-     */
-    private Integer decimals;
+    private String quantity;
 }
 

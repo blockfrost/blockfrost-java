@@ -230,4 +230,34 @@ public class AssetServiceTests extends TestBase {
 
     }
 
+    @Nested
+    @DisplayName("GetPolicyAssets Tests")
+    class GetPolicyAssets {
+
+        @Test
+        public void getPolicyAssets_willReturn_policyAssetsForCountPageAndOrder() throws APIException {
+            List<PolicyAsset> policyAssetsList = assetService.getPolicyAssets("07a6604234b758be257f26565445f30169c25c85cf392797bc878de7", 5, 1, OrderEnum.asc);
+            assertThat(policyAssetsList, hasSize(lessThanOrEqualTo(5)));
+        }
+
+        @Test
+        public void getPolicyAssets_willReturn_policyAssetsForCountAndPage() throws APIException {
+            List<PolicyAsset> policyAssetsList = assetService.getPolicyAssets("07a6604234b758be257f26565445f30169c25c85cf392797bc878de7", 5, 1, OrderEnum.asc);
+            assertThat(policyAssetsList, hasSize(lessThanOrEqualTo(5)));
+        }
+
+        @Test
+        public void getPolicyAssets_willReturn_allPolicyAssets() throws APIException {
+            List<PolicyAsset> policyAssetsList = assetService.getPolicyAssets("07a6604234b758be257f26565445f30169c25c85cf392797bc878de7");
+            assertThat(policyAssetsList, hasSize(greaterThanOrEqualTo(0)));
+        }
+
+        @Test
+        public void getPolicyAssets_willThrowAPIException_onNullPolicyId() {
+            Exception exception = assertThrows(APIException.class, () -> assetService.getPolicyAssets(null, 5, 1));
+            assertThat(exception.getMessage(), is("PolicyId cannot be null or empty"));
+        }
+
+    }
+
 }

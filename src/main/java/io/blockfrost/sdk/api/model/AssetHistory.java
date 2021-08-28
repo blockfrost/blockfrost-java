@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
 /**
- * Asset
+ * AssetHistory
  */
 @Data
 @Builder
@@ -16,8 +16,17 @@ import lombok.*;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class AssetHistory {
+    /**
+     * Hash of the transaction containing the asset action
+     */
     private String txHash;
+    /**
+     * Action executed upon the asset policy
+     */
     private String amount;
+    /**
+     * Asset amount of the specific action
+     */
     private String action;
 }
 
