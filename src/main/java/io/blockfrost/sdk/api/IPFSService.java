@@ -15,4 +15,13 @@ public interface IPFSService {
      * @return IPFSObject
      */
     public IPFSObject add(File file) throws APIException, IOException;
+
+    /**
+     * Relay to an IPFS gateway
+     * Retrieve an object from the IFPS gateway (useful if you do not want to rely on a public gateway, such as &#x60;ipfs.blockfrost.dev&#x60;).
+     * @param ipfsPath
+     * @return Content as byte[]
+     * @throws APIException
+     */
+    public byte[] get(String ipfsPath) throws APIException;
 }

@@ -53,4 +53,10 @@ public class IPFSServiceTests extends TestBase {
             IPFSObject ipfsObject = ipfsService.add(null);
         });
     }
+
+    @Test
+    public void get_willReturnContent_WhenValidIpfsHash() throws APIException, IOException {
+        byte[] content = ipfsService.get("QmWAhBXx11KUkLxkYMNNCvriLWtPLRqw8Eo4EKHFeMBA5a");
+        assertEquals("Hello Temp File", new String(content).trim());
+    }
 }

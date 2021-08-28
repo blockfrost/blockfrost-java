@@ -6,6 +6,7 @@ import io.blockfrost.sdk.api.model.IPFSObject;
 import io.blockfrost.sdk.impl.retrofit.IPFSApi;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -47,6 +48,18 @@ public class IPFSServiceImpl extends BaseService implements IPFSService {
             return processResponse(addResponse);
         } catch (IOException exp) {
             throw new APIException("Exception while adding file to IPFS", exp);
+        }
+    }
+
+    @Override
+    public byte[] get(String ipfsPath) throws APIException {
+        Call<ResponseBody> getCall = ipfsApi.get(getProjectId(), ipfsPath);
+
+        try {
+            Response<ResponseBody> getResponse = getCall.execute();
+            return processResponse(getResponse).bytes();
+        } catch (IOException exp) {
+            throw new APIException("Exception while getting content for ipfsPath : " + ipfsPath, exp);
         }
     }
 }
