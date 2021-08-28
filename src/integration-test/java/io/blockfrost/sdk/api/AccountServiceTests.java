@@ -67,7 +67,7 @@ public class AccountServiceTests extends TestBase {
         @Test
         public void history_willReturn_entireHistory() throws APIException {
 
-            List<AccountHistory> historyList = accountService.getAccountHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha");
+            List<AccountHistory> historyList = accountService.getEntireAccountHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha");
 
             assertThat(historyList, hasSize(greaterThanOrEqualTo(0)));
             assertThat(historyList, hasItem(allOf(hasProperty("poolId", is(notNullValue())))));
@@ -105,7 +105,7 @@ public class AccountServiceTests extends TestBase {
         @Test
         public void rewardHistory_willReturn_entireRewardHistory() throws APIException {
 
-            List<AccountRewardHistory> rewardHistoryList = accountService.getAccountRewardHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha");
+            List<AccountRewardHistory> rewardHistoryList = accountService.getEntireAccountRewardHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha");
 
             assertThat(rewardHistoryList, hasSize(greaterThanOrEqualTo(0)));
         }
@@ -142,7 +142,7 @@ public class AccountServiceTests extends TestBase {
         @Test
         public void delegationHistory_willReturn_entireDelegationHistory() throws APIException {
 
-            List<AccountDelegationHistory> delegationHistoryList = accountService.getAccountDelegationHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha");
+            List<AccountDelegationHistory> delegationHistoryList = accountService.getEntireAccountDelegationHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha");
 
             assertThat(delegationHistoryList, hasSize(greaterThanOrEqualTo(0)));
         }
@@ -179,7 +179,7 @@ public class AccountServiceTests extends TestBase {
         @Test
         public void registrationHistory_willReturn_entireRegistrationHistory() throws APIException {
 
-            List<AccountRegistrationHistory> registrationHistoryList = accountService.getAccountRegistrationHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha");
+            List<AccountRegistrationHistory> registrationHistoryList = accountService.getEntireAccountRegistrationHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha");
 
             assertThat(registrationHistoryList, hasSize(greaterThanOrEqualTo(0)));
         }
@@ -216,7 +216,7 @@ public class AccountServiceTests extends TestBase {
         @Test
         public void withdrawalHistory_willReturn_entireWithdrawalHistory() throws APIException {
 
-            List<AccountWithdrawalHistory> withdrawalHistoryList = accountService.getAccountWithdrawalHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha");
+            List<AccountWithdrawalHistory> withdrawalHistoryList = accountService.getEntireAccountWithdrawalHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha");
 
             assertThat(withdrawalHistoryList, hasSize(greaterThanOrEqualTo(0)));
         }
@@ -253,7 +253,7 @@ public class AccountServiceTests extends TestBase {
         @Test
         public void mirHistory_willReturn_entireMirHistory() throws APIException {
 
-            List<AccountMirHistory> mirHistoryList = accountService.getAccountMirHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha");
+            List<AccountMirHistory> mirHistoryList = accountService.getEntireAccountMirHistory("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha");
 
             assertThat(mirHistoryList, hasSize(greaterThanOrEqualTo(0)));
         }
@@ -290,7 +290,7 @@ public class AccountServiceTests extends TestBase {
         @Test
         public void addresses_willReturn_allAddresses() throws APIException {
 
-            List<AccountAddress> addressesList = accountService.getAccountAddresses("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha");
+            List<AccountAddress> addressesList = accountService.getAllAccountAddresses("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha");
 
             assertThat(addressesList, hasSize(greaterThanOrEqualTo(0)));
         }
@@ -327,7 +327,7 @@ public class AccountServiceTests extends TestBase {
         @Test
         public void assets_willReturn_allAssets() throws APIException {
 
-            List<AccountAsset> assetsList = accountService.getAccountAssets("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha");
+            List<AccountAsset> assetsList = accountService.getAllAccountAssets("stake_test1upwlsqc3m9629dsf2vw3ycuqv5jhd023xtjh3ax42nvj03gwy2cha");
 
             assertThat(assetsList, hasSize(greaterThanOrEqualTo(0)));
         }

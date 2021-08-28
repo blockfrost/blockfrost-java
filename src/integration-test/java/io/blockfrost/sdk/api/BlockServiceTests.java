@@ -125,7 +125,7 @@ public class BlockServiceTests extends TestBase {
         @Test
         public void transactionsInLatestBlock_willReturn_allTransactionsInLatestBlock() throws APIException {
 
-            List<String> transactionsInLatestBlock = blockService.getTransactionsInLatestBlock();
+            List<String> transactionsInLatestBlock = blockService.getAllTransactionsInLatestBlock();
 
             assertThat(transactionsInLatestBlock, hasSize(greaterThanOrEqualTo(0)));
         }
@@ -165,7 +165,7 @@ public class BlockServiceTests extends TestBase {
 
             Block block = blockService.getLatestBlock();
             int latestBlockNumber = block.getHeight();
-            List<Block> nextBlocks = blockService.getNextBlocks( String.valueOf(latestBlockNumber - 5) );
+            List<Block> nextBlocks = blockService.getAllNextBlocks( String.valueOf(latestBlockNumber - 5) );
             assertThat(nextBlocks, hasSize(greaterThanOrEqualTo(0)));
 
         }
@@ -210,7 +210,7 @@ public class BlockServiceTests extends TestBase {
         @Test
         public void previousBlocks_willReturn_allPreviousBlocks() throws APIException {
 
-            List<Block> previousBlocks = blockService.getPreviousBlocks("2");
+            List<Block> previousBlocks = blockService.getAllPreviousBlocks("2");
             assertThat(previousBlocks, hasSize(greaterThanOrEqualTo(0)));
 
         }

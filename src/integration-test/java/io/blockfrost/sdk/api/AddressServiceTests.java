@@ -70,7 +70,7 @@ public class AddressServiceTests extends TestBase {
         public void addressUtxos_willReturn_allAddressUtxos() throws APIException {
 
 
-            List<AddressUtxo> addressUtxoList = addressService.getAddressUtxos("addr_test1qqy07jaue8tru20877ak7wxpuagrqqpm2pdacfjjtv4z3elcn8dnk52656jspgq03ts2sl6jvefwakdacwfy605m9ydselehdg");
+            List<AddressUtxo> addressUtxoList = addressService.getAllAddressUtxos("addr_test1qqy07jaue8tru20877ak7wxpuagrqqpm2pdacfjjtv4z3elcn8dnk52656jspgq03ts2sl6jvefwakdacwfy605m9ydselehdg");
 
             assertThat(addressUtxoList, hasSize(greaterThanOrEqualTo(0)));
         }

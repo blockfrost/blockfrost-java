@@ -52,7 +52,7 @@ public class PoolServiceImpl extends BaseService implements PoolService {
     }
 
     @Override
-    public List<String> getPools(OrderEnum order) throws APIException {
+    public List<String> getAllPools(OrderEnum order) throws APIException {
         List<String> responseList = new ArrayList<>();
         boolean stopExecution = false;
         int currentPageCount = 1;
@@ -88,8 +88,8 @@ public class PoolServiceImpl extends BaseService implements PoolService {
     }
 
     @Override
-    public List<String> getPools() throws APIException {
-        return getPools(OrderEnum.asc);
+    public List<String> getAllPools() throws APIException {
+        return getAllPools(OrderEnum.asc);
     }
 
     @Override
@@ -113,7 +113,7 @@ public class PoolServiceImpl extends BaseService implements PoolService {
     }
 
     @Override
-    public List<PoolRetirementInfo> getRetiredPools(OrderEnum order) throws APIException {
+    public List<PoolRetirementInfo> getAllRetiredPools(OrderEnum order) throws APIException {
 
         List<PoolRetirementInfo> responseList = new ArrayList<>();
         boolean stopExecution = false;
@@ -150,8 +150,8 @@ public class PoolServiceImpl extends BaseService implements PoolService {
     }
 
     @Override
-    public List<PoolRetirementInfo> getRetiredPools() throws APIException {
-        return getRetiredPools(OrderEnum.asc);
+    public List<PoolRetirementInfo> getAllRetiredPools() throws APIException {
+        return getAllRetiredPools(OrderEnum.asc);
     }
 
     @Override
@@ -176,7 +176,7 @@ public class PoolServiceImpl extends BaseService implements PoolService {
     }
 
     @Override
-    public List<PoolRetirementInfo> getRetiringPools(OrderEnum order) throws APIException {
+    public List<PoolRetirementInfo> getAllRetiringPools(OrderEnum order) throws APIException {
 
         List<PoolRetirementInfo> responseList = new ArrayList<>();
         boolean stopExecution = false;
@@ -214,8 +214,8 @@ public class PoolServiceImpl extends BaseService implements PoolService {
     }
 
     @Override
-    public List<PoolRetirementInfo> getRetiringPools() throws APIException {
-        return getRetiringPools(OrderEnum.asc);
+    public List<PoolRetirementInfo> getAllRetiringPools() throws APIException {
+        return getAllRetiringPools(OrderEnum.asc);
     }
 
     @Override
@@ -256,7 +256,7 @@ public class PoolServiceImpl extends BaseService implements PoolService {
     }
 
     @Override
-    public List<PoolHistory> getPoolHistory(String poolId, OrderEnum order) throws APIException {
+    public List<PoolHistory> getEntirePoolHistory(String poolId, OrderEnum order) throws APIException {
 
         List<PoolHistory> responseList = new ArrayList<>();
         boolean stopExecution = false;
@@ -294,8 +294,8 @@ public class PoolServiceImpl extends BaseService implements PoolService {
     }
 
     @Override
-    public List<PoolHistory> getPoolHistory(String poolId) throws APIException {
-        return getPoolHistory(poolId, OrderEnum.asc);
+    public List<PoolHistory> getEntirePoolHistory(String poolId) throws APIException {
+        return getEntirePoolHistory(poolId, OrderEnum.asc);
     }
 
     @Override
@@ -352,7 +352,7 @@ public class PoolServiceImpl extends BaseService implements PoolService {
 
 
     @Override
-    public List<PoolDelegator> getPoolDelegators(String poolId, OrderEnum order) throws APIException {
+    public List<PoolDelegator> getAllPoolDelegators(String poolId, OrderEnum order) throws APIException {
 
         List<PoolDelegator> responseList = new ArrayList<>();
         boolean stopExecution = false;
@@ -390,8 +390,8 @@ public class PoolServiceImpl extends BaseService implements PoolService {
     }
 
     @Override
-    public List<PoolDelegator> getPoolDelegators(String poolId) throws APIException {
-        return getPoolDelegators(poolId, OrderEnum.asc);
+    public List<PoolDelegator> getAllPoolDelegators(String poolId) throws APIException {
+        return getAllPoolDelegators(poolId, OrderEnum.asc);
     }
 
     @Override
@@ -417,7 +417,7 @@ public class PoolServiceImpl extends BaseService implements PoolService {
     }
 
     @Override
-    public List<String> getPoolBlocks(String poolId, OrderEnum order) throws APIException {
+    public List<String> getAllPoolBlocks(String poolId, OrderEnum order) throws APIException {
 
         List<String> responseList = new ArrayList<>();
         boolean stopExecution = false;
@@ -455,8 +455,8 @@ public class PoolServiceImpl extends BaseService implements PoolService {
     }
 
     @Override
-    public List<String> getPoolBlocks(String poolId) throws APIException {
-        return getPoolBlocks(poolId, OrderEnum.asc);
+    public List<String> getAllPoolBlocks(String poolId) throws APIException {
+        return getAllPoolBlocks(poolId, OrderEnum.asc);
     }
 
     @Override
@@ -481,7 +481,7 @@ public class PoolServiceImpl extends BaseService implements PoolService {
     }
 
     @Override
-    public List<PoolUpdate> getPoolUpdates(String poolId, OrderEnum order) throws APIException {
+    public List<PoolUpdate> getAllPoolUpdates(String poolId, OrderEnum order) throws APIException {
 
         List<PoolUpdate> responseList = new ArrayList<>();
         boolean stopExecution = false;
@@ -519,8 +519,8 @@ public class PoolServiceImpl extends BaseService implements PoolService {
     }
 
     @Override
-    public List<PoolUpdate> getPoolUpdates(String poolId) throws APIException {
-        return getPoolUpdates(poolId, OrderEnum.asc);
+    public List<PoolUpdate> getAllPoolUpdates(String poolId) throws APIException {
+        return getAllPoolUpdates(poolId, OrderEnum.asc);
     }
 
 

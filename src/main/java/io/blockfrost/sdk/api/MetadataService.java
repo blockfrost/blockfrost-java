@@ -39,8 +39,7 @@ public interface MetadataService {
      * @param order The ordering of items from the point of view of the blockchain.
      * @return List&lt;TransactionMetadataLabel&gt;
      */
-    //TODO: Implement
-    List<TransactionMetadataLabel> getTransactionMetadataLabels(OrderEnum order) throws APIException;
+    List<TransactionMetadataLabel> getAllTransactionMetadataLabels(OrderEnum order) throws APIException;
 
     /**
      * Transaction metadata labels
@@ -48,7 +47,7 @@ public interface MetadataService {
      *
      * @return List&lt;TransactionMetadataLabel&gt;
      */
-    List<TransactionMetadataLabel> getTransactionMetadataLabels() throws APIException;
+    List<TransactionMetadataLabel> getAllTransactionMetadataLabels() throws APIException;
 
     /**
      * Transaction metadata content in CBOR
@@ -82,8 +81,7 @@ public interface MetadataService {
      * @param order The ordering of items from the point of view of the blockchain.
      * @return List&lt;TransactionMetadataLabelCbor&gt;
      */
-    //TODO: Implement
-    List<TransactionMetadataLabelCbor> getTransactionMetadataCborForLabel(String label, OrderEnum order) throws APIException;
+    List<TransactionMetadataLabelCbor> getAllTransactionMetadataCborForLabel(String label, OrderEnum order) throws APIException;
 
     /**
      * Transaction metadata content in CBOR
@@ -92,7 +90,7 @@ public interface MetadataService {
      * @param label Metadata label (required)
      * @return List&lt;TransactionMetadataLabelCbor&gt;
      */
-    List<TransactionMetadataLabelCbor> getTransactionMetadataCborForLabel(String label) throws APIException;
+    List<TransactionMetadataLabelCbor> getAllTransactionMetadataCborForLabel(String label) throws APIException;
 
     /**
      * Transaction metadata content in JSON
@@ -126,8 +124,7 @@ public interface MetadataService {
      * @param order The ordering of items from the point of view of the blockchain.
      * @return List&lt;TransactionMetadataLabelJson&gt;
      */
-    //TODO: Implement
-    List<TransactionMetadataLabelJson> getTransactionMetadataJsonForLabel(String label, OrderEnum order) throws APIException;
+    List<TransactionMetadataLabelJson> getAllTransactionMetadataJsonForLabel(String label, OrderEnum order) throws APIException;
 
     /**
      * Transaction metadata content in JSON
@@ -136,5 +133,5 @@ public interface MetadataService {
      * @param label Metadata label (required)
      * @return List&lt;TransactionMetadataLabelJson&gt;
      */
-    List<TransactionMetadataLabelJson> getTransactionMetadataJsonForLabel(String label) throws APIException;
+    List<TransactionMetadataLabelJson> getAllTransactionMetadataJsonForLabel(String label) throws APIException;
 }

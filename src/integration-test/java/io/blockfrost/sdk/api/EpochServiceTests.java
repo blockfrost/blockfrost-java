@@ -90,7 +90,7 @@ public class EpochServiceTests extends TestBase {
     public void nextEpochs_willReturn_allNextEpochs() throws APIException {
 
         Epoch latestEpoch = epochService.getLatestEpoch();
-        List<Epoch> nextEpochs = epochService.getNextEpochs(latestEpoch.getEpoch() - 5 );
+        List<Epoch> nextEpochs = epochService.getAllNextEpochs(latestEpoch.getEpoch() - 5 );
         assertThat(nextEpochs, hasSize(greaterThanOrEqualTo(0)));
 
     }
@@ -120,7 +120,7 @@ public class EpochServiceTests extends TestBase {
     @Test
     public void previousEpochs_willReturn_allPreviousEpochs() throws APIException {
 
-        List<Epoch> previousEpochs = epochService.getPreviousEpochs(2);
+        List<Epoch> previousEpochs = epochService.getAllPreviousEpochs(2);
         assertThat(previousEpochs, hasSize(greaterThanOrEqualTo(0)));
     }
 
@@ -138,7 +138,7 @@ public class EpochServiceTests extends TestBase {
     @Test
     public void activeStakesForEpoch_willReturn_allActiveStakesForEpoch() throws APIException {
 
-        List<Stake> activeStakes = epochService.getActiveStakesForEpoch(149);
+        List<Stake> activeStakes = epochService.getAllActiveStakesForEpoch(149);
 
         assertThat(activeStakes, hasSize(greaterThanOrEqualTo(0)));
 
@@ -156,7 +156,7 @@ public class EpochServiceTests extends TestBase {
     @Test
     public void activeStakesForEpochAndPool_willReturn_allActiveStakesForEpochAndPool() throws APIException {
 
-        List<Stake> activeStakesForPool = epochService.getActiveStakesForEpochAndPool(149, "pool1q0umnwuvj6menpj49z64fr4hf2z7qwnme28c87tyss7zc7y3c5e");
+        List<Stake> activeStakesForPool = epochService.getAllActiveStakesForEpochAndPool(149, "pool1q0umnwuvj6menpj49z64fr4hf2z7qwnme28c87tyss7zc7y3c5e");
 
         assertThat(activeStakesForPool, hasSize(greaterThanOrEqualTo(0)));
 
@@ -251,7 +251,7 @@ public class EpochServiceTests extends TestBase {
 
         Epoch latestEpoch = epochService.getLatestEpoch();
         List<Stake> activeStakes = epochService.getActiveStakesForEpoch(latestEpoch.getEpoch(), 1, 1);
-        List<String> blocksForEpoch = epochService.getBlocksForEpochAndPool(latestEpoch.getEpoch(), activeStakes.get(0).getPoolId());
+        List<String> blocksForEpoch = epochService.getAllBlocksForEpochAndPool(latestEpoch.getEpoch(), activeStakes.get(0).getPoolId());
 
         assertThat(blocksForEpoch, hasSize(greaterThanOrEqualTo(0)));
 

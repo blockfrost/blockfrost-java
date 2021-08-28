@@ -116,7 +116,7 @@ public class AssetServiceTests extends TestBase {
         @Test
         public void getAssetHistory_willReturn_allAssetHistory() throws APIException {
 
-            List<AssetHistory> assetHistoryList = assetService.getAssetHistory("476039a0949cf0b22f6a800f56780184c44533887ca6e821007840c36e7574636f696e");
+            List<AssetHistory> assetHistoryList = assetService.getEntireAssetHistory("476039a0949cf0b22f6a800f56780184c44533887ca6e821007840c36e7574636f696e");
             assertThat(assetHistoryList, hasSize(greaterThanOrEqualTo(0)));
 
         }
@@ -164,7 +164,7 @@ public class AssetServiceTests extends TestBase {
         @Test
         public void getAssetTransaction_willReturn_allAssetTransactions() throws APIException {
 
-            List<AssetTransaction> assetTransactionList = assetService.getAssetTransactions("476039a0949cf0b22f6a800f56780184c44533887ca6e821007840c36e7574636f696e");
+            List<AssetTransaction> assetTransactionList = assetService.getAllAssetTransactions("476039a0949cf0b22f6a800f56780184c44533887ca6e821007840c36e7574636f696e");
             assertThat(assetTransactionList, hasSize(greaterThanOrEqualTo(0)));
 
         }
@@ -209,7 +209,7 @@ public class AssetServiceTests extends TestBase {
         @Test
         public void getAssetAddresses_willReturn_allAssetAddresses() throws APIException {
 
-            List<AssetAddress> assetAddressList = assetService.getAssetAddresses("476039a0949cf0b22f6a800f56780184c44533887ca6e821007840c36e7574636f696e");
+            List<AssetAddress> assetAddressList = assetService.getAllAssetAddresses("476039a0949cf0b22f6a800f56780184c44533887ca6e821007840c36e7574636f696e");
             assertThat(assetAddressList, hasSize(greaterThanOrEqualTo(0)));
         }
 
@@ -240,7 +240,7 @@ public class AssetServiceTests extends TestBase {
 
         @Test
         public void getPolicyAssets_willReturn_allPolicyAssets() throws APIException {
-            List<PolicyAsset> policyAssetsList = assetService.getPolicyAssets("07a6604234b758be257f26565445f30169c25c85cf392797bc878de7");
+            List<PolicyAsset> policyAssetsList = assetService.getAllPolicyAssets("07a6604234b758be257f26565445f30169c25c85cf392797bc878de7");
             assertThat(policyAssetsList, hasSize(greaterThanOrEqualTo(0)));
         }
 

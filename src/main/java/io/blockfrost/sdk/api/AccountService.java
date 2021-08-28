@@ -50,7 +50,7 @@ public interface AccountService {
      * @param order        The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
      * @return List&lt;AccountHistory&gt;
      */
-    public List<AccountHistory> getAccountHistory(String stakeAddress, OrderEnum order) throws APIException;
+    public List<AccountHistory> getEntireAccountHistory(String stakeAddress, OrderEnum order) throws APIException;
 
     /**
      * Account history
@@ -59,7 +59,7 @@ public interface AccountService {
      * @param stakeAddress Bech32 stake address. (required)
      * @return List&lt;AccountHistory&gt;
      */
-    public List<AccountHistory> getAccountHistory(String stakeAddress) throws APIException;
+    public List<AccountHistory> getEntireAccountHistory(String stakeAddress) throws APIException;
 
     /**
      * Account reward history
@@ -92,7 +92,7 @@ public interface AccountService {
      * @param order        The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
      * @return List&lt;AccountRewardHistory&gt;
      */
-    public List<AccountRewardHistory> getAccountRewardHistory(String stakeAddress, OrderEnum order) throws APIException;
+    public List<AccountRewardHistory> getEntireAccountRewardHistory(String stakeAddress, OrderEnum order) throws APIException;
 
     /**
      * Account reward history
@@ -101,7 +101,7 @@ public interface AccountService {
      * @param stakeAddress Bech32 stake address. (required)
      * @return List&lt;AccountRewardHistory&gt;
      */
-    public List<AccountRewardHistory> getAccountRewardHistory(String stakeAddress) throws APIException;
+    public List<AccountRewardHistory> getEntireAccountRewardHistory(String stakeAddress) throws APIException;
 
     /**
      * Account delegation history
@@ -134,7 +134,7 @@ public interface AccountService {
      * @param order        The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
      * @return List&lt;AccountDelegationHistory&gt;
      */
-    public List<AccountDelegationHistory> getAccountDelegationHistory(String stakeAddress, OrderEnum order) throws APIException;
+    public List<AccountDelegationHistory> getEntireAccountDelegationHistory(String stakeAddress, OrderEnum order) throws APIException;
 
     /**
      * Account delegation history
@@ -143,7 +143,7 @@ public interface AccountService {
      * @param stakeAddress Bech32 stake address. (required)
      * @return List&lt;AccountDelegationHistory&gt;
      */
-    public List<AccountDelegationHistory> getAccountDelegationHistory(String stakeAddress) throws APIException;
+    public List<AccountDelegationHistory> getEntireAccountDelegationHistory(String stakeAddress) throws APIException;
 
     /**
      * Account registration history
@@ -176,7 +176,7 @@ public interface AccountService {
      * @param order        The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
      * @return List&lt;AccountRegistrationHistory&gt;
      */
-    public List<AccountRegistrationHistory> getAccountRegistrationHistory(String stakeAddress, OrderEnum order) throws APIException;
+    public List<AccountRegistrationHistory> getEntireAccountRegistrationHistory(String stakeAddress, OrderEnum order) throws APIException;
 
     /**
      * Account registration history
@@ -185,7 +185,7 @@ public interface AccountService {
      * @param stakeAddress Bech32 stake address. (required)
      * @return List&lt;AccountRegistrationHistory&gt;
      */
-    public List<AccountRegistrationHistory> getAccountRegistrationHistory(String stakeAddress) throws APIException;
+    public List<AccountRegistrationHistory> getEntireAccountRegistrationHistory(String stakeAddress) throws APIException;
 
     /**
      * Account withdrawal history
@@ -218,7 +218,7 @@ public interface AccountService {
      * @param order        The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
      * @return List&lt;AccountWithdrawalHistory&gt;
      */
-    public List<AccountWithdrawalHistory> getAccountWithdrawalHistory(String stakeAddress, OrderEnum order) throws APIException;
+    public List<AccountWithdrawalHistory> getEntireAccountWithdrawalHistory(String stakeAddress, OrderEnum order) throws APIException;
 
     /**
      * Account withdrawal history
@@ -227,7 +227,7 @@ public interface AccountService {
      * @param stakeAddress Bech32 stake address. (required)
      * @return List&lt;AccountWithdrawalHistory&gt;
      */
-    public List<AccountWithdrawalHistory> getAccountWithdrawalHistory(String stakeAddress) throws APIException;
+    public List<AccountWithdrawalHistory> getEntireAccountWithdrawalHistory(String stakeAddress) throws APIException;
 
     /**
      * Account MIR history
@@ -260,7 +260,7 @@ public interface AccountService {
      * @param order        The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
      * @return List&lt;AccountMirHistory&gt;
      */
-    public List<AccountMirHistory> getAccountMirHistory(String stakeAddress, OrderEnum order) throws APIException;
+    public List<AccountMirHistory> getEntireAccountMirHistory(String stakeAddress, OrderEnum order) throws APIException;
 
     /**
      * Account MIR history
@@ -269,7 +269,7 @@ public interface AccountService {
      * @param stakeAddress Bech32 stake address. (required)
      * @return List&lt;AccountMirHistory&gt;
      */
-    public List<AccountMirHistory> getAccountMirHistory(String stakeAddress) throws APIException;
+    public List<AccountMirHistory> getEntireAccountMirHistory(String stakeAddress) throws APIException;
 
     /**
      * Account associated addresses
@@ -302,7 +302,7 @@ public interface AccountService {
      * @param order        The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
      * @return List&lt;AccountAddress&gt;
      */
-    public List<AccountAddress> getAccountAddresses(String stakeAddress, OrderEnum order) throws APIException;
+    public List<AccountAddress> getAllAccountAddresses(String stakeAddress, OrderEnum order) throws APIException;
 
     /**
      * Account associated addresses
@@ -311,7 +311,7 @@ public interface AccountService {
      * @param stakeAddress Bech32 stake address. (required)
      * @return List&lt;AccountAddress&gt;
      */
-    public List<AccountAddress> getAccountAddresses(String stakeAddress) throws APIException;
+    public List<AccountAddress> getAllAccountAddresses(String stakeAddress) throws APIException;
 
     /**
      * Assets associated with the account addresses
@@ -347,7 +347,7 @@ public interface AccountService {
      * @param order        The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
      * @return List&lt;AccountAsset&gt;
      */
-    public List<AccountAsset> getAccountAssets(String stakeAddress, OrderEnum order) throws APIException;
+    public List<AccountAsset> getAllAccountAssets(String stakeAddress, OrderEnum order) throws APIException;
 
     /**
      * Assets associated with the account addresses
@@ -357,5 +357,5 @@ public interface AccountService {
      * @param stakeAddress Bech32 stake address. (required)
      * @return List&lt;AccountAsset&gt;
      */
-    public List<AccountAsset> getAccountAssets(String stakeAddress) throws APIException;
+    public List<AccountAsset> getAllAccountAssets(String stakeAddress) throws APIException;
 }

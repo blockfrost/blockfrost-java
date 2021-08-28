@@ -79,7 +79,7 @@ public class AddressServiceImpl extends BaseService implements AddressService {
     }
 
     @Override
-    public List<AddressUtxo> getAddressUtxos(String address, OrderEnum order) throws APIException {
+    public List<AddressUtxo> getAllAddressUtxos(String address, OrderEnum order) throws APIException {
 
         List<AddressUtxo> responseList = new ArrayList<>();
         boolean stopExecution = false;
@@ -117,7 +117,7 @@ public class AddressServiceImpl extends BaseService implements AddressService {
     }
 
     @Override
-    public List<AddressUtxo> getAddressUtxos(String address) throws APIException {
-        return getAddressUtxos(address, OrderEnum.asc);
+    public List<AddressUtxo> getAllAddressUtxos(String address) throws APIException {
+        return getAllAddressUtxos(address, OrderEnum.asc);
     }
 }

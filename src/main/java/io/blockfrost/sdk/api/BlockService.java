@@ -73,7 +73,7 @@ public interface BlockService {
      * @param order Ordered by tx index in the block. The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last
      * @return List&lt;String&gt;
      */
-    List<String> getTransactionsInLatestBlock(OrderEnum order) throws APIException;
+    List<String> getAllTransactionsInLatestBlock(OrderEnum order) throws APIException;
 
     /**
      * Latest block transactions
@@ -81,7 +81,7 @@ public interface BlockService {
      *
      * @return List&lt;String&gt;
      */
-    List<String> getTransactionsInLatestBlock() throws APIException;
+    List<String> getAllTransactionsInLatestBlock() throws APIException;
 
     /**
      * Listing of next blocks
@@ -101,7 +101,7 @@ public interface BlockService {
      * @param hashOrNumber Hash of the requested block.
      * @return List&lt;Block&gt;
      */
-    List<Block> getNextBlocks(String hashOrNumber) throws APIException;
+    List<Block> getAllNextBlocks(String hashOrNumber) throws APIException;
 
     /**
      * Listing of previous blocks
@@ -121,5 +121,5 @@ public interface BlockService {
      * @param hashOrNumber Hash of the requested block.
      * @return List&lt;Block&gt;
      */
-    List<Block> getPreviousBlocks(String hashOrNumber) throws APIException;
+    List<Block> getAllPreviousBlocks(String hashOrNumber) throws APIException;
 }

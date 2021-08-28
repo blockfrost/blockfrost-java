@@ -53,7 +53,7 @@ public interface EpochService {
      * @param number Number of the requested epoch. (required)
      * @return List&lt;Epoch&gt;
      */
-    List<Epoch> getNextEpochs(int number) throws APIException;
+    List<Epoch> getAllNextEpochs(int number) throws APIException;
 
 
     /**
@@ -74,7 +74,7 @@ public interface EpochService {
      * @param number Number of the requested epoch. (required)
      * @return List&lt;Epoch&gt;
      */
-    List<Epoch> getPreviousEpochs(int number) throws APIException;
+    List<Epoch> getAllPreviousEpochs(int number) throws APIException;
 
     /**
      * Stake distribution
@@ -94,7 +94,7 @@ public interface EpochService {
      * @param number Number of the epoch (required)
      * @return List&lt;Stake&gt;
      */
-    List<Stake> getActiveStakesForEpoch(int number) throws APIException;
+    List<Stake> getAllActiveStakesForEpoch(int number) throws APIException;
 
     /**
      * Stake distribution
@@ -116,7 +116,7 @@ public interface EpochService {
      * @param poolId
      * @return List&lt;Stake&gt;
      */
-    List<Stake> getActiveStakesForEpochAndPool(int number, String poolId) throws APIException;
+    List<Stake> getAllActiveStakesForEpochAndPool(int number, String poolId) throws APIException;
 
     /**
      * Protocol parameters
@@ -205,7 +205,7 @@ public interface EpochService {
      * @param order  The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
      * @return List&lt;String&gt;
      */
-    List<String> getBlocksForEpochAndPool(int number, String poolId, OrderEnum order) throws APIException;
+    List<String> getAllBlocksForEpochAndPool(int number, String poolId, OrderEnum order) throws APIException;
 
     /**
      * Block distribution
@@ -215,5 +215,5 @@ public interface EpochService {
      * @param poolId NetworkStake pool ID to filter (required)
      * @return List&lt;String&gt;
      */
-    List<String> getBlocksForEpochAndPool(int number, String poolId) throws APIException;
+    List<String> getAllBlocksForEpochAndPool(int number, String poolId) throws APIException;
 }
