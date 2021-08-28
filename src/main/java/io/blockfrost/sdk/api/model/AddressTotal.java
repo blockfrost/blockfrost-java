@@ -19,9 +19,21 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class AddressTotal {
+    /**
+     * Bech32 encoded address
+     */
     private String address;
+    /**
+     * Array of TransactionOutputAmount objects
+     */
     private List<TransactionOutputAmount> receivedSum = new ArrayList<TransactionOutputAmount>();
+    /**
+     * Array of TransactionOutputAmount objects
+     */
     private List<TransactionOutputAmount> sentSum = new ArrayList<TransactionOutputAmount>();
+    /**
+     * Count of all transactions on the address
+     */
     private Integer txCount;
 }
 
