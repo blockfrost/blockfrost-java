@@ -50,14 +50,6 @@ public class AssetServiceTests extends TestBase {
             assertThat(assetList, hasSize(lessThanOrEqualTo(5)));
             assertThat(assetList, hasItem(expectedAsset));
         }
-
-//        @Test
-//        public void getAssets_willReturn_allAssets() throws APIException {
-//
-//            List<Asset> assetList = assetService.getAssets();
-//            assertThat(assetList, hasSize(greaterThanOrEqualTo(0)));
-//
-//        }
     }
 
     @Nested

@@ -24,14 +24,12 @@ public class MetricsServiceTests extends TestBase {
         metricsService = new MetricsServiceImpl(Constants.BLOCKFROST_TESTNET_URL, projectId);
     }
 
-    //TODO: How to assert this test results. Should we keep a separate projectId?
     @Test
     public void usageMetrics_willReturn_listOfUsageMetrics() throws APIException {
         List<UsageMetric> usageMetricsResponse = metricsService.getUsageMetrics();
         assertThat(usageMetricsResponse, hasSize(greaterThan(0)));
     }
 
-    //TODO: How to assert this test results. Should we keep a separate projectId?
     //TODO: "date" in Api Documentation has changed to "time"
     @Test
     public void endpointUsageMetrics_willReturn_listOfEndpointUsageMetrics() throws APIException {

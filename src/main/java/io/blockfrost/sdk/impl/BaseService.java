@@ -57,12 +57,13 @@ public class BaseService {
             return response.body();
         } else {
             String errorMessage = response.errorBody().string();
+            int errorCode = response.code();
             try {
                 ResponseError responseError = OBJECT_MAPPER.readValue(response.errorBody().bytes(), ResponseError.class);
                 errorMessage = responseError.getError() + " : " + responseError.getMessage();
             } catch (Exception exp ){
             }
-            throw new APIException(errorMessage);
+            throw new APIException(errorMessage, errorCode);
         }
     }
 

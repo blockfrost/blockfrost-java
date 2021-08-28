@@ -64,6 +64,7 @@ public class MetadataServiceTests extends TestBase {
         }
 
         @Test
+        @Disabled
         public void transactionMetadataLabels_willReturn_allTransactionMetadataLabels() throws APIException {
 
             List<TransactionMetadataLabel> metadataList = metadataService.getTransactionMetadataLabels();

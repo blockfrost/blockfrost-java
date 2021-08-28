@@ -3,9 +3,9 @@ package io.blockfrost.sdk.impl;
 import io.blockfrost.sdk.api.IPFSService;
 import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.api.exception.RuntimeAPIException;
-import io.blockfrost.sdk.api.model.IPFSObject;
-import io.blockfrost.sdk.api.model.PinItem;
-import io.blockfrost.sdk.api.model.PinResponse;
+import io.blockfrost.sdk.api.model.ipfs.IPFSObject;
+import io.blockfrost.sdk.api.model.ipfs.PinItem;
+import io.blockfrost.sdk.api.model.ipfs.PinResponse;
 import io.blockfrost.sdk.api.util.ConfigHelper;
 import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.retrofit.IPFSApi;
@@ -96,12 +96,12 @@ public class IPFSServiceImpl extends BaseService implements IPFSService {
     }
 
     @Override
-    public List<PinItem> getPinnedObjects() throws APIException {
-        return getPinnedObjects(OrderEnum.asc);
+    public List<PinItem> getAllPinnedObjects() throws APIException {
+        return getAllPinnedObjects(OrderEnum.asc);
     }
 
     @Override
-    public List<PinItem> getPinnedObjects(OrderEnum order) throws APIException {
+    public List<PinItem> getAllPinnedObjects(OrderEnum order) throws APIException {
 
         List<PinItem> responseList = new ArrayList<>();
         boolean stopExecution = false;

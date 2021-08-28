@@ -1,8 +1,8 @@
 package io.blockfrost.sdk.impl.retrofit;
 
-import io.blockfrost.sdk.api.model.PinItem;
-import io.blockfrost.sdk.api.model.PinResponse;
-import io.blockfrost.sdk.api.model.IPFSObject;
+import io.blockfrost.sdk.api.model.ipfs.PinItem;
+import io.blockfrost.sdk.api.model.ipfs.PinResponse;
+import io.blockfrost.sdk.api.model.ipfs.IPFSObject;
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;

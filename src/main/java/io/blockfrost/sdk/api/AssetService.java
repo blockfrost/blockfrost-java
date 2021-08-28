@@ -42,25 +42,6 @@ public interface AssetService {
     List<Asset> getAssets(int count, int page) throws APIException;
 
     /**
-     * Assets
-     * List of all assets.
-     *
-     * @param order The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
-     * @return List&lt;Asset&gt;
-     */
-    //TODO It's not practical to get all assets
-    //List<Asset> getAssets(OrderEnum order) throws APIException;
-
-    /**
-     * Assets
-     * List of all assets ordered asceding from the point of view of the blockchain, not the page listing itself.
-     *
-     * @return List&lt;Asset&gt;
-     */
-    //TODO It's not practical to get all assets
-    //List<Asset> getAssets() throws APIException;
-
-    /**
      * Asset history
      * History of a specific asset
      *

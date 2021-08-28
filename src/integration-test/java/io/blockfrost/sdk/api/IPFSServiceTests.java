@@ -1,15 +1,14 @@
 package io.blockfrost.sdk.api;
 
 import io.blockfrost.sdk.api.exception.APIException;
-import io.blockfrost.sdk.api.model.IPFSObject;
-import io.blockfrost.sdk.api.model.PinState;
-import io.blockfrost.sdk.api.model.PinItem;
-import io.blockfrost.sdk.api.model.PinResponse;
+import io.blockfrost.sdk.api.model.ipfs.IPFSObject;
+import io.blockfrost.sdk.api.model.ipfs.PinState;
+import io.blockfrost.sdk.api.model.ipfs.PinItem;
+import io.blockfrost.sdk.api.model.ipfs.PinResponse;
 import io.blockfrost.sdk.api.util.Constants;
 import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.IPFSServiceImpl;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -131,7 +130,7 @@ public class IPFSServiceTests extends TestBase {
         }
 
         ((IPFSServiceImpl)ipfsService).setDefaultFetchSize(10);
-        List<PinItem> pinnedItems = ipfsService.getPinnedObjects();
+        List<PinItem> pinnedItems = ipfsService.getAllPinnedObjects();
         assertTrue(pinnedItems.size() >= 14, "Pinned items size should be 14 or more");
     }
 

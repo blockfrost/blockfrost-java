@@ -4,6 +4,8 @@ import io.blockfrost.sdk.api.TransactionService;
 import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.api.model.*;
 import io.blockfrost.sdk.impl.retrofit.TransactionsApi;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -141,7 +143,9 @@ public class TransactionServiceImpl extends BaseService implements TransactionSe
 
     @Override
     public String submitTransaction(byte[] serializedTransaction) throws APIException {
-        Call<String> transactionSubmitCall = transactionsApi.txSubmitPost(getProjectId(), "application/cbor");
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/cbor"), serializedTransaction);
+
+        Call<String> transactionSubmitCall = transactionsApi.txSubmitPost(getProjectId(), requestBody);
 
         try {
             Response<String> transactionSubmitResponse = transactionSubmitCall.execute();

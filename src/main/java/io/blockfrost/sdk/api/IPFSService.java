@@ -1,9 +1,9 @@
 package io.blockfrost.sdk.api;
 
 import io.blockfrost.sdk.api.exception.APIException;
-import io.blockfrost.sdk.api.model.IPFSObject;
-import io.blockfrost.sdk.api.model.PinItem;
-import io.blockfrost.sdk.api.model.PinResponse;
+import io.blockfrost.sdk.api.model.ipfs.IPFSObject;
+import io.blockfrost.sdk.api.model.ipfs.PinItem;
+import io.blockfrost.sdk.api.model.ipfs.PinResponse;
 import io.blockfrost.sdk.api.util.OrderEnum;
 
 import java.io.File;
@@ -39,9 +39,9 @@ public interface IPFSService {
 
     /**
      * List objects pinned to local storage
-     * @param count The number of results displayed on one page. (optional, default to 100)
-     * @param page The page number for listing the results. (optional, default to 1)
-     * @param order The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.  (optional, default to asc)
+     * @param count The number of results displayed on one page.
+     * @param page The page number for listing the results.
+     * @param order The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
      * @return List&lt;PinItem&gt;
      */
     public List<PinItem> getPinnedObjects(int count, int page, OrderEnum order) throws APIException;
@@ -50,14 +50,14 @@ public interface IPFSService {
      * List objects pinned to local storage with default order asc
      * @return List&lt;PinItem&gt;
      */
-    public List<PinItem> getPinnedObjects() throws APIException;
+    public List<PinItem> getAllPinnedObjects() throws APIException;
 
     /**
      * List objects pinned to local storage
      * @param order
      * @return List&lt;PinItem&gt;
      */
-    public List<PinItem> getPinnedObjects(OrderEnum order) throws APIException;
+    public List<PinItem> getAllPinnedObjects(OrderEnum order) throws APIException;
 
     /**
      *

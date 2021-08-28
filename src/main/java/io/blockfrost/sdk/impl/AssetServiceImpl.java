@@ -62,50 +62,6 @@ public class AssetServiceImpl extends BaseService implements AssetService {
         return getAssets(count, page, OrderEnum.asc);
     }
 
-    /*
-    @Override
-    public List<Asset> getAssets(OrderEnum order) throws APIException {
-
-        List<Asset> responseList = new ArrayList<>();
-        boolean stopExecution = false;
-        int currentPageCount = 1;
-        int numThreads = ConfigHelper.threadCount();
-
-        while (!stopExecution) {
-
-            List<CompletableFuture<List<Asset>>> completableFutures = new ArrayList<>();
-
-            for (int i = 0; i < numThreads; i++) {
-
-                int finalCurrentPageCount = currentPageCount + i;
-
-                completableFutures.add(CompletableFuture.supplyAsync(() -> {
-                    try {
-                        return getAssets( getDefaultFetchSize(), finalCurrentPageCount, order);
-                    } catch (APIException e) {
-                        throw new RuntimeAPIException(e);
-                    }
-                }));
-            }
-
-            try {
-                stopExecution = fetchData(completableFutures, responseList);
-            } catch (Exception e) {
-                throw new APIException("Exception while fetching all assets", e);
-            }
-
-            currentPageCount += numThreads;
-        }
-
-        return responseList;
-
-    }*/
-
-//    @Override
-//    public List<Asset> getAssets() throws APIException {
-//        return getAssets(OrderEnum.asc);
-//    }
-
     @Override
     public List<AssetHistory> getAssetHistory(String asset, int count, int page, OrderEnum order) throws APIException {
 

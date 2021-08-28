@@ -8,7 +8,6 @@ import io.blockfrost.sdk.api.util.Constants;
 import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.EpochServiceImpl;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -16,6 +15,7 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class EpochServiceTests extends TestBase {
@@ -127,18 +127,18 @@ public class EpochServiceTests extends TestBase {
     @Test
     public void activeStakesForEpoch_willReturn_activeStakesForEpochForCountAndPage() throws APIException {
 
-        Epoch latestEpoch = epochService.getLatestEpoch();
-        List<Stake> activeStakes = epochService.getActiveStakesForEpoch(latestEpoch.getEpoch(), 5, 1);
+        List<Stake> activeStakes = epochService.getActiveStakesForEpoch(149, 5, 1);
 
         assertThat(activeStakes, hasSize(lessThanOrEqualTo(5)));
-
+        assertEquals("pool1q0umnwuvj6menpj49z64fr4hf2z7qwnme28c87tyss7zc7y3c5e", activeStakes.get(0).getPoolId());
+        assertEquals("stake_test1uplkc69ny6xlp9l83844gdwmsdw0war5j5t68cv2dn7tzzgh37wdp", activeStakes.get(0).getStakeAddress());
+        assertEquals("1999232269", activeStakes.get(0).getAmount());
     }
 
     @Test
     public void activeStakesForEpoch_willReturn_allActiveStakesForEpoch() throws APIException {
 
-        Epoch latestEpoch = epochService.getLatestEpoch();
-        List<Stake> activeStakes = epochService.getActiveStakesForEpoch(latestEpoch.getEpoch());
+        List<Stake> activeStakes = epochService.getActiveStakesForEpoch(149);
 
         assertThat(activeStakes, hasSize(greaterThanOrEqualTo(0)));
 
@@ -147,22 +147,18 @@ public class EpochServiceTests extends TestBase {
     @Test
     public void activeStakesForEpochAndPool_willReturn_activeStakesForEpochAndPoolForCountAndPage() throws APIException {
 
-        Epoch latestEpoch = epochService.getLatestEpoch();
-        List<Stake> activeStakes = epochService.getActiveStakesForEpoch(latestEpoch.getEpoch(), 1, 1);
-        List<Stake> activeStakesForPool = epochService.getActiveStakesForEpochAndPool(latestEpoch.getEpoch(), activeStakes.get(0).getPoolId(), 5, 1);
+        List<Stake> activeStakesForPool = epochService.getActiveStakesForEpochAndPool(149, "pool1q0umnwuvj6menpj49z64fr4hf2z7qwnme28c87tyss7zc7y3c5e", 5, 1);
 
-        assertThat(activeStakes, hasSize(lessThanOrEqualTo(5)));
+        assertThat(activeStakesForPool, hasSize(lessThanOrEqualTo(5)));
 
     }
 
     @Test
     public void activeStakesForEpochAndPool_willReturn_allActiveStakesForEpochAndPool() throws APIException {
 
-        Epoch latestEpoch = epochService.getLatestEpoch();
-        List<Stake> activeStakes = epochService.getActiveStakesForEpoch(latestEpoch.getEpoch(), 1, 1);
-        List<Stake> activeStakesForPool = epochService.getActiveStakesForEpochAndPool(latestEpoch.getEpoch(), activeStakes.get(0).getPoolId());
+        List<Stake> activeStakesForPool = epochService.getActiveStakesForEpochAndPool(149, "pool1q0umnwuvj6menpj49z64fr4hf2z7qwnme28c87tyss7zc7y3c5e");
 
-        assertThat(activeStakes, hasSize(greaterThanOrEqualTo(0)));
+        assertThat(activeStakesForPool, hasSize(greaterThanOrEqualTo(0)));
 
     }
 
@@ -227,15 +223,6 @@ public class EpochServiceTests extends TestBase {
         assertThat(blocksForEpoch, hasItem(blockHash));
 
     }
-
-//    @Test
-//    public void blocksForEpoch_willReturn_allBlocksForEpoch() throws APIException {
-//
-//        Epoch latestEpoch = epochService.getLatestEpoch();
-//        List<String> blocksForEpoch = epochService.getBlocksForEpoch(latestEpoch.getEpoch());
-//        assertThat(blocksForEpoch, hasSize(greaterThanOrEqualTo(0)));
-//
-//    }
 
     @Test
     public void blocksForEpochAndPool_willReturn_blocksForEpochAndPoolForCountPageAndOrder() throws APIException {

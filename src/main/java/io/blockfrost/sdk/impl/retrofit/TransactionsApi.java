@@ -1,11 +1,9 @@
 package io.blockfrost.sdk.impl.retrofit;
 
 import io.blockfrost.sdk.api.model.*;
+import okhttp3.RequestBody;
 import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Header;
-import retrofit2.http.POST;
-import retrofit2.http.Path;
+import retrofit2.http.*;
 
 import java.util.List;
 
@@ -14,13 +12,12 @@ public interface TransactionsApi {
      * Submit a transaction
      * Submit an already serialized transaction to the network.
      *
-     * @param contentType (required)
      * @return Call&lt;String&gt;
      */
     @POST("tx/submit")
     Call<String> txSubmitPost(
             @Header("project_id") String projectId,
-            @Header("Content-Type") String contentType
+            @Body RequestBody signedTxn
     );
 
     /**
