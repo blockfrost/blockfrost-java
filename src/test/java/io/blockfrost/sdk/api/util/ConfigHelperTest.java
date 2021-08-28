@@ -13,7 +13,7 @@ class ConfigHelperTest {
         System.setProperty(BF_API_MAX_THREADS, "");
         System.setProperty(BF_RATE_LIMIT_FOR_PERIOD, "");
         System.setProperty(BF_RATE_LIMIT_REFRESH_PERIOD_IN_SEC, "");
-        System.setProperty(BF_TIMEOUT_DURATION_IN_MILLIS, "");
+        System.setProperty(BF_RATE_LIMIT_TIMEOUT_DURATION_IN_MILLIS, "");
         ConfigHelper.INSTANCE.initEnv();
     }
 
@@ -86,7 +86,7 @@ class ConfigHelperTest {
 
     @Test
     public void getTimeoutDuration_willReturn_timeOutDurationSetAsSystemProperty() {
-        System.setProperty(BF_TIMEOUT_DURATION_IN_MILLIS, "1000");
+        System.setProperty(BF_RATE_LIMIT_TIMEOUT_DURATION_IN_MILLIS, "1000");
         ConfigHelper.INSTANCE.initEnv();
 
         int timeoutDurationInMillis = ConfigHelper.INSTANCE.getTimeoutDurationInMillis();

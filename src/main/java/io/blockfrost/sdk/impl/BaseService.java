@@ -3,12 +3,9 @@ package io.blockfrost.sdk.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.api.model.ResponseError;
-import io.blockfrost.sdk.impl.util.BuildVersion;
+import io.blockfrost.sdk.api.util.NetworkHelper;
 import io.blockfrost.sdk.impl.util.RateLimitHelper;
 import io.github.resilience4j.retrofit.RateLimiterCallAdapter;
-import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import retrofit2.Response;
@@ -38,21 +35,11 @@ public class BaseService {
     }
 
     protected Retrofit getRetrofit() {
-        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-
-        httpClient.addInterceptor(new Interceptor() {
-            @Override
-            public okhttp3.Response intercept(Chain chain) throws IOException {
-                Request request = chain.request().newBuilder().addHeader("User-Agent", BuildVersion.getBuildName()).build();
-                return chain.proceed(request);
-            }
-        });
-
         return new Retrofit.Builder()
                 .addCallAdapterFactory( RateLimiterCallAdapter.of(RateLimitHelper.rateLimiter()))
                 .baseUrl(getBaseUrl())
                 .addConverterFactory(JacksonConverterFactory.create())
-                .client(httpClient.build())
+                .client(NetworkHelper.getInstance().getOkHttpClient())
                 .build();
 
     }
