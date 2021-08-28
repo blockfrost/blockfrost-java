@@ -77,7 +77,7 @@ public class EpochServiceImpl extends BaseService implements EpochService {
     }
 
     @Override
-    public List<Epoch> getNextEpochs(int number) throws APIException {
+    public List<Epoch> getAllNextEpochs(int number) throws APIException {
 
         List<Epoch> responseList = new ArrayList<>();
         boolean stopExecution = false;
@@ -128,7 +128,7 @@ public class EpochServiceImpl extends BaseService implements EpochService {
     }
 
     @Override
-    public List<Epoch> getPreviousEpochs(int number) throws APIException {
+    public List<Epoch> getAllPreviousEpochs(int number) throws APIException {
 
         List<Epoch> responseList = new ArrayList<>();
         boolean stopExecution = false;
@@ -179,7 +179,7 @@ public class EpochServiceImpl extends BaseService implements EpochService {
     }
 
     @Override
-    public List<Stake> getActiveStakesForEpoch(int number) throws APIException {
+    public List<Stake> getAllActiveStakesForEpoch(int number) throws APIException {
 
         List<Stake> responseList = new ArrayList<>();
         boolean stopExecution = false;
@@ -234,7 +234,7 @@ public class EpochServiceImpl extends BaseService implements EpochService {
     }
 
     @Override
-    public List<Stake> getActiveStakesForEpochAndPool(int number, String poolId) throws APIException {
+    public List<Stake> getAllActiveStakesForEpochAndPool(int number, String poolId) throws APIException {
 
         List<Stake> responseList = new ArrayList<>();
         boolean stopExecution = false;
@@ -362,7 +362,7 @@ public class EpochServiceImpl extends BaseService implements EpochService {
     }
 
     @Override
-    public List<String> getBlocksForEpochAndPool(int number, String poolId, OrderEnum order) throws APIException {
+    public List<String> getAllBlocksForEpochAndPool(int number, String poolId, OrderEnum order) throws APIException {
 
         List<String> responseList = new ArrayList<>();
         boolean stopExecution = false;
@@ -400,8 +400,8 @@ public class EpochServiceImpl extends BaseService implements EpochService {
     }
 
     @Override
-    public List<String> getBlocksForEpochAndPool(int number, String poolId) throws APIException {
-        return getBlocksForEpochAndPool(number, poolId, OrderEnum.asc);
+    public List<String> getAllBlocksForEpochAndPool(int number, String poolId) throws APIException {
+        return getAllBlocksForEpochAndPool(number, poolId, OrderEnum.asc);
     }
 
 }

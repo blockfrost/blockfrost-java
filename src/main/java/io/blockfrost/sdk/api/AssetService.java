@@ -69,7 +69,7 @@ public interface AssetService {
      * @param order The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last
      * @return List&lt;AssetHistory&gt;
      */
-    List<AssetHistory> getAssetHistory(String asset, OrderEnum order) throws APIException;
+    List<AssetHistory> getEntireAssetHistory(String asset, OrderEnum order) throws APIException;
 
     /**
      * Asset history
@@ -78,7 +78,7 @@ public interface AssetService {
      * @param asset Concatenation of the policy_id and hex-encoded asset_name (required)
      * @return List&lt;AssetHistory&gt;
      */
-    List<AssetHistory> getAssetHistory(String asset) throws APIException;
+    List<AssetHistory> getEntireAssetHistory(String asset) throws APIException;
 
     /**
      * Asset transactions
@@ -111,7 +111,7 @@ public interface AssetService {
      * @param order The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
      * @return List&lt;AssetTransaction&gt;
      */
-    List<AssetTransaction> getAssetTransactions(String asset, OrderEnum order) throws APIException;
+    List<AssetTransaction> getAllAssetTransactions(String asset, OrderEnum order) throws APIException;
 
     /**
      * Asset transactions
@@ -120,7 +120,7 @@ public interface AssetService {
      * @param asset Concatenation of the policy_id and hex-encoded asset_name (required)
      * @return List&lt;AssetTransaction&gt;
      */
-    List<AssetTransaction> getAssetTransactions(String asset) throws APIException;
+    List<AssetTransaction> getAllAssetTransactions(String asset) throws APIException;
 
     /**
      * Asset addresses
@@ -153,7 +153,7 @@ public interface AssetService {
      * @param order The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last
      * @return List&lt;AssetAddress&gt;
      */
-    List<AssetAddress> getAssetAddresses(String asset, OrderEnum order) throws APIException;
+    List<AssetAddress> getAllAssetAddresses(String asset, OrderEnum order) throws APIException;
 
     /**
      * Asset addresses
@@ -162,7 +162,7 @@ public interface AssetService {
      * @param asset Concatenation of the policy_id and hex-encoded asset_name (required)
      * @return List&lt;AssetAddress&gt;
      */
-    List<AssetAddress> getAssetAddresses(String asset) throws APIException;
+    List<AssetAddress> getAllAssetAddresses(String asset) throws APIException;
 
     /**
      * Assets of a specific policy
@@ -195,7 +195,7 @@ public interface AssetService {
      * @param order    The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
      * @return List&lt;PolicyAsset&gt;&gt;
      */
-    List<PolicyAsset> getPolicyAssets(String policyId, OrderEnum order) throws APIException;
+    List<PolicyAsset> getAllPolicyAssets(String policyId, OrderEnum order) throws APIException;
 
     /**
      * Assets of a specific policy
@@ -204,5 +204,5 @@ public interface AssetService {
      * @param policyId Specific policy_id (required)
      * @return List&lt;PolicyAsset&gt;&gt;
      */
-    List<PolicyAsset> getPolicyAssets(String policyId) throws APIException;
+    List<PolicyAsset> getAllPolicyAssets(String policyId) throws APIException;
 }

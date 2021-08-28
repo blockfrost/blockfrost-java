@@ -37,8 +37,7 @@ public interface PoolService {
      * @param order The ordering of items from the point of view of the blockchain.
      * @return List&lt;String&gt;
      */
-    //TODO: Implement
-    List<String> getPools(OrderEnum order) throws APIException;
+    List<String> getAllPools(OrderEnum order) throws APIException;
 
     /**
      * List of networkStake pools
@@ -46,7 +45,7 @@ public interface PoolService {
      *
      * @return List&lt;String&gt;
      */
-    List<String> getPools() throws APIException;
+    List<String> getAllPools() throws APIException;
 
 
     /**
@@ -78,8 +77,7 @@ public interface PoolService {
      * @param order The ordering of items from the point of view of the blockchain.
      * @return List&lt;PoolRetirementInfo&gt;
      */
-    //TODO: Implement
-    List<PoolRetirementInfo> getRetiredPools(OrderEnum order) throws APIException;
+    List<PoolRetirementInfo> getAllRetiredPools(OrderEnum order) throws APIException;
 
     /**
      * List of retired pools
@@ -87,7 +85,7 @@ public interface PoolService {
      *
      * @return List&lt;PoolRetirementInfo&gt;
      */
-    List<PoolRetirementInfo> getRetiredPools() throws APIException;
+    List<PoolRetirementInfo> getAllRetiredPools() throws APIException;
 
     /**
      * List of retiring pools
@@ -118,8 +116,7 @@ public interface PoolService {
      * @param order The ordering of items from the point of view of the blockchain.
      * @return List&lt;PoolRetirementInfo&gt;
      */
-    //TODO: Implement
-    List<PoolRetirementInfo> getRetiringPools(OrderEnum order) throws APIException;
+    List<PoolRetirementInfo> getAllRetiringPools(OrderEnum order) throws APIException;
 
     /**
      * List of retiring pools
@@ -127,7 +124,7 @@ public interface PoolService {
      *
      * @return List&lt;PoolRetirementInfo&gt;
      */
-    List<PoolRetirementInfo> getRetiringPools() throws APIException;
+    List<PoolRetirementInfo> getAllRetiringPools() throws APIException;
 
     /**
      * Specific networkStake pool
@@ -151,8 +148,8 @@ public interface PoolService {
     List<PoolHistory> getPoolHistory(String poolId, int count, int page, OrderEnum order) throws APIException;
 
     /**
-     * List of retiring pools
-     * List of retiring networkStake pools ordered from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
+     * NetworkStake pool history
+     * History of networkStake pool parameters over epochs ordered from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
      *
      * @param poolId Bech32 or hexadecimal pool ID. (required)
      * @param count  The numbers of pools per page (&lt;=100).
@@ -163,24 +160,23 @@ public interface PoolService {
 
 
     /**
-     * List of retiring pools
-     * List of all retiring networkStake pools.
+     * NetworkStake pool history
+     * History of networkStake pool parameters over epochs.
      *
      * @param poolId Bech32 or hexadecimal pool ID. (required)
      * @param order  The ordering of items from the point of view of the blockchain.
      * @return List&lt;PoolHistory&gt;
      */
-    //TODO: Implement
-    List<PoolHistory> getPoolHistory(String poolId, OrderEnum order) throws APIException;
+    List<PoolHistory> getEntirePoolHistory(String poolId, OrderEnum order) throws APIException;
 
     /**
-     * List of retiring pools
-     * List of all retiring networkStake pools in ascending order from the point of view of the blockchain. We return oldest first, newest last
+     * NetworkStake pool history
+     * History of networkStake pool parameters over epochs in ascending order from the point of view of the blockchain. We return oldest first, newest last
      *
      * @param poolId Bech32 or hexadecimal pool ID. (required)
      * @return List&lt;PoolHistory&gt;
      */
-    List<PoolHistory> getPoolHistory(String poolId) throws APIException;
+    List<PoolHistory> getEntirePoolHistory(String poolId) throws APIException;
 
     /**
      * NetworkStake pool metadata
@@ -232,8 +228,7 @@ public interface PoolService {
      * @param order  The ordering of items from the point of view of the blockchain.
      * @return List&lt;PoolDelegator&gt;
      */
-    //TODO: Implement
-    List<PoolDelegator> getPoolDelegators(String poolId, OrderEnum order) throws APIException;
+    List<PoolDelegator> getAllPoolDelegators(String poolId, OrderEnum order) throws APIException;
 
     /**
      * List of networkStake pool delegators
@@ -242,7 +237,7 @@ public interface PoolService {
      * @param poolId Bech32 or hexadecimal pool ID. (required)
      * @return List&lt;PoolDelegator&gt;
      */
-    List<PoolDelegator> getPoolDelegators(String poolId) throws APIException;
+    List<PoolDelegator> getAllPoolDelegators(String poolId) throws APIException;
 
     /**
      * NetworkStake pool blocks
@@ -276,8 +271,7 @@ public interface PoolService {
      * @param order  The ordering of items from the point of view of the blockchain.
      * @return List&lt;String&gt;
      */
-    //TODO: Implement
-    List<String> getPoolBlocks(String poolId, OrderEnum order) throws APIException;
+    List<String> getAllPoolBlocks(String poolId, OrderEnum order) throws APIException;
 
     /**
      * NetworkStake pool blocks
@@ -286,7 +280,7 @@ public interface PoolService {
      * @param poolId Bech32 or hexadecimal pool ID. (required)
      * @return List&lt;String&gt;
      */
-    List<String> getPoolBlocks(String poolId) throws APIException;
+    List<String> getAllPoolBlocks(String poolId) throws APIException;
 
     /**
      * NetworkStake pool updates
@@ -320,8 +314,7 @@ public interface PoolService {
      * @param order  The ordering of items from the point of view of the blockchain.
      * @return List&lt;PoolUpdate&gt;
      */
-    //TODO: Implement
-    List<PoolUpdate> getPoolUpdates(String poolId, OrderEnum order) throws APIException;
+    List<PoolUpdate> getAllPoolUpdates(String poolId, OrderEnum order) throws APIException;
 
     /**
      * NetworkStake pool updates
@@ -330,6 +323,6 @@ public interface PoolService {
      * @param poolId Bech32 or hexadecimal pool ID. (required)
      * @return List&lt;PoolUpdate&gt;
      */
-    List<PoolUpdate> getPoolUpdates(String poolId) throws APIException;
+    List<PoolUpdate> getAllPoolUpdates(String poolId) throws APIException;
 
 }

@@ -110,7 +110,7 @@ public class PoolServiceTests extends TestBase {
         @Test
         public void pools_willReturn_allPools() throws APIException {
 
-            List<String> poolList = poolService.getPools();
+            List<String> poolList = poolService.getAllPools();
 
             assertThat(poolList, hasSize(greaterThanOrEqualTo(0)));
 
@@ -164,7 +164,7 @@ public class PoolServiceTests extends TestBase {
         @Disabled
         public void retiredPools_willReturn_allRetiredPools() throws APIException {
 
-            List<PoolRetirementInfo> poolList = poolService.getRetiredPools();
+            List<PoolRetirementInfo> poolList = poolService.getAllRetiredPools();
 
             assertThat(poolList, hasSize(greaterThanOrEqualTo(0)));
 
@@ -205,7 +205,7 @@ public class PoolServiceTests extends TestBase {
         //Throw error Too many requests for the client. Not sure if we keep this test case
         public void retiringPools_willReturn_allRetiringPools() throws APIException {
 
-            List<PoolRetirementInfo> poolList = poolService.getRetiringPools();
+            List<PoolRetirementInfo> poolList = poolService.getAllRetiringPools();
 
             assertThat(poolList, hasSize(greaterThanOrEqualTo(0)));
 
@@ -308,7 +308,7 @@ public class PoolServiceTests extends TestBase {
         @Test
         public void poolHistory_willReturn_entireHistory() throws APIException {
 
-            List<PoolHistory> poolList = poolService.getPoolHistory("pool1adur9jcn0dkjpm3v8ayf94yn3fe5xfk2rqfz7rfpuh6cw6evd7w");
+            List<PoolHistory> poolList = poolService.getEntirePoolHistory("pool1adur9jcn0dkjpm3v8ayf94yn3fe5xfk2rqfz7rfpuh6cw6evd7w");
 
             assertThat(poolList, hasSize(greaterThanOrEqualTo(0)));
 
@@ -435,7 +435,7 @@ public class PoolServiceTests extends TestBase {
         @Test
         public void poolDelegators_willReturn_allPoolDelegators() throws APIException {
 
-            List<PoolDelegator> poolList = poolService.getPoolDelegators("pool126zlx7728y7xs08s8epg9qp393kyafy9rzr89g4qkvv4cv93zem");
+            List<PoolDelegator> poolList = poolService.getAllPoolDelegators("pool126zlx7728y7xs08s8epg9qp393kyafy9rzr89g4qkvv4cv93zem");
 
             assertThat(poolList, hasSize(greaterThanOrEqualTo(0)));
 
@@ -483,7 +483,7 @@ public class PoolServiceTests extends TestBase {
         @Test
         public void poolBlocks_willReturn_allPoolBlocks() throws APIException {
 
-            List<String> poolList = poolService.getPoolBlocks("pool126zlx7728y7xs08s8epg9qp393kyafy9rzr89g4qkvv4cv93zem");
+            List<String> poolList = poolService.getAllPoolBlocks("pool126zlx7728y7xs08s8epg9qp393kyafy9rzr89g4qkvv4cv93zem");
 
             assertThat(poolList, hasSize(greaterThanOrEqualTo(0)));
 
@@ -559,7 +559,7 @@ public class PoolServiceTests extends TestBase {
         @Test
         public void poolUpdates_willReturn_allPoolUpdates() throws APIException {
 
-            List<PoolUpdate> poolList = poolService.getPoolUpdates("pool126zlx7728y7xs08s8epg9qp393kyafy9rzr89g4qkvv4cv93zem");
+            List<PoolUpdate> poolList = poolService.getAllPoolUpdates("pool126zlx7728y7xs08s8epg9qp393kyafy9rzr89g4qkvv4cv93zem");
 
             assertThat(poolList, hasSize(greaterThanOrEqualTo(0)));
 

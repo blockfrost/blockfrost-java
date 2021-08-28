@@ -83,7 +83,7 @@ public class AssetServiceImpl extends BaseService implements AssetService {
     }
 
     @Override
-    public List<AssetHistory> getAssetHistory(String asset, OrderEnum order) throws APIException {
+    public List<AssetHistory> getEntireAssetHistory(String asset, OrderEnum order) throws APIException {
 
         List<AssetHistory> responseList = new ArrayList<>();
         boolean stopExecution = false;
@@ -121,8 +121,8 @@ public class AssetServiceImpl extends BaseService implements AssetService {
     }
 
     @Override
-    public List<AssetHistory> getAssetHistory(String asset) throws APIException {
-        return getAssetHistory(asset, OrderEnum.asc);
+    public List<AssetHistory> getEntireAssetHistory(String asset) throws APIException {
+        return getEntireAssetHistory(asset, OrderEnum.asc);
     }
 
     @Override
@@ -146,7 +146,7 @@ public class AssetServiceImpl extends BaseService implements AssetService {
     }
 
     @Override
-    public List<AssetTransaction> getAssetTransactions(String asset, OrderEnum order) throws APIException {
+    public List<AssetTransaction> getAllAssetTransactions(String asset, OrderEnum order) throws APIException {
 
         List<AssetTransaction> responseList = new ArrayList<>();
         boolean stopExecution = false;
@@ -184,8 +184,8 @@ public class AssetServiceImpl extends BaseService implements AssetService {
     }
 
     @Override
-    public List<AssetTransaction> getAssetTransactions(String asset) throws APIException {
-        return getAssetTransactions(asset, OrderEnum.asc);
+    public List<AssetTransaction> getAllAssetTransactions(String asset) throws APIException {
+        return getAllAssetTransactions(asset, OrderEnum.asc);
     }
 
     @Override
@@ -208,7 +208,7 @@ public class AssetServiceImpl extends BaseService implements AssetService {
     }
 
     @Override
-    public List<AssetAddress> getAssetAddresses(String asset, OrderEnum order) throws APIException {
+    public List<AssetAddress> getAllAssetAddresses(String asset, OrderEnum order) throws APIException {
 
         List<AssetAddress> responseList = new ArrayList<>();
         boolean stopExecution = false;
@@ -246,8 +246,8 @@ public class AssetServiceImpl extends BaseService implements AssetService {
     }
 
     @Override
-    public List<AssetAddress> getAssetAddresses(String asset) throws APIException {
-        return getAssetAddresses(asset, OrderEnum.asc);
+    public List<AssetAddress> getAllAssetAddresses(String asset) throws APIException {
+        return getAllAssetAddresses(asset, OrderEnum.asc);
     }
 
     @Override
@@ -274,7 +274,7 @@ public class AssetServiceImpl extends BaseService implements AssetService {
     }
 
     @Override
-    public List<PolicyAsset> getPolicyAssets(String policyId, OrderEnum order) throws APIException {
+    public List<PolicyAsset> getAllPolicyAssets(String policyId, OrderEnum order) throws APIException {
 
         if (policyId == null || policyId.equals("")) {
             throw new APIException("PolicyId cannot be null or empty");
@@ -316,7 +316,7 @@ public class AssetServiceImpl extends BaseService implements AssetService {
     }
 
     @Override
-    public List<PolicyAsset> getPolicyAssets(String policyId) throws APIException {
-        return getPolicyAssets(policyId, OrderEnum.asc);
+    public List<PolicyAsset> getAllPolicyAssets(String policyId) throws APIException {
+        return getAllPolicyAssets(policyId, OrderEnum.asc);
     }
 }

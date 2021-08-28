@@ -66,7 +66,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
     }
 
     @Override
-    public List<AccountHistory> getAccountHistory(String stakeAddress, OrderEnum order) throws APIException {
+    public List<AccountHistory> getEntireAccountHistory(String stakeAddress, OrderEnum order) throws APIException {
 
         List<AccountHistory> responseList = new ArrayList<>();
         boolean stopExecution = false;
@@ -104,8 +104,8 @@ public class AccountServiceImpl extends BaseService implements AccountService {
     }
 
     @Override
-    public List<AccountHistory> getAccountHistory(String stakeAddress) throws APIException {
-        return getAccountHistory(stakeAddress, OrderEnum.asc);
+    public List<AccountHistory> getEntireAccountHistory(String stakeAddress) throws APIException {
+        return getEntireAccountHistory(stakeAddress, OrderEnum.asc);
     }
 
     @Override
@@ -129,7 +129,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
     }
 
     @Override
-    public List<AccountRewardHistory> getAccountRewardHistory(String stakeAddress, OrderEnum order) throws APIException {
+    public List<AccountRewardHistory> getEntireAccountRewardHistory(String stakeAddress, OrderEnum order) throws APIException {
 
         List<AccountRewardHistory> responseList = new ArrayList<>();
         boolean stopExecution = false;
@@ -167,8 +167,8 @@ public class AccountServiceImpl extends BaseService implements AccountService {
     }
 
     @Override
-    public List<AccountRewardHistory> getAccountRewardHistory(String stakeAddress) throws APIException {
-        return getAccountRewardHistory(stakeAddress, OrderEnum.asc);
+    public List<AccountRewardHistory> getEntireAccountRewardHistory(String stakeAddress) throws APIException {
+        return getEntireAccountRewardHistory(stakeAddress, OrderEnum.asc);
     }
 
     @Override
@@ -191,7 +191,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
     }
 
     @Override
-    public List<AccountDelegationHistory> getAccountDelegationHistory(String stakeAddress, OrderEnum order) throws APIException {
+    public List<AccountDelegationHistory> getEntireAccountDelegationHistory(String stakeAddress, OrderEnum order) throws APIException {
 
         List<AccountDelegationHistory> responseList = new ArrayList<>();
         boolean stopExecution = false;
@@ -229,8 +229,8 @@ public class AccountServiceImpl extends BaseService implements AccountService {
     }
 
     @Override
-    public List<AccountDelegationHistory> getAccountDelegationHistory(String stakeAddress) throws APIException {
-        return getAccountDelegationHistory(stakeAddress, OrderEnum.asc);
+    public List<AccountDelegationHistory> getEntireAccountDelegationHistory(String stakeAddress) throws APIException {
+        return getEntireAccountDelegationHistory(stakeAddress, OrderEnum.asc);
     }
 
     @Override
@@ -253,7 +253,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
     }
 
     @Override
-    public List<AccountRegistrationHistory> getAccountRegistrationHistory(String stakeAddress, OrderEnum order) throws APIException {
+    public List<AccountRegistrationHistory> getEntireAccountRegistrationHistory(String stakeAddress, OrderEnum order) throws APIException {
 
         List<AccountRegistrationHistory> responseList = new ArrayList<>();
         boolean stopExecution = false;
@@ -291,8 +291,8 @@ public class AccountServiceImpl extends BaseService implements AccountService {
     }
 
     @Override
-    public List<AccountRegistrationHistory> getAccountRegistrationHistory(String stakeAddress) throws APIException {
-        return getAccountRegistrationHistory(stakeAddress, OrderEnum.asc);
+    public List<AccountRegistrationHistory> getEntireAccountRegistrationHistory(String stakeAddress) throws APIException {
+        return getEntireAccountRegistrationHistory(stakeAddress, OrderEnum.asc);
     }
 
     @Override
@@ -315,7 +315,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
     }
 
     @Override
-    public List<AccountWithdrawalHistory> getAccountWithdrawalHistory(String stakeAddress, OrderEnum order) throws APIException {
+    public List<AccountWithdrawalHistory> getEntireAccountWithdrawalHistory(String stakeAddress, OrderEnum order) throws APIException {
 
         List<AccountWithdrawalHistory> responseList = new ArrayList<>();
         boolean stopExecution = false;
@@ -353,8 +353,8 @@ public class AccountServiceImpl extends BaseService implements AccountService {
     }
 
     @Override
-    public List<AccountWithdrawalHistory> getAccountWithdrawalHistory(String stakeAddress) throws APIException {
-        return getAccountWithdrawalHistory(stakeAddress, OrderEnum.asc);
+    public List<AccountWithdrawalHistory> getEntireAccountWithdrawalHistory(String stakeAddress) throws APIException {
+        return getEntireAccountWithdrawalHistory(stakeAddress, OrderEnum.asc);
     }
 
     @Override
@@ -378,7 +378,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
 
 
     @Override
-    public List<AccountMirHistory> getAccountMirHistory(String stakeAddress, OrderEnum order) throws APIException {
+    public List<AccountMirHistory> getEntireAccountMirHistory(String stakeAddress, OrderEnum order) throws APIException {
 
         List<AccountMirHistory> responseList = new ArrayList<>();
         boolean stopExecution = false;
@@ -416,8 +416,8 @@ public class AccountServiceImpl extends BaseService implements AccountService {
     }
 
     @Override
-    public List<AccountMirHistory> getAccountMirHistory(String stakeAddress) throws APIException {
-        return getAccountMirHistory(stakeAddress, OrderEnum.asc);
+    public List<AccountMirHistory> getEntireAccountMirHistory(String stakeAddress) throws APIException {
+        return getEntireAccountMirHistory(stakeAddress, OrderEnum.asc);
     }
 
     @Override
@@ -440,7 +440,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
     }
 
     @Override
-    public List<AccountAddress> getAccountAddresses(String stakeAddress, OrderEnum order) throws APIException {
+    public List<AccountAddress> getAllAccountAddresses(String stakeAddress, OrderEnum order) throws APIException {
 
         List<AccountAddress> responseList = new ArrayList<>();
         boolean stopExecution = false;
@@ -478,8 +478,8 @@ public class AccountServiceImpl extends BaseService implements AccountService {
     }
 
     @Override
-    public List<AccountAddress> getAccountAddresses(String stakeAddress) throws APIException {
-        return getAccountAddresses(stakeAddress, OrderEnum.asc);
+    public List<AccountAddress> getAllAccountAddresses(String stakeAddress) throws APIException {
+        return getAllAccountAddresses(stakeAddress, OrderEnum.asc);
     }
 
     @Override
@@ -502,7 +502,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
     }
 
     @Override
-    public List<AccountAsset> getAccountAssets(String stakeAddress, OrderEnum order) throws APIException {
+    public List<AccountAsset> getAllAccountAssets(String stakeAddress, OrderEnum order) throws APIException {
 
         List<AccountAsset> responseList = new ArrayList<>();
         boolean stopExecution = false;
@@ -540,7 +540,7 @@ public class AccountServiceImpl extends BaseService implements AccountService {
     }
 
     @Override
-    public List<AccountAsset> getAccountAssets(String stakeAddress) throws APIException {
-        return getAccountAssets(stakeAddress, OrderEnum.asc);
+    public List<AccountAsset> getAllAccountAssets(String stakeAddress) throws APIException {
+        return getAllAccountAssets(stakeAddress, OrderEnum.asc);
     }
 }

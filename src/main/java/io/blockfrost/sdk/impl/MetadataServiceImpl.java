@@ -55,7 +55,7 @@ public class MetadataServiceImpl extends BaseService implements MetadataService 
     }
 
     @Override
-    public List<TransactionMetadataLabel> getTransactionMetadataLabels(OrderEnum order) throws APIException {
+    public List<TransactionMetadataLabel> getAllTransactionMetadataLabels(OrderEnum order) throws APIException {
 
         List<TransactionMetadataLabel> responseList = new ArrayList<>();
         boolean stopExecution = false;
@@ -93,8 +93,8 @@ public class MetadataServiceImpl extends BaseService implements MetadataService 
     }
 
     @Override
-    public List<TransactionMetadataLabel> getTransactionMetadataLabels() throws APIException {
-        return getTransactionMetadataLabels(OrderEnum.asc);
+    public List<TransactionMetadataLabel> getAllTransactionMetadataLabels() throws APIException {
+        return getAllTransactionMetadataLabels(OrderEnum.asc);
     }
 
     @Override
@@ -120,7 +120,7 @@ public class MetadataServiceImpl extends BaseService implements MetadataService 
     }
 
     @Override
-    public List<TransactionMetadataLabelCbor> getTransactionMetadataCborForLabel(String label, OrderEnum order) throws APIException {
+    public List<TransactionMetadataLabelCbor> getAllTransactionMetadataCborForLabel(String label, OrderEnum order) throws APIException {
         validateLabel(label);
 
         List<TransactionMetadataLabelCbor> responseList = new ArrayList<>();
@@ -159,8 +159,8 @@ public class MetadataServiceImpl extends BaseService implements MetadataService 
     }
 
     @Override
-    public List<TransactionMetadataLabelCbor> getTransactionMetadataCborForLabel(String label) throws APIException {
-        return getTransactionMetadataCborForLabel(label, OrderEnum.asc);
+    public List<TransactionMetadataLabelCbor> getAllTransactionMetadataCborForLabel(String label) throws APIException {
+        return getAllTransactionMetadataCborForLabel(label, OrderEnum.asc);
     }
 
     @Override
@@ -185,7 +185,7 @@ public class MetadataServiceImpl extends BaseService implements MetadataService 
     }
 
     @Override
-    public List<TransactionMetadataLabelJson> getTransactionMetadataJsonForLabel(String label, OrderEnum order) throws APIException {
+    public List<TransactionMetadataLabelJson> getAllTransactionMetadataJsonForLabel(String label, OrderEnum order) throws APIException {
         validateLabel(label);
 
         List<TransactionMetadataLabelJson> responseList = new ArrayList<>();
@@ -224,7 +224,7 @@ public class MetadataServiceImpl extends BaseService implements MetadataService 
     }
 
     @Override
-    public List<TransactionMetadataLabelJson> getTransactionMetadataJsonForLabel(String label) throws APIException {
-        return getTransactionMetadataJsonForLabel(label, OrderEnum.asc);
+    public List<TransactionMetadataLabelJson> getAllTransactionMetadataJsonForLabel(String label) throws APIException {
+        return getAllTransactionMetadataJsonForLabel(label, OrderEnum.asc);
     }
 }

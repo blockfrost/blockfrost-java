@@ -67,7 +67,7 @@ public class MetadataServiceTests extends TestBase {
         @Disabled
         public void transactionMetadataLabels_willReturn_allTransactionMetadataLabels() throws APIException {
 
-            List<TransactionMetadataLabel> metadataList = metadataService.getTransactionMetadataLabels();
+            List<TransactionMetadataLabel> metadataList = metadataService.getAllTransactionMetadataLabels();
             assertThat(metadataList, hasSize(greaterThanOrEqualTo(0)));
 
         }
@@ -141,7 +141,7 @@ public class MetadataServiceTests extends TestBase {
         @Disabled
         public void transactionMetadataCborForLabel_willReturn_allTransactionMetadataLabelCbors() throws APIException {
 
-            List<TransactionMetadataLabelCbor> transactionMetadataLabelCborList = metadataService.getTransactionMetadataCborForLabel("100");
+            List<TransactionMetadataLabelCbor> transactionMetadataLabelCborList = metadataService.getAllTransactionMetadataCborForLabel("100");
             assertThat(transactionMetadataLabelCborList, hasSize(greaterThanOrEqualTo(0)));
 
         }
@@ -157,7 +157,7 @@ public class MetadataServiceTests extends TestBase {
         @Test
         public void transactionMetadataCborForLabel_willThrowAPIException_onNullLabel() {
 
-            Exception exception = assertThrows(APIException.class, () -> metadataService.getTransactionMetadataCborForLabel(null));
+            Exception exception = assertThrows(APIException.class, () -> metadataService.getAllTransactionMetadataCborForLabel(null));
             assertThat(exception.getMessage(), is("Label cannot be null or empty"));
         }
 
@@ -222,7 +222,7 @@ public class MetadataServiceTests extends TestBase {
         @Disabled
         public void transactionMetadataJsonForLabel_willReturn_allTransactionMetadataLabelJson() throws APIException {
 
-            List<TransactionMetadataLabelJson> transactionMetadataLabelJsonList = metadataService.getTransactionMetadataJsonForLabel("10");
+            List<TransactionMetadataLabelJson> transactionMetadataLabelJsonList = metadataService.getAllTransactionMetadataJsonForLabel("10");
             assertThat(transactionMetadataLabelJsonList, hasSize(greaterThanOrEqualTo(0)));
 
         }
@@ -241,7 +241,7 @@ public class MetadataServiceTests extends TestBase {
             Exception exception = assertThrows(APIException.class, () -> metadataService.getTransactionMetadataJsonForLabel(null, 1, 1));
             assertThat(exception.getMessage(), is("Label cannot be null or empty"));
 
-            exception = assertThrows(APIException.class, () -> metadataService.getTransactionMetadataJsonForLabel(null));
+            exception = assertThrows(APIException.class, () -> metadataService.getAllTransactionMetadataJsonForLabel(null));
             assertThat(exception.getMessage(), is("Label cannot be null or empty"));
 
         }

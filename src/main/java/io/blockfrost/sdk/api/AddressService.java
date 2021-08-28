@@ -59,7 +59,7 @@ public interface AddressService {
      * @param order   Ordered by tx index in the block. The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.     *
      * @return List&lt;AddressUtxo&gt;
      */
-    List<AddressUtxo> getAddressUtxos(String address, OrderEnum order) throws APIException;
+    List<AddressUtxo> getAllAddressUtxos(String address, OrderEnum order) throws APIException;
 
     /**
      * Address UTXOs
@@ -68,7 +68,7 @@ public interface AddressService {
      * @param address Bech32 address. (required)
      * @return List&lt;AddressUtxo&gt;
      */
-    List<AddressUtxo> getAddressUtxos(String address) throws APIException;
+    List<AddressUtxo> getAllAddressUtxos(String address) throws APIException;
 
     /**
      * Address transactions

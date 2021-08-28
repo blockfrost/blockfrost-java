@@ -79,8 +79,6 @@ public interface TransactionService {
      */
     List<TransactionPoolRetire> getTransactionPoolRetires(String hash) throws APIException;
 
-    //TODO: Check the implementation of JsonMetadata
-
     /**
      * Transaction metadata
      * Obtain the transaction metadata.

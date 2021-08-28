@@ -101,7 +101,7 @@ public class BlockServiceImpl extends BaseService implements BlockService {
     }
 
     @Override
-    public List<String> getTransactionsInLatestBlock(OrderEnum order) throws APIException {
+    public List<String> getAllTransactionsInLatestBlock(OrderEnum order) throws APIException {
 
         List<String> responseList = new ArrayList<>();
         boolean stopExecution = false;
@@ -139,8 +139,8 @@ public class BlockServiceImpl extends BaseService implements BlockService {
     }
 
     @Override
-    public List<String> getTransactionsInLatestBlock() throws APIException {
-        return getTransactionsInLatestBlock(OrderEnum.asc);
+    public List<String> getAllTransactionsInLatestBlock() throws APIException {
+        return getAllTransactionsInLatestBlock(OrderEnum.asc);
     }
 
     @Override
@@ -160,7 +160,7 @@ public class BlockServiceImpl extends BaseService implements BlockService {
 
 
     @Override
-    public List<Block> getNextBlocks(String hashOrNumber) throws APIException {
+    public List<Block> getAllNextBlocks(String hashOrNumber) throws APIException {
 
         List<Block> responseList = new ArrayList<>();
         boolean stopExecution = false;
@@ -212,7 +212,7 @@ public class BlockServiceImpl extends BaseService implements BlockService {
     }
 
     @Override
-    public List<Block> getPreviousBlocks(String hashOrNumber) throws APIException {
+    public List<Block> getAllPreviousBlocks(String hashOrNumber) throws APIException {
 
         List<Block> responseList = new ArrayList<>();
         boolean stopExecution = false;
