@@ -50,6 +50,10 @@ public class NetworkHelper {
                 .build();
     }
 
+    public void shutdown() {
+        okHttpClient.dispatcher().executorService().shutdown();
+        okHttpClient.connectionPool().evictAll();
+    }
 
     private static class NetworkHolder {
         public static final NetworkHelper NETWORK = new NetworkHelper();
