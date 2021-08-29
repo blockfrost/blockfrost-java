@@ -135,12 +135,10 @@ publishing {
                     developer {
                         id = 'satran004'
                         name = 'Satya'
-                        email = 'satran004@gmail.com'
                     }
                     developer {
                         id = 'cryptofervid'
                         name = 'Cryptofervid'
-                        email = 'cryptofervid@gmail.com'
                     }
                 }
                 scm {
@@ -153,7 +151,7 @@ publishing {
     }
 
     repositories {
-        String ossrhUsername = System.getenv('MAVEN_USER')
+        String ossrhUsername = System.getenv('MAVEN_USERNAME')
         String ossrhPassword = System.getenv('MAVEN_PASSWORD')
 
         maven {
