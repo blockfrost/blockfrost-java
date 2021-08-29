@@ -57,6 +57,9 @@ configurations {
 }
 
 compileJava {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+
     options.compilerArgs += ["-Aproject=${project.group}/${project.name}"]
 }
 
