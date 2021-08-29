@@ -92,6 +92,14 @@ public class AddressServiceTests extends TestBase {
     class GetAddressTransactionsTests {
 
         @Test
+        public void addressTransactions_willReturn_addressTransactionsForCountPageAndAscendingOrderNoRange() throws APIException {
+
+            List<AddressTransaction> addressTransactionListsList = addressService.getAddressTransactions("addr_test1qrlf8mers2lzpp9y278tc4xp8yug7djflrnrr55c8fmg75qxu2hyfhlkwuxupa9d5085eunq2qywy7hvmvej456flkns2gsze6", 100, 1, OrderEnum.asc);
+
+            assertThat(addressTransactionListsList, hasSize(greaterThanOrEqualTo(2)));
+        }
+
+        @Test
         public void addressTransactions_willReturn_addressTransactionsForCountPageAndAscendingOrder() throws APIException {
 
 

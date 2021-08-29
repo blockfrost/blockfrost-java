@@ -123,6 +123,13 @@ public class AddressServiceImpl extends BaseService implements AddressService {
     }
 
     @Override
+    public List<AddressTransaction> getAddressTransactions(String address, int count, int page, OrderEnum order) throws APIException {
+        validateAddress(address);
+
+        return getAddressTransactions(address, count, page, order, null, null);
+    }
+
+    @Override
     public List<AddressTransaction> getAddressTransactions(String address, int count, int page, OrderEnum order, String from, String to) throws APIException {
 
         validateAddress(address);
