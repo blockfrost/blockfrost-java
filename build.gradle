@@ -57,7 +57,17 @@ configurations {
 }
 
 compileJava {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+
     options.compilerArgs += ["-Aproject=${project.group}/${project.name}"]
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': artifactId,
+                'Implementation-Version': archiveVersion
+    }
 }
 
 task sourceJar(type: Jar) {

@@ -3,6 +3,7 @@ package io.blockfrost.sdk.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.blockfrost.sdk.api.exception.APIException;
 import io.blockfrost.sdk.api.model.ResponseError;
+import io.blockfrost.sdk.api.util.NetworkHelper;
 import io.blockfrost.sdk.impl.util.RateLimitHelper;
 import io.github.resilience4j.retrofit.RateLimiterCallAdapter;
 import org.slf4j.Logger;
@@ -34,11 +35,11 @@ public class BaseService {
     }
 
     protected Retrofit getRetrofit() {
-
         return new Retrofit.Builder()
                 .addCallAdapterFactory( RateLimiterCallAdapter.of(RateLimitHelper.rateLimiter()))
                 .baseUrl(getBaseUrl())
                 .addConverterFactory(JacksonConverterFactory.create())
+                .client(NetworkHelper.getInstance().getOkHttpClient())
                 .build();
 
     }
