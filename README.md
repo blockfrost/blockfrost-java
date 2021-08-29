@@ -59,7 +59,7 @@ export BF_IPFS_PROJECT_ID=<Blockfrost Ipfs Project Id>
 compile 'com.bloxbean.cardano:cardano-client-lib:$version'
 ```
 
-**Note:** Replace '$version' with correct version number
+**Note:** Replace '$version' with the correct version number
 
 **For example:** $version = 0.1.0-SNAPSHOT (If you have published snapshot jar to your local maven repository)
 
@@ -84,7 +84,7 @@ compile 'com.bloxbean.cardano:cardano-client-lib:$version'
     - IPFSService
 
 
-#### Cardano BlockService Usage
+#### Cardano Api Usage
 
 - Create a BlockService instance
 
@@ -98,4 +98,29 @@ BlockService blockService = new BlockServiceImpl(Constants.BLOCKFROST_TESTNET_UR
 Block block = blockService.getLatestBlock();
 ```
 
+#### IPFS Api Usage
 
+- Create IPFSService instance
+
+```
+IPFSService ipfsService = new IPFSServiceImpl(Constants.BLOCKFROST_IPFS_URL, IPFS_PROJECT_ID);
+```
+
+- Add to IPFS, Pin the content and Get content by CID
+
+```
+File file = new File(<path to file>);
+IPFSObject ipfsObject = ipfsService.add(file);
+
+//pin
+PinResponse pinResponse = ipfsService.pinAdd(ipfsObject.getIpfsHash());
+       
+//get
+byte[] bytes = ipfsService.get(ipfsObject.getIpfsHash());
+```
+#### Release resources when program exits
+To release OkHttpClient's thread pool and other resources when the program exits, invoke the following api.
+
+```
+NetworkHelper.getInstance().shutdown();
+```
