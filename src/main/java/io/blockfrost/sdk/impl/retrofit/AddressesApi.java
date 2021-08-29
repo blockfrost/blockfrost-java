@@ -2,6 +2,7 @@ package io.blockfrost.sdk.impl.retrofit;
 
 import io.blockfrost.sdk.api.model.Address;
 import io.blockfrost.sdk.api.model.AddressTotal;
+import io.blockfrost.sdk.api.model.AddressTransaction;
 import io.blockfrost.sdk.api.model.AddressUtxo;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -48,10 +49,10 @@ public interface AddressesApi {
      * @param order   The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.  (optional, default to asc)
      * @param from    The block number and optionally also index from which (inclusive) to start search for results, concatenated using colon. Has to be lower than or equal to &#x60;to&#x60; parameter.  (optional)
      * @param to      The block number and optionally also index where (inclusive) to end the search for results, concatenated using colon. Has to be higher than or equal to &#x60;from&#x60; parameter.  (optional)
-     * @return Call&lt;List&lt;Object&gt;&gt;
+     * @return Call&lt;List&lt;AddressTransaction&gt;&gt;
      */
     @GET("addresses/{address}/transactions")
-    Call<List<Object>> addressesAddressTransactionsGet(
+    Call<List<AddressTransaction>> addressesAddressTransactionsGet(
             @Header("project_id") String projectId,
             @Path("address") String address,
             @Query("count") Integer count,
