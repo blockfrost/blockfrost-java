@@ -124,3 +124,24 @@ To release OkHttpClient's thread pool and other resources when the program exits
 ```
 NetworkHelper.getInstance().shutdown();
 ```
+
+### Configuration
+
+A supported configuration property can be set through system property or environment variable. You can also directly set a config property using ConfigHelper.
+
+**Example:**
+```
+ConfigHelper.INSTANCE.setThreadCount(60);
+ConfigHelper.INSTANCE.setRateLimitForPeriod(40);
+```
+
+**List of supported config properties**
+
+| Property Name | Description |
+| --------------|-------------|
+| BF_API_MAX_THREADS | No of threads to use while fetching multiple pages of data in a single request. **Default Value: 10** (Example: getAllAddressUtxos, getAddressTransactions ...)|
+| BF_RATE_LIMIT_FOR_PERIOD |  The permission limit for refresh period. This property is used in rate limit implementation. **Default Value: 10** |
+| BF_RATE_LIMIT_REFRESH_PERIOD_IN_SEC | The period of limit refresh in sec.  **Default Value: 1** After each period rate limiter sets its permission count to value set for BF_RATE_LIMIT_FOR_PERIOD.|
+| BF_RATE_LIMIT_TIMEOUT_DURATION_IN_MILLIS | The default wait for permission duration in milliseconds. **Default Value: 5000**|
+| BF_CONNECTION_TIMEOUT | The connect timeout (connection/read/write) for new connections in seconds. **Default Value: 90**|
+
