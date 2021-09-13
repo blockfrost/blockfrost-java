@@ -96,7 +96,7 @@ class ConfigHelperTest {
     @Test
     public void getTimeoutDuration_willReturn_defaultTimeoutDuration() {
         int timeoutDurationInMillis = ConfigHelper.INSTANCE.getTimeoutDurationInMillis();
-        assertEquals(500, timeoutDurationInMillis);
+        assertEquals(5000, timeoutDurationInMillis);
     }
 
     @Test
