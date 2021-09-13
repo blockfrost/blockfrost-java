@@ -353,8 +353,9 @@ public class PoolServiceTests extends TestBase {
 
             PoolMetadata poolMetadata = poolService.getPoolMetadata("pool126zlx7728y7xs08s8epg9qp393kyafy9rzr89g4qkvv4cv93zem");
             assertThat(poolMetadata, is(notNullValue()));
-            assertThat(poolMetadata, is(expectedPoolMetadata));
-
+            assertThat(poolMetadata.getPoolId(), is(expectedPoolMetadata.getPoolId()));
+            assertThat(poolMetadata.getHex(), is(expectedPoolMetadata.getHex()));
+            assertThat(poolMetadata.getHash(), is(expectedPoolMetadata.getHash()));
         }
 
         @Test
