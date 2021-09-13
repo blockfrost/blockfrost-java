@@ -27,7 +27,7 @@ public enum ConfigHelper {
         threadCount = getPropertyIntValue(BF_API_MAX_THREADS, 10);
         rateLimitForPeriod = getPropertyIntValue(BF_RATE_LIMIT_FOR_PERIOD, 10);
         rateLimitRefreshPeriodInSec = getPropertyIntValue(BF_RATE_LIMIT_REFRESH_PERIOD_IN_SEC, 1);
-        timeoutDurationInMillis = getPropertyIntValue(BF_RATE_LIMIT_TIMEOUT_DURATION_IN_MILLIS, 500);
+        timeoutDurationInMillis = getPropertyIntValue(BF_RATE_LIMIT_TIMEOUT_DURATION_IN_MILLIS, 5000);
         connectionTimeout = getPropertyIntValue(BF_CONNECTION_TIMEOUT, 90);
     }
 
