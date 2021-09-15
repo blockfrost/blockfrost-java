@@ -168,10 +168,10 @@ publishing {
 
 ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
 
-//if (isReleaseVersion && !project.hasProperty("skipSigning")) {
+if (isReleaseVersion && !project.hasProperty("skipSigning")) {
     signing {
 //        sign configurations.archives
         sign publishing.publications
     }
-//}
+}
 
