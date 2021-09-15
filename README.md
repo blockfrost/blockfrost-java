@@ -1,4 +1,4 @@
-[![Java CI with Gradle](https://github.com/blockfrost/blockfrost-java/actions/workflows/gradle.yml/badge.svg?branch=master)](https://github.com/blockfrost/blockfrost-java/actions/workflows/gradle.yml)
+[![Build](https://github.com/blockfrost/blockfrost-java/actions/workflows/build.yml/badge.svg)](https://github.com/blockfrost/blockfrost-java/actions/workflows/build.yml) [![Integration Tests](https://github.com/blockfrost/blockfrost-java/actions/workflows/integration-test.yml/badge.svg)](https://github.com/blockfrost/blockfrost-java/actions/workflows/integration-test.yml)
 
 # blockfrost-java
 
