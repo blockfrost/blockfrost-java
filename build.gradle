@@ -175,8 +175,13 @@ if (isReleaseVersion && !project.hasProperty("skipSigning")) {
         def signingPassword = findProperty("signingPassword")
         println signingKeyId
         println signingKey
-        System.setProperty("signing.gnupg.keyName", signingKeyId)
-        System.setProperty("signing.gnupg.passphrase", signingPassword)
+
+        if(signingKeyId != null) {
+            System.setProperty("signing.gnupg.keyName", signingKeyId)
+        }
+        if(signingPassword != null) {
+            System.setProperty("signing.gnupg.passphrase", signingPassword)
+        }
 
         useGpgCmd()
 //        useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
