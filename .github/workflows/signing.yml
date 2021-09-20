@@ -29,6 +29,6 @@ jobs:
       - name: Dearmor
         run: |
           echo "${{ secrets.SIGNING_KEY }}" > ~/.gradle/secring
-          gpg --dearmor ~/.gradle/secring > ~/.gradle/secring.gpg
+          gpg --batch ~/.gradle/secring > ~/.gradle/secring.gpg
       - name: Sign Jar
         run: ./gradlew :signMavenJavaPublication -Psigning.keyId=${{ secrets.SIGNING_KEY_ID }} -Psigning.password= -Psigning.secretKeyRingFile=$(echo ~/.gradle/secring.gpg)
