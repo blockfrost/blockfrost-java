@@ -21,14 +21,14 @@ jobs:
         run: chmod +x gradlew
       - name: Build with Gradle
         run: ./gradlew clean build
-#      - name: Decode
+#      - id: install-secret-key
+#        name: Install gpg secret key
+#        run: |
+#          cat <(echo -e "${{ secrets.SIGNING_KEY }}") | gpg --batch --import
+#          gpg --list-secret-keys --keyid-format LONG
+#      - name: Export
 #        run: |
 #          echo "${{secrets.SIGNING_KEY}}" > ~/.gradle/secring.gpg.b64
 #          base64 -d ~/.gradle/secring.gpg.b64 > ~/.gradle/secring.gpg
-      - id: install-secret-key
-        name: Install gpg secret key
-        run: |
-          cat <(echo -e "${{ secrets.SIGNING_KEY }}") | gpg --batch --import
-          gpg --list-secret-keys --keyid-format LONG
       - name: Sign Jar
         run: ./gradlew :signMavenJavaPublication -PsigningKeyId=${{secrets.SIGNING_KEY_ID}} -PsigningPassword=${{secrets.SIGNING_PASSWORD}} -PsigningKey=${{secrets.SIGNING_KEY}}
