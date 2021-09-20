@@ -32,7 +32,7 @@ jobs:
           echo pinentry-mode loopback >> ~/.gnupg/gpg.conf
           echo allow-loopback-pinentry >> ~/.gnupg/gpg-agent.conf
           echo RELOADAGENT | gpg-connect-agent
-          gpg --export-secret-keys > ~/.gradle/secring.gpg
+          gpg --export-secret-keys --no-tty  > ~/.gradle/secring.gpg
 #          echo "${{ secrets.SIGNING_KEY }}" > ~/.gradle/secring
 #          gpg --batch ~/.gradle/secring > ~/.gradle/secring.gpg
       - name: Sign Jar
