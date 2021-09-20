@@ -21,8 +21,12 @@ jobs:
         run: chmod +x gradlew
       - name: Build with Gradle
         run: ./gradlew clean build
+      - name: Decode
+        run: |
+          echo "${{secrets.SIGNING_SECRET_KEY_RING_FILE}}" > ~/.gradle/secring.gpg.b64
+          base64 -d ~/.gradle/secring.gpg.b64 > ~/.gradle/secring.gpg
       - name: Sign Jar
-        run: ./gradlew :signMavenJavaPublication
+        run: ./gradlew :signMavenJavaPublication -Psigning.keyId=${{secrets.SIGNING_KEY_ID}} -Psigning.password={{secrets.SIGNING_PASSWORD}} -Psigning.secretKeyRingFile=$(echo ~/.gradle/secring.gpg)
         env:
           ORG_GRADLE_PROJECT_signingKeyId: ${{ secrets.OSSRH_GPG_SECRET_KEY_ID }}
           ORG_GRADLE_PROJECT_signingKey: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
