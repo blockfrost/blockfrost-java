@@ -28,7 +28,7 @@ jobs:
           gpg --list-secret-keys --keyid-format SHORT
       - name: Export
         run: |
-          gpg --batch --export-secret-keys > ~/.gradle/secring.gpg
+          gpg --export-secret-keys --no-tty --batch --yes > ~/.gradle/secring.gpg
 #          echo "${{ secrets.SIGNING_KEY }}" > ~/.gradle/secring
 #          gpg --batch ~/.gradle/secring > ~/.gradle/secring.gpg
       - name: Sign Jar
