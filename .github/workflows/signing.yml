@@ -28,6 +28,7 @@ jobs:
           gpg --list-secret-keys --keyid-format SHORT
       - name: Export
         run: |
-          gpg --export-secret-keys 39BFF407 > ~/.gradle/secring.gpg
+          export GPG_TTY=$(tty)
+          gpg --export-secret-keys ${{ secrets.SIGNING_KEY_ID }} > ~/.gradle/secring.gpg
       - name: Sign Jar
         run: ./gradlew :signMavenJavaPublication -Psigning.keyId=${{ secrets.SIGNING_KEY_ID }} -Psigning.password= -Psigning.secretKeyRingFile=$(echo ~/.gradle/secring.gpg)
