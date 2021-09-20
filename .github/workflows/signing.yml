@@ -26,9 +26,10 @@ jobs:
         run: |
           cat <(echo -e "${{ secrets.SIGNING_KEY }}") | gpg --batch --import
           gpg --list-secret-keys --keyid-format SHORT
-      - name: Dearmor
+      - name: Export
         run: |
-          echo "${{ secrets.SIGNING_KEY }}" > ~/.gradle/secring
-          gpg --batch ~/.gradle/secring > ~/.gradle/secring.gpg
+          gpg --batch --export-secret-keys > ~/.gradle/secring.gpg
+#          echo "${{ secrets.SIGNING_KEY }}" > ~/.gradle/secring
+#          gpg --batch ~/.gradle/secring > ~/.gradle/secring.gpg
       - name: Sign Jar
         run: ./gradlew :signMavenJavaPublication -Psigning.keyId=${{ secrets.SIGNING_KEY_ID }} -Psigning.password= -Psigning.secretKeyRingFile=$(echo ~/.gradle/secring.gpg)
