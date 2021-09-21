@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'maven-publish'
     id 'signing'
+    id 'io.codearte.nexus-staging' version '0.30.0'
 }
 
 repositories {
@@ -173,5 +174,11 @@ if (isReleaseVersion && !project.hasProperty("skipSigning")) {
 //        sign configurations.archives
         sign publishing.publications
     }
+}
+
+nexusStaging {
+    serverUrl = "https://s01.oss.sonatype.org/service/local/"
+    username = System.getenv('MAVEN_USERNAME')
+    password = System.getenv('MAVEN_PASSWORD')
 }
 
