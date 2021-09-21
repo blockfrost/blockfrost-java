@@ -18,6 +18,8 @@ jobs:
           distribution: 'adopt'
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
+      - name: Build with Gradle
+        run: ./gradlew clean build
       - id: install-secret-key
         name: Install gpg secret key
         run: |
@@ -30,8 +32,6 @@ jobs:
           echo allow-loopback-pinentry >> ~/.gnupg/gpg-agent.conf
           echo RELOADAGENT | gpg-connect-agent
           echo ${{ secrets.SIGNING_PASSWORD }} | gpg  --export-secret-keys --batch --yes --passphrase-fd 0 --pinentry-mode loopback > ~/.gradle/secring.gpg
-      - name: Build with Gradle
-        run: ./gradlew clean build
       - name: Publish package
         run: ./gradlew publish -Psigning.keyId=${{ secrets.SIGNING_KEY_ID }} -Psigning.password=${{ secrets.SIGNING_PASSWORD }} -Psigning.secretKeyRingFile=$(echo ~/.gradle/secring.gpg)
         env:
