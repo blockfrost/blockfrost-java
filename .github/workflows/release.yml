@@ -20,6 +20,11 @@ jobs:
         run: chmod +x gradlew
       - name: Build with Gradle
         run: ./gradlew clean build
+      - name: Integration tests
+        run: ./gradlew integrationTest
+        env:
+          BF_PROJECT_ID: ${{ secrets.BF_TESTNET_PROJECT_ID }}
+          BF_IPFS_PROJECT_ID: ${{ secrets.BF_IPFS_PROJECT_ID }}
       - id: install-secret-key
         name: Install gpg secret key
         run: |
