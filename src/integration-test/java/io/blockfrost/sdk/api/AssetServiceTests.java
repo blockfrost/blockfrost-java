@@ -7,7 +7,9 @@ import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.AssetServiceImpl;
 import org.junit.jupiter.api.*;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -72,6 +74,47 @@ public class AssetServiceTests extends TestBase {
 
             Asset asset = assetService.getAsset("07a6604234b758be257f26565445f30169c25c85cf392797bc878de753554d");
             assertThat(asset, is(expectedAsset));
+        }
+
+        @Test
+        public void getAsset_willReturn_assetWithOnchainMetadata() throws APIException {
+            final String filesKey = "files";
+
+            Map<String, String> expectedFiles = Map.ofEntries(
+                    Map.entry("src", "ipfs://QmaotSicXXa9LzpYKfkt6SWhgTVrRGyBJbTWAgDA1sVBXH"),
+                    Map.entry("name", "FreeGhost01853"),
+                    Map.entry("https", ""),
+                    Map.entry("mediaType", "image/jpeg")
+            );
+
+            Map<String, Object> expectedOnchainMetadata = Map.ofEntries(
+                    Map.entry("dna", "00013000"),
+                    Map.entry("back", "College Backpack"),
+                    Map.entry("body", "Blue Shirt"),
+                    Map.entry("eyes", "Normal"),
+                    Map.entry("name", "FreeGhost01853"),
+                    Map.entry(filesKey, Collections.singleton(expectedFiles)),
+                    Map.entry("ghost", "Normal"),
+                    Map.entry("image", "ipfs://QmaotSicXXa9LzpYKfkt6SWhgTVrRGyBJbTWAgDA1sVBXH"),
+                    Map.entry("rarity", "Epic"),
+                    Map.entry("project", "FreeGhost"),
+                    Map.entry("twitter", "twitter.com/freeroam_io"),
+                    Map.entry("website", "FREEROAM TESTING"),
+                    Map.entry("mediaType", "image/jpeg")
+            );
+
+            Asset asset = assetService.getAsset("3f5265ef14f89e948fd5b5f55419712ad1f0dd4d75ab26be134441714672656547686f73743031383533");
+            Map<String, Object> onchainMetadata = asset.getOnchainMetadata();
+
+            assertThat(onchainMetadata, notNullValue());
+            expectedOnchainMetadata.entrySet().stream()
+                    .filter(e -> !e.getKey().equals(filesKey))
+                    .forEach(e -> assertThat(onchainMetadata, hasEntry(e.getKey(), e.getValue())));
+
+            assertThat(onchainMetadata.get(filesKey), instanceOf(List.class));
+            @SuppressWarnings("unchecked")
+            List<Map<String, String>> files = (List<Map<String, String>>) onchainMetadata.get(filesKey);
+            expectedFiles.forEach((key, value) -> assertThat(files.get(0), hasEntry(key, value)));
         }
 
         @Test
