@@ -51,7 +51,7 @@ public class Asset {
      * community discussion around the standard ongoing at
      * https://github.com/cardano-foundation/CIPs/pull/85
      */
-    private Map<String, String> onchainMetadata;
+    private Map<String, Object> onchainMetadata;
     /**
      * Asset metadata
      */
