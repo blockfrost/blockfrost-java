@@ -17,6 +17,8 @@ To use this SDK, you first need to log in to [blockfrost.io](https://blockfrost.
 
 ## Build
 
+**Required Java Version for build:** Java 11
+
 ```
 $> git clone https://github.com/blockfrost/blockfrost-java.git
 $> ./gradlew clean build
@@ -38,6 +40,8 @@ export BF_IPFS_PROJECT_ID=<Blockfrost Ipfs Project Id>
 ```
 
 ## How to use ?
+
+**Required Java Version:** Java 11 or later
 
 ### Add dependency 
 
