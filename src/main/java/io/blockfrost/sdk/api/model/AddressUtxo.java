@@ -31,11 +31,22 @@ public class AddressUtxo {
     /**
      * Array of TransactionOutputAmount objects
      */
-    private List<TransactionOutputAmount> amount = new ArrayList<TransactionOutputAmount>();
+    private List<TransactionOutputAmount> amount = new ArrayList<>();
     /**
-     * Block number of the UTXO
+     * Block hash of the UTXO
      */
     private String block;
-
+    /**
+     * The hash of the transaction output datum
+     */
+    private String dataHash;
+    /**
+     * CBOR encoded inline datum
+     */
+    private String inlineDatum;
+    /**
+     * The hash of the reference script of the output
+     */
+    private String referenceScriptHash;
 }
 
