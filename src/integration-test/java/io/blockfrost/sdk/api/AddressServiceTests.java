@@ -8,18 +8,18 @@ import io.blockfrost.sdk.api.model.AddressUtxo;
 import io.blockfrost.sdk.api.util.Constants;
 import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.AddressServiceImpl;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Objects;
 
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AddressServiceTests extends TestBase {
 
@@ -54,7 +54,6 @@ public class AddressServiceTests extends TestBase {
         @Test
         public void addressUtxos_willReturn_addressUtxosForCountPageAndAscendingOrder() throws APIException {
 
-
             List<AddressUtxo> addressUtxoList = addressService.getAddressUtxos("addr_test1qqy07jaue8tru20877ak7wxpuagrqqpm2pdacfjjtv4z3elcn8dnk52656jspgq03ts2sl6jvefwakdacwfy605m9ydselehdg", 2, 1, OrderEnum.asc);
 
             assertThat(addressUtxoList, hasSize(2));
@@ -62,7 +61,6 @@ public class AddressServiceTests extends TestBase {
 
         @Test
         public void addressUtxos_willReturn_addressUtxosForCountAndPage() throws APIException {
-
 
             List<AddressUtxo> addressUtxoList = addressService.getAddressUtxos("addr_test1qqy07jaue8tru20877ak7wxpuagrqqpm2pdacfjjtv4z3elcn8dnk52656jspgq03ts2sl6jvefwakdacwfy605m9ydselehdg", 2, 1);
 
@@ -72,17 +70,19 @@ public class AddressServiceTests extends TestBase {
         @Test
         public void addressUtxos_willReturn_allAddressUtxos() throws APIException {
 
-
             List<AddressUtxo> addressUtxoList = addressService.getAllAddressUtxos("addr_test1qqy07jaue8tru20877ak7wxpuagrqqpm2pdacfjjtv4z3elcn8dnk52656jspgq03ts2sl6jvefwakdacwfy605m9ydselehdg");
 
             assertThat(addressUtxoList, hasSize(greaterThanOrEqualTo(0)));
+            assertTrue(addressUtxoList.stream().map(AddressUtxo::getDataHash).anyMatch(Objects::nonNull));
+            assertTrue(addressUtxoList.stream().map(AddressUtxo::getInlineDatum).anyMatch(Objects::nonNull));
+            assertTrue(addressUtxoList.stream().map(AddressUtxo::getReferenceScriptHash).anyMatch(Objects::nonNull));
         }
 
         @Test
         public void addressUtxos_willThrowAPIException_onNullAddress() {
 
             Exception exception = assertThrows(APIException.class, () -> addressService.getAddressUtxos("", 2, 1));
-            assertThat(exception.getMessage(), Matchers.is("Address cannot be null or empty"));
+            assertThat(exception.getMessage(), is("Address cannot be null or empty"));
         }
 
     }
@@ -111,7 +111,6 @@ public class AddressServiceTests extends TestBase {
         @Test
         public void addressTransactions_willReturn_addressTransactionsForCountAndPage() throws APIException {
 
-
             List<AddressTransaction> addressTransactionListsList = addressService.getAddressTransactions("addr_test1qqy07jaue8tru20877ak7wxpuagrqqpm2pdacfjjtv4z3elcn8dnk52656jspgq03ts2sl6jvefwakdacwfy605m9ydselehdg", 2, 1, "8929261", "9999269");
 
             assertThat(addressTransactionListsList, hasSize(lessThanOrEqualTo(2)));
@@ -119,7 +118,6 @@ public class AddressServiceTests extends TestBase {
 
         @Test
         public void addressTransactions_willReturn_allAddressTransactions() throws APIException {
-
 
             List<AddressTransaction> addressTransactionListsList = addressService.getAddressTransactions("addr_test1qqy07jaue8tru20877ak7wxpuagrqqpm2pdacfjjtv4z3elcn8dnk52656jspgq03ts2sl6jvefwakdacwfy605m9ydselehdg", "8929261", "9999269");
 
@@ -130,7 +128,7 @@ public class AddressServiceTests extends TestBase {
         public void addressTransactions_willThrowAPIException_onNullAddress() {
 
             Exception exception = assertThrows(APIException.class, () -> addressService.getAddressTransactions(null, 2, 1, OrderEnum.asc, "8929261", "9999269"));
-            assertThat(exception.getMessage(), Matchers.is("Address cannot be null or empty"));
+            assertThat(exception.getMessage(), is("Address cannot be null or empty"));
         }
 
     }
