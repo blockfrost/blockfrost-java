@@ -24,7 +24,7 @@ import lombok.ToString;
 public class ScriptRedeemer {
     private String txHash;
     private Integer txIndex;
-    private String purpose;
+    private ValidationPurpose purpose;
     private String redeemerDataHash;
     private String datumHash;
     private String unitMem;

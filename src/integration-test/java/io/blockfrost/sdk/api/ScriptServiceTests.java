@@ -10,6 +10,7 @@ import io.blockfrost.sdk.api.model.ScriptDatumCbor;
 import io.blockfrost.sdk.api.model.ScriptJson;
 import io.blockfrost.sdk.api.model.ScriptRedeemer;
 import io.blockfrost.sdk.api.model.ScriptType;
+import io.blockfrost.sdk.api.model.ValidationPurpose;
 import io.blockfrost.sdk.api.util.Constants;
 import io.blockfrost.sdk.api.util.OrderEnum;
 import io.blockfrost.sdk.impl.ScriptServiceImpl;
@@ -186,7 +187,7 @@ public class ScriptServiceTests extends TestBase {
             ScriptRedeemer fifthRedeemer = redeemers.get(4);
             assertThat(fifthRedeemer.getTxHash(), is("3543502f973c3daf53febbb63fb1207c0b74293e476a3773b402a6cc17d1b8bf"));
             assertThat(fifthRedeemer.getTxIndex(), is(0));
-            assertThat(fifthRedeemer.getPurpose(), is("spend"));
+            assertThat(fifthRedeemer.getPurpose(), is(ValidationPurpose.spend));
             assertThat(fifthRedeemer.getRedeemerDataHash(), is("fcaa61fb85676101d9e3398a484674e71c45c3fd41b492682f3b0054f4cf3273"));
             assertThat(fifthRedeemer.getDatumHash(), is("fcaa61fb85676101d9e3398a484674e71c45c3fd41b492682f3b0054f4cf3273"));
             assertThat(fifthRedeemer.getUnitMem(), is("1700"));
