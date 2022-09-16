@@ -127,7 +127,7 @@ public class ScriptServiceTests extends TestBase {
         public void getScriptJson_willReturn_jsonForTimelockScriptHash() throws APIException {
             ScriptJson scriptJson = scriptService.getScriptJson(TIMELOCK_SCRIPT_HASH);
 
-            Map<String, Object> jsonAsMap = new ObjectMapper().convertValue(scriptJson.getJson(), new TypeReference<>(){});
+            Map<String, Object> jsonAsMap = new ObjectMapper().convertValue(scriptJson.getJson(), new TypeReference<Map<String, Object>>(){});
             assertThat(jsonAsMap.get("type"), is("all"));
             List<Object> scripts = (List)jsonAsMap.get("scripts");
             assertThat(scripts, hasSize(2));
