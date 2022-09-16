@@ -16,7 +16,6 @@ import retrofit2.Response;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class ScriptServiceImpl extends BaseService implements ScriptService {
 
@@ -43,7 +42,7 @@ public class ScriptServiceImpl extends BaseService implements ScriptService {
 
     @Override
     public Script getScript(String scriptHash) throws APIException {
-        validateHash(scriptHash);
+        ValidationHelper.validateHexadecimalHash(scriptHash);
 
         Call<Script> call = scriptsApi.scriptsScriptHashGet(getProjectId(), scriptHash);
 
@@ -57,7 +56,7 @@ public class ScriptServiceImpl extends BaseService implements ScriptService {
 
     @Override
     public ScriptJson getScriptJson(String scriptHash) throws APIException {
-        validateHash(scriptHash);
+        ValidationHelper.validateHexadecimalHash(scriptHash);
 
         Call<ScriptJson> call = scriptsApi.scriptsScriptHashJsonGet(getProjectId(), scriptHash);
 
@@ -71,7 +70,7 @@ public class ScriptServiceImpl extends BaseService implements ScriptService {
 
     @Override
     public ScriptCbor getScriptCbor(String scriptHash) throws APIException {
-        validateHash(scriptHash);
+        ValidationHelper.validateHexadecimalHash(scriptHash);
 
         Call<ScriptCbor> call = scriptsApi.scriptsScriptHashCborGet(getProjectId(), scriptHash);
 
@@ -86,7 +85,7 @@ public class ScriptServiceImpl extends BaseService implements ScriptService {
     @Override
     public List<ScriptRedeemer> getScriptRedeemers(String scriptHash, int count, int page, OrderEnum order) throws APIException {
         ValidationHelper.validateCount(count);
-        validateHash(scriptHash);
+        ValidationHelper.validateHexadecimalHash(scriptHash);
 
         Call<List<ScriptRedeemer>> call = scriptsApi.scriptsScriptHashRedeemersGet(getProjectId(), scriptHash, count, page, order.name());
 
@@ -100,7 +99,7 @@ public class ScriptServiceImpl extends BaseService implements ScriptService {
 
     @Override
     public ScriptDatum getScriptDatum(String datumHash) throws APIException {
-        validateHash(datumHash);
+        ValidationHelper.validateHexadecimalHash(datumHash);
 
         Call<ScriptDatum> call = scriptsApi.scriptsDatumDatumHashGet(getProjectId(), datumHash);
 
@@ -114,7 +113,7 @@ public class ScriptServiceImpl extends BaseService implements ScriptService {
 
     @Override
     public ScriptDatumCbor getScriptDatumCbor(String datumHash) throws APIException {
-        validateHash(datumHash);
+        ValidationHelper.validateHexadecimalHash(datumHash);
 
         Call<ScriptDatumCbor> call = scriptsApi.scriptsDatumDatumHashCborGet(getProjectId(), datumHash);
 
@@ -126,17 +125,4 @@ public class ScriptServiceImpl extends BaseService implements ScriptService {
         }
     }
 
-    private static void validateHash(String hash) throws APIException {
-        if (hash == null || hash.trim().isEmpty()) {
-            throw new APIException("Hash cannot be null or empty");
-        }
-
-        if(!isHexadecimal(hash)) {
-            throw new APIException("Hash must be an hexadecimal value");
-        }
-    }
-
-    private static boolean isHexadecimal(String input) {
-        return Pattern.compile("\\p{XDigit}+").matcher(input).matches();
-    }
 }
