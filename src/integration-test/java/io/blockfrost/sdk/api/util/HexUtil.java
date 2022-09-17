@@ -1,10 +1,11 @@
 package io.blockfrost.sdk.api.util;
 
 public class HexUtil {
+
     public static String encodeHexString(byte[] byteArray) {
         StringBuffer hexStringBuffer = new StringBuffer();
-        for (int i = 0; i < byteArray.length; i++) {
-            hexStringBuffer.append(byteToHex(byteArray[i]));
+        for (byte b : byteArray) {
+            hexStringBuffer.append(byteToHex(b));
         }
         return hexStringBuffer.toString();
     }

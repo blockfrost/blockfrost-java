@@ -27,6 +27,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testCompile("org.junit.jupiter:junit-jupiter-params:5.6.0")
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
     testImplementation 'org.hamcrest:hamcrest-library:2.2'
     testImplementation 'org.exparity:hamcrest-date:2.0.0'
