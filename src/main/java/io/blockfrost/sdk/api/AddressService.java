@@ -42,6 +42,19 @@ public interface AddressService {
     List<AddressUtxo> getAddressUtxos(String address, int count, int page, OrderEnum order) throws APIException;
 
     /**
+     * Address UTXOs of a given asset
+     * UTXOs of the address.
+     *
+     * @param address Bech32 address. (required)
+     * @param asset Concatenation of the policy_id and hex-encoded asset_name (required)
+     * @param count   The number of results displayed on one page.
+     * @param page    The page number for listing the results.
+     * @param order   Ordered by tx index in the block. The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.
+     * @return List&lt;AddressUtxo&gt;
+     */
+    List<AddressUtxo> getAddressUtxosGivenAsset(String address, String asset, int count, int page, OrderEnum order) throws APIException;
+
+    /**
      * Address UTXOs
      * UTXOs of the address ascending ordered by tx index in the block.
      *

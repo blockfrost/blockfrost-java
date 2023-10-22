@@ -81,4 +81,25 @@ public interface AddressesApi {
             @Query("order") String order
     );
 
+    /**
+     * Address UTXOs of a given asset
+     * UTXOs of the address.
+     *
+     * @param address Bech32 address. (required)
+     * @param asset   Concatenation of the policy_id and hex-encoded asset_name (required)
+     * @param count   The number of results displayed on one page. (optional, default to 100)
+     * @param page    The page number for listing the results. (optional, default to 1)
+     * @param order   Ordered by tx index in the block. The ordering of items from the point of view of the blockchain, not the page listing itself. By default, we return oldest first, newest last.  (optional, default to asc)
+     * @return Call&lt;List&lt;Object&gt;&gt;
+     */
+    @GET("addresses/{address}/utxos/{asset}")
+    Call<List<AddressUtxo>> addressesAddressUtxosGivenAssetGet(
+            @Header("project_id") String projectId,
+            @Path("address") String address,
+            @Path("asset") String asset,
+            @Query("count") Integer count,
+            @Query("page") Integer page,
+            @Query("order") String order
+    );
+
 }

@@ -73,6 +73,21 @@ public class AddressServiceImpl extends BaseService implements AddressService {
         }
     }
 
+    @Override
+    public List<AddressUtxo> getAddressUtxosGivenAsset(String address, String asset, int count, int page, OrderEnum order) throws APIException {
+
+        validateAddress(address);
+
+        Call<List<AddressUtxo>> addressUtxoCall = addressesApi.addressesAddressUtxosGivenAssetGet(getProjectId(), address, asset, count, page, order.name());
+
+        try {
+            Response<List<AddressUtxo>> addressUtxoResponse = addressUtxoCall.execute();
+            return processResponse(addressUtxoResponse);
+        } catch (IOException exp) {
+            throw new APIException("Exception while fetching address utxos for address: " + address, exp);
+        }
+    }
+
 
     @Override
     public List<AddressUtxo> getAddressUtxos(String address, int count, int page) throws APIException {
