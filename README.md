@@ -56,7 +56,7 @@ export BF_IPFS_PROJECT_ID=<Blockfrost Ipfs Project Id>
 - For Gradle, add the following dependency to build.gradle
 
 ```
-compile 'com.bloxbean.cardano:cardano-client-lib:$version'
+compile 'io.blockfrost:blockfrost-java:$version'
 ```
 
 **Note:** Replace '$version' with the correct version number
